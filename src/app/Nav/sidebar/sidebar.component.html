@@ -1,0 +1,310 @@
+<mat-toolbar class="header" *ngIf="nav.visible">
+  <!-- <div class="container-fluid"> -->
+  <mat-toolbar-row class="header_area">
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+      *ngIf="isHandset$ | async">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <div class="company_name">
+      <h3>{{first_name}} {{last_name}}</h3>
+    </div>
+    <!-- <p class="cust-email">{{email}}</p> -->
+    <div class="setting_sec">
+      <div class="action_menus">
+        <a [matMenuTriggerFor]="menu" class="menu_open">
+          <i class="material-icons">
+            settings
+          </i>
+        </a>
+        <mat-menu #menu="matMenu" class="actions">
+          <button mat-menu-item (click)="open()">
+            <i class="material-icons">
+              edit
+            </i>
+            Edit
+          </button>
+          <button mat-menu-item (click)="close()">
+            <i class="material-icons">
+              power_settings_new
+            </i>
+            logout</button>
+        </mat-menu>
+      </div>
+
+      <!-- <a  class="user_link" (click)="open()"><mat-icon class="v-align-middle edit">edit</mat-icon></a>
+        <a class="logout" (click)="close()">
+          <img src="../../../assets/images/signout.svg">
+          <i class="fa fa-sign-out" aria-hidden="true"></i>
+        </a> -->
+    </div>
+
+    <!-- <button class="logout" mat-raised-button (click)="close()">Logout</button> -->
+  </mat-toolbar-row>
+  <!-- </div> -->
+  <!-- <mat-icon (click)="openDialog()">edit</mat-icon> -->
+</mat-toolbar>
+
+<mat-sidenav-container class="">
+  <mat-sidenav class="sidenav " #sidenav mode="side" opened *ngIf="nav.visible">
+    <div class="main-menu">
+      <ul id="side-main-menu" class="side-menu">
+        <!-- <li routerLinkActive="active-link">
+          <a [routerLink]="['/dashboard']">
+            <i class="fa fa-th-large" aria-hidden="true"></i>
+            <span>Dashboard</span>
+          </a>
+        </li> -->
+
+        <li routerLinkActive="active-link">
+          <a [routerLink]="['/machine_details']">
+            <i class="fa fa-th-large" aria-hidden="true"></i>
+            <span>Machines</span>
+          </a>
+        </li>
+
+        <li routerLinkActive="active-link">
+          <a [routerLink]="['/machine_view']">
+            <i class="fa fa-th-large" aria-hidden="true"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+
+        <li routerLinkActive="active-link">
+          <a [routerLink]="['/alarm']">
+            <i class="fa fa-bell-o" aria-hidden="true"></i>
+            <span>Alarms</span>
+          </a>
+        </li>
+        <li routerLinkActive="active-link">
+          <a [routerLink]="['/alert']">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <span>Alert</span>
+          </a>
+        </li>
+
+        <li routerLinkActive="active-link">
+          <a [routerLink]="['/alarmreport']">
+            <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+            <span>Alarm History Report</span>
+          </a>
+        </li>
+        <li routerLinkActive="active-link">
+          <a [routerLink]="['/connectionlog']">
+            <i class="fa fa-history" aria-hidden="true"></i>
+            <span>Log</span>
+          </a>
+        </li>
+        <li routerLinkActive="active-link">
+          <a [routerLink]="['/hmi']">
+            <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
+            <span>HMI</span>
+          </a>
+        </li>
+        <li routerLinkActive="active-link">
+          <a [routerLink]="['/report']">
+            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+            <span>Report</span>
+          </a>
+        </li>
+        <li routerLinkActive="active-link">
+          <a [routerLink]="['/cyclechart']">
+            <i class="fa fa-bar-chart" aria-hidden="true"></i>
+            <span>Cycle Time Chart</span>
+          </a>
+        </li>
+
+        <li routerLinkActive="active-link">
+          <a [routerLink]="['/allshiftchart']">
+            <i class="fa fa-area-chart" aria-hidden="true"></i>
+            <span>All shift chart</span>
+          </a>
+        </li>
+
+        <li routerLinkActive="active-link">
+          <a [routerLink]="['/cyclestart']">
+            <i class="fa fa-line-chart" aria-hidden="true"></i>
+            <span>Cycle start to start</span>
+          </a>
+        </li>
+
+        <li routerLinkActive="active-link">
+          <a [routerLink]="['/cyclestop']">
+            <i class="fa fa-line-chart" aria-hidden="true"></i>
+            <span>Cycle Stop to start</span>
+          </a>
+        </li>
+
+        <li routerLinkActive="active-link">
+          <a [routerLink]="['/notification']">
+            <i class="fa fa-wrench" aria-hidden="true"></i>
+            <span>Notification Setting</span>
+          </a>
+        </li>
+
+        <!-- <li routerLinkActive="active-link">
+          <a [routerLink]="['/machine_status']">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+            <span>Machine Status</span>
+          </a>
+        </li> -->
+
+
+        <!-- <li routerLinkActive="active-link">
+          <a [routerLink]="['/admin_user']">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <span>Admin User</span>
+          </a>
+        </li> -->
+
+        <!-- <li routerLinkActive="active-link">
+          <a [routerLink]="['/approval']">
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+            <span>Approval</span>
+          </a>
+        </li> -->
+
+        <!-- <li routerLinkActive="active-link">
+          <a [routerLink]="['/setting']">
+            <i class="fa fa-cogs" aria-hidden="true"></i>
+            <span>Settings</span>
+          </a>
+        </li> -->
+
+        <!-- <li routerLinkActive="active-link">
+          <a [routerLink]="['/customer_details']">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <span>Customer Details</span>
+          </a>
+        </li> -->
+
+        <!-- <li routerLinkActive="active-link">
+          <a [routerLink]="['/device_registration']">
+            <i class="fa fa-laptop" aria-hidden="true"></i>
+            <span>Device Registration</span>
+          </a>
+        </li> -->
+
+      
+
+        <li routerLinkActive="active-link" onclick="myFunction2()">
+          <a (click)="toggle()" id="drop_down2">
+            <i class="fa fa-list-alt" aria-hidden="true"></i>
+            <span>Master</span>
+            <i class="material-icons rotate">
+              keyboard_arrow_down
+            </i>
+          </a>
+        </li>
+        <div *ngIf="show1">
+          <li routerLinkActive="active-link">
+            <a [routerLink]="['/machine_registration']">
+              <i class="fa fa-desktop" aria-hidden="true"></i>
+              <span>Machine</span>
+            </a>
+          </li>
+          <li routerLinkActive="active-link">
+            <a [routerLink]="['/shift']">
+              <i class="fa fa-clock-o" aria-hidden="true"></i>
+              <span>Shift</span>
+            </a>
+          </li>
+          <li routerLinkActive="active-link">
+            <a [routerLink]="['/oee']">
+              <i class="fa fa-connectdevelop" aria-hidden="true"></i>
+              <span>OEE</span>
+            </a>
+          </li>
+          <li routerLinkActive="active-link">
+            <a [routerLink]="['/user_management']">
+              <i class="fa fa-user-o" aria-hidden="true"></i>
+              <span>User</span>
+            </a>
+          </li>
+          <li routerLinkActive="active-link">
+            <a [routerLink]="['/operator_registration']">
+              <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+              <span>Operator</span>
+            </a>
+          </li>
+          <li routerLinkActive="active-link">
+            <a [routerLink]="['/operator_allocation']">
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+              <span>Operator Allocation</span>
+            </a>
+          </li>
+        </div>
+        <div *ngIf="tenant === '14'">
+          <li routerLinkActive="active-link" onclick="myFunction()">
+            <a (click)="view()" id="drop_down">
+              <i class="fa fa-file" aria-hidden="true"></i>
+              <span>File Compare</span>
+              <i class="material-icons rotate">
+                keyboard_arrow_down
+              </i>
+            </a>
+          </li>
+
+          <div *ngIf="show2">
+            <li routerLinkActive="active-link">
+              <a [routerLink]="['/filepath']">
+                <i class="fa fa-address-card-o" aria-hidden="true"></i>
+                <span>File Path</span>
+              </a>
+            </li>
+            <li routerLinkActive="active-link">
+              <a [routerLink]="['/master']">
+                <i class="fa fa-bookmark" aria-hidden="true"></i>
+                <span>Program List</span>
+              </a>
+            </li>
+
+            <li routerLinkActive="active-link">
+              <a [routerLink]="['/backup']">
+                <i class="fa fa-external-link" aria-hidden="true"></i>
+                <span>Backup Folder</span>
+              </a>
+            </li>
+
+            <li routerLinkActive="active-link">
+              <a [routerLink]="['/home']">
+                <i class="fa fa-clone" aria-hidden="true"></i>
+                <span> Code Compare</span>
+              </a>
+            </li>
+
+            <!-- <li routerLinkActive="active-link">
+              <a [routerLink]="['/part_documentation']">
+                <i class="fa fa-clipboard" aria-hidden="true"></i>
+                <span>Part Documentation</span>
+              </a>
+            </li> -->
+            <li routerLinkActive="active-link">
+              <a [routerLink]="['/reason']">
+                <i class="fa fa-rocket" aria-hidden="true"></i>
+                <span>Reason</span>
+              </a>
+            </li>
+          </div>
+        </div>
+      </ul>
+      <!-- <div class="cover-bar"></div> -->
+    </div>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+  
+</mat-sidenav-container>
+
+
+<footer class="main-footer ng-scope" *ngIf="nav.visible">
+  <div class="container-fluid">
+    <p>Powered by
+      <a target="blank" href="https://www.altiussolution.com" class="external">
+        <img src="/assets/images/favicon.png">Yantra24x7
+      </a>
+    </p>
+  </div>
+</footer>
+<div ng-include="'footer.html'"></div>

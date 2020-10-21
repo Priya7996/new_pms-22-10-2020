@@ -1,0 +1,261 @@
+<section class="page">
+  <div *ngIf="myLoader" class="spinner">
+    <img src="assets/images/spinner.gif">
+  </div>
+  <div class="section_top_padding">
+    <div class="container-fluid">
+      <div class="page_title_sec">
+        <h2 class="sub_title">
+          <mat-icon class="v-align-middle display">laptop</mat-icon>
+          <span class="v-align-middle">Report</span>
+        </h2>
+        <div class="table_export">
+          <a (click)="export()" class="export_btn">
+            <i class="material-icons">
+              file_copy
+            </i>
+            Export
+          </a>
+        </div>
+        <!-- <div>
+                    <button (click)="export()">Export</button>
+                </div> -->
+      </div>
+      <form [formGroup]="login">
+        <mat-card class="card_sec">
+          <mat-card-content>
+            <div class="filter_sec mt-10">
+              <div class="filter_field">
+                <mat-form-field appearance="outline">
+                  <mat-select placeholder="Select Machine" matNativeControl required formControlName="machine_id">
+                    <mat-option *ngFor="let file of report_response" [value]="file.id">{{file.machine_name}}
+                    </mat-option>
+
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="filter_field">
+                <mat-form-field appearance="outline">
+                  <mat-select placeholder="Select type" matNativeControl formControlName="report_type"
+                  (selectionChange)="getmachine($event.value)" required>
+                    
+                  
+                    <mat-option value="">Select Type</mat-option> 
+                    <mat-option value="{{type.value}}" *ngFor="let type of selecttype">
+                      {{type.value}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+
+              <div class="filter_field" *ngIf="wise === 'Shiftwise' || wise === 'Operatorwise'">
+                <mat-form-field appearance="outline">
+                  <mat-select matNativeControl placeholder="Split" formControlName="split" required  >
+                    <!-- <mat-option value="">All</mat-option>
+                    <mat-option value="{{loko.value}}" *ngFor="let loko of selecttype">  {{loko.value}}</mat-option> -->
+                    <mat-option value="Select Machine" disabled>Select Split</mat-option>
+                    <mat-option value="hourwise">HourWise</mat-option>
+                    <mat-option value="programnumber">ProgramNumber</mat-option>
+
+
+
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+
+             
+
+              <div class="filter_field date_picker">
+
+                <mat-form-field>
+                  <mat-label>From Date</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="start_date" (click)="picker.open()">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+
+              <div class="filter_field date_picker">
+
+                <mat-form-field>
+                  <mat-label>To Date</mat-label>
+                  <input matInput [matDatepicker]="picker1" formControlName="end_date" (click)="picker1.open()">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1 startView="year" [startAt]="endDate"></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="filter_field"  *ngIf="wise === 'Shiftwise' ">
+                <mat-form-field appearance="outline">
+                  <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_id">
+                    <mat-option *ngFor="let shift of shift_response" [value]="shift.id">{{shift.shift_no}}
+                      ({{shift.shift_start_time}}-{{shift.shift_end_time}})</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+ 
+              <div class="filter_field" *ngIf="wise === 'Operatorwise' ">
+                <mat-form-field appearance="outline">
+                  <mat-select placeholder="Select Operator" matNativeControl required formControlName="operator_id">
+                    <mat-option *ngFor="let operator of operator_response" [value]="operator.id">
+                      {{operator.operator_name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <button mat-raised-button class="filter_btn btn_success" (click)="reporttable()">
+                Report</button>
+            </div>
+
+          </mat-card-content>
+        </mat-card>
+      </form>
+      <div class="section_top_padding">
+        <mat-card class="card_sec">
+          <mat-card-content class="table_responsive">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+              <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.date  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="shift">
+                <th mat-header-cell *matHeaderCellDef> Shift </th>
+                <td mat-cell *matCellDef="let element"> {{element.shift  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="time">
+                <th mat-header-cell *matHeaderCellDef> Time </th>
+                <td mat-cell *matCellDef="let element"> {{element.time  || '---'}} </td>
+              </ng-container>
+              <ng-container matColumnDef="operatorid">
+                <th mat-header-cell *matHeaderCellDef> Operator Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.operatorname  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="operatorname">
+                <th mat-header-cell *matHeaderCellDef> Operator Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.operatorid  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="machineid">
+                <th mat-header-cell *matHeaderCellDef> Machine Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.machineid  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="machinename">
+                <th mat-header-cell *matHeaderCellDef> Machine Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.machinetype  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="idleduration">
+                <th mat-header-cell *matHeaderCellDef> Program Number </th>
+                <td mat-cell *matCellDef="let element"> {{element.idleduration  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="idletime">
+                <th mat-header-cell *matHeaderCellDef>Job Description </th>
+                <td mat-cell *matCellDef="let element"> {{element.idletime  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="reason">
+                <th mat-header-cell *matHeaderCellDef> Parts Produced</th>
+                <td mat-cell *matCellDef="let element"> {{element.reason  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="cycle_time">
+                <th mat-header-cell *matHeaderCellDef>Cycle Time(H:M:S)</th>
+                <td mat-cell *matCellDef="let element"> {{element.cycle_time  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="cutting_time">
+                <th mat-header-cell *matHeaderCellDef> Cutting Time(H:M:S)</th>
+                <td mat-cell *matCellDef="let element"> {{element.cutting_time  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="spindle_speed">
+                <th mat-header-cell *matHeaderCellDef>Spindle Speed(R.P.M)</th>
+                <td mat-cell *matCellDef="let element"> {{element.spindle_speed  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="feed">
+                <th mat-header-cell *matHeaderCellDef>Feed(mm/min)</th>
+                <td mat-cell *matCellDef="let element"> {{element.feed  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="run_time">
+                <th mat-header-cell *matHeaderCellDef>Run Time(Hrs)</th>
+                <td mat-cell *matCellDef="let element"> {{element.run_time  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="idle_time">
+                <th mat-header-cell *matHeaderCellDef>Idle Time(Hrs)</th>
+                <td mat-cell *matCellDef="let element"> {{element.idle_time  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="stop_time">
+                <th mat-header-cell *matHeaderCellDef>Stop Time(Hrs)</th>
+                <td mat-cell *matCellDef="let element"> {{element.stop_time  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef>Total(Hrs)</th>
+                <td mat-cell *matCellDef="let element"> {{element.total  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="hours">
+                <th mat-header-cell *matHeaderCellDef>Actual Working Hours</th>
+                <td mat-cell *matCellDef="let element"> {{element.hours  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="utilization">
+                <th mat-header-cell *matHeaderCellDef>Utilization (%)</th>
+                <td mat-cell *matCellDef="let element"> {{element.utilization  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="load">
+                <th mat-header-cell *matHeaderCellDef>Spindle Load (%)</th>
+                <td mat-cell *matCellDef="let element"> {{element.load  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="motor">
+                <th mat-header-cell *matHeaderCellDef>Spindle Motor Temp(℃)</th>
+                <td mat-cell *matCellDef="let element"> {{element.motor  || '---'}} </td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="servo_load">
+                <th mat-header-cell *matHeaderCellDef>Servo Load(%)</th>
+                <td mat-cell *matCellDef="let element"> {{element.servo_load  || '---'}} </td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="servo_motor">
+                <th mat-header-cell *matHeaderCellDef>Servo Motor Temp(℃)</th>
+                <td mat-cell *matCellDef="let element"> {{element.servo_motor  || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="pulse_code">
+                <th mat-header-cell *matHeaderCellDef>Pulse Coder Temp(℃)</th>
+                <td mat-cell *matCellDef="let element"> {{element.pulse_code  || '---'}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+
+          </mat-card-content>
+          <!-- <mat-card-content *ngIf="reports.length==0" class="no_data_found">
+                <h2>No data found</h2>
+              </mat-card-content>  -->
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

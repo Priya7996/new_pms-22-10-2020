@@ -1,0 +1,169 @@
+<section class="page">
+    <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+      </div>
+    <div class="section_top_padding">
+        <div class="container-fluid">
+            <div class="page_title_sec">
+                <h2 class="sub_title">
+                    <mat-icon class="v-align-middle display">laptop</mat-icon>
+                    <span class="v-align-middle"> Machine Registration</span>
+                </h2>
+            <div class="add_new">
+                <mat-icon class="circle" (click)="add_registartion()">add</mat-icon>
+              </div>
+            </div>
+
+            <div class="cards_collections">
+                <div class="px-16">
+                    <mat-card class="example-card" *ngFor="let machine of machine_response ;let i=index">
+                        <mat-card-content>
+                            <div class="switch_holder">
+                                <!-- <div class="action_menus">
+                                    <mat-icon (click)="setting_view(machine)" class="v-align-middle edit" matTooltip="Status Update">
+                                        settings</mat-icon>
+                                    <mat-icon (click)="edit_view(machine)" class="v-align-middle edit" matTooltip="Edit">
+                                        edit</mat-icon>
+                                    <mat-icon (click)="delete_view(machine.id)" class="v-align-middle edit" matTooltip="Delete">
+                                        delete</mat-icon>
+                                </div> -->
+                            </div>
+                            <div class="action_menus">
+                                <a [matMenuTriggerFor]="menu" class="menu_open">
+                                    <i class="material-icons">
+                                        menu_open
+                                    </i>
+                                </a>
+                                <mat-menu #menu="matMenu" class="actions">
+                                    <button mat-menu-item (click)="edit_view(machine)">
+                                        <!-- <i class="material-icons">
+                                            edit
+                                        </i> -->
+                                        Edit
+                                    </button>
+                                    <button mat-menu-item (click)="delete_view(machine.id)">
+                                        <!-- <i class="material-icons">
+                                            delete
+                                        </i> -->
+                                        Delete
+                                    </button>
+                                   
+                                </mat-menu>
+                            </div>
+
+                            <h2>{{machine.machine_name}}</h2>
+                            <h3>{{machine.machine_type}}</h3>
+                            <div class="content">
+                                <div class="count" >{{i+1}}</div>
+                                <div class="full_date">
+                                    <p>
+                                        Controller  :
+                                        <span>{{machine.machine_model}}</span>
+                                    </p>
+                                
+                                    <p>
+                                        Model  :
+                                        <span>{{machine.machine_serial_no}}</span>
+                                    </p>
+                                    <p>
+                                        IP :
+                                        <span> {{machine.machine_ip}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <!-- <div class="px-16">
+                    <mat-card class="example-card">
+                        <mat-card-content>
+                            <div class="switch_holder">
+                                <mat-slide-toggle class="status"></mat-slide-toggle>
+                                <div class="action_menus">
+                                    <mat-icon (click)="edit_view()" class="v-align-middle edit" matTooltip="Edit">
+                                        edit</mat-icon>
+                                </div>
+                            </div>
+
+                            <h2>RIPL/VMC/HW/EM-C22</h2>
+                            <div class="content">
+                                <div class="count">2</div>
+                                <div class="full_date">
+                                    <p>
+                                        timeintervel :
+                                        <span>10</span>
+
+                                    </p>
+                                    <p>
+                                        Reason :
+                                        <span class="reason"> idle</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div class="px-16">
+                    <mat-card class="example-card">
+                        <mat-card-content>
+                            <div class="switch_holder">
+                                <mat-slide-toggle class="status"></mat-slide-toggle>
+                                <div class="action_menus">
+                                    <mat-icon (click)="edit_view()" class="v-align-middle edit" matTooltip="Edit">
+                                        edit</mat-icon>
+                                </div>
+                            </div>
+
+                            <h2>RIPL/VMC/HW/EM-C22</h2>
+                            <div class="content">
+                                <div class="count">3</div>
+                                <div class="full_date">
+                                    <p>
+                                        timeintervel :
+                                        <span>10</span>
+
+                                    </p>
+                                    <p>
+                                        Reason :
+                                        <span class="reason"> idle</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+
+                <div class="px-16 pr-0">
+                    <mat-card class="example-card">
+                        <mat-card-content>
+                            <div class="switch_holder">
+                                <mat-slide-toggle class="status"></mat-slide-toggle>
+                                <div class="action_menus">
+                                    <mat-icon (click)="edit_view()" class="v-align-middle edit" matTooltip="Edit">
+                                        edit</mat-icon>
+                                </div>
+                            </div>
+
+                            <h2>RIPL/VMC/HW/EM-C22</h2>
+                            <div class="content">
+                                <div class="count">4</div>
+                                <div class="full_date">
+                                    <p>
+                                        timeintervel :
+                                        <span>10</span>
+
+                                    </p>
+                                    <p>
+                                        Reason :
+                                        <span class="reason"> idle</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+</section>

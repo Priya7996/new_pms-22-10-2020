@@ -1,0 +1,254 @@
+<!-- <div class="container-fluid">
+  <header>
+    <div class="container">
+      <h1>NGX Text Diffs</h1>
+    </div>
+  </header>
+  <div class="main-content">
+    <div class="container">
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="leftContent" class="font-weight-bold">Left Content:</label>
+            <tda-code-editor
+              [options]="options"
+              [ngModel]="content.leftContent"
+              [name]="'leftContent'"
+              [autoFocus]="true"
+              (ngModelChange)="handleChange('left',$event)"
+            ></tda-code-editor>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="rightContent" class="font-weight-bold">Right Content:</label>
+            <tda-code-editor
+              [options]="options"
+              [ngModel]="content.rightContent"
+              [name]="'rightContent'"
+              [autoFocus]="false"
+              (ngModelChange)="handleChange('right',$event)"
+            ></tda-code-editor>
+          </div>
+        </div>
+        <button type="submit" (click)="submitComparison()" class="btn btn-primary">Compare</button>
+      </form>
+      <div *ngIf="submitted">
+        <td-ngx-text-diff
+          [left]="content.leftContent"
+          [right]="content.rightContent"
+          [loading]="!submitted"
+          [diffContent]="contentObservable$"
+          [synchronizeScrolling]="true"
+          [compareRowsStyle]="{'max-height': '500px', 'overflow': 'auto'}"
+          (compareResults)="onCompareResults($event)"
+        >
+        </td-ngx-text-diff>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <header>
+    <div class="container">
+      <h2><b>File Compare</b></h2>
+    </div>
+  </header>
+  <div class="main-content">
+    <div class="container">
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="leftContent" class="font-weight-bold"> <input id="file-upload" 
+              type="file" 
+              accept=".txt" 
+              (change)="fileUpload($event)">
+              <div>
+               <textarea rows="10" cols="50">{{FileText}}</textarea> -->
+               <header class="header ng-scope">
+                <div class="container-fluid">
+                  <div class="navbar-header d-flex align-items-center justify-content-between">
+                    <div class="brand-logo">
+                      <img src="assets/images/yantra_logo.jpg">
+                    </div>
+                    <!-- <img ng-show="tenant_id == 1" src="assets/images/logo_nd.jpg" alt="person"> -->
+                    <!-- <div class="company_name"> 
+                                      <h4>{{}}</h4>
+                                    </div> -->
+                  </div>
+                </div>
+              </header>
+              
+              <!-- *ngFor="let country of countries" value= {{country.id}} -->
+              <div class="container-fluid">
+                <!-- <div class="home-back">
+                  <a href="https://mms2.yantra24x7.com/"><span>
+                      <mat-icon class="back">arrow_back</mat-icon>
+                    </span>Back</a>
+                </div> -->
+                <!-- <div class="col clock_all">
+                  <div class="clock_top">
+                    <span>Date:</span>
+                    18/09/2020
+                  </div>
+                  <div class="clock_top">
+                    <span>Time:</span>
+                    7.22.33AM
+                  </div>
+                </div> -->
+                <div class="file-path">
+                  <div class="label">
+                    <label>Select Machine : </label>
+                    <select (change)="onSelect($event.target.value)">
+              
+                      <option *ngFor="let machine of machinesArray" [value]="machine.id">{{machine.machine_name}}</option>
+                    </select>
+                  </div>
+                  <p> <span>File Path :</span> {{file_path ? file_path['file_path'] : ''}} </p>
+                </div>
+                <div class="page-title">
+              
+                  <h2>File Compare</h2>
+                  <button type="submit" (click)="submitComparison()" class="upload_btn" (click)="toggle()" id="bt"
+                    [disabled]="!file_name || !fileName1 ">{{buttonName}}</button>
+                </div>
+              
+              
+                <div class="main-content">
+              
+                  <form [formGroup]="">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <div for="leftContent" class="left_content">
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" [(ngModel)]="file_name" [ngModelOptions]="{standalone: true}"
+                                class="custom-file-input" aria-describedby="inputGroupFileAddon01" id="file-upload" accept=".txt"
+                                (change)="fileUpload($event)">
+                              <label class="custom-file-label" for="inputGroupFile01">{{filName || "Choose file"}}</label>
+                            </div>
+                          </div>
+                          <div>
+                            <!-- <textarea rows="10" cols="50">{{FileText}}</textarea> -->
+                          </div>
+                        </div>
+                        <!-- <tda-code-editor
+                                        [options]="options"
+                                        [ngModel]="content.leftContent"
+                                        [name]="'leftContent'"
+                                        [autoFocus]="true"
+                                        (focus)="handleChange('left',content.leftContent)"
+                                        (ngModelChange)="handleChange('left',$event)"
+                                      ></tda-code-editor>  -->
+                      </div>
+                      <div class="form-group col-md-6">
+                        <div for="rightContent" class="right_content">
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" [(ngModel)]="fileName1" [ngModelOptions]="{standalone: true}"
+                                class="custom-file-input" aria-describedby="inputGroupFileAddon01" id="file-upload" accept=".txt"
+                                type="file" (change)="fileUpload1($event)">
+                              <label class="custom-file-label" for="inputGroupFile01">{{filName1 || "Choose file"}}</label>
+                            </div>
+                          </div>
+                          <div>
+                            <!-- <textarea rows="10" cols="50">{{filetext1}}</textarea> -->
+                          </div>
+                        </div>
+                        <!-- <tda-code-editor
+                                        [options]="options"
+                                        [ngModel]="content.rightContent"
+                                        [name]="'rightContent'"
+                                        [autoFocus]="false"
+                                        (focus)="handleChange('right',content.rightContent)"
+                                        (ngModelChange)="handleChange('right',$event)"
+                                      ></tda-code-editor> -->
+              
+              
+                      </div>
+              
+                    </div>
+              
+                  </form>
+                  <div class="compare_table" *ngIf="submitted">
+                    <td-ngx-text-diff [left]="content.leftContent" [right]="content.rightContent" [loading]="!submitted"
+                      [diffContent]="contentObservable$" [synchronizeScrolling]="true"
+                      [compareRowsStyle]="{'max-height': '500px', 'overflow': 'auto'}" (compareResults)="onCompareResults($event)">
+                    </td-ngx-text-diff>
+                  </div>
+                </div>
+                <div>
+                  <form [formGroup]="login" (ngSubmit)="logintest(login.value)" *ngIf="Compare">
+                    <div class="container mb-3">
+                      <div class="row">
+                        <div class="col-md-6">
+                        <!-- <div class="input-label">
+                                            <label class='home-label'>Changed By</label>
+                                            <mat-form-field>
+                                                <input matInput formControlName="name" type="text" placeholder="Enter Your Name" required>
+                                                
+                                              </mat-form-field>
+                                          </div> -->
+              
+                        <!-- <div>
+                                            <label class='home-label'>Date</label>
+                                            <mat-form-field>
+                                                <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]='date' (dateChange)='change($event)' (click)="picker.open()"   [max]="maxDate" [ngModelOptions]="{standalone: true}">
+                                               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                               <mat-datepicker #picker></mat-datepicker>
+                                            </mat-form-field>
+                                          </div> -->
+              
+                        <!-- <div class="input-label">
+                                            <label class='home-label'>Old Revision Number</label>
+                                            <mat-form-field>
+                                                <input matInput formControlName="old_revision_no" type="text"  (keypress)="keyPress($event)"   placeholder="Enter Your Old Revision Number" required>
+                                          </mat-form-field>
+                                        </div> -->
+                        </div>
+                        <div class="col-md-6">
+                          <!-- <div class="input-label">
+                                            <label class='home-label'>New Revision Number</label>
+                                            <mat-form-field>
+                                                  <input matInput formControlName="new_revision_no" (keypress)="keyPress($event)"   type="text" placeholder="Enter Your New Revision Number" required>
+                                            </mat-form-field>
+                                          </div> -->
+              
+                          <mat-form-field appearance="outline">
+                            <mat-label>Reason</mat-label>
+                            <textarea class="base" matInput formControlName="reason" type="text" required></textarea>
+                          </mat-form-field>
+              
+                          <div class="submit-btn">
+                            <button class="btn btn-primary" [disabled]="login.invalid">submit</button>
+                          </div>
+                        </div>
+              
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+              
+                        </div>
+                      </div>
+                    </div>
+              
+              
+              
+                  </form>
+              
+              
+              
+                </div>
+              </div><br>
+              <br>
+              
+              
+              <footer class="main-footer ng-scope">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-lg-12 text-right">
+                      <p>Powered by<a target="blank" href="https://www.altiussolution.com" class="external"><img
+                            src="/assets/images/favicon.png" style="height: 25px;">Yantra24x7</a></p>
+                    </div>
+                  </div>
+                </div>
+              </footer>
+              <div ng-include="'footer.html'"></div>

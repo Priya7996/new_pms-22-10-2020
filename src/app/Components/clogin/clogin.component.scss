@@ -1,0 +1,87 @@
+footer.main-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #2f333e;
+    color: #fff;
+    padding: 4px;
+    /* padding: 8px 10px; */
+}
+footer.main-footer p {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 0px!important;
+}
+footer.main-footer a {
+    color: #fff;
+}
+.company_name{
+    font-size: 25px;
+    font-weight: 800;
+}
+header.header{
+    background: #fff;
+    color: #666;
+    position: relative;
+    border-radius: 0;
+    /*-webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);*/
+    z-index: 10;
+   /* width: 100%;*/
+    /*padding: 10px;*/
+    margin-bottom: 30px;
+    display: block
+}
+header ,.page-title{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+ .brand-logo img {
+    width: 177px;
+    padding: 25px 0px;
+}
+:ng-deep  .td-table-wrapper {
+    max-height: calc(100vh - 335px)!important;
+}
+.rabwin-login{
+    min-height: 100vh;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px 0;
+    position: relative;
+ }
+
+ .card-sub p{
+   font-size: 14px;
+   text-align: center;
+   padding: 0px 12px;
+ }
+
+ mat-card.mat-card{
+    width: 350px;
+    text-align: center;
+ }
+ mat-form-field.form {
+    width: 100%;
+}
+.card-text{
+    padding:0px 20px;
+}
+button.Submit.mat-raised-button.mat-primary {
+ background-color: #ec6e17 !important;
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex{
+    background-color: #fff;
+}
+
+.login-page {
+    background: url('/assets/images/bg.jpeg') no-repeat;
+    min-height: auto;
+    padding-bottom: 0;
+    background-size: cover;
+}
+.container-fluid.login-img {
+    padding: 0px;
+}

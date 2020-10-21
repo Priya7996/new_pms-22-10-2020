@@ -1,0 +1,49 @@
+<div class="container-fluid login-img">
+    <div class="login-page">
+    <div class=" rabwin-login d-flex align-items-center">
+      <div>
+  <mat-card >
+    <mat-card-header >
+        <header class="header ng-scope">
+           
+            <mat-card-title>
+              <div class="brand-logo">
+                <img src="assets/images/yantra_logo.jpg">
+              </div>
+            </mat-card-title>
+      <mat-card-subtitle> 
+        <div class="card-sub">
+        <p>RABWIN INDUSTRIES&nbsp;PVT.LTD</p>
+        <p> Sign in continue with Code Compare</p>
+        </div>
+      </mat-card-subtitle>
+          </header>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="card-text">
+        <form [formGroup]="login" (ngSubmit)="logintest(login.value)">
+            <mat-form-field class="form" appearance="fill">
+           <mat-label>Email</mat-label>
+              <input matInput formControlName="email_id" placeholder="Email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ng-reflect-pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a"  required>
+              <mat-error *ngIf="login.get('email_id').hasError('email')"> Enter valid email address</mat-error>
+          
+            </mat-form-field>
+          
+            <mat-form-field class="form" appearance="fill">
+              <mat-label>Password</mat-label> 
+              <input matInput formControlName="password" placeholder="Password" [type]=" hide ? 'password' : 'text'"  required>
+              <mat-icon class="eye" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+            <div >
+             <button class="Submit" mat-raised-button color="primary" [routerLink]="['/codecompare']">Submit</button>
+             </div>
+          </form>
+          </div>
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+  </div>
+  </div>
+  </div>
+  </div>

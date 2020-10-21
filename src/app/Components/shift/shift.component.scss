@@ -1,0 +1,103 @@
+.row_sec{
+    display: flex;
+        flex-wrap: wrap;
+    .mat-form-field {
+        width: 48%!important;
+        &:nth-child(odd){
+            margin-right: 16px;
+        }
+        }
+    }
+.shift_sec {
+    display: flex;
+    
+    .col{
+        width: calc(100% /1);
+        &:first-child{
+            margin-right: 20px;
+        }
+    }
+    .shift_card{
+        padding: 15px;
+        margin-bottom: 15px;
+        background: #f7941e;
+        text-align: center;
+        color: #fff;
+        position: relative;
+    .shift{
+        .edit{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+        }
+        .play_circle{
+            i{
+                font-size: 100px;
+            }
+        }
+        h2{
+            font-size: 1.5rem;
+            margin-bottom: 0;
+        }
+        h3{
+            font-size: 90px;
+            font-weight: 100;
+            margin: 0;
+        }
+        .status_icon{
+            display: flex;
+            justify-content: space-around;
+            .status{
+                width: calc(100% /1);
+                &:first-child{
+                    border-right: 1px solid #ccc;
+                }
+                span{
+                    color: #292929;
+                    font-size: 24px;
+                }
+                p{
+                    margin-top: 0px;
+                    color: #292929;
+                
+            }
+            }
+         
+        }
+
+    }
+}
+}
+.two_form.modal_sec .mat-form-field {
+    width: calc(96% /2);
+    margin-right: 3%;
+    &:nth-child(2n){
+      margin-right: 0;
+    }
+  }
+.spinner {
+    background: #262932;
+    height: 100vh;
+    opacity: 0.9;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    z-index: 999;
+  }
+  
+  .spinner img {
+    width: 90px;
+    margin-top: -130px;
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .shift_sec {
+        flex-wrap: wrap;
+    }
+  }

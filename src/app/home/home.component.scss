@@ -1,0 +1,141 @@
+
+footer.main-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #2f333e;
+    color: #fff;
+    padding: 4px;
+}
+footer.main-footer p {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 0px!important;
+}
+footer.main-footer a {
+    color: #fff;
+}
+.company_name{
+    font-size: 25px;
+    font-weight: 800;
+}
+header.header{
+    background: #fff;
+    color: #666;
+    position: relative;
+    border-radius: 0;
+    // -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    // box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.navbar-header .brand-logo img {
+    width: 177px;
+}
+:ng-deep  .td-table-wrapper {
+    max-height: calc(100vh - 335px)!important;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #f49322;
+    border-color: #f98907;
+}
+.custom-file-label::after {
+    color: #ffffff;
+    background-color: #605f60;
+    cursor: pointer;
+}
+.compare_table {
+    padding-bottom: 25px;
+}
+.label label{
+    padding: 0px 7px 0px 0px;
+    font-weight: 500;
+}
+/* .page-title.reason {
+    border: 2px solid #000;
+    padding: 10px 20px;
+    margin-bottom: 4rem;
+} */
+
+.page-title.reason ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline{
+    height: 0px;
+}
+
+.page-title.reason ::ng-deep .mat-form-field-infix{
+    border:1px solid #ddd;
+    width: 510px;
+}
+.submit-btn{
+    margin-left: 10px;
+}
+
+.back.mat-icon.notranslate.material-icons.mat-icon-no-color {
+    vertical-align: middle;
+}
+
+.page-title{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px;
+    h2{
+        font-size: 18px;
+        margin: 0;
+        font-weight: 500;
+    }
+    &.reason{
+        h4{
+            margin-right: 10px;
+            font-size: 21px
+        }
+        form{
+            display: flex;
+        }
+    }
+}
+
+.clock_all {
+    font-size: 14px;
+.clock_top {
+    margin: 5px auto;
+}
+}
+.file-path {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0px;
+    p {
+        margin:0;
+        font-size: 14px;
+        span{
+            padding: 0px 4px 0px 0px;
+            font-weight:500;
+        }
+    }
+    label {
+        font-weight: 500;
+    }
+        }
+.home-back {
+    padding: 10px 0px;
+    a{
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #000000;
+        font-size: 14px;
+    }
+
+}

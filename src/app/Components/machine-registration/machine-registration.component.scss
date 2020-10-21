@@ -1,0 +1,177 @@
+.row_sec{
+  display: flex;
+      flex-wrap: wrap;
+  .mat-form-field {
+      width: 48%!important;
+      &:nth-child(odd){
+          margin-right: 14px;
+      }
+      }
+  }
+.cards_collections{
+  margin-top: 24px;
+  .px-16{
+    display: flex;
+    flex-wrap: wrap;
+  }
+ .example-card{
+  position: relative;
+  width: 21%;
+  margin: 15px 10px 15px 0;
+  h2{
+    margin-top: 16px;
+    color: #000;
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 0;
+    // min-height: 50px;
+    // height: 52px;
+    // overflow: hidden;
+  }
+  h3{
+    color: #898888!important;
+    margin-bottom: 18px;
+    text-align: center;
+    margin-top: 8px;
+  }
+  .content{
+    .count{
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    background: #f7941e;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    }
+    .full_date{
+      text-align: center;
+      p{
+        color: #c7c7c7;
+        margin: 5px 0;
+        font-size: 16px;
+        span{
+          text-transform: lowercase;
+          font-size: 16px;
+          color: #8c8a8a;
+        }
+     
+    }
+
+    }
+   
+    .switch_holder{
+      // border-top: 1px solid #ddd;
+      // margin-top: 20px;
+      // padding: 10px 0;
+      // display: flex;
+      // align-items: center;
+      // justify-content: space-between;
+      .status{
+        line-height: 25px;
+        color: #c7c7c7;
+        font-size: 11px;
+      }
+      .actions{
+        float: right;
+        mat-icon{
+          font-size: 24px;
+          cursor: pointer;
+          &.edit{
+            color: #c1c1c1;
+          }
+          &.setting{
+            color: #909090;
+          }
+          &.delete{
+            color: #e03434;
+
+          }
+    }
+
+    }
+    }
+   
+  }
+  .action_menus{
+    text-align: right;
+    cursor: pointer;
+  }
+}
+}
+
+
+// setting modal style
+
+.filter_sec {
+  .setting_sec{
+  display: flex;
+  align-items: center;
+  // .dialog-form{
+  //   overflow-y: scroll;
+  //   min-height: 493px!important;
+  //   height: 400px;
+  //   }
+  }
+}
+
+.dialog-form{
+  display: flex;
+.filter{
+  margin: 0 12px 0 0;
+  padding: 0 16px;
+ p{
+   margin-bottom: 5px;
+ }
+}
+}
+.spinner {
+  background: #262932;
+  height: 100vh;
+  opacity: 0.9;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: auto;
+  z-index: 999;
+}
+
+.spinner img {
+  width: 90px;
+  margin-top: -130px;
+}
+.two_form.modal_sec .mat-form-field {
+  width: calc(96% /2);
+  margin-right: 3%;
+  &:nth-child(2n){
+    margin-right: 0;
+  }
+}
+
+// Resposnive styles
+@media only screen and (max-width:768px) {
+
+}
+@media only screen and (max-width:600px) {
+  .cards_collections{
+   .example-card{
+    position: relative;
+    width: 21%;
+    margin: 15px 10px 15px 0;
+  }
+  }
+}
+@media only screen and (min-device-width: 320px) 
+                   and (max-device-width: 1024px) 
+                   and (orientation: landscape) {
+
+                   }

@@ -1,0 +1,319 @@
+
+::ng-deep tspan {
+    font-weight: 600;
+    fill: #626262;
+}
+
+#page_area {
+    &.page{
+        background-color: #fafafa;
+        .page_title_sec {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            // border-bottom: 1px solid #DEDEDE;
+            margin-bottom: 15px;
+            // .table_search{
+            //     .form-control {
+            //         height: 35px;
+            //     }
+            // }
+            // .sub_title {
+            //     font-size: 18px;
+            //     font-weight: 600;
+            //     color: #1A1F3D;
+            //     margin-bottom: 15px;
+            // }
+            .machine_identifier{
+                list-style: none;
+                display: flex;
+                margin: 0;
+                padding: 0;
+                li{
+                    display: flex;
+                    align-items: center;
+                    margin-left: 5px;
+                   .add_btn{
+                    background-color: #fb8c0c;
+                    color:#fff;
+                   }
+                }
+            }
+        }
+
+        #machine_details_sec{
+            &.machines_details{
+                .machine_item_details{
+                    display: flex;
+                    border: 1px solid #DEDEDE;
+                    margin-bottom: 20px;
+                    .machine_img{
+                        display: flex;
+                        align-items: center;
+                        background: #fff;
+                        padding: 15px;
+                        img{
+                            width: 180px;
+                            min-height: 150px;
+                            height: 150px;
+                            object-fit: contain;
+                            object-position: center;
+                        }
+                    }
+                    .machine_info{
+                        background: #F1F5F4;
+                        padding: 10px;
+                        border-left: 1px solid #DEDEDE;
+                        width: 100%;
+                        position: relative;
+                        .machine_total{
+                            position: absolute;
+                            top: 10px;
+                            right: 10px;
+                            background: #fff9f2;
+                            color: #fb8c0c;
+                            border: 1px solid #fb8c0c;
+                            padding: 5px;
+                            border-radius: 5px;
+                        }
+                        h3{
+                            font-size: 20px;
+                            font-weight: 600;
+                            margin: 0;
+                            text-transform: capitalize;
+                            margin-bottom: 15px;
+                        }
+                        .info_box_list{
+                            display: flex;
+                            flex-wrap: wrap;  
+                        .info_box{
+                            width: 24%;
+                            margin: 10px 10px 0px 0;
+                            .status{
+                                display: flex;
+                                -webkit-box-align: center;
+                                align-items: center;
+                                margin: 0;
+                                i{
+                                    font-size: 16px;
+                                    padding-right: 4px;
+                                }
+                                span{
+                                    font-size: 12px;
+                                    text-transform: capitalize;
+                                    display: flex;
+                                    align-items: center;
+                                }
+                                &.active{
+                                    i{
+                                        color: #11d525;
+                                    }
+                                   
+                                }
+                            }
+                            .machine_item_box{
+                                background: #fff;
+                                padding: 10px;
+                                position: relative;
+                                border-left: 5px solid #ddd;
+                                position: relative;
+                                cursor: pointer;
+                                min-height: 80px;
+                                font-size: 14px;
+                                // &.running{
+                                //     background: #d0f3c7;
+                                //     border-left: 8px solid #0f591a;
+                                // }
+                                // &.stop{
+                                //     background: #fecaca;
+                                //     border-left: 8px solid #c91f1f;
+                                // }
+                                // &.idle{
+                                //     background: #fef4d8;
+                                //     border-left: 8px solid #f2c12b;
+                                // }
+                                // &:hover{
+                                //     border-left: 8px solid #a5a5a5;
+                                // }
+                                .info_title{
+                                    h2{
+                                        font-size: 16px;
+                                        text-transform: uppercase;
+                                        color: #1A1F3D;
+                                        font-weight: 600;
+                                        margin-top: 35px;
+                                    }
+                                    p{
+                                        font-size: 12px;
+                                        text-transform: uppercase;
+                                        color: #1A1F3D;
+                                        span{
+                                            font-size: 12px;
+                                            font-weight: 600;  
+                                        }
+                                    }
+                                }
+                                .assigned_info{
+                                    .assigned_box{
+                                        border: 1px solid #F7941D;
+                                        display: flex;
+                                        align-items: center;
+                                        padding: 10px;
+                                        color: #F7941D;
+                                        margin: 35px 0 0px 0;
+                                        i{
+                                            border: 1px solid #F7941D;
+                                            font-size: 12px;
+                                            padding: 2px;
+                                        }
+                                        h4{
+                                            font-size: 14px;
+                                            font-weight: 400;
+                                            margin: 0;
+                                        }
+                                        span{
+                                            color: #989898;
+                                            font-size: 12px;
+                                        }
+                                    }
+                                    .view_link{
+                                        color: #989898;
+                                        font-size: 12px;
+                                        text-decoration: underline;
+                                    }
+                                }
+                                .right_side{
+                                    display: flex;
+                                    align-items: flex-end;
+                                    .progress_bar{
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    }
+                }
+            }
+        }
+    }
+}
+.spinner {
+    background: #262932;
+    height: 100vh;
+    opacity: 0.9;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    z-index: 999;
+  }
+  
+  .spinner img {
+    width: 90px;
+    margin-top: -130px;
+  }
+  
+  .current_running {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.machine_item_box.stop_wrap{
+    background: #f4a3a3!important;
+    border-left: 5px solid #e03939 !important;
+}
+.machine_item_box.running_wrap{
+    background: #64c079!important;
+    border-left: 5px solid #1d9739 !important;
+}
+.machine_item_box.idle_wrap{
+    background: #efe250 !important;
+    border-left: 5px solid #bd9d01!important;
+}
+.machine_item_box.nodata_wrap{
+    background:  #989898!important;
+    border-left: 5px solid #868686 !important;
+}
+
+// Responsive Style
+@media only screen and (max-width:768px) {
+    #page_area.page{
+        #machine_details_sec{
+            &.machines_details {
+                .machine_item_details {
+                    .machine_info {
+                        .info_box_list{
+                            .info_box {
+                                width: 48%;
+                                margin: 10px 10px 0px 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width:600px) {
+    .page_title_sec {
+        .table_export {
+            a{
+                margin-top: 10px;
+            }
+        }
+    }
+    .machine_item_details{
+        flex-wrap: wrap;
+    }
+    .info_box{
+        flex-wrap: wrap;
+    }
+    .machine_img{
+        width: 100%;
+        justify-content: center;
+    }
+
+    #page_area.page{
+        #machine_details_sec{
+            &.machines_details {
+                .machine_item_details {
+                    .machine_info {
+                        .info_box_list{
+                            .info_box {
+                                width: 100%;
+                                margin: 10px 0px 0px 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-device-width: 320px) 
+and (max-device-width: 1024px) 
+and (orientation: landscape) {
+    #page_area.page{
+        #machine_details_sec{
+            &.machines_details {
+                .machine_item_details {
+                    .machine_info {
+                        .info_box_list{
+                            .info_box {
+                                width: 48%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

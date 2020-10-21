@@ -1,0 +1,110 @@
+<section class="page">
+  <div class="section_top_padding">
+    <div class="container-fluid">
+      <div>
+        <!-- <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+      </div> -->
+        <div class="page_title_sec">
+          <h2 class="sub_title">
+            <mat-icon class="v-align-middle display">important_devices</mat-icon>
+            <span class="v-align-middle">Device Registration</span>
+          </h2>
+          <div class="add_new">
+            <mat-icon class="circle" (click)="user()" matTooltip="Add New">add</mat-icon>
+          </div>
+        </div>
+
+        <div class="page_title_sec align_right">
+          <div class="table_search">
+            <input class="form-control" (keyup)="dolly($event.target.value)" type="text" name="search"
+              [(ngModel)]="searchText" placeholder="Search">
+          </div>
+        </div>
+
+        <!-- <span *ngIf="(alarm1 | filter:searchText)?.length==0">No Results Found</span> -->
+
+        <mat-card class="card_sec">
+          <mat-card-content class="table-responsive">
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+              <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> Device Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name || '---'}} </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Price </th>
+                <td mat-cell *matCellDef="let element"> {{element.per_pic_price || '---'}} </td>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef> Purchase Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.purchase_date || '---'}} </td>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef> Count </th>
+                <td mat-cell *matCellDef="let element"> {{element.count || '---'}} </td>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="totalprice">
+                <th mat-header-cell *matHeaderCellDef> Total Price </th>
+                <td mat-cell *matCellDef="let element"> {{element.total_price || '---'}} </td>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="createdby">
+                <th mat-header-cell *matHeaderCellDef> Created By </th>
+                <td mat-cell *matCellDef="let element"> {{element.created_by || '---'}} </td>
+              </ng-container>
+
+
+
+              <ng-container matColumnDef="action">
+                <!-- <mat-header-cell *matHeaderCellDef> Action </mat-header-cell> -->
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <ul *matCellDef="let element" class="table_action">
+                  <li>
+                    <mat-icon mat-button aria-hidden="false" aria-label="Example home icon" (click)="user_edit(element)"
+                      mattooltip="Edit">edit
+                    </mat-icon>
+                  </li>
+                  <li>
+                    <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                      (click)="user_delete(element.id)" mattooltip="Delete">delete
+                    </mat-icon>
+                  </li>
+                </ul>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <!-- </mat-card-content>
+<mat-card-content *ngIf="back.length==0">
+  <h2><b>No data found</b></h2>
+</mat-card-content>  
+</mat-card>
+</div>
+</div>
+</div>
+</section> -->
+          </mat-card-content>
+          <mat-card-content *ngIf="back.length==0" class="no_data_found">
+            <h2>No data found</h2>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

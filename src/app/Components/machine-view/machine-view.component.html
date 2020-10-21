@@ -1,0 +1,275 @@
+<section class="page" id="page_area">
+    <div class="sec_padding_top">
+        <section class="dashbaord_sec">
+            <div *ngIf="myLoader" class="spinner">
+                <img src="assets/images/spinner.gif">
+            </div>
+            <div class="content-inner active content-dashboard">
+                <div class="container-fluid">
+                    <div class="wrapper_inner">
+                        <div class="mec_head">
+                            <div class="row_sec main_header">
+                                <div class="col-lg-5 col-md-4 col-xs-12 v_mid">
+                                    <h2 class="title">{{machie_status?.machine_name}} </h2>
+                                    <span class="shift_time">{{machie_status?.shift_no}}({{machie_status?.shift_time}})
+                                    </span>
+                                </div>
+                                <div class="col-lg-3 col-md-2 col-xs-12 clock_all">
+                                    <div class="clock_top date">
+                                        <h4>
+                                            Date:
+                                            <span> {{today | date:'dd-MM-yyyy'}}</span>
+                                        </h4>
+                                    </div>
+                                    <div class="clock_top time">
+                                        <!-- <span>Time:</span> -->
+                                        <h4>
+
+                                            {{today | date:'h:mm:ss a'  }}
+                                        </h4>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="time_desc">
+                            <p> <b>Operator Name : </b>
+                                <span>
+                                    {{machie_status?.operator_allocation}}
+                                </span></p>
+                            <p><b>Last Updated Time : </b>
+                                <span>{{machie_status?.last_update | date:'dd-MM-yyyy ; HH:mm:ss a'}} </span>
+                            </p>
+                        </div>
+
+
+                        <!-- main row start -->
+                        <div class="main_row">
+                            <div class="col-lg-4 col-md-12 col-xs-12 main_col">
+                                <div class="bg_grad mn_status">
+                                    <div class="current_running">
+                                        <!-- <i class="material-icons">
+                                            fiber_manual_record
+                                        </i> -->
+                                        <!-- <span class="running machine_status_view">
+                                        </span> -->
+                                        <!-- <span class="stop machine_status_view">
+                                        </span>
+                                        <span class="idle machine_status_view">
+                                        </span> -->
+                                        <p class="stop machine_status_view" *ngIf="machie_status?.machine_status =='100'">
+                                            <span class="mac_ut_bar_red">Stop
+                                            </span>
+                                        </p>
+                                        <p class="running machine_status_view" *ngIf="machie_status?.machine_status =='3'">
+                                            <span class="">Running
+                                            </span>
+                                        </p>
+                                        <p class="idle machine_status_view"
+                                            *ngIf="machie_status?.machine_status !='3' && machie_status?.machine_status !='100' && machie_status?.machine_status != null ">
+                                            <span class="machine_status">Idle
+                                            </span>
+                                        </p>
+                                        <span class="machine_status" *ngIf="machie_status?.machine_status =='null'">No Data
+                                        </span>
+                                    </div>
+                                    <h5>{{machie_status?.job_name}}</h5>
+                                </div>
+                                <div class="gradient-wrapper">
+                                    <div class="circle_progress_wrapper utilization_chart">
+                                        <span>Utilization</span>
+                                        <circle-progress percent="{{machie_status?.utilization}}" radius="100"
+                                            outerStrokeColor="#48ba46" innerStrokeColor="#78542C" animation="true"
+                                            animationDuration="300"></circle-progress>
+                                    </div>
+                                </div>
+                                <div class="bg_grad">
+                                    <div class="row_sec">
+                                        <div class="col brdr_right parts_pro">
+                                            <h4>Parts Produced</h4>
+                                            <ul class="parts_produced">
+                                                <li>
+                                                    <h4> MD :
+                                                        <p>
+                                                            <b> {{machie_status?.machine_disply}}</b>
+                                                            <span> Nos </span>
+                                                        </p>
+                                                    </h4>
+                                                </li>
+                                                <li>
+                                                    <h4>C :
+                                                        <p><b> {{machie_status?.parts_count}}</b>
+                                                            <span>
+                                                                Nos
+                                                            </span>
+                                                        </p>
+                                                    </h4>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col brdr_left table-reponsive">
+                                            <table class="table parts_pro_table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Pgm No</th>
+                                                        <th>Parts</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="ng-scope" *ngFor="let parts of machi_job_parts | keyvalue">
+                                                        <td>{{parts.key}}</td>
+                                                        <td>{{parts.value}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-xs-12 bg_grad">
+                                    <div class="mac_ut_holder">
+                                        <h5 class="sub_title"><i class="material-icons">
+                                                access_time
+                                            </i> Current Status</h5>
+                                        <div class="row_sec">
+                                            <div class="col">
+                                                <span class="mac_ut_bar_green"></span>
+                                                <h5>Run Time</h5>
+                                                <div class="mac_ut_time">{{machie_status?.run_time}}</div>
+                                            </div>
+                                            <div class="col brdr_mid">
+                                                <span class="mac_ut_bar_yellow"></span>
+                                                <h5>Idle Time</h5>
+                                                <div class="mac_ut_time">{{machie_status?.idle_time}}</div>
+                                            </div>
+                                            <div class="col">
+                                                <span class="mac_ut_bar_red"></span>
+                                                <h5>Stop Time</h5>
+                                                <div class="mac_ut_time">{{machie_status?.stop_time}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-xs-12 main_col sec_center">
+                                <div class="rpm_holder">                          
+                                    <div class="container">
+                                      <div class="row">
+                                          <div class="col-sm-6">Spindle Speed
+                                            <div id="containergokul" style="width:100%; height:200px; margin: 0 auto"></div>
+                                          </div>
+                                          <div class="col-sm-6">Feed Rate
+                                            <div id="FeedRategokul" style="width:100%; height:200px; margin: 0 auto"></div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div  class="col-sm-4">
+                                    <h2 style="font-size: 20px">Servo Load </h2>
+                                    <div  style="font-size:14px; height: 227px">
+                                        <div class="axis_txt" *ngFor="let mach of testgokul | keyvalue">
+                                             {{mach.key }}
+                                             <span class="axis_txt float-right">{{mach.value}} %</span>
+                                               
+                                        <div *ngFor="let mac of repeatchart; index as keyvalue"></div>
+                                        
+                                        <div class="axis"
+                                            [ngClass]="{'ax_three' :testgokul?.axis_tem_count == null, 'ax_three' :testgokul?.axis_tem_count =='3', 'two' :testgokul?.axis_tem_count =='2', 'sd' :testgokul?.axis_tem_count =='4', 'sdj' :testgokul?.axis_tem_count =='5'}">
+                                            <div *ngFor="let no of repeatchart; let i = index" [attr.data-index]="i">
+                                                <span
+                                                    [ngClass]="no < 100 ? ( no < 80 ? 'green' : 'yellow' ) : 'red'"></span>
+                                            </div>
+                                        </div>
+
+                                     
+
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="bg_grad">
+                                    <div class="mac_alarm">
+                                        <h5 class="brdr_botm"><i class="material-icons">
+                                                notification_important
+                                            </i>Recent Alarms</h5>
+                                        <div class="brdr_top mac_alarm_innr"> {{machie_status?.alarm}}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-12 col-xs-12 main_col sec_last">
+                                <div class="bg_grad donut_small bg_grad_temp time_sec">
+                                    <div class="mac_ut">
+                                        <h5>Last Cycle time</h5>
+                                        <span class="mac_ut_time">{{machie_status?.cycle_time}}</span>
+                                    </div>
+                                    <div class="mac_ut brdr_mid">
+                                        <h5>Last cutting time</h5>
+                                        <span class="mac_ut_time">{{machie_status?.cutting_time}}</span>
+                                    </div>
+                                    <div class="mac_ut">
+                                        <h5>total run time</h5>
+                                        <span class="mac_ut_time">{{machie_status?.total_run_time}}</span>
+                                    </div>
+                                </div>
+ 
+                                <div class="bg_grad donut_small bg_grad_temp">
+                                    <h2>Pulse Coder Temperature</h2>
+                                    <div class="row_sec temperature" *ngFor="let pu of machie_statusnew | keyvalue">
+                                        <div class="col brdr_right axis_display">
+                                            <div class="gradient-wrapper servo_motor_chart">
+                                                <circle-progress [percent]=pu.value [radius]="100" [outerStrokeWidth]="16"
+                                                    [innerStrokeWidth]="false" [outerStrokeColor]="'#48ba46'"
+                                                    [animation]="true" [animationDuration]="300"></circle-progress>
+                                            </div>
+                                            <p>{{pu.key}}</p>
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                                <div class="bg_grad donut_small bg_grad_temp">
+                                    <h2>Servo Motor Temperature</h2>
+                                    <div class="row_sec temperature" *ngFor="let te of machie_statustemp | keyvalue" >
+                                        <div class="col brdr_right axis_display">
+                                            <div class="gradient-wrapper servo_motor_chart">
+                                                <circle-progress [percent]=te.value [radius]="100" [outerStrokeWidth]="16"
+                                                    [innerStrokeWidth]="false" [outerStrokeColor]="'#48ba46'"
+                                                    [animation]="true" [animationDuration]="300"></circle-progress>
+                                            </div>
+                                            <p>{{te.key}}</p>
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+
+                    <div class="bg_grad donut_small bg_grad_temp">
+                        <h5 style="font-size: 20px">Spindle</h5>
+                        <div class="row align-items-center brdr_right">
+                          <div class="col-sm-6 text-center">
+                            <div class="gradient-wrapper2"  >
+                                <circle-progress [percent]=machie_status?.spindle_load [radius]="100" [outerStrokeWidth]="16"
+                                                    [innerStrokeWidth]="false" [outerStrokeColor]="'#48ba46'"
+                                                    [animation]="true" [animationDuration]="300"></circle-progress>
+                            </div>
+                            <p style="font-size: 14px; font-weight: 800">Load</p>
+                          </div>
+                          <div class="col-sm-6 text-center brdr_left">
+                            <div class="gradient-wrapper8">
+                                <circle-progress [percent]=machie_status?.sp_temp [radius]="100" [outerStrokeWidth]="16"
+                                                    [innerStrokeWidth]="false" [outerStrokeColor]="'#48ba46'"
+                                                    [animation]="true" [animationDuration]="300"></circle-progress>
+                            </div>
+                            <p style="font-size: 14px; font-weight: 800">Motor Temperature</p>
+                          </div>
+                        </div>
+                     </div>
+                            </div>
+                        </div>
+                        <!-- main row end -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

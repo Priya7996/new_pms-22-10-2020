@@ -1,0 +1,75 @@
+<section class="page">
+  <div class="section_top_padding">
+    <div class="container-fluid">
+      <div class="page_title_sec">
+        <h2 class="sub_title">
+          <mat-icon class="v-align-middle display">person_outline</mat-icon>
+          <span class="v-align-middle">Admin User</span>
+        </h2>
+        <div class="add_new">
+          <mat-icon class="circle" (click)="user()" matTooltip="Add New">add</mat-icon>
+        </div>
+      </div>
+
+      <div class="page_title_sec align_right">
+        <div class="table_search">
+          <input class="form-control" (keyup)="dolly($event.target.value)" type="text" name="search"
+            [(ngModel)]="searchText" placeholder="Search">
+        </div>
+      </div>
+
+      <mat-card class="card_sec">
+        <mat-card-content class="table-responsive">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+            <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef> User Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Email ID </th>
+              <td mat-cell *matCellDef="let element"> {{element.email_id}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="weight">
+              <th mat-header-cell *matHeaderCellDef> Phone </th>
+              <td mat-cell *matCellDef="let element"> {{element.phone_number}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <!-- <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container> -->
+
+            <ng-container matColumnDef="action">
+              <!-- <mat-header-cell *matHeaderCellDef> Action </mat-header-cell> -->
+              <th mat-header-cell *matHeaderCellDef> Action </th>
+              <ul *matCellDef="let element" class="table_action">
+                <li>
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon" (click)="user_edit(element)"
+                    mattooltip="Edit">edit
+                  </mat-icon>
+                </li>
+                <li>
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                    (click)="user_delete(element.id)" mattooltip="Delete">delete
+                  </mat-icon>
+                </li>
+              </ul>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>

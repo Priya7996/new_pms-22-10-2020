@@ -1,0 +1,75 @@
+<section class="page">
+  <div *ngIf="myLoader" class="spinner">
+    <img src="assets/images/spinner.gif">
+  </div>
+  <div class="section_top_padding">
+    <div class="container-fluid">
+      <div class="page_title_sec">
+        <h2 class="sub_title">
+          <mat-icon class="v-align-middle display">alarm</mat-icon>
+          <span class="v-align-middle">User Registration</span>
+        </h2>
+        <div class="add_new">
+          <mat-icon class="circle" (click)="user()">add</mat-icon>
+        </div>
+      </div>
+      <mat-card class="card_sec table-responsive">
+        <mat-card-content>
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+            <!-- Position Column -->
+            <ng-container matColumnDef="first_name">
+              <th mat-header-cell *matHeaderCellDef> User Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.first_name || '---'}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="email_id">
+              <th mat-header-cell *matHeaderCellDef> Email Id </th>
+              <td mat-cell *matCellDef="let element"> {{element.email_id || '---'}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="phone_number">
+              <th mat-header-cell *matHeaderCellDef> Mobile Number </th>
+              <td mat-cell *matCellDef="let element"> {{element.phone_number || '---'}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="role_name">
+              <th mat-header-cell *matHeaderCellDef> Role </th>
+              <td mat-cell *matCellDef="let element"> {{element.role_name || '---'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <!-- <mat-header-cell *matHeaderCellDef> Action </mat-header-cell> -->
+              <th mat-header-cell *matHeaderCellDef> Action </th>
+              <ul *matCellDef="let element" class="table_action">
+                <li>
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon" (click)="user_edit(element)"
+                    mattooltip="Edit">edit
+                  </mat-icon>
+                </li>
+                <li>
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                    (click)="user_delete(element.id)" mattooltip="Delete">delete
+                  </mat-icon>
+                </li>
+              </ul>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- <iframe width="600" height="450" src="https://datastudio.google.com/embed/reporting/1P0hefuNqfWnr3rNlksljNEky8pZOixpf/page/gufNB" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+  
+  <!-- <div>
+      
+    <iframe width="600" height="450" src="https://datastudio.google.com/embed/reporting/1AGRVsC43aOO1tIhSnJHxPSoSJ9p2KzWz/page/sIgNB" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div> -->
+</section>

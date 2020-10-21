@@ -1,0 +1,283 @@
+
+<div class="page">
+
+    <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+    </div>
+    <div class="page_title_sec">
+          <h2>OEE Dashboard</h2>
+    
+</div>
+  <div class="machine_detail_Page">
+    <div class="running">
+        <div class="header_machine">
+            <form [formGroup]="login" (ngSubmit)="logintest(login.value)">
+                <div class="rhs_wrapper">
+                    <button class="back" [routerLink]="['/machine_lmw']" mat-flat-button color="primary"><span class="material-icons">
+          
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                    </span></button> 
+                         
+            <h2 *ngIf ="machine" >{{machine}}</h2>
+        <h2 *ngIf ="machine_class">{{machine_class}}</h2>
+                    <!-- <mat-toolbar>
+                <h1 *ngIf ="machine" ><b>{{machine}}</b></h1>
+                <h1 *ngIf ="machine_class"><b>{{machine_class}}</b></h1>
+            </mat-toolbar> -->
+                  <!--   <div class="machine_name_list">
+                        <mat-form-field appearance="fill" floatLabel="never">
+                            <mat-select placeholder="Select Machine" matNativeControl required formControlName="machine">
+                                <mat-option value="all">All</mat-option>
+
+                                <mat-option *ngFor="let machine of machine_response" [value]="machine.machine_name">
+                                {{machine.machine_name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>    -->
+                </div>
+                <div class="lhs_wrapper">
+                   <mat-form-field appearance="fill" floatLabel="never">
+                            <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_num">
+                                <mat-option value="all">Select Shift</mat-option>
+                                <mat-option value="all">All</mat-option>
+
+                              <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no" (change)="select_shift(shift.shift_no)">
+                                {{shift.shift_no}}
+                             </mat-option>
+                               </mat-select>
+                          </mat-form-field>
+                      <mat-form-field appearance="fill" floatLabel="never">
+                     <!--  <mat-label>Choose a date</mat-lab el>  -->
+                         
+                      <input placeholder="Choose a date" matInput [matDatepicker]="picker" formControlName="date" (click)="picker.open()">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                      </mat-form-field>
+                      
+                       <button [disabled]="login.invalid" type="submit" color="primary" mat-raised-button>Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+        
+        <div class="machine_Container"  *ngIf = "liveoee && !get_report">
+            <div  class="machine_prod running"  >
+                
+                <div class="circle_progress_wrapper"> 
+                   <circle-progress percent="{{liveoee?.oee}}" radius="65" outerStrokeColor="#F69320" innerStrokeColor="#78542C" animation="true" animationDuration="300" ></circle-progress>
+                </div>
+                 <div class="label_info">
+                    <div class="upper_row">
+                        <div>
+                            <label>{{liveoee?.actual}}</label>
+                            <span>Actual</span>
+                        </div>
+                        <div>
+                            <label>{{liveoee?.target}}</label>
+                            <span>Target</span>
+                        </div>
+                    </div>
+                    <div class="lower_row">
+                       <div>
+                            <label>{{liveoee?.availability}}%</label>
+                            <span>Availability</span>
+                        </div>
+                         <div>
+                            <label>{{liveoee?.perfomance}}%</label>
+                            <span>Performance</span>
+                        </div>
+                        <div>
+                            <label>{{liveoee?.quality}}%</label>
+                            <span>Quality</span>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div style="clear: both;height: 1px;"></div>
+            </div>
+                <h2>{{reason}}</h2>
+            <div class="footer_action">
+                <button  [routerLink]="['/reflect']" mat-flat-button color="primary">Reason</button>
+                <button [routerLink]="['/production']" mat-flat-button color="primary">Production List</button>
+            </div>
+        </div>
+
+
+
+        <div class="machine_Container" *ngIf="get_report">
+            <div  class="machine_prod running"  >
+                
+                <div class="circle_progress_wrapper"> 
+                   <circle-progress percent="{{get_report?.oee}}" radius="65" outerStrokeColor="#F69320" innerStrokeColor="#78542C" animation="true" animationDuration="300" ></circle-progress>
+                </div>
+                 <div class="label_info">
+                    <div class="upper_row">
+                        <div>
+                            <label>{{get_report?.actual}}</label>
+                            <span>Actual</span>
+                        </div>
+                        <div>
+                            <label>{{get_report?.target}}</label>
+                            <span>Target</span>
+                        </div>
+                    </div>
+                    <div class="lower_row">
+                       <div>
+                            <label>{{get_report?.availability}}%</label>
+                            <span>Availability</span>
+                        </div>
+                         <div>
+                            <label>{{get_report?.perfomance}}%</label>
+                            <span>Performance</span>
+                        </div>
+                        <div>
+                            <label>{{get_report?.quality}}%</label>
+                            <span>Quality</span>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div style="clear: both;height: 1px;"></div>
+            </div>
+                <h2>{{reason}}</h2>
+            <div class="footer_action">
+                <button  [routerLink]="['/reflect']" mat-flat-button color="primary">Reason</button>
+                <button  [routerLink]="['/production']" mat-flat-button color="primary">Production List</button>
+            </div>
+        </div>
+    </div>
+
+<footer>
+    <img src="../../../assets/images/yantra1.png">
+</footer>
+</div>
+<!-- <section class="page">
+     <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+    </div> 
+    <div class="section_top_padding">
+        <mat-toolbar>
+             <h1 *ngIf ="machine" ><b>{{machine}}</b></h1>
+            <h1 *ngIf ="machine_class"><b>{{machine_class}}</b></h1> -->
+        <!-- </mat-toolbar> -->
+        <!-- <div class="container-fluid">
+            <div class="page_title_sec">
+                <h2 class="sub_title">
+                     <mat-icon class="v-align-middle display">laptop</mat-icon>
+                  <h2>  <b><span class="v-align-middle"> Oee Dashboard</span></b></h2> 
+                </h2>
+            </div> -->
+
+            <!-- <div class="cards_collections">
+                <div class="px-16 pl-0" >
+                    <mat-card class="single_card" >
+                        <mat-card-content>
+                            
+
+                            <h1 ><b>{{machine}}</b></h1>
+                            <h3>LMW</h3>
+                            <div class="content">
+                             
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div> 
+        </div>
+    </div>
+     <div class="filter_sec mt-10">
+                <form [formGroup]="login" (ngSubmit)="logintest('true')">
+            <div class="filter_fields">
+                     <div class="filter_field">
+                    have commmented out conditions feel free to use them again *ngIf="type == 'ShiftWise'" 
+                    <mat-form-field appearance="outline">
+                        <mat-select placeholder="Select Machine" matNativeControl required formControlName="machine">
+                            <mat-option value="all">All</mat-option>
+
+                            <mat-option *ngFor="let machine of machine_response" [value]="machine.machine_name">
+                            {{machine.machine_name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+                <div class="filter_field">
+                    <!--have commmented out conditions feel free to use them again *ngIf="type == 'ShiftWise'" 
+                    <mat-form-field appearance="outline">
+                        <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_num">
+                            <mat-option value="all">All</mat-option>
+
+                            <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no">
+                            {{shift.shift_no}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+                <div class="filter_field date_picker" color="primary">
+                    <!-- <label>Select Date</label> -->
+                    <!-- <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' [endDate]='end'></ejs-daterangepicker> 
+                    
+         <mat-form-field>
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="date" (click)="picker.open">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+         <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+         </mat-form-field>
+                </div>
+
+                <button [disabled]="login.invalid" type="submit" color="primary" mat-raised-button>Submit</button>
+            </div>
+                
+            </form>
+   <div  *ngIf="reportList" class="cards_collections">
+                <div class="px-16 pl-0" >
+    <mat-card class="example-card">
+                        <mat-card-content>
+                          
+                            <!-- <h2>{{get_report?.machine}}</h2>
+                            <h2>{{get_report?.Shift_num}}</h2> 
+
+                            <h3>Machine Name:{{get_report?.machine}}</h3>
+                            <h3>Shift Number:{{get_report?.shift_num}}</h3>
+
+                            <div class="content">
+                                <div class="count">1</div>
+                                <div class="full_date">
+                                    <p>
+                                        Availabilty :
+                                        <span>{{get_report?.availability}}</span>
+                                    </p>
+                                    <p>
+                                        Performance :
+                                        <span>{{get_report?.perfomance}}</span>
+                                    </p>
+                                    <p>
+                                        Quality :
+                                        <span> {{get_report?.quality}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+            <!-- <div class="table_export">
+                <button class="export_btn" mat-raised-button (click)="export()"> Export</button>
+                
+            </div>  
+        </div>
+    <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+      </div>
+      <!-- <iframe width="600" height="450" src="https://datastudio.google.com/embed/reporting/1P0hefuNqfWnr3rNlksljNEky8pZOixpf/page/gufNB" frameborder="0" style="border:0" allowfullscreen></iframe> 
+<div >
+    <h2>{{reason}}</h2>
+      <button id="fixedbutton" [routerLink]="['/reflect']"><h2><b>Reason</b></h2></button>
+      <button id="flexedbutton" [routerLink]="['/production']"><h2><b>Production Result</b></h2></button>
+
+    </div>
+</section>
+
+
+<div ng-include="'footer.html'"></div> -->
+

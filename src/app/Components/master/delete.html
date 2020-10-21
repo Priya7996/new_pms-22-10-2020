@@ -1,0 +1,33 @@
+<mat-toolbar>Are You Sure You want to delete this file?</mat-toolbar>
+
+<form [formGroup]="login" (ngSubmit)="logintest(login.value)">
+    <mat-form-field>
+        <mat-label>UserName</mat-label>
+        <input matInput formControlName="user_name" type="text">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Reason</mat-label>
+        <input matInput formControlName="reason" type="text">
+    </mat-form-field>
+
+    <div class="control-section">
+        
+        <div id="control_wrapper">
+            <!-- <label style='color:black;'>Select Date</label> -->
+            <!-- <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' [endDate]='end'></ejs-daterangepicker> -->
+            <ejs-daterangepicker placeholder='Select a range' [max]='maxDate' [min]='minDate' (click)="daterangepicker.open()">
+                <e-presets>
+                    <e-preset label="This Week" [start]='weekStart' [end]='weekEnd'></e-preset>
+                    <e-preset label="This Month" [start]='monthStart' [end]='monthEnd'></e-preset>
+                    <e-preset label="Last Month" [start]='lastStart' [end]='lastEnd'></e-preset>
+                    <e-preset label="Last Year" [start]='yearStart' [end]='yearEnd'></e-preset>
+                </e-presets>
+            </ejs-daterangepicker>
+        </div>
+    </div>
+
+    <button mat-raise-button>Save</button>
+    <button mat-raise-button>Close</button>
+
+</form>

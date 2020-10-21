@@ -1,0 +1,57 @@
+<div class="modal_sec">
+    <mat-toolbar>
+        <h3>C Password</h3>
+        <button type="button" class="close" aria-label="Close" (click)="onNoClick()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </mat-toolbar>
+    <div class="dialog-form">
+        <div class="filter_sec">
+            <form [formGroup]="edit1" (ngSubmit)="editform()" class="form_sec" autocomplete="off">
+                <mat-form-field>
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="first_name" type="text" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="last_name" type="text" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Email Address</mat-label>
+                    <input matInput formControlName="email_id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                        ng-reflect-pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a" type="email" required>
+                    <!-- <mat-error *ngIf="test.get('email_id').hasError('email')"> Enter valid email address</mat-error> -->
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput formControlName="phone_number" maxlength="10" minlength="10"
+                        (keypress)="keyPress($event)" type="text" required>
+                </mat-form-field>
+
+                <div class="password_align">
+                    <mat-form-field class="old_pwd">
+                        <mat-label>Old Password</mat-label>
+                        <input matInput formControlName="old_password" [type]=" flock ? 'text' : 'password'"
+                            [(ngModel)]="oldPassword" (change)="checkPassword()" required>
+                        <mat-icon class="eye" matSuffix (click)="flock = !flock">
+                            {{flock ? 'visibility' : 'visibility_off'}}
+                        </mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>New Password</mat-label>
+                        <input matInput formControlName="new_password" [type]=" hide ? 'text' : 'password'" required>
+                        <mat-icon class="eye" matSuffix (click)="hide = !hide">
+                            {{hide ? 'visibility' : 'visibility_off'}}
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-button text-right">
+                    <button mat-raised-button class="filter_btn btn_orange" [disabled]="edit1.invalid"> Save</button>
+                    <button mat-raised-button (click)="onNoClick()" class="filter_btn btn_default ml-16">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

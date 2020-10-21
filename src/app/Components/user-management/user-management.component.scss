@@ -1,0 +1,31 @@
+.row_sec{
+    display: flex;
+        flex-wrap: wrap;
+    .mat-form-field {
+        width: 48%;
+        &:nth-child(odd){
+            margin-right: 16px;
+        }
+        }
+    }
+
+    .spinner {
+        background: #262932;
+        height: 100vh;
+        opacity: 0.9;
+        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: auto;
+        z-index: 999;
+      }
+      
+      .spinner img {
+        width: 90px;
+        margin-top: -130px;
+      }
+    

@@ -1,0 +1,304 @@
+<section class="page">
+
+  <div>
+    <div *ngIf="myLoader" class="spinner">
+      <img src="assets/images/spinner.gif">
+    </div>
+
+    <div class="section_top_padding">
+      <div class="container-fluid">
+        <div class="log_sec">
+          <div *ngIf="myLoader" class="spinner">
+            <img src="assets/images/spinner.gif">
+          </div>
+          <div class="col">
+            <div class="page_title_sec">
+              <h2 class="sub_title">
+                <mat-icon class="v-align-middle display">laptop</mat-icon>
+                <span class="v-align-middle">Internet Status</span>
+              </h2>
+              <div class="table_search">
+                <input class="form-control" (keyup)="dolly($event.target.value)" type="text" name="search"
+                  [(ngModel)]="searchText" placeholder="Search">
+              </div>
+            </div>
+            <mat-card class="card_sec table_card_sec">
+              <mat-card-content *ngIf="connectionlog.status === Connected">
+                <table class="row" mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+
+                  <!-- Position Column -->
+                  <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> # </th>
+                    <td mat-cell *matCellDef="let i=index;"> {{i+1}} </td>
+
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date  || '---'}} </td>
+                  </ng-container>
+
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="time">
+                    <th mat-header-cell *matHeaderCellDef> Time </th>
+                    <td mat-cell *matCellDef="let element"> {{element.time  || '---'}} </td>
+                  </ng-container>
+
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let element"> {{element?.status  || '---'}} </td>
+                  </ng-container>
+
+
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <ng-container *ngIf="dataSource?.filteredData.length == 0">
+                  <div class="no_data_msg"><h2>No Data Found</h2></div>
+              </ng-container>
+              </mat-card-content>
+             
+            </mat-card>
+          </div>
+          <div class="col">
+            <div class="page_title_sec">
+              <h2 class="sub_title">
+                <mat-icon class="v-align-middle display">laptop</mat-icon>
+                <span class="v-align-middle">Ethernet Status</span>
+              </h2>
+              <div class="table_search">
+                <input class="form-control" (keyup)="dongly($event.target.value)" type="text" name="search"
+                  [(ngModel)]="search" placeholder="Search ">
+              </div>
+            </div>
+
+            <div *ngIf="myLoader1" class="spinner">
+              <img src="assets/images/spinner.gif">
+            </div>
+            <mat-card class="card_sec table_card_sec">
+              <mat-card-content>
+                <table class="row" mat-table [dataSource]="dataSource1" class="mat-elevation-z0">
+
+
+                  <!-- Position Column -->
+                  <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> # </th>
+                    <td mat-cell *matCellDef="let i=index;"> {{i+1}} </td>
+
+                  </ng-container>
+
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date  || '---'}} </td>
+                  </ng-container>
+
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="time">
+                    <th mat-header-cell *matHeaderCellDef> Time </th>
+                    <td mat-cell *matCellDef="let element"> {{element.time  || '---'}} </td>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="machinename">
+                    <th mat-header-cell *matHeaderCellDef> Machine Name</th>
+                    <td mat-cell *matCellDef="let element"> {{element.machine.machine_name  || '---'}} </td>
+                  </ng-container>
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let element"> {{element?.status  || '---'}} </td>
+                  </ng-container>
+
+
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+                </table>
+                <ng-container *ngIf="dataSource1?.filteredData.length == 0">
+                  <div class="no_data_msg"><h2>No Data Found</h2></div>
+              </ng-container>
+              </mat-card-content>
+             
+            </mat-card>
+
+          </div>
+        </div>
+        <div class="log_sec">
+          <div class="col">
+            <div class="page_title_sec">
+              <h2 class="sub_title">
+                <mat-icon class="v-align-middle display">laptop</mat-icon>
+                <span class="v-align-middle">Power Status</span>
+              </h2>
+              <div class="table_search">
+                <input class="form-control" (keyup)="doblly($event.target.value)" type="text" name="search"
+                  [(ngModel)]="searchText" placeholder="Search">
+              </div>
+            </div>
+            <mat-card class="card_sec table_card_sec">
+              <mat-card-content class="table-responsive">
+                <table class="row" mat-table [dataSource]="power" class="mat-elevation-z0">
+
+
+                  <!-- Position Column -->
+                  <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> # </th>
+                    <td mat-cell *matCellDef="let i=index;"> {{i+1}} </td>
+
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date  || '---'}} </td>
+                  </ng-container>
+
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="time">
+                    <th mat-header-cell *matHeaderCellDef> Time </th>
+                    <td mat-cell *matCellDef="let element"> {{element.time  || '---'}} </td>
+                  </ng-container>
+
+                  <!-- Symbol Column -->
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let element"> {{element.status  || '---'}} </td>
+                  </ng-container>
+
+
+
+                  <tr mat-header-row *matHeaderRowDef="powerconnected"></tr>
+                  <tr mat-row *matRowDef="let row; columns: powerconnected;"></tr>
+                </table>
+                <!-- <div *ngIf="logfh?.length==0" class="no_data_found">
+                  <h2>No data found</h2>
+                </div> -->
+                <ng-container *ngIf="power?.filteredData.length == 0">
+                  <div class="no_data_msg"><h2>No Data Found</h2></div>
+              </ng-container>
+              </mat-card-content>
+                   
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- < <div class="col">
+          <div class="page_title_sec">
+            <h2 class="sub_title">
+              <mat-icon class="v-align-middle display">laptop</mat-icon>
+              <span class="v-align-middle">Ethernet Status</span>
+            </h2>
+            <div class="table_search">
+              <input class="form-control" type="text" name="search" [(ngModel)]="search" placeholder="Search">
+            </div>
+          </div>
+        </div> -->
+<!-- 
+          <mat-card class="card_sec">
+            <mat-card-content>
+              <table mat-table [dataSource]="log" class="mat-elevation-z0">
+
+                 Position Column 
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef> S.No </th>
+                  <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                </ng-container>
+
+                Name Column
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Date </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                Weight Column
+                <ng-container matColumnDef="weight">
+                  <th mat-header-cell *matHeaderCellDef> Time </th>
+                  <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                </ng-container>
+
+
+                Weight Column
+                <ng-container matColumnDef="machine">
+                  <th mat-header-cell *matHeaderCellDef> Machine Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.machine}} </td>
+                </ng-container>
+
+                Symbol Column
+                <ng-container matColumnDef="symbol">
+                  <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                  <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="logistics"></tr>
+                <tr mat-row *matRowDef="let row; columns: logistics;"></tr>
+              </table>
+              <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                (page)="pageEvent = $event">
+              </mat-paginator>
+            </mat-card-content>
+          </mat-card> -->
+<!-- </div>
+      </div> -->
+
+<!-- <div class="section_padding">
+        <div class="d-flex">
+          <div class="page_title_sec">
+            <h2 class="sub_title">
+              <mat-icon class="v-align-middle display">laptop</mat-icon>
+              <span class="v-align-middle">Power Status</span>
+            </h2>
+            <div class="table_search">
+              <input class="form-control" type="text" name="search" [(ngModel)]="Text" placeholder="Search">
+            </div>
+          </div>
+          <mat-card class="card_sec"> -->
+<!-- <mat-card-content>
+              <table mat-table [dataSource]="public" class="mat-elevation-z0">
+
+                Position Column
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef> S.No </th>
+                  <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                </ng-container>
+
+                Name Column
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Date </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                Weight Column
+                <ng-container matColumnDef="weight">
+                  <th mat-header-cell *matHeaderCellDef> Time </th>
+                  <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                </ng-container>
+
+                Symbol Column
+                <ng-container matColumnDef="symbol">
+                  <th mat-header-cell *matHeaderCellDef> Status </th>
+                  <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="pulse"></tr>
+                <tr mat-row *matRowDef="let row; columns: pulse;"></tr>
+              </table>
+              <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                (page)="pageEvent = $event">
+              </mat-paginator>
+            </mat-card-content>
+          </mat-card> -->
+<!-- </div>
+      </div>
+    </div>
+  </div>
+</section> -->

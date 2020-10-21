@@ -1,0 +1,55 @@
+<div class="modal_sec two_form">
+    <mat-toolbar class="forum">
+        <h3>Admin User Registaration</h3>
+        <button type="button" class="close" aria-label="Close" (click)="onNoClick()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </mat-toolbar>
+    <div class="dialog-form">
+        <div class="filter_sec">
+                <form [formGroup]="login" class="form_sec">
+                    <div class="row_sec">
+                    <mat-form-field>
+                        <mat-label>Device Name</mat-label>
+                        <input matInput formControlName="name" type="text">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Price</mat-label>
+                        <input matInput formControlName="per_pic_price" type="text">
+                    </mat-form-field>
+
+
+                     
+                           
+                        <mat-form-field>
+                            <mat-label>Purchase Date</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="purchase_date" (click)="picker.open()">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                          </mat-form-field>
+                    
+                    
+
+                    
+                    <mat-form-field>
+                        <mat-label>Count</mat-label>
+                        <input matInput formControlName="count" type="text">
+                    </mat-form-field>
+
+                         
+                    <mat-form-field>
+                        <mat-label>Total Price</mat-label>
+                        <input matInput formControlName="total_price" type="text">
+                    </mat-form-field>
+                    
+                </div>
+    
+                    <div class="form-button text-right">
+                        <button mat-raised-button [disabled]="login.invalid" (click)="logintest()" class="filter_btn btn_orange"> Save</button>
+                        <button mat-raised-button ((click)="cancel()"  (click)="onNoClick()" class="filter_btn btn_default ml-16">Close</button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>

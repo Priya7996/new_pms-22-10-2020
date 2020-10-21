@@ -1,0 +1,147 @@
+
+<div class="page">
+    <div class="page_title_sec">
+                
+    
+</div>
+  <div class="machine_detail_Page">
+    <div class="running">
+        <div class="header_machine">
+            
+        <form [formGroup]="login" (ngSubmit)="logintest('true')">
+
+            <div class="rhs_wrapper">
+              <button [routerLink]="['/machine_lmw']"class="back" mat-flat-button color="primary"><span class="material-icons">
+                                        <mat-icon>keyboard_arrow_left</mat-icon>
+
+                    </span></button> 
+            <!-- 
+             <div class="machine_name_list">
+                     <mat-form-field appearance="outline">
+                        <mat-select placeholder="Select Machine" matNativeControl required formControlName="machine">
+                            <mat-option value="all">All</mat-option>
+
+                            <mat-option *ngFor="let machine of machine_response" [value]="machine.machine_name">
+                            {{machine.machine_name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+             </div>   --> 
+
+             <h2>{{marvel}}</h2>
+            </div>
+            <div class="lhs_wrapper">
+               <mat-form-field appearance="fill" floatLabel="never">
+                        <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_num">
+                          <mat-option value="all">Select Shift</mat-option>
+                            <mat-option value="all">All</mat-option>
+
+                          <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no">
+                            {{shift.shift_no}}
+                         </mat-option>
+                           </mat-select>
+                      </mat-form-field>
+                  <mat-form-field appearance="fill" floatLabel="never">
+                   <!-- <mat-label>Choose a date</mat-label> -->
+                  <input placeholder="Choose a date" matInput [matDatepicker]="picker" formControlName="date" (click)="picker.open()">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                  </mat-form-field>
+                  <button [disabled]="login.invalid" type="submit" color="primary" mat-raised-button>Submit</button>
+                  </div>
+                     
+              </form>
+              </div>
+        <div class="machine_Container" *ngIf="last && !get_report">
+            <div class="machine_prod table">
+                <table class="table_machine">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Part Start Time</th>
+                            <th>Part End Time</th>
+                            <th>Program Number</th>
+                            <th>Part Count</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+             
+                   <tr *ngFor="let show_report of last; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{show_report?.part_start_time | date:'dd-MM-yyyy ; HH:mm:ss'}}</td>
+                        <td>{{show_report?.part_end_time | date:'dd-MM-ddyyyy ; HH:mm:ss'}}</td>
+                        <td>{{show_report?.program_number}}</td>
+                        <td>{{show_report?.part_count}}</td>
+                      <!--   <td (click)="accept_count(show_report?._id?.$oid)">Accept</td>
+                        <td (click)="reject_count(show_report?._id?.$oid)">Reject</td> -->
+                         <td>
+                                <button mat-flat-button color="primary" (click)="accept_count(show_report?._id?.$oid)"><span class="material-icons">
+                                    check
+                                    </span></button>
+                                <button mat-flat-button color="accent" (click)="reject_count(show_report?._id?.$oid)"><span class="material-icons">
+                                    close
+                                    </span></button>
+                            </td>
+                    </tr>
+                 
+                     
+                      
+                
+                    </tbody>
+                </table>
+            
+           
+             
+            </div>
+        </div>
+
+
+        <div class="machine_Container" *ngIf="get_report" >
+            <div class="machine_prod table">
+                <table class="table_machine">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Part Start Time</th>
+                            <th>Part End Time</th>
+                            <th>Program Number</th>
+                            <th>Part Count</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+             
+                   <tr *ngFor="let show_report of get_report; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{show_report?.part_start_time | date:'dd-MM-yyyy ; HH:mm:ss'}}</td>
+                        <td>{{show_report?.part_end_time | date:'dd-MM-ddyyyy ; HH:mm:ss'}}</td>
+                        <td>{{show_report?.program_number}}</td>
+                        <td>{{show_report?.part_count}}</td>
+                      <!--   <td (click)="accept_count(show_report?._id?.$oid)">Accept</td>
+                        <td (click)="reject_count(show_report?._id?.$oid)">Reject</td> -->
+                         <td>
+                                <button mat-flat-button color="primary" (click)="accept_count(show_report?._id?.$oid)"><span class="material-icons">
+                                    check
+                                    </span></button>
+                                <button mat-flat-button color="accent" (click)="reject_count(show_report?._id?.$oid)"><span class="material-icons">
+                                    close
+                                    </span></button>
+                            </td>
+                    </tr>
+                 
+                     
+                      
+                
+                    </tbody>
+                </table>
+            
+           
+             
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <img src="../../../assets/images/yantra1.png">
+</footer>

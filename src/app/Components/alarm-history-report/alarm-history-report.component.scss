@@ -1,0 +1,9 @@
+
+
+    ::ng-deep.filter_field{
+        .mat-form-field-appearance-legacy {
+            .mat-form-field-underline{
+                height: unset !important;
+            }
+        }
+    }

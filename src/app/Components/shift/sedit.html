@@ -1,0 +1,54 @@
+<div class="modal_sec">
+    <mat-toolbar>
+        <h3>Shift Registaration</h3>
+        <button type="button" class="close" aria-label="Close" (click)="onNoClick()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </mat-toolbar>
+    <div class="dialog-form">
+        <div class="filter_sec">
+            <form [formGroup]="login"  class="form_sec">
+                <mat-form-field>
+                    <mat-label>Shift Start Time</mat-label>
+                    <input matInput formControlName="shift_start_time" type="text">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Shift End Time </mat-label>
+                    <input matInput formControlName="shift_end_time" type="text">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Shift Number</mat-label>
+                    <input matInput formControlName="shift_no" type="text">
+                </mat-form-field>
+                <div class="row_sec">
+                    <mat-form-field>
+                        <mat-label>Start Day</mat-label>
+                        <mat-select formControlName="day" matNativeControl required>
+                            <mat-option value="">start day</mat-option>
+                            <mat-option value="1">Day 1</mat-option>
+                            <mat-option value="2">Day 2</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>End Day</mat-label>
+                        <mat-select formControlName="end_day" matNativeControl required>
+                            <mat-option value="">End day</mat-option>
+                            <mat-option value="1">Day 1</mat-option>
+                            <mat-option value="2">Day 2</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-button text-right">
+                    <button mat-raised-button [disabled]="login.invalid" (click)="loginform()"
+                        class="filter_btn btn_orange"> Save</button>
+                    <button mat-raised-button (click)="onNoClick()" class="filter_btn btn_default ml-16">Close</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

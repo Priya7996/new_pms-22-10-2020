@@ -1,0 +1,14 @@
+<div class="modal_sec">
+    <mat-toolbar class="forum">
+        <h3>Axis Values</h3>
+        <button type="button" class="close" aria-label="Close" (click)="onNoClick()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </mat-toolbar>
+    <div class="dialog-form">
+        <div class="filter" *ngFor="let s of status">
+           <p>{{s.setting_name}}</p>
+     <mat-slide-toggle  [checked] = "s.is_active == true" (change)="notify($event,s)"></mat-slide-toggle> 
+        </div>
+    </div>
+</div>

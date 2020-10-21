@@ -1,0 +1,33 @@
+<div class="modal_sec two_form">
+    <mat-toolbar>
+        <h3>Shift Registaration</h3>
+        <button type="button" class="close" aria-label="Close" (click)="onNoClick()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </mat-toolbar>
+    <div class="dialog-form">
+        <div class="filter_sec">
+            <form [formGroup]="login" (ngSubmit)="logintest()" class="form_sec">
+                <mat-form-field>
+                    <mat-label>Day Start Time</mat-label>
+                    <input matInput formControlName="day_start_time" type="text" required>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Working Time </mat-label>
+                    <input matInput formControlName="working_time" type="text" required>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Number of Shift</mat-label>
+                    <input matInput formControlName="no_of_shift" type="text" required>
+                </mat-form-field>
+
+                <div class="form-button text-right">
+                    <button mat-raised-button [disabled]="login.invalid" (click)="logintest()" class="filter_btn btn_orange"> Save</button>
+                    <button mat-raised-button (click)="onNoClick()" class="filter_btn btn_default ml-16">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

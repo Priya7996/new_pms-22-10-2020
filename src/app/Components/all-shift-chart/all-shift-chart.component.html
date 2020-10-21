@@ -1,0 +1,76 @@
+<section class="page">
+  <div class="section_top_padding">
+    <div class="container-fluid">
+      <div class="page_title_sec">
+        <h2 class="sub_title">
+          <mat-icon class="v-align-middle display">laptop</mat-icon>
+          <span class="v-align-middle">Report</span>
+        </h2>
+        <form [formGroup]="login">
+        <div class="filter_sec">
+          <div class="filter_field">
+            <mat-form-field appearance="outline">
+              <mat-select [(ngModel)]="macname" required formControlName="machine_id">
+                <mat-option>Select Machine</mat-option>
+                <mat-option *ngFor="let machine of machine_response" [value]="machine.machine_name" (click)="getmachine(machine.machine_name,machine.id)">
+                    {{machine.machine_name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+ 
+          <div class="filter_field">
+            <mat-form-field appearance="outline">
+              <mat-select [(ngModel)]="showshift"  required formControlName="shift_id" >
+                <mat-option>Select Shift</mat-option>
+                <mat-option *ngFor="let shift of shift_response"  [value]="shift.shift_no" (click)="getshift(shift.id)">{{shift.shift_no}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="filter_field date_picker">
+                           
+            <mat-form-field>
+                <mat-label>Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date" (click)="picker.open()">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+              </mat-form-field>
+        </div>
+
+          <button mat-raised-button class="filter_btn btn_orange" [disabled]="login.invalid" (click)="chart_view()">
+            Report</button>
+        </div>
+      </form>
+
+      </div>
+      <div>
+
+        
+        <div *ngIf="myLoader1" class="spinner">
+          <img src="assets/images/spinner.gif">
+        </div>
+              <div class="row_sec">
+
+
+        <div class="col">
+        
+          <mat-card class="example-card card_sec">
+            <mat-card-content>
+              <highcharts-chart [Highcharts]="Highcharts1" [options]="chartOptions1"
+                style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="col">
+          <mat-card class="example-card card_sec">
+            <mat-card-content>
+              <highcharts-chart [Highcharts]="Highcharts2" [options]="chartOptions2"
+                style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+</div>
+    </div>
+  </div>
+</section>

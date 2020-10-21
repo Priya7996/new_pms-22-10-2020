@@ -1,0 +1,66 @@
+<!-- <section class="page">
+    <div class="section_top_padding">
+        <div class="container-fluid">
+            <div class="page_title_sec">
+                <h2 class="sub_title">
+                    <mat-icon class="v-align-middle display">laptop</mat-icon>
+                  <h2> <b> <span class="v-align-middle"> Reason List</span></b></h2>
+                </h2>
+            </div>
+
+            <div class="cards_collections">
+                <div class="px-16 pl-0" *ngFor="let locked of reflect; let i = index">
+                    <mat-card class="single_card" (click)="routes(locked?.reason,locked?.id?.$oid)">
+                        <mat-card-content>
+                           
+                            <h5 ><b>{{locked?.reason}}</b></h5>
+                            <div class="content">
+                               
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+      </div>
+</section> -->
+<div class="page">
+    <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+    </div>
+    <div class="page_title_sec">
+                
+        <h2>Reason list</h2>
+    
+</div>
+             <div class="rhs_wrapper">
+              <button [routerLink]="['/machine_lmw']"class="back" mat-flat-button color="primary"><span class="material-icons">
+                                        <mat-icon>keyboard_arrow_left</mat-icon>
+
+                    </span></button> 
+                </div>
+  <div class="machine_detail_Page">
+    <div class="running">
+        <div class="header_machine">
+           
+          
+        </div>
+        <div class="machine_Container" >
+            <div class="machine_prod running">
+                <button *ngFor="let locked of reflect; let i = index" (click)="routes(locked?.reason,locked?.id?.$oid)" mat-flat-button color="primary">{{locked?.reason}}</button>
+                <!-- <button  mat-flat-button color="primary">Production List</button> -->
+
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <img src="../../../assets/images/yantra1.png">
+</footer>
+</div>
+
+
+

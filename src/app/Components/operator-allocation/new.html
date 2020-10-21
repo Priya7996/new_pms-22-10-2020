@@ -1,0 +1,105 @@
+<div class="modal_sec two_form">
+    <mat-toolbar class="forum">
+        <h3>Operator Registaration</h3>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </mat-toolbar>
+    <div class="dialog-form">
+        <div class="filter_sec">
+            <form [formGroup]="login"  class="form_sec">
+                <mat-form-field>
+                    <mat-select placeholder="select machine" matNativeControl required formControlName="machine_id">
+                      <mat-option *ngFor="let machine of machine_response" [value]="machine.id">
+                          {{machine.machine_name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                      <mat-select placeholder="Select Operator" matNativeControl required formControlName="operator_id">
+                          <mat-option *ngFor="let operator of operator_response" [value]="operator.id">
+                               {{operator.operator_name}}
+                          </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+            
+                <mat-form-field>
+                    <mat-select placeholder="Select Shift"  matNativeControl required formControlName="shifttransaction_id">
+                        <mat-option *ngFor="let shift of shift_rep" [value]="shift.id">{{shift.shift_no}} ({{shift.shift_start_time}}-{{shift.shift_end_time}})</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-select placeholder="Description"  matNativeControl required formControlName="description">
+                        <mat-option value="Turning Center Operator">Turning Center Operator</mat-option>
+                        <mat-option value="VMC Operator">VMC Operator</mat-option>
+                        <mat-option value="HMC Operator">HMC Operator</mat-option>
+                        <mat-option value="VTL Operator">VTL Operator</mat-option>
+                        <mat-option value="Turning Center Programmer">Turning Center Programmer</mat-option>
+                        <mat-option value="VMC Programmer">VMC Programmer</mat-option>
+                        <mat-option value="HMC Programmer">HMC Programmer</mat-option>
+                        <mat-option value="VTL Programmer">VTL Programmer</mat-option>
+                        <mat-option value="Turning Center Programmer">Turning Center Setter</mat-option>
+                        <mat-option value="VMC Programmer">VMC Setter</mat-option>
+                        <mat-option value="HMC Programmer">HMC Setter</mat-option>
+                        <mat-option value="VTL Programmer">VTL Setter</mat-option>
+                    </mat-select>
+                </mat-form-field>
+               
+              
+
+                <mat-form-field>
+                    <mat-label>Target</mat-label>
+                    <input matInput formControlName="target" type="text">
+                </mat-form-field>
+
+                <!-- Date Range Picker -->
+
+
+               
+                <div class="filter_field">
+                    <mat-form-field>
+                      <mat-label>From Date</mat-label>
+                      <input matInput [matDatepicker]="picker" formControlName="from_date" (click)="picker.open()">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+      
+                  <div class="filter_field date_picker">
+                                 
+                    <mat-form-field>
+                        <mat-label>To Date</mat-label>
+                        <input matInput [matDatepicker]="picker1" formControlName="to_date" (click)="picker1.open()">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1 startView="year" [startAt]="endDate"></mat-datepicker>
+                      </mat-form-field>
+                </div>
+
+                <!-- <div class="control-section">
+                    <div id="control_wrapper">
+                        <label style='color:black;'>Select Date</label>
+                        <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' [endDate]='end'></ejs-daterangepicker>
+                        <ejs-daterangepicker placeholder='Select a range' [max]='maxDate' [min]='minDate'
+                            (click)="daterangepicker.open()">
+                            <e-presets>
+                                <e-preset label="This Week" [start]='weekStart' [end]='weekEnd'></e-preset>
+                                <e-preset label="This Month" [start]='monthStart' [end]='monthEnd'></e-preset>
+                                <e-preset label="Last Month" [start]='lastStart' [end]='lastEnd'></e-preset>
+                                <e-preset label="Last Year" [start]='yearStart' [end]='yearEnd'></e-preset>
+                            </e-presets>
+                        </ejs-daterangepicker>
+                    </div>
+                </div> -->
+
+                <div class="form-button text-right">
+                    <button mat-raised-button [disabled]="login.invalid" (click)="logintest()" class="filter_btn btn_orange">
+                         Save</button>
+                         <button mat-raised-button (click)="close()" class="filter_btn btn_default ml-16">Close</button>
+                        </div>
+
+            </form>
+        </div>
+        </div>
+        </div>

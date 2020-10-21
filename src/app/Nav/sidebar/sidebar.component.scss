@@ -1,0 +1,241 @@
+
+.header
+{
+  background: #fff;
+  color: #666;
+  position: fixed;
+  border-radius: 0;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+  .header_area{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  .company_name{
+    h3{
+      font-size: 25px;
+    font-weight: 400;
+    text-transform: capitalize;
+    }
+  }
+  .cust-email{
+    margin-left: 965px;
+    font-weight: 100;
+  }
+  .text_right{
+      .user_link{
+        padding: 0.5em 1em;
+        color: #4c4c4c;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 300;
+        margin-right: 30px;
+        mat-icon{
+          height: 16px;
+          width: 16px;
+          font-size: 20px;
+          cursor: pointer;
+        }
+      }
+  }
+  .logout{
+    cursor: pointer;
+    img{
+      width: 24px;
+      height: 24px;
+      fill: #666;
+    }
+  }
+}
+}
+
+// sidenav style
+.sidenav {
+  margin-top: 64px;
+  background: #3b414f!important;
+  color: #686a76;
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  z-index: 9;
+  width: 100px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0px;
+  height: auto;
+  text-align: left;
+  background: #393836;
+  color: #fff;
+  transition: all 0.3s linear;
+  z-index: 999;
+  scroll-behavior: smooth;
+  // overflow-y: hidden;
+  &:hover{
+    overflow-y: scroll; 
+  }
+  .main-menu{
+  ul{
+    list-style-type: none;
+    padding: 0;
+    li{
+      &:hover{
+        background: #ec6e17;
+        color: #fff;
+      }
+      &.active-link{
+        background-color: #f7941d;
+      }
+      a{
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+        display: block;
+        font-weight: 300;
+        text-align: center;
+        cursor: pointer;
+        i{
+          margin-right: 0;
+          font-size: 1.2em;
+        }
+        span{
+          font-size: 11px;
+          display: block;
+          margin-top: 5px;
+        }
+
+      }
+    }
+  }
+  } 
+}
+ 
+  footer{
+    &.main-footer {
+      position: fixed;
+      bottom: 0;
+      background: #2f333e;
+      color: #fff;
+      padding: 10px 0;
+      font-size: 12px;
+      width: calc(100% - 100px);
+      right: 0;
+      z-index: 2;
+      text-align: right;
+    p{
+      font-size: 20px;
+      font-weight: 520;
+      color: #ffffff;
+      margin-bottom: 0px!important;
+      margin: 0;
+      a{
+        font-size: 20px;
+        margin-right: 5px;
+        text-decoration: none;
+        color: #fff;
+        // color: #999;
+        img{
+          margin-right: 5px;
+          height: 20px;
+        }
+      }
+    }
+  }
+  }
+
+
+  // responsive
+  @media (max-width: 600px){
+    .header
+    {
+      .header_area{
+      .company_name{
+        h3{
+          font-size: 16px;
+        }
+      }
+      .logout{
+        img{
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+    }
+    .sidenav {
+      margin-top: 56px;
+    }
+    .bg_grad{
+      margin-top: 15px;
+    }
+     
+  footer{
+    &.main-footer {
+    p{
+      font-size: 14px;
+      a{
+        font-size: 14px;
+        img{
+          height: 14px;
+        }
+      }
+    }
+  }
+  }
+  }
+
+@media (max-width: 1024px){
+ .sidenav{
+   .main-menu{
+     ul{
+       li{
+         a{
+           span{
+             font-size: 10px;
+           }
+         }
+       }
+     }
+   }
+ } 
+
+}
+
+// Custom styles
+.mat-menu-item {
+  display: flex;
+  align-items: center;
+  i {
+    font-size: 18px;
+    margin-right: 5px;
+}
+}
+.setting_sec{
+  .action_menus{
+    cursor: pointer;
+    line-height: 0;
+  }
+}
+
+.rotate {
+  transform:rotate(-90deg);
+}
+.down {
+ .rotate{
+  -moz-transform:rotate(0deg);
+  -webkit-transform:rotate(0deg);
+  transform:rotate(0deg);
+ }
+}
+
+::ng-deep.password_align{
+  display: flex;
+  .old_pwd{
+    margin-right: 10px;
+  }
+}
+
+

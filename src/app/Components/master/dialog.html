@@ -1,0 +1,71 @@
+<div class="modal_sec">
+    <mat-toolbar>
+        <h3>File Upload</h3>
+        <button type="button" class="close" aria-label="Close" (click)="onNoClick()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </mat-toolbar>
+    <div class="dialog-form">
+        <div class="filter_sec">
+            <form [formGroup]="test" (ngSubmit)="testform(test.value)" class="form_sec">
+               
+                    <mat-form-field appearance="standard">
+                      <mat-select placeholder="Select Machine"   matNativeControl required formControlName="machine_id">
+                        <mat-option *ngFor="let machine of machine_response" [value]="machine.id">
+                            {{machine.machine_name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+            
+                  
+                <mat-form-field>
+                    <mat-label>User Name</mat-label>
+                    <input matInput formControlName="user_name" type="text">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Revision Number</mat-label>
+                    <input matInput formControlName="revision_no" type="text">
+                </mat-form-field>
+
+                <!-- <div class="date_picker">
+                    <ejs-daterangepicker placeholder='Select a range' [max]='maxDate' [min]='minDate'
+                        (click)="daterangepicker.open()" formControlName="date">
+                        <e-presets>
+                            <e-preset label="This Week" [start]='weekStart' [end]='weekEnd'></e-preset>
+                            <e-preset label="This Month" [start]='monthStart' [end]='monthEnd'></e-preset>
+                            <e-preset label="Last Month" [start]='lastStart' [end]='lastEnd'></e-preset>
+                            <e-preset label="Last Year" [start]='yearStart' [end]='yearEnd'></e-preset>
+                        </e-presets>
+                    </ejs-daterangepicker>
+                </div> -->
+                <!-- <mat-form-field class="upload_file">
+                    <input matInput placeholder="Choose File"
+                    (click)="selectAssetFile.click()" [readonly]="true">
+                    <mat-icon matSuffix class="upload_files">cloud_upload</mat-icon>
+                    </mat-form-field>
+                    <input #selectAssetFile type='file' (change)="upload($event.target.files)" 
+                    style="display: none;"> -->
+                    <div class="filter_field">
+                        <mat-form-field>
+                          <mat-label>From Date</mat-label>
+                          <input matInput [matDatepicker]="picker" formControlName="date" (click)="picker.open()">
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+          
+
+                    <div class="form-group custom_file_upload">
+                        <label for="file">Choose File</label><br /> <input type="file" id="file" (change)="fileUpload1($event)">
+                      </div>
+                <!-- <div>
+                    <input type="file" (change)="upload($event.target.files)" />
+                </div> -->
+                <div class="form-button text-right">
+                    <button mat-raised-button [disabled]="test.invalid" class="filter_btn btn_orange"> Save</button>
+                    <button mat-raised-button (click)="onNoClick()" class="filter_btn btn_default ml-16">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

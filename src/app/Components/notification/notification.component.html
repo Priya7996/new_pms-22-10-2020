@@ -1,0 +1,52 @@
+<section class="page">
+    <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+      </div>
+    <div class="section_top_padding">
+        <div class="container-fluid">
+            <div class="page_title_sec">
+                <h2 class="sub_title">
+                    <mat-icon class="v-align-middle display">notification_important</mat-icon>
+                    <span class="v-align-middle">Notification Setting</span>
+                </h2>
+            </div>
+
+            <div class="cards_collections">
+                <div class="px-16">
+                    <mat-card class="example-card" *ngFor="let notification of alarm_setting ;let i=index">
+                        <mat-card-content>
+                            <div class="switch_holder">
+                                <mat-slide-toggle [checked]="notification.active == true"
+                                    (change)="notify($event,notification)" >
+                                </mat-slide-toggle>
+                                    <mat-icon (click)="test(i,notification.id)" class="v-align-middle edit" matTooltip="Edit">edit</mat-icon>
+                            </div>
+
+                            <h2>{{notification.machine.machine_name}}</h2>
+                            <div class="content">
+                                <form [formGroup]="interval">
+                                <div class="count">{{i+1}}</div>
+                                <div class="full_date">
+                                    <p><span>Timeinterval : </span> 
+                                        <span *ngIf="interval_index != i">{{notification.time_interval}}  </span>
+                                        <span *ngIf="interval_index == i && updatedTimeInterval">{{updatedTimeInterval}}</span>
+
+                                          <mat-select *ngIf="interval_index == i && hide" formControlName="timeintervel">
+                                    <!-- <option >---select---</option> --> 
+                                    <mat-option *ngFor="let time of times" [value]="time" (click)="edit_view(time)">{{time}}</mat-option>
+                                </mat-select>
+                                </p>
+                                    <p>
+                                        Reason :
+                                        <span class="reason"> {{notification.alarm_for}}</span>
+                                    </p>
+                                </div>
+                                </form>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

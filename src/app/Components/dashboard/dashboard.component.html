@@ -1,0 +1,385 @@
+<div class="sec_padding_top">
+  
+  <section class="dashbaord_sec">
+
+    <div *ngIf="myLoader" class="spinner">
+    <img src="assets/images/spinner.gif">
+  </div>
+    <mat-drawer-container>
+      <mat-drawer class="machine_drawer close_menu" #drawer mode="side" opened>
+      <div class="side_mec">
+            <a (click)="drawer.toggle()" class="close_menu">
+              <i class="material-icons" matTooltip="close">
+                close
+              </i>
+            </a>
+            <div>
+              <div class="mac_stat" *ngFor = "let machine of machine_response.data | keyvalue">
+            <h1>{{machine.key}} </h1>
+            <!-- <div *ngFor = "let test of machine_response.count | keyvalue">
+              {{test.value.running | json }}
+            </div> -->
+            <div *ngFor = "let ma of machine_response.count | keyvalue">
+              <ul class="mac_list" >
+                <li><a>All ({{machine.value.length}})</a></li>
+                <li><a>Running ({{ma.value.running || 0}})</a></li>
+                <li><a>Idle ({{ ma.value.idle1 || 0}})</a></li>
+                <li><a>Stop ({{ma.value.stop || 0}})</a></li>
+              </ul>
+            </div>
+            <div class="clearfix"></div>
+            <ul class="mac_disp" matRipple *ngFor ="let mac of machine.value">
+              <li (click)="activeclick(mac.machine_id)">
+                  <a *ngIf="mac.machine_status =='3'">
+                    <img src="../../../assets/images/machine_running.png">
+                    <span>{{mac.mac_name }}</span>
+                  </a>
+                  <a *ngIf="mac.machine_status != '3' && mac.machine_status !='100' && mac.machine_status != null">
+                    <img src="../../../assets/images/machine_idle_nrm.png">
+                    <span>{{mac.mac_name }}</span>
+                  </a>
+                  <a *ngIf="mac.machine_status=='100'"><img src="../../../assets/images/machine_stop_nrm.png">
+                    <span>{{mac.mac_name }}</span>
+                  </a>
+              </li>
+            </ul>
+          </div>
+          </div>
+        </div> 
+
+        <!-- <div class="side_mec">
+          <a (click)="drawer.toggle()" class="close_menu">
+            <i class="material-icons" matTooltip="close">
+              close
+            </i>
+          </a>
+          <h1>Unit - 1</h1>
+          <ul class="mac_list">
+            <li><a>All (12)</a></li>
+            <li><a>Running (0)</a></li>
+            <li><a>Idle (0)</a></li>
+            <li><a>Stop (0)</a></li>
+          </ul>
+          <div class="clearfix"></div>
+          <ul class="mac_disp">
+            <li><a><img src="../../../assets/images/machine_running.png">
+                <span>TC-M123(E)</span>
+              </a></li>
+            <li><a><img src="../../../assets/images/machine_idle_nrm.png">
+                <span>TC-M124(E)</span>
+              </a></li>
+            <li><a><img src="../../../assets/images/machine_stop_nrm.png">
+                <span>VMC-M029(E)</span>
+              </a></li>
+          </ul>
+        </div> -->
+
+      </mat-drawer>
+      <mat-drawer-content>
+        <div class="content-inner active content-dashboard">
+          <div class="container-fluid">
+            <div class="wrapper_inner">
+              <a (click)="drawer.toggle()" class="toggle_menu" matTooltip="toggle sidenav">
+                <i class="material-icons">
+                  menu
+                </i>
+              </a>
+              <div class="mec_head" [routerLink]="['/machine']">
+                <div class="row_sec">
+                  <div class="col">
+                    <span class="running">
+                    </span>
+                    <span class="mac_ut_bar_red" *ngIf="machie_status?.machine_status =='100'">Stop
+                    </span>
+                    <span class="running" *ngIf="machie_status?.machine_status =='3'">Running
+                    </span>
+                    <span class="machine_status" *ngIf="machie_status?.machine_status !='3' && machie_status?.machine_status !='100' && machie_status?.machine_status != null " >Idle
+                    </span>
+                    <span class="machine_status" *ngIf="machie_status?.machine_status =='null'">No Data
+                    </span>
+                  </div>
+                  <div class="col v_mid">
+                    <h2 class="title">{{machie_status?.machine_name}}
+                    </h2>
+                    <span class="shift_time">Shift:{{machie_status?.shift_no}}({{machie_status?.shift_time}})</span>
+                  </div>
+                  <div class="col clock_all">
+                    <div class="clock_top">
+                      <span>Date:</span>
+                      {{today | date:'dd-MM-yyyy'}}
+                    </div>
+                    <div class="clock_top">
+                      <span>Time:</span>
+                      {{today | date:'h:mm:ss a'  }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="time_desc">
+                <p> <b>Operator Name : </b>
+                  <span>
+                    {{machie_status?.operator_allocation}} </span></p>
+                <p><b>Last Updated Time: {{machie_status?.last_update | date:'yyyy-MM-dd / HH:mm:ss a'}}</b>
+                  <!-- <span>{{machie_status. }}</span> -->
+                </p>
+              </div>
+             
+
+              <!-- main row start -->
+              <div class="main_row">
+                <div class="main_col">
+                  <div class="gradient-wrapper">
+                  <!--   <div>
+                      <circle-progress [percent]="100" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="false"
+                        [outerStrokeColor]="'#48ba46'" [animation]="true" [animationDuration]="300"></circle-progress>
+                    </div> -->
+
+                     <div class="circle_progress_wrapper"> 
+                   <circle-progress percent="{{machie_status?.utilization}}" radius="100" outerStrokeColor="#48ba46" innerStrokeColor="#78542C" animation="true" animationDuration="300" ></circle-progress>
+                </div> 
+                  </div>
+                  <div class="bg_grad">
+                    <h5>6140-(002946140B-30 SFG-TU1)</h5>
+                  </div>
+                  <div class="bg_grad">
+                    <div class="row_sec">
+                      <div class="col brdr_right parts_pro">
+                        <h4>Parts Produced</h4>
+                        <ul class="parts_produced">
+                          <li>
+                            <h4> MD :
+                              <p>
+                                <b> {{machie_status?.machine_disply}}</b>
+                                <span> Nos </span>
+                              </p>
+                            </h4>
+                          </li>
+                          <li>
+                            <h4>C :
+                              <p><b> {{machie_status?.parts_count}}</b>
+                                <span>
+                                  Nos
+                                </span>
+                              </p>
+                            </h4>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col brdr_left">
+                        <table class="table parts_pro_table">
+                          <thead>
+                            <tr>
+                              <th>Pgm No</th>
+                              <th>Parts</th>
+                            </tr>
+                          </thead>
+                          <tbody class="table-scroll mCustomScrollbar _mCS_23 mCS-autoHide mCS_no_scrollbar"
+                            style="position: relative; overflow: visible;">
+                            <div id="mCSB_23" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside"
+                              tabindex="0" style="max-height: none;">
+                              <div id="mCSB_23_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
+                                style="position: relative; left: 0px; top: 0px;" dir="ltr">
+                                <tr ng-repeat="(key,val) in datas.job_wise_parts" class="ng-scope">
+                                  <td>6140</td>
+                                  <td>12</td>
+                                </tr>
+                              </div>
+                            </div>
+                            <!-- <div id="mCSB_23_scrollbar_vertical"
+                              class="mCSB_scrollTools mCSB_23_scrollbar mCS-minimal mCSB_scrollTools_vertical">
+                              <div class="mCSB_draggerContainer">
+                                <div id="mCSB_23_dragger_vertical" class="mCSB_dragger">
+                                  <div class="mCSB_dragger_bar"></div>
+                                </div>
+                                <div class="mCSB_draggerRail"></div>
+                              </div>
+                            </div> -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bg_grad">
+                    <div class="mac_ut_holder">
+                      <h5 class="sub_title"><i class="material-icons">
+                          access_time
+                        </i> Current Status</h5>
+                      <div class="row_sec">
+                        <div class="col">
+                          <span class="mac_ut_bar_green"></span>
+                          <h5>Run Time</h5>
+                          <div class="mac_ut_time">{{machie_status?.run_time}}</div>
+                        </div>
+                        <div class="col brdr_mid">
+                          <span class="mac_ut_bar_yellow"></span>
+                          <h5>Idle Time</h5>
+                          <div class="mac_ut_time">{{machie_status?.idle_time}}</div>
+                        </div>
+                        <div class="col">
+                          <span class="mac_ut_bar_red"></span>
+                          <h5>Stop Time</h5>
+                          <div class="mac_ut_time">{{machie_status?.stop_time}}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="main_col sec_center">
+                  <div class="bg_grad">
+                    <h2>Servo Load</h2>
+                    <div class="axis_display">
+                      <p> x_axis
+                      </p>
+                      <span>49 %</span>
+                    </div>
+                    <div class="axis two">
+                      <div>
+                        <span class="green"></span>
+                      </div>
+                      <div>
+                        <span class="green"></span>
+                      </div>
+                      <div>
+                        <span class="green"></span>
+                      </div>
+                    </div>
+                    <div class="axis_display">
+                      <p> z_axis
+                      </p>
+                      <span>47 %</span>
+                    </div>
+                    <div class="axis two">
+                      <div>
+                        <span class="green"></span>
+                      </div>
+                      <div>
+                        <span class="green"></span>
+                      </div>
+                      <div>
+                        <span class="green"></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="speed_sec">
+                    <figure class="highcharts-figure">
+                      <div id="container" class="chart-container"></div>
+                      <div id="container2" class="chart-container"></div>
+                    </figure>
+                  </div>
+
+                  <div class="bg_grad">
+                    <h5>Machine Status</h5>
+                    <ul class="status">
+                      <li>
+                        <a matTooltip="Spindle Running">
+                          <img src="assets/images/spindel-running.png">
+                        </a>
+                      </li>
+                      <li><a matTooltip="Oil Level"><img src="assets/images/oil-level.png"></a></li>
+                      <li><a matTooltip="Coolant Level"><img src="assets/images/coolant-level.png"></a></li>
+                      <li><a matTooltip="Maintenance"><img src="assets/images/maintenance.png"></a></li>
+                      <li><a matTooltip="Tool Touch"><img src="assets/images/tool-touch.png"></a></li>
+                      <li><a matTooltip="Spindle Vibration"><img src="assets/images/spindle-vibration.png"></a>
+                      </li>
+                      <li><a matTooltip="Spindle Temperature"><img src="assets/images/spindle-temperature.png"></a></li>
+                      <li><a matTooltip="Alarm">
+                          <img src="assets/images/alarm.png"> </a></li>
+                    </ul>
+                  </div>
+                  <div class="bg_grad">
+                    <div class="mac_alarm">
+                      <h5 class="brdr_botm"><i class="material-icons">
+                          notification_important
+                        </i>Recent Alarms</h5>
+                      <div class="brdr_top mac_alarm_innr"> {{machie_status?.alarm}}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="main_col sec_last">
+                  <div class="bg_grad donut_small bg_grad_temp">
+                    <h2>Pulse Coder Temperature</h2>
+                    <div class="row_sec temperature">
+                      <div class="col brdr_right axis_display">
+                        <div class="gradient-wrapper" >
+                            <circle-progress [percent]="100" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="false"
+                              [outerStrokeColor]="'#48ba46'" [animation]="true" [animationDuration]="300"></circle-progress>
+                        </div>
+                        <p>789</p>
+                      </div>
+                      <!-- <div class="col axis_display">
+                        <div class="gradient-wrapper">
+                          <circle-progress [percent]="100" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="false"
+                              [outerStrokeColor]="'#48ba46'" [animation]="true" [animationDuration]="300"></circle-progress>
+                        </div>
+                        <p>y_axis</p>
+                      </div> -->
+                    </div>
+                  </div>
+                  <div class="bg_grad donut_small bg_grad_temp">
+                    <h2>Servo Motor Temperature</h2>
+                    <div class="row_sec temperature">
+                      <div class="col brdr_right axis_display">
+                        <div class="gradient-wrapper">
+                            <circle-progress [percent]="100" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="false"
+                              [outerStrokeColor]="'#48ba46'" [animation]="true" [animationDuration]="300"></circle-progress>
+                        </div>
+                        <p>x_axis</p>
+                      </div>
+                      <div class="col axis_display">
+                        <div class="gradient-wrapper">
+                          <circle-progress [percent]="100" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="false"
+                              [outerStrokeColor]="'#48ba46'" [animation]="true" [animationDuration]="300"></circle-progress>
+                        </div>
+                        <p>y_axis</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bg_grad donut_small bg_grad_temp">
+                    <h2>Spindle</h2>
+                    <div class="row_sec temperature">
+                      <div class="col brdr_right axis_display">
+                        <div class="gradient-wrapper">
+                            <circle-progress [percent]="100" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="false"
+                              [outerStrokeColor]="'#48ba46'" [animation]="true" [animationDuration]="300"></circle-progress>
+                        </div>
+                 
+                        <p>Load</p>
+                      </div>
+                      <div class="col axis_display">
+                        <div class="gradient-wrapper">
+                          <circle-progress [percent]="100" [radius]="100" [outerStrokeWidth]="16" [innerStrokeWidth]="false"
+                              [outerStrokeColor]="'#48ba46'" [animation]="true" [animationDuration]="300"></circle-progress>
+                        </div>
+                        <p>Motor Temperature</p>
+                      </div>
+                    </div>
+                  
+                  </div>
+
+                  <div class="bg_grad donut_small bg_grad_temp time_sec">
+                    <div class="mac_ut">
+                      <h5>Last Cycle time</h5>
+                      <span class="mac_ut_time">{{machie_status?.cycle_time}}</span>
+                    </div>
+                    <div class="mac_ut brdr_mid">
+                      <h5>Last cutting time</h5>
+                      <span class="mac_ut_time">{{machie_status?.cutting_time}}</span>
+                    </div>
+                    <div class="mac_ut">
+                      <h5>total run time</h5>
+                      <span class="mac_ut_time">{{machie_status?.total_run_time}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- main row end -->
+            </div>
+          </div>
+        </div>
+      </mat-drawer-content>
+    </mat-drawer-container>
+  </section>
+</div>

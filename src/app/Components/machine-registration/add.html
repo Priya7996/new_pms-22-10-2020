@@ -1,0 +1,77 @@
+<div class="modal_sec two_form">
+    <mat-toolbar>
+        <h3>Machine Registration</h3>
+        <button type="button" class="close" aria-label="Close" (click)="onNoClick()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </mat-toolbar>
+
+    <div class="dialog-form">
+        <form [formGroup]="login">
+            <mat-form-field>
+                <mat-label>Machine Type</mat-label>
+                <input matInput formControlName="machine_name" type="text" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Machine Name</mat-label>
+                <input matInput formControlName="machine_type" type="text" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Controller Model Number</mat-label>
+                <input matInput formControlName="controller_type" type="text" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Machine Serial Number</mat-label>
+                <input matInput formControlName="machine_serial_no" type="text" required>
+            </mat-form-field>
+            <div class="row_sec">
+                <mat-form-field>
+                    <mat-label>Machine IP</mat-label>
+                    <input matInput formControlName="machine_ip" type="text" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Select Unit</mat-label>
+                    <mat-select matNativeControl required formControlName="unit" required>
+                        <mat-option value="Select unit" disabled>Select Unit</mat-option>
+                        <mat-option value="Unit - 1">Unit1</mat-option>
+                        <mat-option value="Unit - 2">Unit2</mat-option>
+                        <mat-option value="Unit - 3">Unit3</mat-option>
+                        <mat-option value="Unit - 4">Unit4</mat-option>
+                        <mat-option value="Unit - 5">Unit5</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <mat-form-field>
+                <mat-label>Device ip (Eg:GTA-Y001-0001)</mat-label>
+                <input matInput formControlName="device_id" type="text" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Select Machine</mat-label>
+                <mat-select matNativeControl required formControlName="machine_model">
+                    <mat-option value="Select Machine" disabled>Select Machine</mat-option>
+                    <mat-option value="Ethernet" (click)="machineSelect('Ethernet')">Ethernet</mat-option>
+                    <mat-option value="RS232" (click)="machineSelect('RS232')">RS232</mat-option>
+                    <mat-option value="CT&PT" (click)="machineSelect('CT&PT')">CT&PT</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <mat-form-field>
+                <select matNativeControl required>
+                    <mat-label>machine Type</mat-label>
+                    <option value="Select Machine">Select Machine</option>
+                    <option value="Ethernet">Ethernet</option>
+                    <option value="RS232">RS232</option>
+                    <option value="CT&PT">CT&PT</option>
+
+                </select>
+            </mat-form-field> -->
+            
+            <div class="form-button text-right">
+                <button mat-raised-button (click)="form()" [disabled]="login.invalid" class="filter_btn btn_orange">
+                    Save</button>
+                <button mat-raised-button (click)="onNoClick()" (click)="cancel()"
+                    class="filter_btn btn_default ml-16">Close</button>
+            </div>
+
+        </form>
+    </div>
+</div>
