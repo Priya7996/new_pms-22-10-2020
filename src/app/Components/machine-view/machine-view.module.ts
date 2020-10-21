@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule} from '../shared/shared.module';
-import { MachineViewRoutingModule } from './machine-view-routing.module';
 import { MachineViewComponent } from './machine-view.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { Routes, RouterModule } from '@angular/router';
 
+const routes: Routes = [{ path: '', component: MachineViewComponent }];
 
 @NgModule({
   declarations: [MachineViewComponent],
-  imports: [
+  imports: [RouterModule.forChild(routes),
     CommonModule,
-    MachineViewRoutingModule,SharedModule,HighchartsChartModule,
+    SharedModule,HighchartsChartModule,
     NgCircleProgressModule.forRoot({
       "radius": 50,
       "space": -12,

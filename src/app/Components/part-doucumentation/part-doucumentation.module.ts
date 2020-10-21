@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
 
-import { PartDoucumentationRoutingModule } from './part-doucumentation-routing.module';
 import { PartDoucumentationComponent } from './part-doucumentation.component';
+
+const routes: Routes = [{ path: '', component: PartDoucumentationComponent }];
 
 
 @NgModule({
   declarations: [PartDoucumentationComponent],
-  imports: [
-    CommonModule,
-    PartDoucumentationRoutingModule
+  imports: [RouterModule.forChild(routes),
+    CommonModule, 
   ]
 })
 export class PartDoucumentationModule { }

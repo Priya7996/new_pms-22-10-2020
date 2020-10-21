@@ -8,7 +8,6 @@ const routes: Routes = [
   { path: 'filepath', loadChildren: () => import('./Components/filepath/filepath.module').then(m => m.FilepathModule) },
   { path: 'master', loadChildren: () => import('./Components/master/master.module').then(m => m.MasterModule) },
   { path: 'backup', loadChildren: () => import('./Components/backup/backup.module').then(m => m.BackupModule) },
-  { path: 'clogin', loadChildren: () => import('./Components/clogin/clogin.module').then(m => m.CloginModule) },
   { path: 'reason', loadChildren: () => import('./Components/reason/reason.module').then(m => m.ReasonModule) },
   { path: 'alarm', loadChildren: () => import('./Components/alarm/alarm.module').then(m => m.AlarmModule) },
   { path: 'alert', loadChildren: () => import('./Components/alert/alert.module').then(m => m.AlertModule) },
