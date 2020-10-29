@@ -37,8 +37,8 @@
                 <mat-form-field appearance="outline">
                   <mat-select placeholder="Select Type" matNativeControl formControlName="report_type" required (selectionChange)="getsplit($event.value)">
                     <mat-option value="Select Machine" disabled>Select type</mat-option>
-                    <mat-option value="ShiftWise">ShiftWise</mat-option>
-                    <mat-option value="OperatorWise">OperatorWise</mat-option>
+                    <mat-option value="Shiftwise">ShiftWise</mat-option>
+                    <mat-option value="Operatorwise">OperatorWise</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -100,46 +100,41 @@
                 <td mat-cell *matCellDef="let element"> {{element.position  || '---'}} </td>
               </ng-container>
 
-              <!-- Name Column -->
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Shift </th>
                 <td mat-cell *matCellDef="let element"> {{element.name  || '---'}} </td>
               </ng-container>
 
-              <!-- Weight Column -->
               <ng-container matColumnDef="weight">
                 <th mat-header-cell *matHeaderCellDef> Machine Id </th>
                 <td mat-cell *matCellDef="let element"> {{element.weight  || '---'}} </td>
               </ng-container>
 
-              <!-- Symbol Column -->
               <ng-container matColumnDef="symbol">
                 <th mat-header-cell *matHeaderCellDef> Operator Name </th>
                 <td mat-cell *matCellDef="let element"> {{element.symbol  || '---'}} </td>
               </ng-container>
 
 
-              <!-- Symbol Column -->
               <ng-container matColumnDef="alarmtype">
                 <th mat-header-cell *matHeaderCellDef> Alarm Type </th>
                 <td mat-cell *matCellDef="let element"> {{element.alarmtype  || '---'}} </td>
               </ng-container>
 
 
-              <!-- Symbol Column -->
               <ng-container matColumnDef="alarmnumber">
                 <th mat-header-cell *matHeaderCellDef> Alarm Number </th>
                 <td mat-cell *matCellDef="let element"> {{element.alarmnumber  || '---'}} </td>
               </ng-container>
 
 
-              <!-- Symbol Column -->
+           
               <ng-container matColumnDef="alarmmessage">
                 <th mat-header-cell *matHeaderCellDef> Alarm Message </th>
                 <td mat-cell *matCellDef="let element"> {{element.alarmmessage  || '---'}} </td>
               </ng-container>
 
-              <!-- Symbol Column -->
+            
               <ng-container matColumnDef="alarmtime">
                 <th mat-header-cell *matHeaderCellDef> Alarm Time </th>
                 <td mat-cell *matCellDef="let element"> {{element.alarmtime  || '---'}} </td>
@@ -149,9 +144,9 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
           </mat-card-content>
-          <!-- <mat-card-content *ngIf="reports.length==0" class="no_data_found">
+           <mat-card-content *ngIf="reports.length==0" class="no_data_found">
             <h2>No data found</h2>
-          </mat-card-content> -->
+          </mat-card-content> 
         </mat-card>
       </div>
     </div>
