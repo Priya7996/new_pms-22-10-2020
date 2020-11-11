@@ -27,8 +27,22 @@ export class ReportService {
   report(report,tenant_id):Observable<any>{
     return this.http.get('resport_split_value?report_type='+report + '&&tenant_id=' + tenant_id)
   }
-  table(register):Observable<any>{
-    return this.http.get('hour_reports?tenant_id='+register.tenant_id + '&&start_date=' +register.start_date + '&&end_date=' +register.end_date +'&&machine_id=' + register.machine_id + '&&operator_id=' + register.operator_id +'&&shift_id=' +register.shift_id + '&&report_type=' + register.report_type +'&&hourwise='+register.hourwise+'&&programnumber='+register.programnumber  )
+  table(register,type):Observable<any>  {
+    if(type === 'Datewise Utilization'){ 
+     
+      return this.http.get('hour_reports?tenant_id='+register.tenant_id+ '&&start_date=' + register.start_date + '&&end_date=' + register.end_date +'&&machine_id=' + register.machine_id + '&&report_type=' + type)
+
+    }else if(type === 'Monthwise Utilization'){
+      return this.http.get('hour_reports?tenant_id='+register.tenant_id+ '&&start_date=' + register.start_date + '&&end_date=' + register.end_date +'&&machine_id=' + register.machine_id  + '&&report_type=' + type)
+    }else if(type === 'Shiftwise'){
+
+      return this.http.get('hour_reports?tenant_id='+register.tenant_id+ '&&start_date=' + register.start_date + '&&end_date=' + register.end_date +'&&machine_id=' + register.machine_id + '&&shift_id=' + register.shift_id + '&&report_type=' + type)
+
+    }
+    else{
+      return this.http.get('hour_reports?tenant_id='+register.tenant_id+ '&&start_date=' + register.start_date + '&&end_date=' + register.end_date +'&&machine_id=' + register.machine_id + '&&operator_id=' + register.operator_id + '&&report_type=' + type)
+    }
+    
   }
   shiftidentity(tenantId):Observable<any>{
     return this.http.get('shifts?tenant_id='+tenantId)

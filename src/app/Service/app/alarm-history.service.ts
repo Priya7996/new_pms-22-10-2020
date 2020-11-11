@@ -27,13 +27,14 @@ export class AlarmHistoryService {
    
     return this.http.get('operators?tenant_id='+tenantId);
   }
-  table(register,type):Observable<any>  {
+  table(register,type,tenant):Observable<any>  {
+    console.log(tenant)
     if(type === 'ShiftWise'){ 
      this.s_date=  this.datePipe.transform(register.start_date, 'dd-MM-yyyy');
      this.e_date=  this.datePipe.transform(register.end_date, 'dd-MM-yyyy');
-      return this.http.get('alarm_reports?tenant_id='+this.tenantId+ '&&start_date=' + this.s_date + '&&end_date=' + this.e_date +'&&machine_id=' + register.machine_id + '&&shift_id=' + register.shift_id + '&&report_type=' + type)
+      return this.http.get('alarm_reports?tenant_id='+tenant+ '&&start_date=' + this.s_date + '&&end_date=' + this.e_date +'&&machine_id=' + register.machine_id + '&&shift_id=' + register.shift_id + '&&report_type=' + type)
     }else{
-      return this.http.get('alarm_reports?tenant_id='+this.tenantId+ '&&start_date=' + register.start_date + '&&end_date=' + register.end_date +'&&machine_id=' + register.machine_id + '&&operator_id=' + register.operator_id + '&&report_type=' + type)
+      return this.http.get('alarm_reports?tenant_id='+tenant+ '&&start_date=' + register.start_date + '&&end_date=' + register.end_date +'&&machine_id=' + register.machine_id + '&&operator_id=' + register.operator_id + '&&report_type=' + type)
     }
     
   }
@@ -41,4 +42,3 @@ export class AlarmHistoryService {
     return this.http.get('shifts?tenant_id='+tenantId)
   }
 }
-

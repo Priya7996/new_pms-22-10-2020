@@ -12,6 +12,7 @@ import { MatButtonModule,MatMenuModule,MatIconModule,MatInputModule,MatCardModul
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ExportService } from './export.service';
 
 
 @NgModule({
@@ -34,6 +35,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,
     MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule,
     CommonModule,DateRangePickerModule,MatToolbarModule,MatPaginatorModule,AngularFontAwesomeModule
+  ],
+  providers: [
+    ExportService
   ]
 })
 export class SharedModule { }

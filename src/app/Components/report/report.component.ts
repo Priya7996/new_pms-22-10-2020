@@ -21,6 +21,7 @@ export class ReportComponent implements OnInit {
   shift_response: any;
   operator_response: any;
   selecttype:any;
+  show:any;
    export_excel: any[] = [];
   login: FormGroup;
   displayedColumns: string[] = ['date', 'shift', 'time', 'operatorname','operatorid','machineid','machinename','idleduration','idletime','reason','cycle_time','cutting_time','spindle_speed','feed','run_time','idle_time','stop_time','total','hours','utilization','load','motor','servo_load','servo_motor','pulse_code'];
@@ -45,6 +46,8 @@ export class ReportComponent implements OnInit {
   ngOnInit() {
     this.login = this.fb.group({
       machine_id:["",Validators.required],
+      report_split:["",Validators.required],
+
       shift_id:["",Validators.required],
       operator_id:["",Validators.required],
       start_date:["",Validators.required],
@@ -90,74 +93,29 @@ export class ReportComponent implements OnInit {
 
   getmachine(value){
     console.log(value)
+    this.show = value;
+    console.log(this.show)
+    this.service.report(value,this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+      console.log(res);
+      this.split = res.data;
+    })
    
 
-    this.wise = value;
-    console.log( this.wise)
+    // this.wise = value;
+    // console.log( this.wise)
   
   }
   export(){
     
   }
   reporttable(){
-    console.log(this.wise)
-    if(this.wise == 'hourwise'){
-        let register = this.login.value;
+    console.log(this.login.value);
+    this.service.table(this.login.value,this.show).subscribe(res =>{
+      console.log(res);
+    })
+    
+  
    
-    // register.start_date = this.login.value.date[0];
-    // register.end_date = this.login.value.date[1];
-    register.tenant_id = this.tenant;
-    register.hourwise=true;
-    register.programnumber=false;
-
-    console.log(register);
-    this.myLoader=true;
-    this.service.table(register).subscribe(res => {
-     console.log(res);
-     this.myLoader=false;
-     this.reports = res;
-     this.dataSource = new MatTableDataSource(this.reports);
-    //  this.reportList = true;
-
-  })
-    }
-    else if(this.wise == 'programnumber'){
-         let register = this.login.value;
-   
-    // register.start_date = this.login.value.date[0];
-    // register.end_date = this.login.value.date[1];
-    register.tenant_id = this.tenant;
-    register.programnumber=true;
-    register.hourwise=false;
-
-    console.log(register);
-    this.myLoader=true;
-    this.service.table(register).subscribe(res => {
-     console.log(res);
-     this.myLoader=false;
-     this.reports = res;
-     this.dataSource = new MatTableDataSource(this.reports);
-    //  this.reportList = true;
-
-  })
-    }
-    else{
-        let register = this.login.value;
-   
-    // register.start_date = this.login.value.date[0];
-    // register.end_date = this.login.value.date[1];
-    register.tenant_id = this.tenant;
-    console.log(register);
-    this.myLoader=true;
-    this.service.table(register).subscribe(res => {
-     console.log(res);
-     this.myLoader=false;
-     this.reports = res;
-     this.dataSource = new MatTableDataSource(this.reports);
-    //  this.reportList = true;
-
-  })
-    }
   
 
   }

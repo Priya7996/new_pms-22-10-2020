@@ -42,6 +42,7 @@
                     
                   
                     <mat-option value="">Select Type</mat-option> 
+                    
                     <mat-option value="{{type.value}}" *ngFor="let type of selecttype">
                       {{type.value}}
                     </mat-option>
@@ -50,11 +51,25 @@
               </div>
 
 
-              <div class="filter_field" *ngIf="wise === 'Shiftwise' || wise === 'Operatorwise'">
+              <div class="filter_field" *ngIf="show === 'Shiftwise' || show === 'Operatorwise'">
+                <mat-form-field appearance="outline">
+                  <mat-select placeholder="Select Split" matNativeControl formControlName="report_split"
+                   required>
+                    
+                  
+                    <mat-option value="">Select Split</mat-option> 
+                    <mat-option value="All">All</mat-option> 
+                    <mat-option value="{{loko.value}}" *ngFor="let loko of split">
+                      {{loko.value}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+<!-- 
+              <div class="filter_field" >
                 <mat-form-field appearance="outline">
                   <mat-select matNativeControl placeholder="Split" formControlName="split" required  >
-                    <!-- <mat-option value="">All</mat-option>
-                    <mat-option value="{{loko.value}}" *ngFor="let loko of selecttype">  {{loko.value}}</mat-option> -->
+                   
                     <mat-option value="Select Machine" disabled>Select Split</mat-option>
                     <mat-option value="hourwise">HourWise</mat-option>
                     <mat-option value="programnumber">ProgramNumber</mat-option>
@@ -63,7 +78,7 @@
 
                   </mat-select>
                 </mat-form-field>
-              </div>
+              </div> -->
 
 
              
@@ -89,7 +104,7 @@
                 </mat-form-field>
               </div>
 
-              <div class="filter_field"  *ngIf="wise === 'Shiftwise' ">
+              <div class="filter_field"  *ngIf="show === 'Shiftwise' ">
                 <mat-form-field appearance="outline">
                   <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_id">
                     <mat-option *ngFor="let shift of shift_response" [value]="shift.id">{{shift.shift_no}}
@@ -98,7 +113,7 @@
                 </mat-form-field>
               </div>
  
-              <div class="filter_field" *ngIf="wise === 'Operatorwise' ">
+              <div class="filter_field" *ngIf="show === 'Operatorwise' ">
                 <mat-form-field appearance="outline">
                   <mat-select placeholder="Select Operator" matNativeControl required formControlName="operator_id">
                     <mat-option *ngFor="let operator of operator_response" [value]="operator.id">

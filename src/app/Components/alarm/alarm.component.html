@@ -40,7 +40,7 @@
             <!-- Symbol Column -->
             <ng-container matColumnDef="time">
               <th mat-header-cell *matHeaderCellDef> Date </th>
-              <td mat-cell *matCellDef="let element"> {{element.time  |  date:'dd-MM-yyyy'  || '---'}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.updated_at  |  date:'dd-MM-yyyy'  || '---'}} </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="report"></tr>
             <tr mat-row *matRowDef="let row; columns: report;"></tr>
