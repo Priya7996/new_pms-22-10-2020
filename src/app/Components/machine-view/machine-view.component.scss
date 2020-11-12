@@ -964,3 +964,17 @@ h5{
   justify-content: space-between;
 }
 
+::ng-deep .bg_grad_temp .gradient-wrapper2 text tspan:last-child,
+.bg_grad_temp .gradient-wrapper8 text tspan:last-child {
+display: none;
+}
+
+
+// ::ng-deep .bg_grad_temp .gradient-wrapper8 text tspan:last-child{
+//   // display: none;
+//   }
+
+// ::ng-deep .bg_grad_temp text tspan:nth-child(2), .bg_grad_temp text tspan:last-child {
+//   // display: none;
+// }
+
