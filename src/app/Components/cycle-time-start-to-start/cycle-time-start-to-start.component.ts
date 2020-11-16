@@ -27,6 +27,20 @@ export class CycleTimeStartToStartComponent implements OnInit {
   shiftname: any;
   showdate: any;
   shiftNo: any;
+  starttostart: any;
+  timestart: any[];
+  countstart: any[];
+  sec: any;
+   //  gokul 11-11 after work ---------------
+  secondsToMinutes(time) {
+    let min = Math.floor(time / 60);
+   this.sec = Math.floor(time % 60);
+    if (this.sec.toString().length == 1) {
+    this.sec = '0' + this.sec;
+    }
+    return min + '.' + this.sec;
+}
+// --------------------------
   constructor(private datePipe:DatePipe,private nav:NavbarService,private service:CycleStartService,private fb :FormBuilder) {
     this.nav.show();
     this.tenant = localStorage.getItem('tenant_id')
@@ -39,127 +53,19 @@ export class CycleTimeStartToStartComponent implements OnInit {
           date:["",Validators.required]
       })
    this.login.value.date=Date.now();
-   console.log(this.login.value.date,"date")
     this.service.machine( this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
-        console.log(res);
         this.machine_response=res;
-        
-       
-
-      
     })
        
    this.service.shiftidentity(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-     console.log(res);
      this.service.shift(res.id).subscribe(res => {
-      console.log(res);
       this.shift_response=res; 
-      console.log(localStorage.getItem('token'));})
+    })
    })
    this.service.current_status(this.tenant).subscribe(res =>{
     console.log(res);
   })
-
-
- //    let register = {'machine_id': this.machine_response.id, 'shift_id':this.shift_response.id, 'date':this.login.value['date']};
- //        register['tenant_id'] = this.tenant;
-
-
- // this.service.cycle_start_to_start(register).subscribe(res => {
- //      console.log(res);
- //      this.chartOptions = {
- //        chart: {
- //          type: 'bar'
- //      },
- //      exporting: {
- //        // enabled:true,
- //        buttons: {
- //          contextButton: {
- //            menuItems: ["printChart", "separator", "downloadPNG", "downloadPDF"]
- //        }
- //      }
- //    },
- //      title: {
- //          text: 'Cycle Start to Cycle Start(Mins)'
- //      },
- //      subtitle: {
- //          text: 'Machine ID :' + this.macname['machine_name']+', Shift : ' +this.shiftname['shift_no'] +', Date : 04-02-2020',
- //          style: {
- //            fontSize: '16px',
- //            color: '#f58632',
- //            fill: '#f58632'
- //         }
- //      },
- //      xAxis: {
- //          categories: res.length,
- //          title: {
- //              text: 'Parts Count'
- //          }
- //      },
- //      yAxis: {
- //          min: 0,
- //          title: {
- //              text: 'Time(Min)',
- //              align: 'middle'
- //          },
- //          labels: {
- //              overflow: 'justify'
- //          }
- //      },
- //      tooltip: {
- //          valueSuffix: ' Min'
- //      },
- //      plotOptions: {
- //          bar: {
- //              dataLabels: {
- //                  enabled: true
- //              }
- //          }
- //      },
- //      legend: {
- //          layout: 'vertical',
- //          align: 'right',
- //          verticalAlign: 'top',
- //          x: -40,
- //          y: 10,
- //          floating: true,
- //          borderWidth: 1,
- //          backgroundColor:
- //              Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
- //          shadow: true
- //      },
- //      navigation: {
- //        buttonOptions: {
- //            enabled: true
- //        }
- //    },
-    
- //      credits: {
- //          enabled: false
- //      },
-     
- //      colors: ['#2cbe63', '#2cbe63', '#2cbe63', '#2cbe63'],
- //      series: [{
- //          name: 'Time',
- //          data: res
- //      }]
- //      }
- //  })
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-  }
+}
   getmachine(event) {
     this.macname = event;
       
@@ -175,21 +81,25 @@ export class CycleTimeStartToStartComponent implements OnInit {
   time_start_view(){
            
     this.showdate = this.datePipe.transform(this.login.value.date);
-    console.log(this.showdate)
-
-    console.log(this.login.value);
-   let register = this.login.value;
-     register.tenant_id = this.tenant; 
-    
-    console.log(register);
-   this. myLoader = true;
-
-    this.service.cycle_start_to_start(register).pipe(untilDestroyed(this)).subscribe(res => {
-      console.log(res);
-      this.myLoader = false;
-
-      
+    let register = this.login.value;
+    register.tenant_id = this.tenant; 
+    this. myLoader = true;
   
+    this.service.cycle_start_to_start(register).pipe(untilDestroyed(this)).subscribe(res => {
+      //  gokul 11-11 after work---------------
+                this.starttostart = res;
+                    this.timestart=[];
+                    this.countstart=[];
+           for (var data in this.starttostart) {
+                      var run = parseFloat(data)
+                      var count = run*1 + 1;
+                      var minutes = parseFloat(this.secondsToMinutes(this.starttostart[data]));
+                    this.countstart.push(count);
+                    this.timestart.push(minutes);
+
+                    }
+    //---------------
+      this.myLoader = false;
       this.chartOptions = {
         chart: {
           type: 'bar',
@@ -197,7 +107,6 @@ export class CycleTimeStartToStartComponent implements OnInit {
 
       },
       exporting: {
-        // enabled:true,
         buttons: {
           contextButton: {
             menuItems: ["printChart", "separator", "downloadPNG", "downloadPDF"]
@@ -209,8 +118,6 @@ export class CycleTimeStartToStartComponent implements OnInit {
       },
       subtitle: {
         text: 'Machine ID : '+ this.login.value.machine_id+',Shift No:'+ this.login.value.shift_id+' Date :'+this.showdate+',',
-
-          // text: 'Machine ID :' + this.macname['machine_name']+', Shift : ' +this.shiftname['shift_no'] +', Date : 04-02-2020',
           style: {
             fontSize: '16px',
             color: '#f58632',
@@ -218,58 +125,51 @@ export class CycleTimeStartToStartComponent implements OnInit {
          }
       },
       xAxis: {
-          categories: res.length,
+          categories: this.countstart.reverse(),
           title: {
               text: 'Parts Count'
           }
       },
+      // gokul 11-11 after work
       yAxis: {
-          min: 0,
-          title: {
-              text: 'Time(Min)',
-              align: 'middle'
-          },
-          labels: {
-              overflow: 'justify'
-          }
-      },
-      tooltip: {
-          valueSuffix: ' Min'
-      },
-      plotOptions: {
-          bar: {
-              dataLabels: {
-                  enabled: true
-              }
-          }
-      },
-      legend: {
-          layout: 'vertical',
-          align: 'right',
-          verticalAlign: 'top',
-          x: -40,
-          y: 10,
-          floating: true,
-          borderWidth: 1,
-          backgroundColor:
-              Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-          shadow: true
-      },
-      navigation: {
-        buttonOptions: {
-            enabled: true
+        min: 0,
+        title: {
+            text: 'Time(Min)'
+        },
+        stackLabels: {
+            enabled: true,
+            style: {
+                fontWeight: 'bold',
+            },
+            formatter: function () {
+              
+               
+                return this.total + 'min' ;
+            }
         }
+
     },
-    
-    credits: {
-      enabled: false
+    legend: {
+        reversed: true
     },
-     
-      colors: ['#2cbe63', '#2cbe63', '#2cbe63', '#2cbe63'],
-      series: [{
-          name: 'Time',
-          data:res
-      }]
+    plotOptions: {
+        series: {
+            stacking: 'normal',
+            dataLabels: {
+                valueDecimals: 2 
+            }
+        }
+
+    },
+    colors: ['#2cbe63'],
+                        credits: {
+                            enabled: false
+                        },
+                        series: [{
+                            name: 'Time',
+                            data:  this.timestart.reverse()
+                        }]
+                        //--------
       }
   })
   }

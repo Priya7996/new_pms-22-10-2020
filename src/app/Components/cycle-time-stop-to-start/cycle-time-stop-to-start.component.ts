@@ -22,6 +22,20 @@ export class CycleTimeStopToStartComponent implements OnInit {
     machine_response: any;
     shift_response: any;
     tenant: any;
+  starttostart: any;
+  timestart: any[];
+  countstart: any[];
+  sec: any;
+     // gokul 11-11 after work
+  secondsToMinutes(time) {
+    let min = Math.floor(time / 60);
+   this.sec = Math.floor(time % 60);
+    if (this.sec.toString().length == 1) {
+    this.sec = '0' + this.sec;
+    }
+    return min + '.' + this.sec;
+}
+// -----------
   constructor(private datePipe:DatePipe,private nav:NavbarService,private service:CycleStopService,private fb:FormBuilder) {
     this.nav.show();
     this.tenant = localStorage.getItem('tenant_id')
@@ -34,49 +48,69 @@ export class CycleTimeStopToStartComponent implements OnInit {
           date:["",Validators.required]
       })
       this.service.machine( this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
-        console.log(res);
         this.machine_response=res;
-        console.log(localStorage.getItem('token'));})
-      
-       
+      })
+    
         this.service.shiftidentity(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-            console.log(res);
             this.service.shift(res.id).pipe(untilDestroyed(this)).subscribe(res => {
-             console.log(res);
              this.shift_response=res; 
-             console.log(localStorage.getItem('token'));})
+            })
           })
           this.service.current_status(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
             console.log(res);
           })
+           // gokul 11-11 after work
+      // this.service.machine( this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
+      //   this.machine_response=res.data;
+      // })
+      //   this.service.shiftidentity(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+      //     this.shiftdetailfordrop = res;
+      //       this.service.shift(res.id).subscribe(res => {
+      //        this.shift_response=res; 
+      //        console.log(this.tenant)
+      //        this.service.current_status(this.tenant).subscribe(res =>{
+      //         this.current_view_details = res;
+      //        console.log(this.current_view_details)
+      //         this.MachineID = this.current_view_details.machine;
+      //         this.ShiftID = this.current_view_details.shift_id;
+      //         this.from_date = this.current_view_details.date;
+      //        // this.cycle_time_stop();
+      //       })
+      //       })
+           
+      //     })
+      //-----------------  
   }
   cycle_time_stop(){
       
     this.date = this.datePipe.transform(this.login.value.date);
-    console.log(this.date)
-
-      console.log(this.login.value);
       let register = this.login.value;
       register.tenant_id = this.tenant;
-      console.log(register);
       this.myLoader = true;
       this.service.cycle_time_stop(register).pipe(untilDestroyed(this)).subscribe(res => {
-        console.log(res);
+        this.starttostart = res;
+        this.timestart=[];
+        this.countstart=[];
+        for (var data in this.starttostart) {
+          var run = parseFloat(data)
+          var count = run*1 + 1;
+          var minutes = parseFloat(this.secondsToMinutes(this.starttostart[data]));
+          this.countstart.push(count);
+          this.timestart.push(minutes);
+
+        }
         this.myLoader = false;
 
        this. chartOptions = {
             chart: {
               type: 'bar',
               zoomType: 'xy',
-
           },
           title: {
               text: 'Cycle Start to Cycle Start(Mins)'
           },
           subtitle: {
-            //   text: 'Machine Name : SBE/TC/BA/M-M123(E), Shift : 2, Date : 04-02-2020',
               text: 'Machine ID : '+ this.login.value.machine_id+',Shift No:'+ this.login.value.shift_id+' Date :'+this.date+',',
-
               style: {
                 fontSize: '16px',
                 color: '#f58632',
@@ -84,55 +118,50 @@ export class CycleTimeStopToStartComponent implements OnInit {
              }
           },
           xAxis: {
-              categories: res.length,
+              categories: this.countstart.reverse(),
               title: {
                   text: 'Parts Count'
               }
           },
           yAxis: {
-              min: 0,
-              title: {
-                  text: 'Time(Min)',
-                  align: 'middle'
-              },
-              labels: {
-                  overflow: 'justify'
-              }
-          },
-          tooltip: {
-              valueSuffix: ' Min'
-          },
-          plotOptions: {
-              bar: {
-                  dataLabels: {
-                      enabled: true
-                  }
-              }
-          },
-          legend: {
-              layout: 'vertical',
-              align: 'right',
-              verticalAlign: 'top',
-              x: -40,
-              y: 10,
-              floating: true,
-              borderWidth: 1,
-              backgroundColor:
-                  Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-              shadow: true
-          },
-          navigation: {
-            buttonOptions: {
-                enabled: true
+            min: 0,
+           
+            title: {
+                text: 'Time(Min)'
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                },
+                formatter: function () {
+                    return this.total + 'min' ;
+                }
             }
+
         },
-        
-        
-          colors: ['#ec5550', '#ec5550', '#ec5550', '#ec5550'],
-          series: [{
-              name: 'Time',
-               data:res          
-            }]
+        legend: {
+            reversed: true
+        },
+        plotOptions: {
+            series: {
+                pointInterval: 1,
+                stacking: 'normal',
+                dataLabels: {
+                    valueDecimals: 2 
+                }
+            }
+
+        },
+        colors: ['#ec5550'],
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Time',
+            data:  this.timestart.reverse()
+        }]
+
           }
   })
 }
