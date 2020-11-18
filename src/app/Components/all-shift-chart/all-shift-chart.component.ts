@@ -117,6 +117,7 @@ machineName:any;
       }
   
   chart_view(){
+      console.log(this.login.value)
 
     this.date = this.datePipe.transform(this.login.value.date);
     console.log(this.date)     
