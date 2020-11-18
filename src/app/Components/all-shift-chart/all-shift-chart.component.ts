@@ -83,7 +83,7 @@ machineName:any;
               this.login.patchValue({
                 machine_id: this.machine_response[i].machine_name,
               })
-             }
+             } 
            }
             this.login.patchValue({
               shift_id: this.shiftNo,

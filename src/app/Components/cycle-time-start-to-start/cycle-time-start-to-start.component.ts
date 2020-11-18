@@ -52,6 +52,10 @@ export class CycleTimeStartToStartComponent implements OnInit {
           shift_id:["",Validators.required],
           date:["",Validators.required]
       })
+
+      this.service.current_status(this.tenant).subscribe(res =>{
+        console.log(res);
+      })
    this.login.value.date=Date.now();
     this.service.machine( this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
         this.machine_response=res;
@@ -62,9 +66,7 @@ export class CycleTimeStartToStartComponent implements OnInit {
       this.shift_response=res; 
     })
    })
-   this.service.current_status(this.tenant).subscribe(res =>{
-    console.log(res);
-  })
+  
 }
   getmachine(event) {
     this.macname = event;

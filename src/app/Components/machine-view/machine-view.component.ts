@@ -18,7 +18,7 @@ export class MachineViewComponent implements OnInit {
   machie_status:any;
   repeatchart;
   repeatpulse;
-  spindlespeed;
+  spindlespeed; 
   feedrate;
   ax_three:any;
   testgokul;

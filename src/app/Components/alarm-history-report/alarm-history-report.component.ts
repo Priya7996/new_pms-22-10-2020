@@ -17,6 +17,8 @@ import Swal from 'sweetalert2';
 export class AlarmHistoryReportComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','alarmtype','alarmnumber','alarmmessage','alarmtime'];
   dataSource = new MatTableDataSource();
+  startDate:any;
+  endDate:any;
     show: boolean=false;
   login:FormGroup;
   machine_response: any;

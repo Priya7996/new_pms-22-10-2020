@@ -26,6 +26,9 @@ export class ReportComponent implements OnInit {
   login: FormGroup;
   displayedColumns: string[] = ['date', 'shift', 'time', 'operatorname','operatorid','machineid','machinename','idleduration','idletime','reason','cycle_time','cutting_time','spindle_speed','feed','run_time','idle_time','stop_time','total','hours','utilization','load','motor','servo_load','servo_motor','pulse_code'];
   dataSource = new  MatTableDataSource();
+  displayedColumns1: string[] = ['date', 'shift', 'time', 'operatorid'];
+  dataSource1 = new  MatTableDataSource();
+
   reports: unknown[];
   drop_value:any;
   split:any;
