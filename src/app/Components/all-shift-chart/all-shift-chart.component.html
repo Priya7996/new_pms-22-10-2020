@@ -23,6 +23,8 @@
             <mat-form-field appearance="outline">
               <mat-select [(ngModel)]="showshift"  required formControlName="shift_id" >
                 <mat-option>Select Shift</mat-option>
+                <mat-option value="all">All</mat-option>
+
                 <mat-option *ngFor="let shift of shift_response"  [value]="shift.shift_no" (click)="getshift(shift.id)">{{shift.shift_no}} </mat-option>
               </mat-select>
             </mat-form-field>
