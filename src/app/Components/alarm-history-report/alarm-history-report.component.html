@@ -55,9 +55,9 @@
                 </mat-form-field>
               </div>
 
-              <div class="filter_field">
-              <mat-form-field>
-                <mat-label>From Date</mat-label>
+              <div class="filter_field date_picker">
+              <mat-form-field appearance="fill">
+                <!-- <mat-label>From Date</mat-label> -->
                 <input matInput [matDatepicker]="picker" placeholder='From Date' formControlName="start_date" (click)="picker.open()">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
@@ -66,8 +66,8 @@
 
             <div class="filter_field date_picker">
                            
-              <mat-form-field>
-                  <mat-label>To Date</mat-label>
+              <mat-form-field appearance="fill">
+                  <!-- <mat-label>To Date</mat-label> -->
                   <input matInput [matDatepicker]="picker1" placeholder='To Date' formControlName="end_date" (click)="picker1.open()">
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1 startView="year" [startAt]="endDate"></mat-datepicker>

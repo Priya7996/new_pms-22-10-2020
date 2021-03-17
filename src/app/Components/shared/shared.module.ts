@@ -14,6 +14,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ExportService } from './export.service';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import { MatTableExporterModule } from 'mat-table-exporter';
     MatAutocompleteModule,MatSelectModule,MatSlideToggleModule,MatSliderModule,
     MatSidenavModule,MatDividerModule,MatNativeDateModule,MatRadioModule
     ,MatExpansionModule,MatGridListModule,MatStepperModule,MatTooltipModule,
-    MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,
+    MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,NgxMaterialTimepickerModule,
     MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule,MatTableExporterModule,
     CommonModule,DateRangePickerModule,MatToolbarModule,MatPaginatorModule,AngularFontAwesomeModule,
     
@@ -32,7 +33,7 @@ import { MatTableExporterModule } from 'mat-table-exporter';
     MatIconModule,MatInputModule,MatCardModule,MatFormFieldModule,MatListModule,
     MatAutocompleteModule,MatSelectModule,MatSlideToggleModule,MatSliderModule,
     MatSidenavModule,MatDividerModule,MatNativeDateModule,MatRadioModule
-    ,MatExpansionModule,MatGridListModule,MatStepperModule,MatTooltipModule,
+    ,MatExpansionModule,MatGridListModule,MatStepperModule,MatTooltipModule,NgxMaterialTimepickerModule,
     MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,
     MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule,MatTableExporterModule,
     CommonModule,DateRangePickerModule,MatToolbarModule,MatPaginatorModule,AngularFontAwesomeModule
