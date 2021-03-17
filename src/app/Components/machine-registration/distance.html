@@ -1,0 +1,38 @@
+<div class="modal_sec two_form">
+    <mat-toolbar>
+        <h3>Machine Registration</h3>
+        <button type="button" class="close" aria-label="Close" (click)="onNoClick()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </mat-toolbar>
+
+    <div class="dialog-form">
+        <form [formGroup]="login">
+            <mat-form-field>
+                <mat-label>Distance Minute</mat-label>
+                <input matInput formControlName="dis_min" type="text" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Distance Second</mat-label>
+                <input matInput formControlName="dis_sec" type="text" required>
+            </mat-form-field>
+          
+            <mat-form-field>
+                <mat-label>Distance Total</mat-label>
+                <input matInput formControlName="dis_tot" type="text" required>
+            </mat-form-field>
+           
+          
+           
+          
+            
+            <div class="form-button text-right">
+                <button mat-raised-button (click)="form()" [disabled]="login.invalid" class="filter_btn btn_orange">
+                    Save</button>
+                <button mat-raised-button (click)="onNoClick()" (click)="cancel()"
+                    class="filter_btn btn_default ml-16">Close</button>
+            </div>
+
+        </form>
+    </div>
+</div>

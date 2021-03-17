@@ -7,18 +7,19 @@
     </mat-toolbar>
     <div class="dialog-form">
         <div class="filter_sec">
-            <form [formGroup]="login"  class="form_sec">
-                <mat-form-field>
-                    <mat-label>Machine Type</mat-label>
-                    <input matInput formControlName="machine_name" type="text" required>
-                </mat-form-field>
+            <form [formGroup]="login"  class="form_sec"> 
                 <mat-form-field>
                     <mat-label>Machine Name</mat-label>
                     <input matInput formControlName="machine_type" type="text" required>
                 </mat-form-field>
                 <mat-form-field>
+                    <mat-label>Machine Type</mat-label>
+                    <input matInput formControlName="machine_name" type="text" required>
+                </mat-form-field>
+               
+                <mat-form-field>
                     <mat-label>Controller Model Number</mat-label>
-                    <input matInput formControlName="controller_type" type="text" required>
+                    <input matInput formControlName="machine_model" type="text" required>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Machine Serial Number</mat-label>
@@ -44,11 +45,11 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                    <mat-select matNativeControl placeholder="Select Machine Type" formControlName="machine_model" required>
+                    <mat-select matNativeControl placeholder="Select Machine Type" formControlName="controller_type" required>
                         <mat-option value="Select Machine Name" disabled>Select Machine Type</mat-option>
-                        <mat-option value="Ethernet">Ethernet</mat-option>
-                        <mat-option value="RS232">RS232</mat-option>
-                        <mat-option value="CT&PT">CT&PT</mat-option>
+                        <mat-option value="1">Ethernet</mat-option>
+                        <mat-option value="2">RS232</mat-option>
+                        <mat-option value="3">CT&PT</mat-option>
                     </mat-select>
                 </mat-form-field>
 

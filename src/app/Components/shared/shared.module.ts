@@ -13,6 +13,7 @@ import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ExportService } from './export.service';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import { ExportService } from './export.service';
     MatSidenavModule,MatDividerModule,MatNativeDateModule,MatRadioModule
     ,MatExpansionModule,MatGridListModule,MatStepperModule,MatTooltipModule,
     MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,
-    MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule,
+    MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule,MatTableExporterModule,
     CommonModule,DateRangePickerModule,MatToolbarModule,MatPaginatorModule,AngularFontAwesomeModule,
     
   ],
@@ -33,7 +34,7 @@ import { ExportService } from './export.service';
     MatSidenavModule,MatDividerModule,MatNativeDateModule,MatRadioModule
     ,MatExpansionModule,MatGridListModule,MatStepperModule,MatTooltipModule,
     MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,
-    MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule,
+    MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule,MatTableExporterModule,
     CommonModule,DateRangePickerModule,MatToolbarModule,MatPaginatorModule,AngularFontAwesomeModule
   ],
   providers: [

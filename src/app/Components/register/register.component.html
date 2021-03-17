@@ -11,53 +11,95 @@
                         <mat-form-field>
                             <mat-label>FirstName</mat-label>
                             <input matInput formControlName="first_name" type="text" required>
+                            <mat-error *ngIf="login.controls['first_name'].errors?.required">First Name is Required
+                            </mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>LastName</mat-label>
                             <input matInput formControlName="last_name" type="text" required>
+                            <mat-error *ngIf="login.controls['last_name'].errors?.required">Last Name is Required
+                            </mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Email Id</mat-label>
                             <input matInput formControlName="email_id"
-                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-                                ng-reflect-pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a" type="email" required>
+                            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$"
+                            ng-reflect-pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a" required type="email">
+
+                            
+                            <mat-error *ngIf="login.controls['email_id'].errors?.required">Email Id is Required
+                            </mat-error>
+                            <mat-error *ngIf="login.controls['email_id'].errors?.pattern">Email Valid Email Address
+                            </mat-error>
                         </mat-form-field>
-                        <mat-error *ngIf="login.get('email_id').hasError('email')"> Enter valid email address
-                        </mat-error>
+                       
 
                         <mat-form-field>
                             <mat-label>Password</mat-label>
-                            <input matInput formControlName="password" type="password" required>
+                            <input matInput formControlName="password" maxlength="14"
+                            [type]=" hide ? 'password' : 'text'" required
+                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&].{7,}$">
+
+                        <mat-icon class="eye" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
+                            'visibility'}}
+                        </mat-icon>
+                        <mat-error *ngIf="login.controls['password'].errors?.required">password is Required
+                        </mat-error>
+
+                        <mat-error *ngIf="login.controls['password'].errors?.pattern"><b>password Should be this
+                                format eg:('A','a','7','#' and password in 8 char)</b> </mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Mobile Number</mat-label>
                             <input matInput formControlName="phone_number" maxlength="10" minlength="10"
-                                (keypress)="keyPress($event)" type="text" required>
+                            (keypress)="keyPress($event)" type="text" required>
+
+                            <mat-error *ngIf="login.controls['phone_number'].errors?.required">Mobile Number is Required
+                            </mat-error>
+                            <mat-error *ngIf="login.controls['phone_number'].errors?.pattern">Please Enter a valid number
+                            </mat-error>
+                            <mat-error *ngIf="login.controls['phone_number'].errors?.minlength">Mobile Number Should be 10
+                                digit
+                            </mat-error>
+
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Company Name</mat-label>
                             <textarea matInput formControlName="tenant_name" type="text" required></textarea>
+
+                            <mat-error *ngIf="login.controls['tenant_name'].errors?.required">Company Name Required
+                            </mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Address Line1</mat-label>
                             <textarea matInput formControlName="address_line1" type="text" required></textarea>
+                            <mat-error *ngIf="login.controls['address_line1'].errors?.required">Address Line Required
+                            </mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Address Line2</mat-label>
                             <textarea matInput formControlName="address_line2" type="text" required></textarea>
+                            <mat-error *ngIf="login.controls['address_line2'].errors?.required">Address Line Required
+                            </mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label> About Company</mat-label>
                             <input matInput formControlName="remarks" type="text" required>
+                            <mat-error *ngIf="login.controls['remarks'].errors?.required">About Company Required
+                            </mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>City</mat-label>
                             <input matInput formControlName="city" type="text" required>
+                            <mat-error *ngIf="login.controls['city'].errors?.required">City Required
+                            </mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label> State</mat-label>
                             <input matInput formControlName="state" type="text" required>
+                            <mat-error *ngIf="login.controls['state'].errors?.required">State Required
+                            </mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
@@ -67,7 +109,12 @@
                         <mat-form-field>
                             <mat-label>Pincode</mat-label>
                             <input matInput formControlName="pincode" maxlength="6" minlength="6"
-                                (keypress)="keyPress($event)" type="text" required>
+                            (keypress)="keyPress($event)" type="text" required>
+                        <mat-error *ngIf="login.controls['pincode'].errors?.required">Pincode is Required
+                        </mat-error>
+                        <mat-error *ngIf="login.controls['pincode'].errors?.minlength">Pincode Should be 6
+                            digit
+                        </mat-error>
                         </mat-form-field>
                     </div>
                     <span class="agree_link">

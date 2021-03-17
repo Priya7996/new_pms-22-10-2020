@@ -134,7 +134,7 @@ export class User {
     this.dialogRef.close();
   }
   keyPress(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
+    const pattern = /[0-9]/;
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
       event.preventDefault();
@@ -206,12 +206,20 @@ export class Edit {
   constructor(private service: UserService, public dialogRef: MatDialogRef<Edit>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, ) {
  
     this.edit_data = data;
+    console.log(this.edit_data);
   }
 
   onNoClick(): void {
     this.dialogRef.close();
 
     
+  }
+  keyPress(event: any) {
+    const pattern = /[0-9]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
   }
   cancel() {
     this.dialogRef.close();
@@ -228,6 +236,8 @@ export class Edit {
       password: [this.edit_data.password],
       phone_number: [this.edit_data.phone_number],
       remarks: [this.edit_data.remarks],
+      role_id: [this.edit_data.role_id, Validators.required]
+
     })
 
     this.service.operator().pipe(untilDestroyed(this)).subscribe(res => {

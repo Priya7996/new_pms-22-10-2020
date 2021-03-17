@@ -61,7 +61,7 @@ export class AlarmComponent implements OnInit {
       this.length =res['count'];
       this.dataSource.paginator = this.paginator;
     })
-    this.myLoader = true;
+    this.myLoader = false;
     this.service.alarm(this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
      
       this.myLoader= false;

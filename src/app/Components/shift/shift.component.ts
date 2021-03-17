@@ -1,7 +1,7 @@
 import { Component, OnInit,Inject } from '@angular/core';
 import { NavbarService} from '../../Nav/navbar.service';
 import Swal from 'sweetalert2'
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ShiftService} from '../../Service/app/shift.service';
 import { MatTableDataSource } from '@angular/material';
@@ -162,6 +162,7 @@ export class Sedit {
   add_val:any;
   constructor(private service:ShiftService,public dialogRef: MatDialogRef<Sedit>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,) {
     this.edit_data1 = data;
+    console.log(this.edit_data1);
     this.tenant = localStorage.getItem('tenant_id')
  
   }
@@ -179,8 +180,8 @@ export class Sedit {
       shift_start_time:[this.edit_data1.shift_start_time],
       shift_end_time:[this.edit_data1.shift_end_time],
       shift_no:[this.edit_data1.shift_no],
-      day:[this.edit_data1.day],
-      end_day:[this.edit_data1.end_day],
+      day:[this.edit_data1.day,Validators.required],
+      end_day:[this.edit_data1.end_day,Validators.required],
     })
   }
   loginform()

@@ -12,7 +12,7 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./cycle-time-start-to-start.component.scss']
 })
 export class CycleTimeStartToStartComponent implements OnInit {
-  startDate = new Date(2020, 0, 1);
+  startDate :any;
 
   Highcharts = Highcharts;
 
@@ -54,7 +54,6 @@ export class CycleTimeStartToStartComponent implements OnInit {
       })
 
       this.service.current_status(this.tenant).subscribe(res =>{
-        console.log(res);
       })
    this.login.value.date=Date.now();
     this.service.machine( this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
@@ -77,7 +76,6 @@ export class CycleTimeStartToStartComponent implements OnInit {
     }
   getdate(event) {
     this.showdate = event;
-      console.log(this.showdate);
       
   }
   time_start_view(){
@@ -88,7 +86,6 @@ export class CycleTimeStartToStartComponent implements OnInit {
     this. myLoader = true;
   
     this.service.cycle_start_to_start(register).pipe(untilDestroyed(this)).subscribe(res => {
-      //  gokul 11-11 after work---------------
                 this.starttostart = res;
                     this.timestart=[];
                     this.countstart=[];
@@ -100,7 +97,6 @@ export class CycleTimeStartToStartComponent implements OnInit {
                     this.timestart.push(minutes);
 
                     }
-    //---------------
       this.myLoader = false;
       this.chartOptions = {
         chart: {
@@ -132,7 +128,6 @@ export class CycleTimeStartToStartComponent implements OnInit {
               text: 'Parts Count'
           }
       },
-      // gokul 11-11 after work
       yAxis: {
         min: 0,
         title: {
@@ -171,7 +166,7 @@ export class CycleTimeStartToStartComponent implements OnInit {
                             name: 'Time',
                             data:  this.timestart.reverse()
                         }]
-                        //--------
+                        
       }
   })
   }

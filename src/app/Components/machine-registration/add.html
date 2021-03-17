@@ -9,16 +9,17 @@
     <div class="dialog-form">
         <form [formGroup]="login">
             <mat-form-field>
-                <mat-label>Machine Type</mat-label>
-                <input matInput formControlName="machine_name" type="text" required>
-            </mat-form-field>
-            <mat-form-field>
                 <mat-label>Machine Name</mat-label>
                 <input matInput formControlName="machine_type" type="text" required>
             </mat-form-field>
             <mat-form-field>
+                <mat-label>Machine Type</mat-label>
+                <input matInput formControlName="machine_name" type="text" required>
+            </mat-form-field>
+          
+            <mat-form-field>
                 <mat-label>Controller Model Number</mat-label>
-                <input matInput formControlName="controller_type" type="text" required>
+                <input matInput formControlName="machine_model" type="text" required>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Machine Serial Number</mat-label>
@@ -46,12 +47,12 @@
                 <input matInput formControlName="device_id" type="text" required>
             </mat-form-field>
             <mat-form-field>
-                <mat-label>Select Machine</mat-label>
-                <mat-select matNativeControl required formControlName="machine_model">
+                <mat-label>Machine Type</mat-label>
+                <mat-select matNativeControl required formControlName="controller_type">
                     <mat-option value="Select Machine" disabled>Select Machine</mat-option>
-                    <mat-option value="Ethernet" (click)="machineSelect('Ethernet')">Ethernet</mat-option>
-                    <mat-option value="RS232" (click)="machineSelect('RS232')">RS232</mat-option>
-                    <mat-option value="CT&PT" (click)="machineSelect('CT&PT')">CT&PT</mat-option>
+                    <mat-option value="1" (click)="machineSelect('Ethernet')">Ethernet</mat-option>
+                    <mat-option value="2" (click)="machineSelect('RS232')">RS232</mat-option>
+                    <mat-option value="3" (click)="machineSelect('CT&PT')">CT&PT</mat-option>
                 </mat-select>
             </mat-form-field>
             <!-- <mat-form-field>

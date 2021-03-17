@@ -31,17 +31,11 @@
         </mat-menu>
       </div>
 
-      <!-- <a  class="user_link" (click)="open()"><mat-icon class="v-align-middle edit">edit</mat-icon></a>
-        <a class="logout" (click)="close()">
-          <img src="../../../assets/images/signout.svg">
-          <i class="fa fa-sign-out" aria-hidden="true"></i>
-        </a> -->
+    
     </div>
 
-    <!-- <button class="logout" mat-raised-button (click)="close()">Logout</button> -->
   </mat-toolbar-row>
-  <!-- </div> -->
-  <!-- <mat-icon (click)="openDialog()">edit</mat-icon> -->
+ 
 </mat-toolbar>
 
 <mat-sidenav-container class="">
@@ -62,12 +56,12 @@
           </a>
         </li>
 
-        <li routerLinkActive="active-link">
+        <!-- <li routerLinkActive="active-link">
           <a [routerLink]="['/machine_view']">
             <i class="fa fa-th-large" aria-hidden="true"></i>
             <span>Dashboard</span>
           </a>
-        </li>
+        </li> -->
 
         <li routerLinkActive="active-link">
           <a [routerLink]="['/alarm']">
@@ -75,12 +69,12 @@
             <span>Alarms</span>
           </a>
         </li>
-        <li routerLinkActive="active-link">
+        <!-- <li routerLinkActive="active-link">
           <a [routerLink]="['/alert']">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
             <span>Alert</span>
           </a>
-        </li>
+        </li> -->
 
         <li routerLinkActive="active-link">
           <a [routerLink]="['/alarmreport']">
@@ -88,12 +82,12 @@
             <span>Alarm History Report</span>
           </a>
         </li>
-        <li routerLinkActive="active-link">
+        <!-- <li routerLinkActive="active-link">
           <a [routerLink]="['/connectionlog']">
             <i class="fa fa-history" aria-hidden="true"></i>
             <span>Log</span>
           </a>
-        </li>
+        </li> -->
         <li routerLinkActive="active-link">
           <a [routerLink]="['/hmi']">
             <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
@@ -113,33 +107,33 @@
           </a>
         </li>
 
-        <li routerLinkActive="active-link">
+        <!-- <li routerLinkActive="active-link">
           <a [routerLink]="['/allshiftchart']">
             <i class="fa fa-area-chart" aria-hidden="true"></i>
             <span>All shift chart</span>
           </a>
-        </li>
+        </li> -->
 
-        <li routerLinkActive="active-link">
+        <!-- <li routerLinkActive="active-link">
           <a [routerLink]="['/cyclestart']">
             <i class="fa fa-line-chart" aria-hidden="true"></i>
             <span>Cycle start to start</span>
           </a>
-        </li>
+        </li> -->
 
-        <li routerLinkActive="active-link">
+        <!-- <li routerLinkActive="active-link">
           <a [routerLink]="['/cyclestop']">
             <i class="fa fa-line-chart" aria-hidden="true"></i>
             <span>Cycle Stop to start</span>
           </a>
-        </li>
-
+        </li> -->
+<!-- 
         <li routerLinkActive="active-link">
           <a [routerLink]="['/notification']">
             <i class="fa fa-wrench" aria-hidden="true"></i>
             <span>Notification Setting</span>
           </a>
-        </li>
+        </li> -->
 
         <!-- <li routerLinkActive="active-link">
           <a [routerLink]="['/machine_status']">
@@ -208,12 +202,12 @@
               <span>Shift</span>
             </a>
           </li>
-          <li routerLinkActive="active-link">
+          <!-- <li routerLinkActive="active-link">
             <a [routerLink]="['/oee']">
               <i class="fa fa-connectdevelop" aria-hidden="true"></i>
               <span>OEE</span>
             </a>
-          </li>
+          </li> -->
           <li routerLinkActive="active-link">
             <a [routerLink]="['/user_management']">
               <i class="fa fa-user-o" aria-hidden="true"></i>
@@ -226,14 +220,14 @@
               <span>Operator</span>
             </a>
           </li>
-          <li routerLinkActive="active-link">
+          <!-- <li routerLinkActive="active-link">
             <a [routerLink]="['/operator_allocation']">
               <i class="fa fa-user-plus" aria-hidden="true"></i>
               <span>Operator Allocation</span>
             </a>
-          </li>
+          </li> -->
         </div>
-        <div *ngIf="tenant === '14'">
+        <!-- <div *ngIf="tenant === '14'">
           <li routerLinkActive="active-link" onclick="myFunction()">
             <a (click)="view()" id="drop_down">
               <i class="fa fa-file" aria-hidden="true"></i>
@@ -272,12 +266,12 @@
               </a>
             </li>
 
-            <!-- <li routerLinkActive="active-link">
+            <li routerLinkActive="active-link">
               <a [routerLink]="['/part_documentation']">
                 <i class="fa fa-clipboard" aria-hidden="true"></i>
                 <span>Part Documentation</span>
               </a>
-            </li> -->
+            </li>
             <li routerLinkActive="active-link">
               <a [routerLink]="['/reason']">
                 <i class="fa fa-rocket" aria-hidden="true"></i>
@@ -285,7 +279,7 @@
               </a>
             </li>
           </div>
-        </div>
+        </div> -->
       </ul>
       <!-- <div class="cover-bar"></div> -->
     </div>

@@ -47,6 +47,8 @@
               <div class="filter_field" *ngIf="valuesplit === 'Shiftwise' ">
                 <mat-form-field appearance="outline">
                   <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_id">
+                    <!-- <mat-option value="all">All</mat-option> -->
+
                     <mat-option *ngFor="let shift of shift_response" [value]="shift.id">{{shift.shift_no}}
                     </mat-option>
                   </mat-select>
@@ -56,7 +58,7 @@
               <div class="filter_field">
               <mat-form-field>
                 <mat-label>From Date</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="start_date" (click)="picker.open()">
+                <input matInput [matDatepicker]="picker" placeholder='From Date' formControlName="start_date" (click)="picker.open()">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
               </mat-form-field>
@@ -66,7 +68,7 @@
                            
               <mat-form-field>
                   <mat-label>To Date</mat-label>
-                  <input matInput [matDatepicker]="picker1" formControlName="end_date" (click)="picker1.open()">
+                  <input matInput [matDatepicker]="picker1" placeholder='To Date' formControlName="end_date" (click)="picker1.open()">
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1 startView="year" [startAt]="endDate"></mat-datepicker>
                 </mat-form-field>

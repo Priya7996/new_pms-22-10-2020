@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
 })
 export class AllShiftChartComponent implements OnInit {
     myLoader1= false;
-    startDate = new Date(2020, 0, 1);
+    startDate :any;
 
 
 //form data
@@ -108,20 +108,16 @@ machineName:any;
   getmachine(machine,id){
     this.machineName = machine;
     this.machineID = id;
-    // this.chart_view()
     }
     getshift(shift){
-        console.log(shift)
       this.shiftNo = shift;
-      // this.chart_view()
       }
   
   chart_view(){
-      console.log(this.login.value)
 
     this.date = this.datePipe.transform(this.login.value.date);
-    console.log(this.date)     
      let register = {'machine_id': this.machineID , 'shift_id':this.shiftNo, 'date':this.date}
+     console.log(register)
      register['tenant_id'] = this.tenant;
      this.myLoader1= true;
      this.service.shift_machine_status_chart(register).pipe(untilDestroyed(this)).subscribe(res => {

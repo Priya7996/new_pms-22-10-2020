@@ -6,6 +6,8 @@ import { MatTableDataSource } from '@angular/material';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
@@ -13,8 +15,11 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 })
 export class ReportComponent implements OnInit {
   type:any;
-  startDate = new Date(2020, 0, 1);
-  endDate = new Date(2020,0,1);
+  new_date:any;
+  docku:any;
+  new_date1:any;
+  startDate:any;
+  endDate:any;
   report_response: any;
   tenant: any;
   myLoader = false;
@@ -24,11 +29,12 @@ export class ReportComponent implements OnInit {
   show:any;
    export_excel: any[] = [];
   login: FormGroup;
-  displayedColumns: string[] = ['date', 'shift', 'time', 'operatorname','operatorid','machineid','machinename','idleduration','idletime','reason','cycle_time','cutting_time','spindle_speed','feed','run_time','idle_time','stop_time','total','hours','utilization','load','motor','servo_load','servo_motor','pulse_code'];
+  displayedColumns: string[] = ['position','date', 'shift_no', 'time', 'operator_name','operator_id','machine_name','machine_type','program_number','job_description','parts_produced','cycle_time','cutting_time','spendle_speed','feed_rate','actual_running','idle_time','total_downtime','actual_working_hours','actual_working_hours1','utilization','spindle_load','spindle_m_temp','servo_load','servo_m_temp','puls_code'];
   dataSource = new  MatTableDataSource();
-  displayedColumns1: string[] = ['date', 'shift', 'time', 'operatorid'];
+  displayedColumns1: string[] = ['position','date', 'machine_name', 'machine_type', 'utilization'];
   dataSource1 = new  MatTableDataSource();
-
+  list_data:any;
+  listin_data:any;
   reports: unknown[];
   drop_value:any;
   split:any;
@@ -39,14 +45,16 @@ export class ReportComponent implements OnInit {
   ShiftID: any;
   hourtype: any;
   programNo: any;
-  constructor(private nav:NavbarService,private service:ReportService,private fb:FormBuilder, ) {
+  constructor(private datepipe: DatePipe,private nav:NavbarService,private service:ReportService,private fb:FormBuilder, ) {
     this.nav.show();
-    this.tenant=localStorage.getItem('tenant_id')
 
    }
 
 
   ngOnInit() {
+
+    this.tenant=localStorage.getItem('tenant_id')
+
     this.login = this.fb.group({
       machine_id:["",Validators.required],
       report_split:["",Validators.required],
@@ -56,75 +64,86 @@ export class ReportComponent implements OnInit {
       start_date:["",Validators.required],
       end_date:["",Validators.required],
       report_type:["",Validators.required]
-      // report_type:["",Validators.required],
     })
     
     this.service.tenant_id(this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
-      console.log(res);
       this.report_response=res;
-      console.log(localStorage.getItem('token'));});
+    });
 
       
       this.service.shiftidentity(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-        console.log(res);
         this.service.shift(res.id).subscribe(res => {
-         console.log(res);
          this.shift_response=res; 
-         console.log(localStorage.getItem('token'));})
+        })
       })
        
         
       this.service.operator(this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
-       console.log(res);
        this.operator_response=res;
-       console.log(localStorage.getItem('token'));})
+      })
 
 
       this.service.cnc_jobs(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-        console.log(res);
 
       })
 
       this.service.data(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-        console.log(res);
         this.selecttype = res.data;
-        console.log(this.selecttype)
 
       })
 
   }
 
   getmachine(value){
-    console.log(value)
     this.show = value;
-    console.log(this.show)
     this.service.report(value,this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-      console.log(res);
       this.split = res.data;
     })
    
 
-    // this.wise = value;
-    // console.log( this.wise)
   
   }
-  export(){
-    
+  getresult(valu){
+    this.docku = valu;
+
   }
+ 
   reporttable(){
-    console.log(this.login.value);
-    this.service.table(this.login.value,this.show).subscribe(res =>{
-      console.log(res);
+    if(this.login.value.report_type === 'Datewise Utilization'){
+      this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
+      this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
+      this.service.table(this.login.value,this.new_date,this.new_date1,this.show,this.tenant,this.docku).subscribe(res =>{
+        this.listin_data = res;
+        this.dataSource1 = new MatTableDataSource(this.listin_data);
+  
+      })
+    }
+
+    else if(this.login.value.report_type === 'Monthwise Utilization'){
+      this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
+      this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
+      this.service.table(this.login.value,this.new_date,this.new_date1,this.show,this.tenant,this.docku).subscribe(res =>{
+        this.listin_data = res;
+        this.dataSource1 = new MatTableDataSource(this.listin_data);
+  
+      })
+    }
+    else{
+    this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
+    this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
+    this.service.table(this.login.value,this.new_date,this.new_date1,this.show,this.tenant,this.docku).subscribe(res =>{
+      this.list_data = res;
+      this.dataSource = new MatTableDataSource(this.list_data);
+
     })
     
   
-   
+  }
   
 
   }
   check(value){
     
-  console.log(value)
   }
   
   ngOnDestroy(){

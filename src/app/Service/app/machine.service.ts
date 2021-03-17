@@ -30,4 +30,7 @@ export class MachineService {
   delete_row(id):Observable<any>{
     return this.http.delete('machines/' + id)
   }
+  machine_logs(id,val):Observable<any>{
+    return this.http.put('machines/'+id,val)
+  }
 }

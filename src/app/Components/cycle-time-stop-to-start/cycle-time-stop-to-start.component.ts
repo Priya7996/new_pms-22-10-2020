@@ -12,7 +12,7 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./cycle-time-stop-to-start.component.scss']
 })
 export class CycleTimeStopToStartComponent implements OnInit {
-    startDate = new Date(2020, 0, 1);
+    startDate :any;
 
     Highcharts = Highcharts;
   chartOptions:any;
@@ -26,7 +26,6 @@ export class CycleTimeStopToStartComponent implements OnInit {
   timestart: any[];
   countstart: any[];
   sec: any;
-     // gokul 11-11 after work
   secondsToMinutes(time) {
     let min = Math.floor(time / 60);
    this.sec = Math.floor(time % 60);
@@ -35,7 +34,6 @@ export class CycleTimeStopToStartComponent implements OnInit {
     }
     return min + '.' + this.sec;
 }
-// -----------
   constructor(private datePipe:DatePipe,private nav:NavbarService,private service:CycleStopService,private fb:FormBuilder) {
     this.nav.show();
     this.tenant = localStorage.getItem('tenant_id')
@@ -57,7 +55,6 @@ export class CycleTimeStopToStartComponent implements OnInit {
             })
           })
           this.service.current_status(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-            console.log(res);
           })
            // gokul 11-11 after work
       // this.service.machine( this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
@@ -67,10 +64,8 @@ export class CycleTimeStopToStartComponent implements OnInit {
       //     this.shiftdetailfordrop = res;
       //       this.service.shift(res.id).subscribe(res => {
       //        this.shift_response=res; 
-      //        console.log(this.tenant)
       //        this.service.current_status(this.tenant).subscribe(res =>{
       //         this.current_view_details = res;
-      //        console.log(this.current_view_details)
       //         this.MachineID = this.current_view_details.machine;
       //         this.ShiftID = this.current_view_details.shift_id;
       //         this.from_date = this.current_view_details.date;

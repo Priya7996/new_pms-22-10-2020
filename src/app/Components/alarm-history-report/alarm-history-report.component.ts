@@ -86,7 +86,7 @@ export class AlarmHistoryReportComponent implements OnInit {
  
        });
      }
-       this.exportService.exportAsExcelFile(this.export_excel, 'Report Details');
+       this.exportService.exportAsExcelFile(this.export_excel, 'Alarm History Report Details');
    }
  
  

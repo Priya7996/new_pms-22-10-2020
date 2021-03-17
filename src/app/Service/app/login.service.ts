@@ -15,6 +15,8 @@ export class LoginService {
       return this.http.post('login', login);
   }
   forgot(params):Observable<any> {
-    return this.http.get('sessions/forgot_pwd='+params)
+    return this.http.get('sessions/forgot_pwd?email_id='+params.email_id  + '&&phone_number=' + params.phone_number)
   }
 }
+
+

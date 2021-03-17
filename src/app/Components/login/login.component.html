@@ -10,17 +10,22 @@
           <mat-form-field class="form">
             <mat-label>User Name</mat-label>
             <input matInput formControlName="email_id" placeholder="Email" type="email"
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ng-reflect-pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a"
-              required>
-            <mat-error *ngIf="login.get('email_id').hasError('email')"> Enter valid email address</mat-error>
+            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$"
+            ng-reflect-pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a" required>
+          <mat-error *ngIf="login.controls['email_id'].errors?.required">Please enter your username
+          </mat-error>
+          <mat-error *ngIf="login.controls['email_id'].hasError('pattern')"> Enter valid email address</mat-error>
+
           </mat-form-field>
 
           <mat-form-field class="form">
             <mat-label>Password</mat-label>
             <input matInput formControlName="password" placeholder="Password" [type]=" hide ? 'password' : 'text'"
-              required>
-            <mat-icon class="eye" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
-            </mat-icon>
+            required>
+          <mat-icon class="eye" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+          </mat-icon>
+          <mat-error *ngIf="login.controls['password'].errors?.required">Please enter your password
+          </mat-error>
 
           </mat-form-field>
           <div class="form-btn">

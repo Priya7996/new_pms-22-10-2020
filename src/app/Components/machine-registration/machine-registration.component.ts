@@ -54,6 +54,19 @@ export class MachineRegistrationComponent implements OnInit {
 
     });
   }
+  view_setting(data): void {
+    const dialogRef = this.dialog.open(Distance, {
+      width: '30%',
+      height:'auto%',
+      data:data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+ 
+      this.ngOnInit();
+
+    });
+  }
 
   ngOnInit() {
     this.myLoader = true;
@@ -141,12 +154,12 @@ export class Add {
   form()
   {
      this.add_val = this.login.value;
-
+     console.log(this.add_val);
      this.add_val["tenant_id"] = this.tenant
-     this.add_val["controller_type"]=this.controller_type;
+    //  this.add_val["controller_type"]=this.controller_type;
 
     this.service.machine(this.login.value).pipe(untilDestroyed(this)).subscribe(res => {
-      alert('created successfully')
+      Swal.fire('created successfully')
       this.dialogRef.close();
 
   })
@@ -187,8 +200,8 @@ export class Edit {
       machine_model:[this.edit_data1.machine_model],
       machine_serial_no:[this.edit_data1.machine_serial_no],
       machine_ip:[this.edit_data1.machine_ip],
-      device_id:[this.edit_data1.device_id],
       unit:[this.edit_data1.unit],
+      device_id:[this.edit_data1.device_id],
       controller_type:[this.edit_data1.controller_type],
     //   border_rate:[this.edit_data1.controller_type],
     //   t1_ip:[this.edit_data1.controller_type]
@@ -270,4 +283,66 @@ export class Settings {
 
   }
 
+}
+
+
+@Component({
+  selector: 'distance-page',
+  templateUrl: 'distance.html',
+  styleUrls: ['./machine-registration.component.scss']
+
+})
+export class Distance {
+  login: any;
+  add_val1: any;
+  tenant: any;
+  controller_type:any;
+  edit_data1:any;
+  constructor(public dialogRef: MatDialogRef<Distance>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,private service:MachineService) {
+   this.tenant = localStorage.getItem('tenant_id');
+   this.edit_data1 = data;
+  
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  cancel() {
+    this.dialogRef.close();
+  }
+  ngOnInit()
+  {
+    this.login=this.fb.group({
+      dis_min:["",Validators.required],
+      dis_sec:["",Validators.required],
+      dis_tot:["",Validators.required],
+     
+
+     
+    })
+   
+  }
+  form()
+  {
+    console.log(this.login.value);
+     this.add_val1 = this.login.value;
+    //  this.add_val1 = this.edit_data1;
+    
+     console.log(this.add_val1);
+    //  this.add_val["tenant_id"] = this.tenant
+    //  this.add_val["controller_type"]=this.controller_type;
+
+    this.service.machine_logs( this.edit_data1.id, this.add_val1).pipe(untilDestroyed(this)).subscribe(res => {
+      Swal.fire('created successfully')
+      this.dialogRef.close();
+
+  })
+}
+machineSelect(machine){
+     this.controller_type=machine
+}
+
+ngOnDestroy(){
+
+}
 }

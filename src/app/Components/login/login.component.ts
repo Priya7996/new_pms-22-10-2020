@@ -4,6 +4,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { NavbarService } from '../../Nav/navbar.service';
 import { LoginService } from '../../Service/app/login.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('password',val.password)
     this.service.signin(val).subscribe(res => {
       if (res === false) {
-        alert('The Username or Password is incorrect')
+        Swal.fire('The Username or Password is incorrect')
       } else {
         this.router.navigateByUrl('/machine_details');
       }
@@ -80,8 +82,15 @@ export class Dialog {
     })
   }
   testform(value) {
-    this.test.reset();
     this.service.forgot(value).subscribe(res => {
+
+      if (res === false) {
+        Swal.fire('Please Enter Correct Email or phone number')
+      } else {
+        Swal.fire('Please Wait')
+      }
+      this.dialogRef.close();
+
     })
 
   }

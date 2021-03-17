@@ -10,6 +10,6 @@ export class RegisterService {
 
   constructor(private http:HttpClient) { }
   senddata(register) {
-     return this.http.post('http://192.168.1.56:4000/api/v1/tenants/tenant_user_creation',register)
+     return this.http.post('https://app.yantra24x7.com/api/v1/tenants/tenant_user_creation',register)
   }
 }
