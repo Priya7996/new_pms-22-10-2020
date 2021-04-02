@@ -8,7 +8,7 @@
           <span class="v-align-middle">Cycle Time Chart</span>
         </h2>
         <form [formGroup]="table" >
-          <div class="filter_sec">
+          <div class="filter_sec"> 
             <div class="filter_field">
               <mat-form-field appearance="outline">
                 <mat-select required formControlName="machine_id">
@@ -20,11 +20,11 @@
             <div class="filter_field">
               <mat-form-field appearance="outline">
                 <mat-select required formControlName="shift_id">
-                  <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no" (click)="getshift(shift.id)">{{shift.shift_no}}</mat-option>
+                  <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no" (click)="getshift(shift.id,shift.shift_no)">{{shift.shift_no}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="filter_field date_picker">
+            <div class="filter_field date_picker"> 
                            
                 <mat-form-field>
                     <mat-label>Date</mat-label>
@@ -42,13 +42,13 @@
         <div *ngIf="myLoader" class="spinner">
           <img src="assets/images/spinner.gif">
         </div>
-        <!-- <mat-card class="example-card card_sec">
+        <mat-card class="example-card card_sec" *ngIf="allcycletime.length>0">
        
           <mat-card-content>
             <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
               style="width: 100%; height: 400px; display: block;"></highcharts-chart>
           </mat-card-content>
-        </mat-card> -->
+        </mat-card>
       </div>
       <div class="section_top_padding">
         <div *ngIf="myLoader1" class="spinner">

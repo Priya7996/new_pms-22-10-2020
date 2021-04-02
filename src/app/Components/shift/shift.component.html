@@ -9,7 +9,7 @@
           <div class="page_title_sec">
             <h2 class="sub_title">
               <mat-icon class="v-align-middle display">laptop</mat-icon>
-              <span class="v-align-middle">Shift Registartion</span>
+              <span class="v-align-middle">Shift Registration</span>
             </h2>
           </div>
           <mat-card class="example-card shift_card">
@@ -83,7 +83,7 @@
                   <ul *matCellDef="let element" class="table_action">
                     <li>
                       <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                        (click)="shift_edit(element)" mattooltip="Edit">edit
+                        (click)="shift_edit(element, element.id.$oid)" mattooltip="Edit">edit
                       </mat-icon>
                     </li>
                     <li>

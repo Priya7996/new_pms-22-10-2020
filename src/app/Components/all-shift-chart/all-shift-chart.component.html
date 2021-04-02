@@ -25,7 +25,7 @@
                 <mat-option>Select Shift</mat-option>
                 <mat-option value="undefined" (click)="getshift('undefined')">All</mat-option>
 
-                <mat-option *ngFor="let shift of shift_response"  [value]="shift.shift_no" (click)="getshift(shift.id)">{{shift.shift_no}} </mat-option>
+                <mat-option *ngFor="let shift of shift_response"  [value]="shift.shift_no" (click)="getshift(shift.id,shift.shift_no)">{{shift.shift_no}} </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -33,7 +33,7 @@
                            
             <mat-form-field>
                 <mat-label>Date</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="date" (click)="picker.open()">
+                <input matInput [matDatepicker]="picker" formControlName="date" (click)="picker.open()"  (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
               </mat-form-field>

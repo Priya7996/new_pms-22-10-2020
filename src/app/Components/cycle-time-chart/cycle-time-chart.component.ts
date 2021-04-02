@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../../Nav/navbar.service';
 import * as Highcharts from 'highcharts';
 import { CycleTimeService } from '../../Service/app/cycle-time.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'; 
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
@@ -22,7 +22,7 @@ export class CycleTimeChartComponent implements OnInit {
   startDate :any;
   parts = [];
    sec: any;
-
+   shiftpatch:any;
   c_time  = [];
   pro_number :any;
   Highcharts = Highcharts;
@@ -47,6 +47,8 @@ export class CycleTimeChartComponent implements OnInit {
   machineName:any;
   machineID:any;
   shiftNo:any;
+  SHIFT_ID:any;
+  SHIFT_NUM:any;
   date:any;
   cycle_machine_status: any;
   runarry: any[];
@@ -88,7 +90,7 @@ export class CycleTimeChartComponent implements OnInit {
   ngOnInit() {
     this.table = this.fb.group({
       machine_id: ["", Validators.required],
-      shift_id: ["", Validators.required],
+      shift_id: ["", Validators.required], 
       date: ["", Validators.required]
     })
 
@@ -96,7 +98,14 @@ export class CycleTimeChartComponent implements OnInit {
       this.machine_response = res;
       this.service.current_status(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
         this.currentstatus=res; 
-        this.shiftNo = this.currentstatus.shift_no;
+        this.shiftNo = this.currentstatus.shift_id;
+        this.shiftpatch = this.currentstatus.shift_no;
+        this.SHIFT_ID = this.currentstatus.shift_id;
+        this.SHIFT_NUM = this.currentstatus.shift_no;
+
+        console.log(this.SHIFT_ID)
+        console.log(this.SHIFT_NUM)
+
         this.machineID = this.currentstatus.machine;
         this.date = this.currentstatus.date;
        for(let i=0; i<this.machine_response.length; i++){
@@ -108,7 +117,7 @@ export class CycleTimeChartComponent implements OnInit {
          }
        }
         this.table.patchValue({
-          shift_id: this.shiftNo,
+          shift_id: this.SHIFT_NUM,
           date: this.currentstatus.date
         });
          this.tableview()
@@ -129,8 +138,15 @@ export class CycleTimeChartComponent implements OnInit {
   this.machineName = machine;
   this.machineID = id;
   }
-  getshift(shift){
-  this.shiftNo = shift;
+  getshift(shiftID,shift_nom){
+  this.shiftNo = shiftID;  
+  this.shiftpatch = shift_nom;
+  this.SHIFT_ID = shiftID;
+  this.SHIFT_NUM = shift_nom;
+  console.log(this.SHIFT_ID);
+  console.log(this.SHIFT_NUM);
+
+
   }
 
   
@@ -181,7 +197,8 @@ this.diffparts = uniqs;
         },
         subtitle: {
           // text: 'Machine ID : '+ this.macname['machine_name']+',Shift:'+ res.shift_no+' Date : 04-02-20 ',
-          text: 'Machine Name : ' + this.machineName + ', Date : ' +this.date + ',Shift :'  + this.shiftNo + ',Time : ' + '' + ', PartsCount:' + '' + ',Program No : ' + '',
+          text: 'Machine Name : ' + this.machineName + ', Date : ' +this.date + ',Shift :'  + this.shiftpatch + ',Time : ' + '' ,
+          // + ', PartsCount:' + '' + ',Program No : ' + ''
           style: {
             fontSize: '16px',
             color: '#f58632',
@@ -259,7 +276,7 @@ this.diffparts = uniqs;
         text: 'Hour Wise Parts Count Chart(Nos)'
       },
       subtitle: {
-        text: 'Machine Name : ' + this.machineName + ', Date : ' +this.date + ',Shift :'  + this.shiftNo + ',Time : ' + '' + ', PartsCount:' + '' + ',Program No : ' + '',
+        text: 'Machine Name : ' + this.machineName + ', Date : ' +this.date + ',Shift :'  + this.shiftpatch + ',Time : ' + '',
 
         style: {
           fontSize: '16px',
@@ -377,7 +394,7 @@ this.diffparts = uniqs;
         text: ' Machine Status Chart'
       },
       subtitle: {
-        text: 'Machine Name : ' + this.machineName + ', Date : ' +this.date + ',Shift :'  + this.shiftNo + ',Time : ' + '' + ', PartsCount:' + '' + ',Program No : ' + '',
+        text: 'Machine Name : ' + this.machineName + ', Date : ' +this.date + ',Shift :'  + this.shiftpatch + ',Time : ' + '' ,
 
         style: {
           fontSize: '16px',
@@ -527,8 +544,8 @@ this.diffparts = uniqs;
         text: 'Machine Status With Utilization(%) Chart'
       },
       subtitle: {
-        text: 'Machine Name : ' + this.machineName + ', Date : ' +this.date + ',Shift :'  + this.shiftNo + ',Time : ' + '' + ', PartsCount:' + '' + ',Program No : ' + '',
-
+        text: 'Machine Name : ' + this.machineName + ', Date : ' +this.date + ',Shift :'  + this.shiftpatch + ',Time : ' + '' ,
+        // + ', PartsCount:' + '' + ',Program No : ' + ''
         style: {
           color: "#f58632",
           fontSize: "16px"
@@ -599,13 +616,15 @@ this.diffparts = uniqs;
   }
   tableview() {
 
-    this.date = this.datePipe.transform(this.date,);
-
-    let register = { 'machine_id': this.machineID, 'shift_id': this.shiftNo, 'date': this.date, 'tenant_id':this.tenant }
+    this.date = this.datePipe.transform(this.date,'MM-dd-yyyy');
+    console.log(this.date);
+    let register = { 'machine_id': this.machineID, 'shift_id': this.SHIFT_ID, 'date': this.date, 'tenant_id':this.tenant }
+    console.log(register);
     this.myLoader=true;
     this.service.all_time_chart(register).pipe(untilDestroyed(this)).subscribe(res => {
       this.myLoader=false;
       this.allcycletime = res;
+      console.log(this.allcycletime);
       this.tablelist = true;
       this.chart1()
     })

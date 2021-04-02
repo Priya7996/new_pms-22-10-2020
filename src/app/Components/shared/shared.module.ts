@@ -14,7 +14,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ExportService } from './export.service';
 import { MatTableExporterModule } from 'mat-table-exporter';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+// import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     MatAutocompleteModule,MatSelectModule,MatSlideToggleModule,MatSliderModule,
     MatSidenavModule,MatDividerModule,MatNativeDateModule,MatRadioModule
     ,MatExpansionModule,MatGridListModule,MatStepperModule,MatTooltipModule,
-    MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,NgxMaterialTimepickerModule,
+    MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,NgbModule,
     MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule,MatTableExporterModule,
     CommonModule,DateRangePickerModule,MatToolbarModule,MatPaginatorModule,AngularFontAwesomeModule,
     
@@ -33,8 +34,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     MatIconModule,MatInputModule,MatCardModule,MatFormFieldModule,MatListModule,
     MatAutocompleteModule,MatSelectModule,MatSlideToggleModule,MatSliderModule,
     MatSidenavModule,MatDividerModule,MatNativeDateModule,MatRadioModule
-    ,MatExpansionModule,MatGridListModule,MatStepperModule,MatTooltipModule,NgxMaterialTimepickerModule,
-    MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,
+    ,MatExpansionModule,MatGridListModule,MatStepperModule,MatTooltipModule,
+    MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,NgbModule,
     MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule,MatTableExporterModule,
     CommonModule,DateRangePickerModule,MatToolbarModule,MatPaginatorModule,AngularFontAwesomeModule
   ],

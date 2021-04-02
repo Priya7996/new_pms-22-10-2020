@@ -45,6 +45,7 @@ const routes: Routes = [
   { path: 'production', loadChildren: () => import('./Components/production/production.module').then(m => m.ProductionModule) },
   { path: 'reflect', loadChildren: () => import('./Components/reflect/reflect.module').then(m => m.ReflectModule) },
   { path: 'oee-dashboard', loadChildren: () => import('./Components/oee-dashboard/oee-dashboard.module').then(m => m.OeeDashboardModule) },
+  { path: 'reason_macro', loadChildren: () => import('./Components/reason-macro/reason-macro.module').then(m => m.ReasonMacroModule) },
 
 ];
  

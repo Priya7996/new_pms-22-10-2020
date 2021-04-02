@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 export class OeeComponent implements OnInit {
   myLoader = false;
   searchText:any;
-  displayedColumns: string[] = ['position', 'date', 'shift', 'machine'];
+  displayedColumns: string[] = ['position', 'date', 'shift', 'machine','operating','cycle','produced','rejected','availability','performance','quality','oee'];
   dataSource = new MatTableDataSource();
   public dolly = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();

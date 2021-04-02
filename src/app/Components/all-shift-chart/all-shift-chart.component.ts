@@ -5,6 +5,7 @@ import * as Highcharts from 'highcharts';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { DatePipe } from '@angular/common';
+import { MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-all-shift-chart',
@@ -14,10 +15,11 @@ import { DatePipe } from '@angular/common';
 export class AllShiftChartComponent implements OnInit {
     myLoader1= false;
     startDate :any;
-
+    SHIFT_NUM:any;
 
 //form data
 machineName:any;
+SHIFT_ID:any;
 
   // first chart
  Highcharts1 = Highcharts;
@@ -74,7 +76,10 @@ machineName:any;
         this.service.current_status(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
             this.currentstatus=res;
             this.shiftNo = this.currentstatus.shift_no;
-            console.log( this.shiftNo)
+            console.log( this.shiftNo);
+            this.SHIFT_ID = this.currentstatus.shift_id;
+            this.SHIFT_NUM = this.currentstatus.shift_no; 
+            console.log(this.SHIFT_ID, this.SHIFT_NUM)
             this.machineID = this.currentstatus.machine;
             this.date = this.currentstatus.date;
            for(let i=0; i<this.machine_response.length; i++){
@@ -86,7 +91,7 @@ machineName:any;
              } 
            }
             this.login.patchValue({
-              shift_id: this.shiftNo,
+              shift_id: this.SHIFT_NUM,
               date: this.currentstatus.date
             });
              this.chart_view()
@@ -109,14 +114,25 @@ machineName:any;
     this.machineName = machine;
     this.machineID = id;
     }
-    getshift(shift){
-      this.shiftNo = shift;
+    getshift(shiftID,shift_nom){
+      
+      this.SHIFT_ID = shiftID;
+      this.SHIFT_NUM = shift_nom;
+      console.log(this.SHIFT_ID);
+      console.log(this.SHIFT_NUM);
+    
+    
+      }
+
+      addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+        this.date = event.value;
+        console.log(this.date )
       }
   
   chart_view(){
 
-    this.date = this.datePipe.transform(this.login.value.date);
-     let register = {'machine_id': this.machineID , 'shift_id':this.shiftNo, 'date':this.date}
+    this.date = this.datePipe.transform(this.date,'MM-dd-yyyy');
+     let register = {'machine_id': this.machineID , 'shift_id': this.SHIFT_ID, 'date':this.date}
      console.log(register)
      register['tenant_id'] = this.tenant;
      this.myLoader1= true;
@@ -142,7 +158,7 @@ machineName:any;
       text: 'Machine Status Chart'
   },
   subtitle: {
-    text: 'Machine ID : '+ this.machineName +', Shift No:'+ res.shift_no+' Date :'+this.date+',',
+    text: 'Machine ID : '+ this.machineName +', Shift No:'+ this.SHIFT_NUM +' Date :'+this.date+',',
     style: {
         fontSize: '16px',
         color: '#f58632',
@@ -386,7 +402,7 @@ exporting:{
           text: 'Machine Status With Utilization(%) Chart'
       },
       subtitle: {
-        text: 'Machine ID : '+ this.machineName+',Shift No:'+ res.shift_no+' Date :'+this.date+',',
+        text: 'Machine ID : '+ this.machineName+',Shift No:'+ this.SHIFT_NUM +' Date :'+this.date+',',
         style: {
             fontSize: '16px',
             color: '#f58632',

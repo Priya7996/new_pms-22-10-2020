@@ -184,6 +184,8 @@ export class Edit {
   tenant: any;
   add_val: any;
   edit_data1:any;
+  controller_type:any;
+
   constructor(public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data1: any,private fb:FormBuilder,private service:MachineService) {
      this.edit_data1 = data1;
      console.log(this.edit_data1)
@@ -192,6 +194,10 @@ export class Edit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  machineSelect(machine){
+    this.controller_type=machine
+}
   ngOnInit()
   {  this.tenant = localStorage.getItem('tenant_id')
 

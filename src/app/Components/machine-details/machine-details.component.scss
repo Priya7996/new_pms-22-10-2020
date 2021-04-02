@@ -61,7 +61,8 @@
                         }
                     }
                     .machine_info{
-                        background: #F1F5F4;
+                        // background: #F1F5F4;
+                        background: #3b414f !important;
                         padding: 10px;
                         border-left: 1px solid #DEDEDE;
                         width: 100%;
@@ -82,6 +83,7 @@
                             margin: 0;
                             text-transform: capitalize;
                             margin-bottom: 15px;
+                            color: white;
                         }
                         .info_box_list{
                             display: flex;

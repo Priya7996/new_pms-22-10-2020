@@ -120,7 +120,7 @@
       <div class="section_top_padding">
         <mat-card class="card_sec" *ngIf="show === 'Shiftwise' || show === 'Operatorwise'">
           <mat-card-content class="table_responsive" >
-            <table class="row" mat-table  matTableExporter #exporter="matTableExporter" [dataSource]="dataSource" class="mat-elevation-z0">
+            <table class="row" mat-table matTableExporter #exporter="matTableExporter" [dataSource]="dataSource" class="mat-elevation-z0">
       
 
 
@@ -264,14 +264,14 @@
 
           <mat-card-content *ngIf="dataSource.filteredData.length==0" class="no_data_found">
             <h2>No data found</h2>
-          </mat-card-content>
+          </mat-card-content> 
         
         </mat-card>
       </div>
-      <div class="section_top_padding"  >
+      <!-- <div class="section_top_padding"  >
         <mat-card class="card_sec" *ngIf="show === 'Datewise Utilization' || show === 'Monthwise Utilization'" >
           <mat-card-content class="table_responsive">
-            <table mat-table [dataSource]="dataSource1" class="mat-elevation-z0">
+            <table mat-table matTableExporter #exporter="matTableExporter" [dataSource]="dataSource1" class="mat-elevation-z0">
 
 
               
@@ -311,7 +311,7 @@
           </mat-card-content>
          
         </mat-card>
-      </div>
+      </div> -->
 
     </div>
   </div>

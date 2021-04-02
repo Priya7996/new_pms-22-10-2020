@@ -84,16 +84,54 @@ div {
     background: #ccc;
     opacity: .2;
 }
-  
+.mat-typography .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: #202739 !important;
+    border-radius: 5px;
+    border: unset;
+}
 .table_responsive mat-card-content::-webkit-scrollbar-track {
     border-color: transparent;
     background: transparent;
     border-radius: 10px;
  }
 
+ .form_sec_fields .form_field.time_field_bg, .time_field_bg{
+    background: #202739;
+    padding: 20px;
+    border-radius: 15px;
+} 
+body .componentForm .time_field_bg{
+    padding: 5px!important;
+}
+ .form_sec_fields .form_field.time_field_bg, .time_field_bg{
+    // background: #202739;
+    padding: 10px;
+    border-radius: 10px;
+} 
+.form_sec_fields{
+    -webkit-display: flex;
+-moz-display: flex;
+-ms-display: flex;
+-o-display: flex;
+display: flex;
+   -webkit-flex-wrap: wrap;
+-moz-flex-wrap: wrap;
+-ms-flex-wrap: wrap;
+-o-flex-wrap: wrap;
+   flex-wrap: wrap;
+  align-items: flex-end;
+.form_field {
+  width: 31%;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.ngb-tp-input {
+  padding: 0;
+  font-size: 28px;
+  
+}
 
-
-
+}
 // common styles
 ::selection {
     background: #b3d4fc;

@@ -1,0 +1,209 @@
+<section class="page">
+  <div *ngIf="myLoader" class="spinner">
+      <img src="assets/images/spinner.gif">
+    </div>
+  <div class="section_top_padding">
+      <div class="container-fluid">
+          <div class="page_title_sec">
+              <h2 class="sub_title">
+                  <mat-icon class="v-align-middle display">laptop</mat-icon>
+                  <span class="v-align-middle"> Reason Registration</span>
+              </h2>
+          <div class="add_new">
+              <mat-icon class="circle" (click)="user()">add</mat-icon>
+            </div>
+          </div>
+   
+      
+        <!-- <mat-card class="card_sec table-responsive">
+          <mat-card-content>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+              <ng-container matColumnDef="first_name">
+                <th mat-header-cell *matHeaderCellDef> User Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.first_name || '---'}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="email_id">
+                <th mat-header-cell *matHeaderCellDef> Email Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.email_id || '---'}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="phone_number">
+                <th mat-header-cell *matHeaderCellDef> Mobile Number </th>
+                <td mat-cell *matCellDef="let element"> {{element.phone_number || '---'}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="role_name">
+                <th mat-header-cell *matHeaderCellDef> Role </th>
+                <td mat-cell *matCellDef="let element"> {{element.role_name || '---'}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <ul *matCellDef="let element" class="table_action">
+                  <li>
+                    <mat-icon mat-button aria-hidden="false" aria-label="Example home icon" (click)="user_edit(element)"
+                      mattooltip="Edit">edit
+                    </mat-icon>
+                  </li>
+                  <li>
+                    <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                      (click)="user_delete(element.id)" mattooltip="Delete">delete
+                    </mat-icon>
+                  </li>
+                </ul>
+              </ng-container>
+  
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </mat-card-content>
+        </mat-card> -->
+      
+        <div class="cards_collections">
+          <div class="px-16">
+              <!-- <mat-card class="example-card" *ngFor="let machine of machine_response ;let i=index"> -->
+                <mat-card class="example-card" >
+                  <mat-card-content>
+                      <div class="switch_holder">
+                        
+                      </div>
+                      <div class="action_menus">
+                          <a [matMenuTriggerFor]="menu" class="menu_open">
+                              <i class="material-icons">
+                                  menu_open
+                              </i>
+                          </a>
+                          <mat-menu #menu="matMenu" class="actions">
+                              <button mat-menu-item (click)="user_edit(machine)">
+                                
+                                  Edit
+                              </button>
+                             
+                              <button mat-menu-item (click)="user_delete(machine.id)">
+                                 
+                                  Delete
+                              </button>
+                             
+                             
+                          </mat-menu>
+                      </div>
+
+                      <h2>Reason:Lunch</h2>
+                      <h3>Code:2</h3>
+                      <div class="content">
+                          <div class="count" >1</div>
+                          <!-- <div class="full_date">
+                              <p>
+                                  Controller  :
+                                  <span>{{machine.machine_model}}</span>
+                              </p>
+                          
+                              <p>
+                                  Model  :
+                                  <span>{{machine.machine_serial_no}}</span>
+                              </p>
+                              <p>
+                                  IP :
+                                  <span> {{machine.machine_ip}}</span>
+                              </p>
+                          </div> -->
+                      </div>
+                  </mat-card-content>
+              </mat-card>
+          </div>
+          <!-- <div class="px-16">
+              <mat-card class="example-card">
+                  <mat-card-content>
+                      <div class="switch_holder">
+                          <mat-slide-toggle class="status"></mat-slide-toggle>
+                          <div class="action_menus">
+                              <mat-icon (click)="edit_view()" class="v-align-middle edit" matTooltip="Edit">
+                                  edit</mat-icon>
+                          </div>
+                      </div>
+
+                      <h2>RIPL/VMC/HW/EM-C22</h2>
+                      <div class="content">
+                          <div class="count">2</div>
+                          <div class="full_date">
+                              <p>
+                                  timeintervel :
+                                  <span>10</span>
+
+                              </p>
+                              <p>
+                                  Reason :
+                                  <span class="reason"> idle</span>
+                              </p>
+                          </div>
+                      </div>
+                  </mat-card-content>
+              </mat-card>
+          </div>
+          <div class="px-16">
+              <mat-card class="example-card">
+                  <mat-card-content>
+                      <div class="switch_holder">
+                          <mat-slide-toggle class="status"></mat-slide-toggle>
+                          <div class="action_menus">
+                              <mat-icon (click)="edit_view()" class="v-align-middle edit" matTooltip="Edit">
+                                  edit</mat-icon>
+                          </div>
+                      </div>
+
+                      <h2>RIPL/VMC/HW/EM-C22</h2>
+                      <div class="content">
+                          <div class="count">3</div>
+                          <div class="full_date">
+                              <p>
+                                  timeintervel :
+                                  <span>10</span>
+
+                              </p>
+                              <p>
+                                  Reason :
+                                  <span class="reason"> idle</span>
+                              </p>
+                          </div>
+                      </div>
+                  </mat-card-content>
+              </mat-card>
+          </div>
+
+          <div class="px-16 pr-0">
+              <mat-card class="example-card">
+                  <mat-card-content>
+                      <div class="switch_holder">
+                          <mat-slide-toggle class="status"></mat-slide-toggle>
+                          <div class="action_menus">
+                              <mat-icon (click)="edit_view()" class="v-align-middle edit" matTooltip="Edit">
+                                  edit</mat-icon>
+                          </div>
+                      </div>
+
+                      <h2>RIPL/VMC/HW/EM-C22</h2>
+                      <div class="content">
+                          <div class="count">4</div>
+                          <div class="full_date">
+                              <p>
+                                  timeintervel :
+                                  <span>10</span>
+
+                              </p>
+                              <p>
+                                  Reason :
+                                  <span class="reason"> idle</span>
+                              </p>
+                          </div>
+                      </div>
+                  </mat-card-content>
+              </mat-card>
+          </div> -->
+
+      </div>
+  
+    </div>
+  </div>
+</section>

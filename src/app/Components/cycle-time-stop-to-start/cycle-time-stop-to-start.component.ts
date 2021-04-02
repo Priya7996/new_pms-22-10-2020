@@ -5,11 +5,12 @@ import { CycleStopService} from '../../Service/app/cycle-stop.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { DatePipe } from '@angular/common';
+import { MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-cycle-time-stop-to-start',
   templateUrl: './cycle-time-stop-to-start.component.html',
-  styleUrls: ['./cycle-time-stop-to-start.component.scss']
+  styleUrls: ['./cycle-time-stop-to-start.component.scss'] 
 })
 export class CycleTimeStopToStartComponent implements OnInit {
     startDate :any;
@@ -45,17 +46,54 @@ export class CycleTimeStopToStartComponent implements OnInit {
           shift_id:['',Validators.required],
           date:["",Validators.required]
       })
-      this.service.machine( this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
-        this.machine_response=res;
+      // this.service.machine( this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
+      //   this.machine_response=res;
+      // })
+    
+      //   this.service.shiftidentity(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+      //       this.service.shift(res.id).pipe(untilDestroyed(this)).subscribe(res => {
+      //        this.shift_response=res; 
+      //       })
+      //     })
+      //     this.service.current_status(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+      //     })
+
+      this.service.machine(this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
+        this.machine_response = res;
+        this.service.current_status(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+          this.currentstatus=res; 
+          this.shiftNo = this.currentstatus.shift_id;
+          this.shiftpatch = this.currentstatus.shift_no;
+          this.SHIFT_ID = this.currentstatus.shift_id;
+          this.SHIFT_NUM = this.currentstatus.shift_no;
+    
+          console.log(this.SHIFT_ID)
+          console.log(this.SHIFT_NUM)
+    
+          this.machineID = this.currentstatus.machine;
+          this.date = this.currentstatus.date;
+         for(let i=0; i<this.machine_response.length; i++){
+           if(this.currentstatus["machine"] == this.machine_response[i].id){
+             this.machineName = this.machine_response[i].machine_name
+            this.login.patchValue({
+              machine_id: this.machine_response[i].machine_name,
+            })
+           }
+         }
+          this.login.patchValue({
+            shift_id: this.SHIFT_NUM,
+            date: this.currentstatus.date
+          });
+           this.cycle_time_stop()
+        })
       })
     
-        this.service.shiftidentity(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-            this.service.shift(res.id).pipe(untilDestroyed(this)).subscribe(res => {
-             this.shift_response=res; 
-            })
-          })
-          this.service.current_status(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-          })
+      this.service.shiftidentity(this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
+        this.service.shift(res.id).subscribe(res => {
+          this.shift_response = res;
+          
+        })
+      })
            // gokul 11-11 after work
       // this.service.machine( this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
       //   this.machine_response=res.data;
@@ -76,11 +114,29 @@ export class CycleTimeStopToStartComponent implements OnInit {
       //     })
       //-----------------  
   }
+
+  getmachine(machine,id){
+    this.machineName = machine;
+    this.machineID = id;
+    }
+    addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+      this.date = event.value;
+    }
+    getshift(shiftID,shift_nom){
+      this.shiftNo = shiftID;  
+      this.shiftpatch = shift_nom;
+      this.SHIFT_ID = shiftID;
+      this.SHIFT_NUM = shift_nom;
+      console.log(this.SHIFT_ID);
+      console.log(this.SHIFT_NUM);
+    
+    
+      }
   cycle_time_stop(){
-      
-    this.date = this.datePipe.transform(this.login.value.date);
-      let register = this.login.value;
-      register.tenant_id = this.tenant;
+    this.date = this.datePipe.transform(this.date,'MM-dd-yyyy');
+    console.log(this.date);
+    let register = { 'machine_id': this.machineID, 'shift_id': this.SHIFT_ID, 'date': this.date, 'tenant_id':this.tenant }
+    console.log(register);
       this.myLoader = true;
       this.service.cycle_time_stop(register).pipe(untilDestroyed(this)).subscribe(res => {
         this.starttostart = res;
@@ -105,7 +161,7 @@ export class CycleTimeStopToStartComponent implements OnInit {
               text: 'Cycle Start to Cycle Start(Mins)'
           },
           subtitle: {
-              text: 'Machine ID : '+ this.login.value.machine_id+',Shift No:'+ this.login.value.shift_id+' Date :'+this.date+',',
+              text: 'Machine Name : '+ this.login.value.machine_id+',Shift No:'+ this.SHIFT_NUM+' Date :'+this.date+',',
               style: {
                 fontSize: '16px',
                 color: '#f58632',
