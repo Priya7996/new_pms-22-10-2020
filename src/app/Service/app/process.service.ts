@@ -6,13 +6,13 @@ import { TokenService } from '../core/authentication/token.service';
 @Injectable({
   providedIn: 'root'
 })
-export class OperatorService {
+export class ProcessService {
 
   constructor(private http:HttpClient,private token:TokenService) { } 
   tenantId = this.token.getTenantID();
 
   operator(tenantId):Observable<any> {
-    return this.http.get('operators?tenant_id='+tenantId)
+    return this.http.get('operators?tenant_id='+tenantId) 
   }
   post(value):Observable<any>{
     return this.http.post('operators',value)

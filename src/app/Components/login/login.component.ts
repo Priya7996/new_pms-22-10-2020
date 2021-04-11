@@ -14,11 +14,27 @@ import Swal from 'sweetalert2'
 export class LoginComponent implements OnInit {
   login: FormGroup;
   hide: boolean = true;
-
+  Signup:any;
   constructor(private fb: FormBuilder, public dialog: MatDialog, private nav: NavbarService, private service: LoginService, private router: Router) {
     this.nav.hide();
   }
   ngOnInit() {
+    this.Signup = localStorage.getItem('sign');
+    console.log(this.Signup);
+    // if(this.Signup === 'false'){
+    //   alert("show")
+ 
+    // }
+    // else{
+    //   alert("hide")
+    // }
+
+    this.service.true().subscribe(res=>{
+      console.log(res);
+      this.Signup = res;
+    })
+
+
     this.login = this.fb.group({
       email_id: ["", Validators.email],
       password: ["", Validators.required]
@@ -44,6 +60,8 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('shift_id',res.shift_id)
       localStorage.setItem('phone',res.user.phone_number)
       localStorage.setItem('email',res.user.email_id)
+      localStorage.setItem('role_name',res.role_name)
+
       // localStorage.setItem('password',res.user.password)
     })
 

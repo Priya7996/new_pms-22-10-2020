@@ -16,6 +16,7 @@ import { ExportService } from './export.service';
 import { MatTableExporterModule } from 'mat-table-exporter';
 // import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatAutocompleteModule,MatSelectModule,MatSlideToggleModule,MatSliderModule,
     MatSidenavModule,MatDividerModule,MatNativeDateModule,MatRadioModule
     ,MatExpansionModule,MatGridListModule,MatStepperModule,MatTooltipModule,
-    MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,NgbModule,
+    MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,NgbModule,NgxMaterialTimepickerModule,
     MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule,MatTableExporterModule,
     CommonModule,DateRangePickerModule,MatToolbarModule,MatPaginatorModule,AngularFontAwesomeModule,
     
@@ -35,7 +36,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatAutocompleteModule,MatSelectModule,MatSlideToggleModule,MatSliderModule,
     MatSidenavModule,MatDividerModule,MatNativeDateModule,MatRadioModule
     ,MatExpansionModule,MatGridListModule,MatStepperModule,MatTooltipModule,
-    MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,NgbModule,
+    MatTreeModule,MatButtonToggleModule,MatSnackBarModule,MatTabsModule,NgbModule,NgxMaterialTimepickerModule,
     MatDialogModule,MatTableModule,MatDatepickerModule,MatCheckboxModule,MatTableExporterModule,
     CommonModule,DateRangePickerModule,MatToolbarModule,MatPaginatorModule,AngularFontAwesomeModule
   ],

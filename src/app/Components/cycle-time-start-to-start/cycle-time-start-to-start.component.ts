@@ -14,11 +14,15 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 })
 export class CycleTimeStartToStartComponent implements OnInit {
   startDate :any;
-
+  machineID:any;
+  date:any;
+  SHIFT_ID:any;
+  machineName:any;
+  SHIFT_NUM:any;
   Highcharts = Highcharts;
-
+  shiftpatch:any;
   chartOptions: any;
-
+  currentstatus:any;
   myLoader = false;
     machine_response: any;
     shift_response: any;

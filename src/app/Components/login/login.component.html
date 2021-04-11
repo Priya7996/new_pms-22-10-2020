@@ -28,15 +28,17 @@
           </mat-error>
 
           </mat-form-field>
-          <div class="form-btn">
+          <div class="form-btn"> 
             <button mat-raised-button class="Submit" color="primary" [disabled]="login.invalid">Login</button>
           </div>
         </form>
         <a (click)="openDialog()">Forgot Password?</a>
-        <mat-card-footer>
-          <p class="help_msg">Do you have an account?
+        <!-- <mat-card-footer>
+          <p class="help_msg" >Do you have an account?
             <a [routerLink]="['/register']" class="sign_link">Signup</a></p>
-        </mat-card-footer>
+        </mat-card-footer> -->
+        <p class="help_msg" *ngIf="Signup === false" >Do you have an account?
+          <a [routerLink]="['/register']" class="sign_link">Signup</a></p>
       </mat-card-content>
     </mat-card>
   </div>

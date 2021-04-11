@@ -10,9 +10,9 @@
           <mat-icon class="v-align-middle display">alarm</mat-icon>
           <span class="v-align-middle">Overall Alarm Report</span>
         </h2>
-        <div class="table_search">
+        <!-- <div class="table_search">
           <input class="form-control" (keyup)="dolly($event.target.value)" type="text" name="search" [(ngModel)]="searchText" placeholder="Search">
-        </div>
+        </div> -->
       </div>
       <!-- <span *ngIf="(alarm1 | filter:searchText)?.length==0">No Results Found</span> -->
 
@@ -50,7 +50,7 @@
 
         </mat-card-content>
         <mat-card-content *ngIf="alarm?.length==0" class="no_data_found">
-          <h2>No data found</h2>
+          <h2>No Alarm found</h2>
         </mat-card-content>
       </mat-card>  
     </div>
@@ -59,17 +59,17 @@
         <div *ngIf="myLoader1" class="spinner">
           <img src="assets/images/spinner.gif">
         </div>
-              <!-- <div class="page_title_sec">
+              <div class="page_title_sec">
         <h2 class="sub_title">
           <mat-icon class="v-align-middle display">alarm</mat-icon>
           <span class="v-align-middle">Overall Alarm History</span>
         </h2>
-        <div class="table_search">
+        <!-- <div class="table_search">
           <input class="form-control"(keyup)="dongly($event.target.value)" type="text" name="search" [(ngModel)]="search" placeholder="Search ">
-        </div>
-      </div> -->
+        </div> -->
+      </div>
 
-      <!-- <mat-card class="card_sec">
+       <mat-card class="card_sec">
         <mat-card-content class="table-responsive">
           <table class="row" mat-table [dataSource]="dataSource" class="mat-elevation-z0">
 
@@ -117,8 +117,12 @@
               (page)="pagination($event)">
           </mat-paginator>
           </mat-card-content>
+
+          <mat-card-content *ngIf="no_data.length === 0" class="no_data_found">
+            <h2>No Alarms found</h2>
+          </mat-card-content>
         
-      </mat-card> -->
+      </mat-card> 
     </div>
 
     </div>

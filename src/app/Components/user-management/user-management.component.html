@@ -9,8 +9,11 @@
           <mat-icon class="v-align-middle display">alarm</mat-icon>
           <span class="v-align-middle">User Registration</span>
         </h2>
-        <div class="add_new">
-          <mat-icon class="circle" (click)="user()">add</mat-icon>
+        <div class="add_new" *ngIf = "Role_NAME == 'Admin'">
+          <mat-icon class="circle" (click)="user()">add1</mat-icon>
+        </div>
+        <div class="add_new" *ngIf = "Role_NAME == 'Supervisor' || Role_NAME == 'Manager'">
+          <mat-icon class="circle" (click)="usernot()">add1</mat-icon>
         </div>
       </div>
       <mat-card class="card_sec table-responsive">
@@ -46,13 +49,19 @@
               <ul *matCellDef="let element" class="table_action">
                 <li>
                   <mat-icon mat-button aria-hidden="false" aria-label="Example home icon" (click)="user_edit(element)"
-                    mattooltip="Edit">edit
+                    mattooltip="Edit"  *ngIf = "Role_NAME == 'Admin'">edit
                   </mat-icon>
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon" (click)="usernot()"
+                  mattooltip="Edit"  *ngIf = "Role_NAME == 'Supervisor' || Role_NAME == 'Manager'">edit
+                </mat-icon>
                 </li>
                 <li>
                   <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                    (click)="user_delete(element.id)" mattooltip="Delete">delete
+                    (click)="user_delete(element.id)" mattooltip="Delete" *ngIf = "Role_NAME == 'Admin'">delete
                   </mat-icon>
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                  (click)="usernot()" mattooltip="Delete" *ngIf = "Role_NAME == 'Supervisor' || Role_NAME == 'Manager'">delete
+                </mat-icon>
                 </li>
               </ul>
             </ng-container>

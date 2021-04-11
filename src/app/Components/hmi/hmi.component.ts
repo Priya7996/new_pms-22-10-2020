@@ -14,6 +14,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 export class HmiComponent implements OnInit {
   Highcharts = Highcharts;
   chartOptions:any;
+  new_date1:any;
   // chart 1
   myLoader1 = false;
   myLoader = false;
@@ -73,15 +74,17 @@ export class HmiComponent implements OnInit {
            this.shift_response=res; 
           })
         })
-  } 
+  }  
       
  
   hmiReport(){
 
     // this.login.reset();
     let register = this.login.value;
-     register.start_date = this.login.value.date;
-     register.end_date = this.login.value.date;
+    this.new_date1 = new DatePipe('en-US').transform(this.login.value.date, 'dd-MM-yyyy');
+
+     register.start_date = this.new_date1;
+     register.end_date = this.new_date1;
      register.tenant_id = this.tenant;
       this.myLoader = true;
       this.service.table(register).pipe(untilDestroyed(this)).subscribe(res => {
@@ -96,15 +99,17 @@ export class HmiComponent implements OnInit {
   hmiChart(){
     // this.login.reset();
     let register = this.login.value;
-     register.start_date = this.login.value.date;
-     register.end_date = this.login.value.date;
+    this.new_date1 = new DatePipe('en-US').transform(this.login.value.date, 'dd-MM-yyyy');
+
+     register.start_date = this.new_date1;
+     register.end_date = this.new_date1;
      register.tenant_id = this.tenant;
     this.myLoader1 = true;
     this.service.chart(register).pipe(untilDestroyed(this)).subscribe(res => {
       this.myLoader1 = false;
 
-      this.new_date=new DatePipe('en-US').transform(res.date, 'yyyy-dd-MM');
-
+      this.new_date = this.datePipe.transform(this.login.value.date,'MM-dd-yyyy');
+      console.log(this.new_date);
      this. chartOptions = {
         chart: {
           type: 'column',
@@ -117,7 +122,7 @@ export class HmiComponent implements OnInit {
           alpha: 15,
           beta: 15,
           depth: 50,
-          viewDistance: 25
+          viewDistance: 25 
       },
         title: {
           text: 'HMI Chart'

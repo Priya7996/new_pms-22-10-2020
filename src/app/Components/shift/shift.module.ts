@@ -10,7 +10,7 @@ const routes: Routes = [{ path: '',component: ShiftComponent }];
 
 @NgModule({
   declarations: [ShiftComponent,Edit,Add],
-  imports: [RouterModule.forChild(routes),
+  imports: [RouterModule.forChild(routes), 
   CommonModule,SharedModule,NgxMaterialTimepickerModule,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

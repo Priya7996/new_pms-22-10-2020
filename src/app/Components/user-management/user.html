@@ -65,13 +65,14 @@
                     </mat-form-field>
                     
                     <mat-form-field>
-                        <mat-select placeholder="Select Role" matNativeControl required formControlName="role_id">
+                        <mat-select placeholder="Select Role" matNativeControl required formControlName="role_id"   (selectionChange)="getrole($event.value)">
                             <mat-option *ngFor="let operator of operator_role" [value]="operator.id">{{operator.role_name}}</mat-option>
                         </mat-select>
-
                         <mat-error *ngIf="login.controls['role_id'].errors?.required"> Role is Required
                         </mat-error>
+                        
                     </mat-form-field>
+                    
                     </div>
     
                     <div class="form-button text-right">

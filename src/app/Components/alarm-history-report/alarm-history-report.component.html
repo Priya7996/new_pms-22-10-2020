@@ -9,7 +9,7 @@
           <mat-icon class="v-align-middle display">laptop</mat-icon>
           <span class="v-align-middle">Alarm History Report</span>
         </h2>
-         <div class="table_export">
+         <div class="table_export"  *ngIf ="alarmreport">
             <!-- <a class="export_btn"  (click)="export()" mat-raised-button> Export</a> -->
             <a (click)="export()" class="export_btn">
                     <i class="material-icons">
@@ -53,7 +53,7 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
-              </div>
+              </div> 
 
               <div class="filter_field date_picker">
               <mat-form-field appearance="fill">

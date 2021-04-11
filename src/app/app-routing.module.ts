@@ -40,12 +40,13 @@ const routes: Routes = [
   { path: 'machine_view', loadChildren: () => import('./Components/machine-view/machine-view.module').then(m => m.MachineViewModule) },
   { path: 'machine_details', loadChildren: () => import('./Components/machine-details/machine-details.module').then(m => m.MachineDetailsModule) },
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
-  { path: 'part_documentation', loadChildren: () => import('./Components/part-doucumentation/part-doucumentation.module').then(m => m.PartDoucumentationModule) },
+  { path: 'part', loadChildren: () => import('./Components/part-doucumentation/part-doucumentation.module').then(m => m.PartDoucumentationModule) },
   { path: 'machine-lmw', loadChildren: () => import('./Components/machine-lmw/machine-lmw.module').then(m => m.MachineLmwModule) },
   { path: 'production', loadChildren: () => import('./Components/production/production.module').then(m => m.ProductionModule) },
   { path: 'reflect', loadChildren: () => import('./Components/reflect/reflect.module').then(m => m.ReflectModule) },
   { path: 'oee-dashboard', loadChildren: () => import('./Components/oee-dashboard/oee-dashboard.module').then(m => m.OeeDashboardModule) },
   { path: 'reason_macro', loadChildren: () => import('./Components/reason-macro/reason-macro.module').then(m => m.ReasonMacroModule) },
+  { path: 'process', loadChildren: () => import('./Components/process/process.module').then(m => m.ProcessModule) },
 
 ];
  

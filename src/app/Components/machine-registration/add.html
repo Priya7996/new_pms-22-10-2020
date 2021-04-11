@@ -46,13 +46,13 @@
                 <mat-label>Device ip (Eg:GTA-Y001-0001)</mat-label>
                 <input matInput formControlName="device_id" type="text" required>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field  appearance="outline">
                 <mat-label>Machine Type</mat-label>
                 <mat-select matNativeControl required formControlName="controller_type">
                     <mat-option value="Select Machine" disabled>Select Machine</mat-option>
                     <mat-option value="1" >Ethernet</mat-option>
                     <mat-option value="2" >RS232</mat-option>
-                    <mat-option value="3" >CT&PT</mat-option>
+                    <!-- <mat-option value="3" >CT&PT</mat-option> -->
                 </mat-select>
             </mat-form-field>
          

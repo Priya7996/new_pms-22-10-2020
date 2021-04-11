@@ -14,11 +14,16 @@
         </div> -->
       </div>
     
-      <!-- <div class="page_title_sec align_right">
+      <div class="page_title_sec align_right">
         <div class="table_search">
-          <input class="form-control" (keyup)="dolly($event.target.value)" type="text" name="search" [(ngModel)]="searchText" placeholder="Search">
+          <a (click)="export()" class="export_btn">
+            <i class="material-icons">
+                file_copy
+            </i>
+            Export
+        </a>
         </div>
-      </div> -->
+      </div> 
 
       <mat-card class="card_sec">
         <mat-card-content class="table-responsive">

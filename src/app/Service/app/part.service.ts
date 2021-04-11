@@ -6,7 +6,7 @@ import { TokenService } from '../core/authentication/token.service';
 @Injectable({
   providedIn: 'root'
 })
-export class OperatorService {
+export class PartService {
 
   constructor(private http:HttpClient,private token:TokenService) { } 
   tenantId = this.token.getTenantID();

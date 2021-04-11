@@ -19,11 +19,13 @@ export class UserManagementComponent implements OnInit {
   roles_list: any;
   roleid: any;
   myLoader = false;
+  Role_NAME:any;
   hide: boolean = true;
-
   constructor(private nav: NavbarService, private fb: FormBuilder, public dialog: MatDialog, private service: UserService) {
     this.nav.show();
     this.tenant = localStorage.getItem('tenant_id')
+    this.Role_NAME = localStorage.getItem('role_name')
+    console.log(this.Role_NAME);
 
   }
   user(): void {
@@ -52,6 +54,11 @@ export class UserManagementComponent implements OnInit {
  
 
     });
+  }
+
+  usernot(){
+    Swal.fire("You are not allow to access.Please contact Admin")
+
   }
   ngOnInit() {
     this.service.operator().pipe(untilDestroyed(this)).subscribe(res => {
@@ -119,6 +126,8 @@ export class User {
   back: any;
   role: any;
   add_val: any;
+  show:any;
+
   show_status: any;
   hide: boolean = true;
   constructor(private service: UserService, public dialogRef: MatDialogRef<User>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, ) {
@@ -143,6 +152,11 @@ export class User {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  getrole(value){
+    console.log(value)
+    this.show = value;
+  }
   ngOnInit() {
 
     this.login = this.fb.group({
@@ -157,23 +171,24 @@ export class User {
       // tenant_id:["",this.tenant],
       // approval_id:["",this.approval],
     })
-
-    this.service.operator().subscribe(res => {
+    this.service.operator().pipe(untilDestroyed(this)).subscribe(res => {
       this.operator_role = res;
-    }
+
+    })
 
 
-    );
+    
 
   }
 
   logintest() {
+    console.log(this.login.value);
     this.add_val = this.login.value;
     this.add_val["tenant_id"] = this.tenant;
     this.add_val["usertype_id"] = this.user;
     this.add_val["approval_id"] = this.approval;
-    this.add_val["role_id"] = this.role;
-
+    // this.add_val["role_id"] = this.show;
+    // console.log(this.add_val);
     this.service.user(this.login.value).pipe(untilDestroyed(this)).subscribe(res => {
       Swal.fire("Created Successfully!")
       this.dialogRef.close();
@@ -230,11 +245,11 @@ export class Edit {
     this.tenant = localStorage.getItem('tenant_id');
 
     this.login = this.fb.group({
-      first_name: [this.edit_data.first_name],
-      last_name: [this.edit_data.last_name],
-      email_id: [this.edit_data.email_id],
-      password: [this.edit_data.password],
-      phone_number: [this.edit_data.phone_number],
+      first_name: [this.edit_data.first_name, Validators.required],
+      last_name: [this.edit_data.last_name, Validators.required],
+      email_id: [this.edit_data.email_id, Validators.required],
+      //  password: [this.edit_data.password],
+      phone_number: [this.edit_data.phone_number, Validators.required],
       remarks: [this.edit_data.remarks],
       role_id: [this.edit_data.role_id, Validators.required]
 
@@ -248,7 +263,7 @@ export class Edit {
   }
 
   editdata() {
-    
+    console.log(this.login.value);
     this.add_val = this.login.value
     this.add_val["tenant_id"] = this.tenant;
    

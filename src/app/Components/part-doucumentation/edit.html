@@ -1,0 +1,40 @@
+<div class="modal_sec">
+    <mat-toolbar class="forum">
+        <h3>Part Registaration</h3>
+        <button type="button" class="close" aria-label="Close" (click)="onNoClick()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </mat-toolbar>
+    <div class="dialog-form">
+        <div class="filter_sec">
+            <form [formGroup]="login" class="form_sec">
+                <mat-form-field>
+                    <mat-label>Part Name</mat-label>
+                    <input matInput formControlName="operator_name" type="text">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Part Number</mat-label>
+                    <input matInput formControlName="operator_spec_id" type="text">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Customer Name</mat-label>
+                    <input matInput formControlName="description" type="text">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Part Description</mat-label>
+                    <input matInput formControlName="part_description" type="text">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Status</mat-label>
+                    <input matInput formControlName="status" type="text">
+                </mat-form-field>
+                <div class="form-button text-right">
+                    <button mat-raised-button [disabled]="login.invalid" (click)="logintest()"class="filter_btn btn_orange">
+                        Save</button>
+                    <button mat-raised-button (click)="cancel()" class="filter_btn btn_default ml-16">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

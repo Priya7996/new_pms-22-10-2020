@@ -262,6 +262,12 @@ h1, h2, h3, h4, h5, h6{
      margin-right: 10px;
     }
 }
+
+.mat-typography .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: #202739 !important;
+    border-radius: 5px;
+    border: unset;
+}
 .table_search{
     float: right;
     margin-left: 10px;

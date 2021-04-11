@@ -18,7 +18,7 @@ export class Tokentinterceptor implements HttpInterceptor{
   intercept(request : HttpRequest<any>, next : HttpHandler): Observable<HttpEvent<any>> {
 
     if (!/^(http|https):/i.test(request.url)) {
-      if (request.url.includes('/register && sessions/forgot_pwd')) {
+      if (request.url.includes('/register && sessions/forgot_pwd && check_status')) {
           request = request.clone({ url: environment.serverUrl + request.url });
       }
       else {

@@ -17,6 +17,7 @@ export class AlarmComponent implements OnInit {
   pageEvent: PageEvent;
   length:any;
   searchText:any;
+  no_data:any;
   search:any;
   page_size:any = 20;
   pageSizeOptions: number[] = [20];
@@ -49,11 +50,12 @@ export class AlarmComponent implements OnInit {
    }
 
   ngOnInit() {
-    // this.myLoader1 = true;
+     this.myLoader1 = true;
     this.pageNo =1;
     this.service.alarm_history(this.tenant,this.pageNo).pipe(untilDestroyed(this)).subscribe(res =>{
     
-      // this.myLoader1= false;  
+       this.myLoader1= false;  
+       this.no_data = res;
 
       this.alarmhistory=res['alarm_history'];
       this.dataSource=new MatTableDataSource(this.alarmhistory)
@@ -72,13 +74,13 @@ export class AlarmComponent implements OnInit {
     
   }
   pagination(e){
-    // this.myLoader = false;
+     this.myLoader = true;
     this.pageNo = e.pageIndex+1;
    
     this.service.alarm_history(this.tenant,this.pageNo).pipe(untilDestroyed(this)).subscribe( res => {
       this.alarmhistory=res['alarm_history'];
       this.length =res['count'];
-      // this.myLoader = false;
+       this.myLoader = false;
     //  this.alarmHistory = res.alarm_histories;
       this.dataSource = new MatTableDataSource(this.alarmhistory);
     })

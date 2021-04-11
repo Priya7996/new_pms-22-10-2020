@@ -3,23 +3,24 @@ import { NavbarService} from '../../Nav/navbar.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormBuilder, FormArray,FormControl,FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
-import { OperatorService} from '../../Service/app/operator.service';
+import { ProcessService} from '../../Service/app/process.service';
 import { MatTableDataSource } from '@angular/material';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 @Component({
-  selector: 'app-operator-registration',
-  templateUrl: './operator-registration.component.html',
-  styleUrls: ['./operator-registration.component.scss']
+  selector: 'app-process',
+  templateUrl: './process.component.html',
+  styleUrls: ['./process.component.scss']
 })
-export class OperatorRegistrationComponent implements OnInit {
-  displayedColumns: string[] = ['operator_name', 'operator_spec_id', 'description','action'];
+export class ProcessComponent implements OnInit {
+
+  displayedColumns: string[] = ['position','operator_name', 'operator_spec_id', 'description','created','status','action'];
   dataSource = new MatTableDataSource();
   tenant: any;
   list: any;
   myLoader= false;
 show_status:any;
 Role_NAME:any;
-  constructor(private nav:NavbarService,private fb:FormBuilder,public dialog: MatDialog,private service:OperatorService)
+  constructor(private nav:NavbarService,private fb:FormBuilder,public dialog: MatDialog,private service:ProcessService)
   {
   this.nav.show();
   this.tenant=localStorage.getItem('tenant_id');
@@ -37,10 +38,7 @@ Role_NAME:any;
       this.ngOnInit();
     });
   }
-  usernot(){
-    Swal.fire("You are not allow to access.Please contact Admin")
 
-  }
   ngOnInit() {
     this.myLoader= true;
        this.service.operator(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
@@ -106,14 +104,14 @@ ngOnDestroy(){
 @Component({
   selector: 'edit-page',
   templateUrl: 'edit.html',
-  styleUrls: ['./operator-registration.component.scss']
+  styleUrls: ['./process.component.scss']
 })
 
 export class Edit {
   login:FormGroup;
   tenant: any;
   add_val:any;
-  constructor(public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,public service :OperatorService) {}
+  constructor(public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,public service :ProcessService) {}
 
   cancel() {
     this.dialogRef.close();
@@ -128,6 +126,8 @@ export class Edit {
       operator_name:["",Validators.required],
       operator_spec_id:["",Validators.required],
       description:["",Validators.required],
+      plan:["",Validators.required],
+      status:["",Validators.required]
     })
   }
   logintest() {
@@ -148,7 +148,7 @@ export class Edit {
 @Component({
   selector: 'add-page',
   templateUrl: 'add.html',
-  styleUrls: ['./operator-registration.component.scss']
+  styleUrls: ['./process.component.scss']
 })
 export class Add {
   login:FormGroup;
@@ -156,7 +156,7 @@ export class Add {
   tenant:any;
   edit_data:any;
 
-  constructor(public dialogRef: MatDialogRef<Add>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,private service:OperatorService) 
+  constructor(public dialogRef: MatDialogRef<Add>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,private service:ProcessService) 
   {
     this.edit_data=data;
   }
@@ -171,6 +171,8 @@ export class Add {
     operator_name:[this.edit_data.operator_name],
     operator_spec_id:[this.edit_data.operator_spec_id],
     description:[this.edit_data.description],
+    plan:[this.edit_data.operator_name],
+    status:[this.edit_data.operator_name]
     })
   }
 
