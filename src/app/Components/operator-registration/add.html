@@ -5,20 +5,26 @@
             <span aria-hidden="true">×</span>
         </button>
     </mat-toolbar>
-    <div class="dialog-form">
+    <div class="dialog-form"> 
         <div class="filter_sec">
             <form [formGroup]="login"  class="form_sec">
                 <mat-form-field>
                     <mat-label>Operator Name</mat-label>
                     <input matInput formControlName="operator_name" type="text">
+                    <mat-error *ngIf="login.controls['operator_name'].errors?.required">Operator Name is Required
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Operator Id</mat-label>
-                    <input matInput formControlName="operator_spec_id" type="text">
+                    <input matInput formControlName="operator_spec_id" (keypress)="keyPress($event)" type="text">
+                    <mat-error *ngIf="login.controls['operator_spec_id'].errors?.required">Operator ID is Required
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Others</mat-label>
                     <input matInput formControlName="description" type="text">
+                    <mat-error *ngIf="login.controls['description'].errors?.required">Others is Required
+                    </mat-error>
                 </mat-form-field>
                 <div class="form-button text-right">
                     <button mat-raised-button [disabled]="login.invalid" (click)="editdata()" class="filter_btn btn_orange">

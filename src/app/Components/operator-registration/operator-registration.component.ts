@@ -69,9 +69,9 @@ Role_NAME:any;
           if (destroy.value) {
             this.service.delete_row(id).pipe(untilDestroyed(this)).subscribe(res => {
             
-              if(res === true)
+              if(res.status === true)
               {
-                Swal.fire("Deleted Succesfully !")
+                Swal.fire("Deleted Succesfuly !")
               }
               else{
                 Swal.fire("Delete Failed")
@@ -121,7 +121,13 @@ export class Edit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
+  keyPress(event: any) {
+    const pattern = /[0-9]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
   ngOnInit()
   { this.tenant=localStorage.getItem('tenant_id');
     this.login=this.fb.group({
@@ -134,7 +140,7 @@ export class Edit {
     this.add_val=this.login.value;
     this.add_val["tenant_id"] =this.tenant ;
     this.service.post(this.add_val).pipe(untilDestroyed(this)).subscribe(res => {
-    Swal.fire("Created Successfully!")
+    Swal.fire(res.msg)
     this.dialogRef.close(status);
    
 
@@ -164,6 +170,14 @@ export class Add {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  keyPress(event: any) {
+    const pattern = /[0-9]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
   ngOnInit()
   {
     this.tenant=localStorage.getItem('tenant_id');
@@ -178,7 +192,7 @@ export class Add {
     this.add_val=this.login.value
     this.add_val["tenant_id"] =this.tenant ;
     this.service.put(this.edit_data.id,this.add_val).pipe(untilDestroyed(this)).subscribe(res =>{
-    Swal.fire("Updated Successfully!")
+    Swal.fire(res.msg)
     this.dialogRef.close();
 })
 }

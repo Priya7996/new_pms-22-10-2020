@@ -19,7 +19,7 @@ export class ReasonMacroComponent implements OnInit {
   tenant: any;
   roles_list: any;
   myLoader = false;
-
+  machine_response:any;
   constructor(private nav: NavbarService, private fb: FormBuilder, public dialog: MatDialog, private service: ReasonMacroService) {
     this.nav.show();
     this.tenant = localStorage.getItem('tenant_id')
@@ -54,12 +54,14 @@ export class ReasonMacroComponent implements OnInit {
   }
   ngOnInit() {
   
-    // this.myLoader = true;
-    // this.service.list(this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
-    //  this. myLoader = false;
-    //   this.dataSource = new MatTableDataSource(this.back)
+    this.myLoader = true;
+    this.service.list().pipe(untilDestroyed(this)).subscribe(res => {
+      console.log(res);
+      this.machine_response = res;
+     this. myLoader = false;
+      // this.dataSource = new MatTableDataSource(this.back)
 
-    // })
+    })
   }
 
   user_delete(id) {
@@ -77,13 +79,16 @@ export class ReasonMacroComponent implements OnInit {
         }).then((destroy) => {
           if (destroy.value) {
             this.service.delete_row(id).pipe(untilDestroyed(this)).subscribe(res => {
-              if(res){
-              Swal.fire("Deleted Successfully!")
-            }
-            else{
-              Swal.fire("Deleted Failed!")
+                  Swal.fire(res.msg)
 
-            }
+              
+            //   if(res){
+            //   Swal.fire("Deleted Successfully!")
+            // }
+            // else{
+            //   Swal.fire("Deleted Failed!")
+
+            //}
               this.ngOnInit()
             })
           }
@@ -112,6 +117,7 @@ export class User {
   role: any;
   add_val: any;
   show_status: any;
+  is_active:any;
   constructor(private service: ReasonMacroService, public dialogRef: MatDialogRef<User>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, ) {
 
     this.tenant = localStorage.getItem('tenant_id');
@@ -139,8 +145,8 @@ export class User {
   ngOnInit() {
 
     this.login = this.fb.group({
-      reason: ["", Validators.required],
-      code: ["", Validators.required],
+      name: ["", Validators.required],
+      spec_id: ["", Validators.required],
      
     })
   }
@@ -148,9 +154,20 @@ export class User {
   logintest() {
     console.log(this.login.value)
           this.dialogRef.close();
+          this.is_active = true;
+
+    let data = {'name': this.login.value.name, 'is_active': this.is_active,'spec_id':this.login.value.spec_id}
+    console.log(data);
 
 
-    // this.service.user(this.login.value).pipe(untilDestroyed(this)).subscribe(res => {
+    this.service.post(data).pipe(untilDestroyed(this)).subscribe(res => {
+    
+
+      Swal.fire(res.msg)
+
+      this.dialogRef.close();
+    })
+    // this.service.user(data).pipe(untilDestroyed(this)).subscribe(res => {
     //   Swal.fire("Created Successfully!")
     //   this.dialogRef.close();
 
@@ -172,6 +189,7 @@ export class Edit {
   add_val: any;
   tenant: any;
   user: any;
+  is_active:any;
 
   approval: any;
   role: any;
@@ -203,8 +221,8 @@ export class Edit {
     this.tenant = localStorage.getItem('tenant_id');
 
     this.login = this.fb.group({
-      reason: [this.edit_data.reason, Validators.required],
-      code: [this.edit_data.code, Validators.required],
+      name: [this.edit_data.name, Validators.required],
+      spec_id: [this.edit_data.spec_id, Validators.required],
      
 
     })
@@ -215,14 +233,20 @@ export class Edit {
 
   editdata() {
     console.log(this.login.value);
-    // this.add_val = this.login.value
-    // this.add_val["tenant_id"] = this.tenant;
+    console.log(this.login.value,this.edit_data.id);
+    this.is_active = true;
+    let data = { 'is_active': this.is_active,'name': this.login.value.name,'spec_id':this.login.value.spec_id}
+
+ 
    
-    // this.service.edit(this.edit_data.id, this.add_val).pipe(untilDestroyed(this)).subscribe(res => {
+    this.service.edit(this.edit_data.id,data).pipe(untilDestroyed(this)).subscribe(res => {
     
-    //   Swal.fire("Updated Successfully!")
-    //   this.dialogRef.close();
-    // })
+      this.dialogRef.close();
+
+      Swal.fire(res.msg)
+
+      this.dialogRef.close();
+    })
   }
   ngOnDestroy(){
 

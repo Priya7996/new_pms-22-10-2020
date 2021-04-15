@@ -89,8 +89,8 @@ export class UserManagementComponent implements OnInit {
         }).then((destroy) => {
           if (destroy.value) {
             this.service.delete_row(id).pipe(untilDestroyed(this)).subscribe(res => {
-              if(res){
-              Swal.fire("Deleted Successfully!")
+              if(res === true){
+              Swal.fire("Deleted Sucessfully!")
             }
             else{
               Swal.fire("Deleted Failed!")
@@ -190,7 +190,7 @@ export class User {
     // this.add_val["role_id"] = this.show;
     // console.log(this.add_val);
     this.service.user(this.login.value).pipe(untilDestroyed(this)).subscribe(res => {
-      Swal.fire("Created Successfully!")
+      Swal.fire(res.msg)
       this.dialogRef.close();
 
     });
@@ -269,7 +269,7 @@ export class Edit {
    
     this.service.edit(this.edit_data.id, this.add_val).pipe(untilDestroyed(this)).subscribe(res => {
     
-      Swal.fire("Updated Successfully!")
+      Swal.fire(res.msg)
       this.dialogRef.close();
     })
   }

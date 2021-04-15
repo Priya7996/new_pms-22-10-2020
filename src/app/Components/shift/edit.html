@@ -11,16 +11,25 @@
                 <mat-form-field>
                     <mat-label>Day Start Time</mat-label>
                     <input matInput formControlName="day_start_time" type="text" required>
+                    <mat-error *ngIf="login.controls['day_start_time'].errors?.required" >Day Start Time is
+                        Required
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-label>Working Time </mat-label>
                     <input matInput formControlName="working_time" type="text" required>
+                    <mat-error *ngIf="login.controls['working_time'].errors?.required" >Day Start Time is
+                        Required
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-label>Number of Shift</mat-label>
                     <input matInput formControlName="no_of_shift" type="text" required>
+                    <mat-error *ngIf="login.controls['no_of_shift'].errors?.required" >Number Of shift is
+                        Required
+                    </mat-error>
                 </mat-form-field>
 
                 <div class="form-button text-right">

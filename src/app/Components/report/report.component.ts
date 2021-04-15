@@ -19,6 +19,7 @@ export class ReportComponent implements OnInit {
   type:any;
   new_date:any;
   docku:any;
+  pulse:any;
   new_date1:any;
   startDate:any;
   endDate:any;
@@ -191,10 +192,12 @@ export class ReportComponent implements OnInit {
   }
   getresult(valu){
     this.docku = valu;
+    console.log( this.docku);
 
   }
  
   reporttable(){
+    console.log(this.login.value.report_split)
     if(this.login.value.report_type === 'Datewise Utilization'){
       this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
       this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
@@ -223,6 +226,24 @@ export class ReportComponent implements OnInit {
   
       })
     }
+    else if(this.login.value.report_split === 'undefined'){
+       
+      alert("GODVAPMSTHANKS")
+      this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
+      this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
+      this.myLoader = true;
+
+      this.service.reportall(this.login.value,this.new_date,this.new_date1,this.show,this.tenant).subscribe(res =>{
+        this.myLoader = false;
+        console.log(res);
+        this.list_data = res;
+        
+        this.dataSource = new MatTableDataSource(this.list_data);
+  
+      })
+    }
+
+
     else{
     this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
     this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
@@ -233,6 +254,12 @@ export class ReportComponent implements OnInit {
 
       this.list_data = res;
       this.dataSource = new MatTableDataSource(this.list_data);
+      console.log(res);
+      for(let i in this.list_data){
+        // console.log(i)
+        this.pulse = this.list_data[i].puls_code;
+        // console.log(this.puls_code)  
+      }
 
     })
     

@@ -55,6 +55,10 @@ export class OeeComponent implements OnInit {
     })
      
   }
+  
+  export(){
+
+  }
   ngOnDestroy(){
 
   } 

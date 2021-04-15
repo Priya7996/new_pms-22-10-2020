@@ -15,7 +15,7 @@
           <mat-card class="example-card shift_card">
             <mat-card-content>
               <div class="shift">
-                <mat-icon (click)="card_edit(machine_response)" class="edit" mattooltip="Edit">edit</mat-icon>
+                <mat-icon *ngIf="machine_response.length === 0"(click)="card_edit(machine_response)" class="edit" mattooltip="Edit">edit</mat-icon>
                 <div class="play_circle">
                   <i class="material-icons">
                     play_circle_outline

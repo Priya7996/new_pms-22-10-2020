@@ -154,8 +154,9 @@ export class Edit {
     })
     this.add_val = this.login.value
     this.add_val["tenant_id"] = this.tenant;
-    this.service.edit(this.edit_data.id, this.add_val).pipe(untilDestroyed(this)).subscribe(res => {
-      Swal.fire("Submitted Successfully!")
+    console.log(this.add_val);
+    this.service.edit(this.add_val).pipe(untilDestroyed(this)).subscribe(res => {
+      Swal.fire("Created successfully!")
       this.dialogRef.close();
       // this.ngOnInit();
 
@@ -191,8 +192,9 @@ export class Add {
 
   constructor(public dialogRef: MatDialogRef<Add>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private shift: ShiftService) {
     this.value = data;
+    console.log(this.value);
+    
     this.shiftonkay=localStorage.getItem('SHIFT_IDEN');
-    console.log(this.shiftonkay);
     
 
   }
@@ -214,11 +216,11 @@ export class Add {
     } else {
       let shift = this.value.edit_shift;
       this.shiftForm = this.fb.group({
-        shift_start_time: [this.TimeAM(shift.start_time),Validators.required],
-        shift_end_time: [this.TimeAM(shift.end_time),Validators.required],
+        shift_start_time: [this.TimeAM(shift.shift_start_time),Validators.required],
+        shift_end_time: [this.TimeAM(shift.shift_end_time),Validators.required],
         break_time:[this.Time(shift.break_time),Validators.required],
         shift_no: [this.value.edit_shift.shift_no,Validators.required],
-        day: [this.value.edit_shift.start_day,Validators.required],
+        day: [this.value.edit_shift.day,Validators.required],
         end_day: [this.value.edit_shift.end_day,Validators.required],
       })
     }
@@ -226,12 +228,12 @@ export class Add {
   submit() {
     console.log(this.shiftForm.value)
     if (this.shiftForm.invalid) {
-      return;
+      return; 
     }
   
     let data = this.shiftForm.value;
     data.shift_id = this.shiftonkay
-    data.shift_start_time = this.convertTimeAM(this.shiftForm.value.shift_end_time)
+    data.shift_start_time = this.convertTimeAM(this.shiftForm.value.shift_start_time)
     data.shift_end_time = this.convertTimeAM(this.shiftForm.value.shift_end_time)
     data.break_time = this.convertTime(this.shiftForm.value.break_time)  
     console.log(data);
@@ -252,16 +254,16 @@ export class Add {
       this.shift.post(data).pipe(untilDestroyed(this)).subscribe(res => {
         console.log(res);
         this.myLoader = false;
-        // Swal.fire(res.msg);
+         Swal.fire(res.msg);
 
         this.dialogRef.close();
       })
     } 
     else {
       this.myLoader = true;
-
-      this.shift.shift_edit(this.shiftForm.value, this.value.shift_id).pipe(untilDestroyed(this)).subscribe(res => {
+      this.shift.shift_edit(this.value.edit_shift.id,this.shiftForm.value).pipe(untilDestroyed(this)).subscribe(res => {
         this.myLoader = false;
+        Swal.fire(res.msg);
 
         this.dialogRef.close();
       })

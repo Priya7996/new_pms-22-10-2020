@@ -15,16 +15,19 @@ export class ReasonMacroService {
 
   
   // user(value):Observable<any> {
-  //   return this.http.post('users',value)
+  //   return this.http.post('hmi_reasons',value)
   // }
+  post(data):Observable<any> {
+    return this.http.post('hmi_reasons',data)
+  }
 
-  // edit(id,val):Observable<any> {
-  //   return this.http.put('users/'+id,val)
-  // }
-  list(tenantId):Observable<any> {
-    return this.http.get('users?tenant_id='+tenantId)
+  edit(id: any,data: any):Observable<any> {
+    return this.http.put('hmi_reasons/'+id,data)
+  }
+  list():Observable<any> {
+    return this.http.get('hmi_reasons')
   }
   delete_row(id):Observable<any>{
-    return this.http.delete('users/'+id)
+    return this.http.delete('hmi_reasons/'+id)
   }
 }

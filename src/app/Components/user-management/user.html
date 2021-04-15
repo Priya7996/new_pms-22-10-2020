@@ -76,7 +76,7 @@
                     </div>
     
                     <div class="form-button text-right">
-                        <button mat-raised-button  (click)="logintest()" class="filter_btn btn_orange"> Save</button>
+                        <button mat-raised-button  (click)="logintest()" [disabled]="login.invalid" class="filter_btn btn_orange"> Save</button>
                         <button mat-raised-button (click)="cancel()"  (click)="onNoClick()" class="filter_btn btn_default ml-16">Close</button>
                     </div>
                 </form>

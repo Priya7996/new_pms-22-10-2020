@@ -20,8 +20,8 @@ export class ShiftService {
   shifttransaction(shift_id):Observable<any>{
     return this.http.get('shifttransactions?shift_id='+shift_id)
   }
-  edit(id, val):Observable<any>{
-    return this.http.put('shifts/'+id, val)
+  edit(val):Observable<any>{
+    return this.http.post('shifts', val)
   }
   delete_row(id):Observable<any>{
     return this.http.delete('shifttransactions/'+id)

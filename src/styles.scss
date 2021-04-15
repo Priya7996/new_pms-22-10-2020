@@ -1035,3 +1035,8 @@ mat-dialog-container{
                         }
                     }
                    }
+
+
+                   .ngb-tp-hour, .ngb-tp-meridian, .ngb-tp-minute, .ngb-tp-second {
+                    display: contents !important;
+                   }
