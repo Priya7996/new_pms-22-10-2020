@@ -10,7 +10,8 @@
                   <span class="v-align-middle"> Reason Registration</span>
               </h2>
           <div class="add_new">
-              <mat-icon class="circle" (click)="user()">add</mat-icon>
+              <mat-icon class="circle" (click)="user()" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">add</mat-icon>
+              <mat-icon class="circle" (click)="usernot()" *ngIf = "Role_NAME == 'Supervisor'">add</mat-icon>
             </div>
           </div>
    
@@ -76,15 +77,26 @@
                               </i>
                           </a>
                           <mat-menu #menu="matMenu" class="actions">
-                              <button mat-menu-item (click)="user_edit(machine)">
+                              <button mat-menu-item (click)="user_edit(machine)" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">
                                 
                                   Edit
                               </button>
                              
-                              <button mat-menu-item (click)="user_delete(machine.id)">
+                              <button mat-menu-item (click)="usernot()" *ngIf = "Role_NAME == 'Supervisor'">
+                                
+                                Edit
+                            </button>
+                           
+                              <button mat-menu-item (click)="user_delete(machine.id)" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">
                                  
                                   Delete
                               </button>
+
+                              
+                              <button mat-menu-item (click)="usernot()" *ngIf = "Role_NAME == 'Supervisor'">
+                                 
+                                Delete
+                            </button>
                              
                              
                           </mat-menu>

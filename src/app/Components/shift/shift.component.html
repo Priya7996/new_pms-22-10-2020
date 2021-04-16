@@ -20,7 +20,7 @@
                   <i class="material-icons">
                     play_circle_outline
                   </i>
-                </div>
+                </div> 
                 <h2>Day Start Time</h2>
                 <h3>{{machine_response?.day_start_time}}</h3>
                 <div class="status_icon">
@@ -51,8 +51,12 @@
               <mat-icon class="v-align-middle display">laptop</mat-icon>
               <span class="v-align-middle">Shift Transaction Registration</span>
             </h2>
-            <div class="add_new">
+            <div class="add_new" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">
               <mat-icon class="circle" (click)="openDialog()">add</mat-icon>
+            </div>
+
+            <div class="add_new" *ngIf = "Role_NAME == 'Supervisor'">
+              <mat-icon class="circle" (click)="usernot()">add</mat-icon>
             </div>
           </div>
           <mat-card class="card_sec example-card">
@@ -89,13 +93,21 @@
                   <ul *matCellDef="let element" class="table_action">
                     <li>
                       <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                        (click)="shift_edit(element, element.id.$oid)" mattooltip="Edit">edit
+                        (click)="shift_edit(element, element.id.$oid)" mattooltip="Edit" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">edit
                       </mat-icon>
+
+                      <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                      (click)="usernot()" mattooltip="Edit" *ngIf = "Role_NAME == 'Supervisor'">edit
+                    </mat-icon>
                     </li>
                     <li>
                       <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                        (click)="shift_delete(element.id)" mattooltip="Delete">delete
+                        (click)="shift_delete(element.id)" mattooltip="Delete" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">delete
                       </mat-icon>
+
+                      <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                      (click)="usernot()" mattooltip="Delete" *ngIf = "Role_NAME == 'Supervisor'">delete
+                    </mat-icon>
                     </li>
                   </ul>
 

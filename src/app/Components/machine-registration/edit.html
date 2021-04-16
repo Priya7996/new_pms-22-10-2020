@@ -58,16 +58,17 @@
                     </mat-error>
                 </mat-form-field>
 
-                <mat-form-field  appearance="outline">
-                    <mat-select matNativeControl placeholder="Select Machine Type" formControlName="controller_type" required>
-                        <!-- <mat-option value="Select Machine Name" disabled>Select Machine Type</mat-option> -->
-                        <mat-option value="1">Ethernet</mat-option>
-                        <mat-option value="2">RS232</mat-option>
-                        <!-- <mat-option value="3">CT&PT</mat-option> -->
+                <mat-form-field>
+                    <mat-select matNativeControl placeholder="Select Unit"  formControlName="controller_type" required>
+                        <mat-option value="Select Machine Name" disabled>Select Unit</mat-option>
+                        <mat-option value="Ethernet">Ethernet</mat-option>
+                        <mat-option value="RS232">RS232</mat-option>
+                       
                     </mat-select>
-                    <mat-error *ngIf="login.controls['controller_type'].errors?.required">Controller type is Required
+                    <mat-error *ngIf="login.controls['controller_type'].errors?.required">Unit is Required
                     </mat-error>
                 </mat-form-field>
+      
 
                 <div class="form-button text-right">
                     <button mat-raised-button (click)="loginforum()" [disabled]="login.invalid" class="filter_btn btn_orange"> Save</button>

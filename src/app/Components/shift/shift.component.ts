@@ -16,17 +16,22 @@ export class ShiftComponent implements OnInit {
   dataSource =new MatTableDataSource;
   myLoader = false;
   controls: any;
-
+  Role_NAME:any;
   list: any;
   tenant: any;
   SHIFT_ID:any;
   machine_response: any;
   constructor(private nav:NavbarService,public dialog: MatDialog,private service:ShiftService) {
     this.nav.show();
-    this.tenant=localStorage.getItem('tenant_id')
+    this.tenant=localStorage.getItem('tenant_id');
+    this.Role_NAME = localStorage.getItem('role_name')
+    console.log(this.Role_NAME);
 
    }
-   
+   usernot(){
+    Swal.fire("You are not allow to access.Please contact Admin")
+
+  }
    card_edit(data):void{
     const dialogRef = this.dialog.open(Edit, {
       width: '450px',

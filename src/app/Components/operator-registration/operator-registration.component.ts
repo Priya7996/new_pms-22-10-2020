@@ -141,6 +141,8 @@ export class Edit {
     this.add_val["tenant_id"] =this.tenant ;
     this.service.post(this.add_val).pipe(untilDestroyed(this)).subscribe(res => {
     Swal.fire(res.msg)
+    console.log(res.msg);
+
     this.dialogRef.close(status);
    
 

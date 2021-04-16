@@ -18,11 +18,19 @@ export class ReasonMacroComponent implements OnInit {
   // dataSource = new MatTableDataSource();
   tenant: any;
   roles_list: any;
+  Role_NAME:any;
   myLoader = false;
   machine_response:any;
   constructor(private nav: NavbarService, private fb: FormBuilder, public dialog: MatDialog, private service: ReasonMacroService) {
     this.nav.show();
     this.tenant = localStorage.getItem('tenant_id')
+    this.Role_NAME = localStorage.getItem('role_name')
+    console.log(this.Role_NAME);
+
+  }
+
+  usernot(){
+    Swal.fire("You are not allow to access.Please contact Admin")
 
   }
   user(): void {

@@ -9,10 +9,10 @@
           <mat-icon class="v-align-middle display">alarm</mat-icon>
           <span class="v-align-middle">User Registration</span>
         </h2>
-        <div class="add_new" *ngIf = "Role_NAME == 'Admin'">
+        <div class="add_new" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">
           <mat-icon class="circle" (click)="user()">add1</mat-icon>
         </div>
-        <div class="add_new" *ngIf = "Role_NAME == 'Supervisor' || Role_NAME == 'Manager'">
+        <div class="add_new" *ngIf = "Role_NAME == 'Supervisor'">
           <mat-icon class="circle" (click)="usernot()">add1</mat-icon>
         </div>
       </div>
@@ -49,18 +49,18 @@
               <ul *matCellDef="let element" class="table_action">
                 <li>
                   <mat-icon mat-button aria-hidden="false" aria-label="Example home icon" (click)="user_edit(element)"
-                    mattooltip="Edit"  *ngIf = "Role_NAME == 'Admin'">edit
+                    mattooltip="Edit"  *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">edit
                   </mat-icon>
                   <mat-icon mat-button aria-hidden="false" aria-label="Example home icon" (click)="usernot()"
-                  mattooltip="Edit"  *ngIf = "Role_NAME == 'Supervisor' || Role_NAME == 'Manager'">edit
+                  mattooltip="Edit"  *ngIf = "Role_NAME == 'Supervisor'">edit
                 </mat-icon>
                 </li>
                 <li>
                   <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                    (click)="user_delete(element.id)" mattooltip="Delete" *ngIf = "Role_NAME == 'Admin'">delete
+                    (click)="user_delete(element.id)" mattooltip="Delete" *ngIf = "Role_NAME == 'Admin'  || Role_NAME == 'Manager'">delete
                   </mat-icon>
                   <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                  (click)="usernot()" mattooltip="Delete" *ngIf = "Role_NAME == 'Supervisor' || Role_NAME == 'Manager'">delete
+                  (click)="usernot()" mattooltip="Delete" *ngIf = "Role_NAME == 'Supervisor'">delete
                 </mat-icon>
                 </li>
               </ul>
