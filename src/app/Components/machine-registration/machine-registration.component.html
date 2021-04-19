@@ -9,8 +9,11 @@
                     <mat-icon class="v-align-middle display">laptop</mat-icon>
                     <span class="v-align-middle"> Machine Registration</span>
                 </h2>
-            <div class="add_new">
+            <div class="add_new" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">
                 <mat-icon class="circle" (click)="add_registartion()">add</mat-icon>
+              </div>
+              <div class="add_new" *ngIf = "Role_NAME == 'Supervisor'">
+                <mat-icon class="circle" (click)="usernot()">add</mat-icon>
               </div>
             </div>
 
@@ -35,22 +38,31 @@
                                     </i>
                                 </a>
                                 <mat-menu #menu="matMenu" class="actions">
-                                    <button mat-menu-item (click)="edit_view(machine)">
-                                        <!-- <i class="material-icons">
-                                            edit
-                                        </i> -->
+                                    <button mat-menu-item (click)="edit_view(machine)" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">
+                                     
                                         Edit
                                     </button>
-                                    <button mat-menu-item (click)="setting_view(machine,machine.id)">
-                                        <!-- <i class="material-icons">
-                                            edit
-                                        </i> -->
+
+                                    <button mat-menu-item *ngIf = "Role_NAME == 'Supervisor'" (click)="usernot()">
+                                     
+                                        Edit
+                                    </button>
+                                    <button mat-menu-item (click)="setting_view(machine,machine.id)" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">
+                                     
                                         Setting
                                     </button>
-                                    <button mat-menu-item (click)="delete_view(machine.id)">
-                                        <!-- <i class="material-icons">
-                                            delete
-                                        </i> -->
+
+                                    <button mat-menu-item (click)="usernot()" *ngIf = "Role_NAME == 'Supervisor'">
+                                     
+                                        Setting
+                                    </button>
+                                    <button mat-menu-item (click)="delete_view(machine.id)" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">
+                                      
+                                        Delete
+                                    </button>
+
+                                    <button mat-menu-item (click)="usernot()" *ngIf = "Role_NAME == 'Supervisor'">
+                                      
                                         Delete
                                     </button>
                                     <!-- <button mat-menu-item (click)="view_setting(machine)">

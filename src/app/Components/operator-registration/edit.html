@@ -16,7 +16,7 @@
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Operator Id</mat-label>
-                    <input matInput formControlName="operator_spec_id" (keypress)="keyPress($event)" type="text">
+                    <input matInput formControlName="operator_spec_id" type="text">
                     <mat-error *ngIf="login.controls['operator_spec_id'].errors?.required">Operator ID is Required
                     </mat-error>
                 </mat-form-field>

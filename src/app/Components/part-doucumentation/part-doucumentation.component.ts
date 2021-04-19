@@ -35,14 +35,14 @@ show_status:any;
       this.ngOnInit();
     });
   }
-
+ 
   ngOnInit() {
-    // this.myLoader= true;
-    //    this.service.operator(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-    //    this.myLoader= false;
-    //    this.list=res;
-    //    this.dataSource=new MatTableDataSource(this.list)
-    // })
+    this.myLoader= true;
+       this.service.part(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+       this.myLoader= false;
+       this.list=res;
+       this.dataSource=new MatTableDataSource(this.list)
+    })
   }
 
 
@@ -119,18 +119,19 @@ export class Edit {
   ngOnInit()
   { this.tenant=localStorage.getItem('tenant_id');
     this.login=this.fb.group({
-      operator_name:["",Validators.required],
-      operator_spec_id:["",Validators.required],
-      description:["",Validators.required],
+      part_name:["",Validators.required],
+      part_number:["",Validators.required],
+      customer_name:["",Validators.required],
       part_description:["",Validators.required],
-      status:["",Validators.required]
+      is_active:["",Validators.required]
     })
   }
   logintest() {
+    console.log(this.login.value);
     this.add_val=this.login.value;
     this.add_val["tenant_id"] =this.tenant ;
     this.service.post(this.add_val).pipe(untilDestroyed(this)).subscribe(res => {
-    Swal.fire("Created Successfully!")
+    Swal.fire(res.msg)
     this.dialogRef.close(status);
    
 
@@ -155,6 +156,7 @@ export class Add {
   constructor(public dialogRef: MatDialogRef<Add>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,private service:PartService) 
   {
     this.edit_data=data;
+    console.log(this.edit_data);
   }
 
   onNoClick(): void {
@@ -162,17 +164,21 @@ export class Add {
   }
   ngOnInit()
   {
+
+    // operator_name:[this.edit_data.operator_name],
+
     this.tenant=localStorage.getItem('tenant_id');
     this.login=this.fb.group({
-      operator_name:["",Validators.required],
-      operator_spec_id:["",Validators.required],
-      description:["",Validators.required],
-      part_description:["",Validators.required],
-      status:["",Validators.required]
+      part_name:[this.edit_data.part_name,Validators.required],
+      part_number:[this.edit_data.part_number,Validators.required],
+      customer_name:[this.edit_data.customer_name,Validators.required],
+      part_description:[this.edit_data.part_description,Validators.required],
+      is_active:[this.edit_data.is_active,Validators.required]
     })
   }
 
   editdata() {
+    console.log(this.login.value);
     this.add_val=this.login.value
     this.add_val["tenant_id"] =this.tenant ;
     this.service.put(this.edit_data.id,this.add_val).pipe(untilDestroyed(this)).subscribe(res =>{

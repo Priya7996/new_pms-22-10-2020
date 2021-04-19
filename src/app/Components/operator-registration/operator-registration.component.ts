@@ -12,7 +12,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
   styleUrls: ['./operator-registration.component.scss']
 })
 export class OperatorRegistrationComponent implements OnInit {
-  displayedColumns: string[] = ['operator_name', 'operator_spec_id', 'description','action'];
+  displayedColumns: string[] = ['operator_name', 'operator_spec_id', 'description','created_by','action'];
   dataSource = new MatTableDataSource();
   tenant: any;
   list: any;
@@ -113,7 +113,13 @@ export class Edit {
   login:FormGroup;
   tenant: any;
   add_val:any;
-  constructor(public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,public service :OperatorService) {}
+  role_name:any;
+  constructor(public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,public service :OperatorService) {
+    this.role_name = localStorage.getItem('role_name');
+    console.log(this.role_name);
+
+  }
+
 
   cancel() {
     this.dialogRef.close();
@@ -134,12 +140,19 @@ export class Edit {
       operator_name:["",Validators.required],
       operator_spec_id:["",Validators.required],
       description:["",Validators.required],
-    })
+    }) 
   }
   logintest() {
-    this.add_val=this.login.value;
-    this.add_val["tenant_id"] =this.tenant ;
-    this.service.post(this.add_val).pipe(untilDestroyed(this)).subscribe(res => {
+
+    // this.add_val=this.login.value;
+    // this.add_val["tenant_id"] =this.tenant ;
+    // console.log(this.login.value)
+
+   // console.log(this.add_val)
+    let data = {'operator_name': this.login.value.operator_name, 'operator_spec_id':this.login.value.operator_spec_id,'description': this.login.value.description,'role_name':this.role_name,'tenant_id':this.tenant}
+    console.log(data);
+
+    this.service.post(data).pipe(untilDestroyed(this)).subscribe(res => {
     Swal.fire(res.msg)
     console.log(res.msg);
 
@@ -167,6 +180,7 @@ export class Add {
   constructor(public dialogRef: MatDialogRef<Add>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,private service:OperatorService) 
   {
     this.edit_data=data;
+    console.log(this.edit_data);
   }
 
   onNoClick(): void {

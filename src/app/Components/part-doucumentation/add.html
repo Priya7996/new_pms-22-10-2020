@@ -10,24 +10,32 @@
             <form [formGroup]="login"  class="form_sec">
                 <mat-form-field>
                     <mat-label>Part Name</mat-label>
-                    <input matInput formControlName="operator_name" type="text">
+                    <input matInput formControlName="part_name" type="text">
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Part Number</mat-label>
-                    <input matInput formControlName="operator_spec_id" type="text">
+                    <input matInput formControlName="part_number" type="text">
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Customer Name</mat-label>
-                    <input matInput formControlName="description" type="text">
+                    <input matInput formControlName="customer_name" type="text">
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Part Description</mat-label>
                     <input matInput formControlName="part_description" type="text">
                 </mat-form-field>
 
+             
                 <mat-form-field>
-                    <mat-label>Status</mat-label>
-                    <input matInput formControlName="status" type="text">
+                    <mat-label>Select Status</mat-label>
+                    <mat-select matNativeControl required formControlName="is_active" required>
+                        <mat-option value="Select status" disabled>Select Status</mat-option>
+                        <mat-option value="true">Active</mat-option>
+                        <mat-option value="false">Inactive</mat-option>
+                       
+                    </mat-select>
+                    <mat-error *ngIf="login.controls['is_active'].errors?.required">Status is Required
+                    </mat-error>
                 </mat-form-field>
                 <div class="form-button text-right">
                     <button mat-raised-button [disabled]="login.invalid" (click)="editdata()" class="filter_btn btn_orange">

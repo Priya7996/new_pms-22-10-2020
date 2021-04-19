@@ -14,9 +14,12 @@ export class MachineRegistrationComponent implements OnInit {
   tenant:any;
   myLoader = false;
   machine_response: any;
+  Role_NAME:any;
   constructor(private fb:FormBuilder,public dialog: MatDialog,private nav:NavbarService,private service:MachineService) {
     this.nav.show()
-    this.tenant=localStorage.getItem('tenant_id')
+    this.tenant=localStorage.getItem('tenant_id');
+    this.Role_NAME = localStorage.getItem('role_name')
+    console.log(this.Role_NAME);
 
    }
    add_registartion(): void {
@@ -53,6 +56,11 @@ export class MachineRegistrationComponent implements OnInit {
       this.ngOnInit();
 
     });
+  }
+
+  usernot(){
+    Swal.fire("You are not allow to access.Please contact Admin")
+
   }
   view_setting(data): void {
     const dialogRef = this.dialog.open(Distance, {

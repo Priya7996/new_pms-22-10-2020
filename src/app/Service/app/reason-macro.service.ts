@@ -17,9 +17,14 @@ export class ReasonMacroService {
   // user(value):Observable<any> {
   //   return this.http.post('hmi_reasons',value)
   // }
-  post(data):Observable<any> {
-    return this.http.post('hmi_reasons',data)
+  // post(data):Observable<any> {
+  //   return this.http.post('hmi_reasons',data)
+  // }
+
+  post(value):Observable<any> {
+    return this.http.post('hmi_reasons',value)
   }
+
 
   edit(id: any,data: any):Observable<any> {
     return this.http.put('hmi_reasons/'+id,data)

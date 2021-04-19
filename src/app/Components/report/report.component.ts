@@ -42,6 +42,8 @@ export class ReportComponent implements OnInit {
   listin_data:any;
   reports: unknown[];
   drop_value:any;
+  SHIFT:any;
+
   split:any;
   types:any;
   selectsplit:any;
@@ -197,7 +199,9 @@ export class ReportComponent implements OnInit {
   }
  
   reporttable(){
-    console.log(this.login.value.report_split)
+    console.log(this.login.value.shift_id);
+    this.SHIFT = this.login.value.shift_id;
+    console.log(this.SHIFT);
     if(this.login.value.report_type === 'Datewise Utilization'){
       this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
       this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
@@ -226,23 +230,24 @@ export class ReportComponent implements OnInit {
   
       })
     }
-    else if(this.login.value.report_split === 'undefined'){
-       
-      alert("GODVAPMSTHANKS")
-      this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
-      this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
-      this.myLoader = true;
-
-      this.service.reportall(this.login.value,this.new_date,this.new_date1,this.show,this.tenant).subscribe(res =>{
-        this.myLoader = false;
-        console.log(res);
-        this.list_data = res;
-        
-        this.dataSource = new MatTableDataSource(this.list_data);
   
-      })
-    }
 
+    // else if(this.login.value.report_split === 'undefined'){
+       
+    //   alert("GODVAPMSTHANKS")
+    //   this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
+    //   this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
+    //   this.myLoader = true;
+
+    //   this.service.reportall(this.login.value,this.new_date,this.new_date1,this.show,this.tenant).subscribe(res =>{
+    //     this.myLoader = false;
+    //     console.log(res);
+    //     this.list_data = res;
+        
+    //     this.dataSource = new MatTableDataSource(this.list_data);
+  
+    //   })
+    // }
 
     else{
     this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');

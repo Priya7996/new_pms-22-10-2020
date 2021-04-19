@@ -30,6 +30,11 @@ export class ReportService {
   } 
 
   table(register,new_date,new_date1,type,tenant_id,docku):Observable<any>  {
+    console.log(register,new_date,new_date1,type,tenant_id,docku);
+
+    // if(SHIFT === 'undefined'){
+    //   alert("anju")
+    // }
     if(type === 'Shiftwise' && docku === 'Hourwise'){ 
       
 
@@ -54,6 +59,29 @@ export class ReportService {
  
 
     }
+
+    else if(type === 'Shiftwise' && docku === 'undefined'){
+
+      return this.http.get('machines/reports_page?tenant_id='+tenant_id+ '&&start_date=' + new_date + '&&end_date=' + new_date1 +'&&machine_id=' + register.machine_id + '&&shift_id=' + register.shift_id + '&&report_type=' + type )
+ 
+
+    }
+
+    else if(type === 'Operatorwise' && docku === 'undefined'){
+
+      return this.http.get('machines/reports_page?tenant_id='+tenant_id+ '&&start_date=' + new_date + '&&end_date=' + new_date1 +'&&machine_id=' + register.machine_id + '&&report_type=' + type + '&&operator_id=' +  register.operator_id)
+ 
+ 
+
+    }
+
+//     else if(SHIFT === 'undefined' && docku === 'undefined'){
+// alert("dfghbnkjbhvjgb")
+//       return this.http.get('machines/reports_page?tenant_id='+tenant_id+ '&&start_date=' + new_date + '&&end_date=' + new_date1 +'&&machine_id=' + register.machine_id + '&&report_type=' + type + '&&operator_id=' +  register.operator_id)
+ 
+ 
+
+//     }
     
   
     else{
@@ -65,22 +93,24 @@ export class ReportService {
 
   }
 
-  reportall(register,new_date,new_date1,type,tenant_id):Observable<any>  {
-    if(type === 'Shiftwise'){ 
+  // reportall(register,new_date,new_date1,type,tenant_id):Observable<any>  {
+  //   if(type === 'Shiftwise'){ 
       
 
-      return this.http.get('machines/reports_page?tenant_id='+tenant_id+ '&&start_date=' + new_date + '&&end_date=' + new_date1 +'&&machine_id=' + register.machine_id + '&&shift_id=' + register.shift_id + '&&report_type=' + type )
+  //     return this.http.get('machines/reports_page?tenant_id='+tenant_id+ '&&start_date=' + new_date + '&&end_date=' + new_date1 +'&&machine_id=' + register.machine_id + '&&shift_id=' + register.shift_id + '&&report_type=' + type )
 
-    }
+  //   }
     
     
-    else if(type === 'Operatorwise'){
+  //   else if(type === 'Operatorwise'){
 
-      return this.http.get('machines/reports_page?tenant_id='+tenant_id+ '&&start_date=' + new_date + '&&end_date=' + new_date1 +'&&machine_id=' + register.machine_id + '&&report_type=' + type + '&&operator_id=' +  register.operator_id)
+  //     return this.http.get('machines/reports_page?tenant_id='+tenant_id+ '&&start_date=' + new_date + '&&end_date=' + new_date1 +'&&machine_id=' + register.machine_id + '&&report_type=' + type + '&&operator_id=' +  register.operator_id)
  
 
-    }
-  }
+  //   }
+  // }
+
+
   shiftidentity(tenantId):Observable<any>{
     return this.http.get('shifts?tenant_id='+tenantId)
   }
