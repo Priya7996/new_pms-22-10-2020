@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment} from '../../../environments/environment';
 import { TokenService } from '../core/authentication/token.service';
-@Injectable({
+@Injectable({ 
   providedIn: 'root'
 })
 export class ReasonMacroService {
@@ -21,8 +21,9 @@ export class ReasonMacroService {
   //   return this.http.post('hmi_reasons',data)
   // }
 
-  post(value):Observable<any> {
-    return this.http.post('hmi_reasons',value)
+  Send_data(data):Observable<any> {
+    console.log(data)
+    return this.http.post('hmi_reasons',data)
   }
 
 

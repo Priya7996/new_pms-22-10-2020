@@ -63,13 +63,9 @@ show_status:any;
           if (destroy.value) {
             this.service.delete_row(id).pipe(untilDestroyed(this)).subscribe(res => {
             
-              if(res === true)
-              {
-                Swal.fire("Deleted Succesfully !")
-              }
-              else{
-                Swal.fire("Delete Failed")
-              }
+             
+                Swal.fire(res.msg)
+             
               
               this.ngOnInit()
             })
@@ -115,6 +111,13 @@ export class Edit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  keyPress(event: any) {
+    const pattern = /[0-9]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
 
   ngOnInit()
   { this.tenant=localStorage.getItem('tenant_id');
@@ -123,7 +126,7 @@ export class Edit {
       part_number:["",Validators.required],
       customer_name:["",Validators.required],
       part_description:["",Validators.required],
-      is_active:["",Validators.required]
+      status:["",Validators.required]
     })
   }
   logintest() {
@@ -159,13 +162,20 @@ export class Add {
     console.log(this.edit_data);
   }
 
+  keyPress(event: any) {
+    const pattern = /[0-9]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
   ngOnInit()
   {
 
-    // operator_name:[this.edit_data.operator_name],
 
     this.tenant=localStorage.getItem('tenant_id');
     this.login=this.fb.group({
@@ -173,7 +183,7 @@ export class Add {
       part_number:[this.edit_data.part_number,Validators.required],
       customer_name:[this.edit_data.customer_name,Validators.required],
       part_description:[this.edit_data.part_description,Validators.required],
-      is_active:[this.edit_data.is_active,Validators.required]
+      status:[this.edit_data.status,Validators.required]
     })
   }
 
@@ -182,7 +192,7 @@ export class Add {
     this.add_val=this.login.value
     this.add_val["tenant_id"] =this.tenant ;
     this.service.put(this.edit_data.id,this.add_val).pipe(untilDestroyed(this)).subscribe(res =>{
-    Swal.fire("Updated Successfully!")
+    Swal.fire(res.msg)
     this.dialogRef.close();
 })
 }

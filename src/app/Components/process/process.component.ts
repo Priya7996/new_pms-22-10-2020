@@ -38,7 +38,7 @@ Role_NAME:any;
       this.ngOnInit();
     });
   }
-
+ 
   ngOnInit() {
     this.myLoader= true;
        this.service.operator(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
@@ -67,13 +67,9 @@ Role_NAME:any;
           if (destroy.value) {
             this.service.delete_row(id).pipe(untilDestroyed(this)).subscribe(res => {
             
-              if(res === true)
-              {
-                Swal.fire("Deleted Succesfully !")
-              }
-              else{
-                Swal.fire("Delete Failed")
-              }
+           
+                Swal.fire(res.msg)
+              
               
               this.ngOnInit()
             })
@@ -111,22 +107,40 @@ export class Edit {
   login:FormGroup;
   tenant: any;
   add_val:any;
-  constructor(public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,public service :ProcessService) {}
+  list:any;
+  constructor(public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,public service :ProcessService) {
+    this.tenant=localStorage.getItem('tenant_id');
+
+  }
 
   cancel() {
     this.dialogRef.close();
   }
+  
+  keyPress(event: any) {
+    const pattern = /[0-9]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   ngOnInit()
-  { this.tenant=localStorage.getItem('tenant_id');
+  { 
+    
+    this.service.part(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+      this.list=res;
+   })
+    
     this.login=this.fb.group({
-      operator_name:["",Validators.required],
-      operator_spec_id:["",Validators.required],
-      description:["",Validators.required],
-      plan:["",Validators.required],
+      plan_name:["",Validators.required],
+      plan_number:["",Validators.required],
+      part_configuration_id:["",Validators.required],
+      plan_description:["",Validators.required],
       status:["",Validators.required]
     })
   }
@@ -134,7 +148,7 @@ export class Edit {
     this.add_val=this.login.value;
     this.add_val["tenant_id"] =this.tenant ;
     this.service.post(this.add_val).pipe(untilDestroyed(this)).subscribe(res => {
-    Swal.fire("Created Successfully!")
+    Swal.fire(res.msg)
     this.dialogRef.close(status);
    
 
@@ -151,28 +165,44 @@ export class Edit {
   styleUrls: ['./process.component.scss']
 })
 export class Add {
-  login:FormGroup;
+  login:FormGroup; 
   add_val:any;
   tenant:any;
   edit_data:any;
-
+  list:any;
   constructor(public dialogRef: MatDialogRef<Add>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,private service:ProcessService) 
   {
+    this.tenant=localStorage.getItem('tenant_id');
+
     this.edit_data=data;
+    console.log(this.edit_data);
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
+  
+  keyPress(event: any) {
+    const pattern = /[0-9]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+
   ngOnInit()
   {
-    this.tenant=localStorage.getItem('tenant_id');
+
+
+    this.service.part(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+      this.list=res;
+   })
     this.login=this.fb.group({
-    operator_name:[this.edit_data.operator_name],
-    operator_spec_id:[this.edit_data.operator_spec_id],
-    description:[this.edit_data.description],
-    plan:[this.edit_data.operator_name],
-    status:[this.edit_data.operator_name]
+      plan_name:[this.edit_data.plan_name],
+      plan_number:[this.edit_data.plan_number],
+    part_configuration_id:[this.edit_data.part_number],
+    plan_description:[this.edit_data.plan_description],
+    status:[this.edit_data.status]
     })
   }
 
@@ -180,7 +210,7 @@ export class Add {
     this.add_val=this.login.value
     this.add_val["tenant_id"] =this.tenant ;
     this.service.put(this.edit_data.id,this.add_val).pipe(untilDestroyed(this)).subscribe(res =>{
-    Swal.fire("Updated Successfully!")
+    Swal.fire(res.msg)
     this.dialogRef.close();
 })
 }

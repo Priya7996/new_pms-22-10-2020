@@ -167,19 +167,13 @@ export class User {
     let data = {'name': this.login.value.name, 'is_active': this.is_active,'spec_id':this.login.value.spec_id}
     console.log(data);
 
-
-    this.service.post(data).pipe(untilDestroyed(this)).subscribe(res => {
-    
-
-      Swal.fire(res.msg)
-
-      this.dialogRef.close();
-    })
-    // this.service.user(data).pipe(untilDestroyed(this)).subscribe(res => {
-    //   Swal.fire("Created Successfully!")
-    //   this.dialogRef.close();
-
-    // });
+     this.service.Send_data(data).pipe(untilDestroyed(this)).subscribe(res => {
+       console.log(res);
+       Swal.fire(res.msg)
+       this.dialogRef.close();
+     })
+  
+  
   }
   ngOnDestroy(){
 

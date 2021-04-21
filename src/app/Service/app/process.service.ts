@@ -12,17 +12,20 @@ export class ProcessService {
   tenantId = this.token.getTenantID();
 
   operator(tenantId):Observable<any> {
-    return this.http.get('operators?tenant_id='+tenantId) 
+    return this.http.get('process_plans?tenant_id='+tenantId) 
   }
   post(value):Observable<any>{
-    return this.http.post('operators',value)
+    return this.http.post('process_plans',value)
   }
   put(id,val):Observable<any>{
-    return this.http.put('operators/'+id,val)
+    return this.http.put('process_plans/'+id,val)
 
   }
+  part(tenantId):Observable<any> {
+    return this.http.get('part_configurations?tenant_id='+tenantId)
+  }
 delete_row(id):Observable<any>{
-    return this.http.delete('operators/'+id)
+    return this.http.delete('process_plans/'+id)
 
 }
 }

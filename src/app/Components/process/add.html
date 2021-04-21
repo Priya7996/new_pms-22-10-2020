@@ -7,28 +7,38 @@
     </mat-toolbar>
     <div class="dialog-form">
         <div class="filter_sec">
-            <form [formGroup]="login"  class="form_sec">
+            <form [formGroup]="login"  class="form_sec"> 
                 <mat-form-field>
                     <mat-label>Plan Name</mat-label>
-                    <input matInput formControlName="operator_name" type="text">
+                    <input matInput formControlName="plan_name" type="text">
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Plan Number</mat-label>
-                    <input matInput formControlName="operator_spec_id" type="text">
+                    <input matInput formControlName="plan_number" (keypress)="keyPress($event)" type="text">
                 </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Part Number</mat-label>
-                    <input matInput formControlName="description" type="text">
-                </mat-form-field>
+                <mat-form-field >
+                    <mat-select placeholder="Part Number" matNativeControl required formControlName="part_configuration_id">
+                      <mat-option *ngFor="let file of list" [value]="file.id">{{file.part_number}}
+                      </mat-option>
+  
+                    </mat-select>
+                  </mat-form-field>
 
                 <mat-form-field>
                     <mat-label>Plan Description</mat-label>
-                    <input matInput formControlName="plan" type="text">
+                    <input matInput formControlName="plan_description" type="text">
                 </mat-form-field>
 
+  
                 <mat-form-field>
-                    <mat-label>Status</mat-label>
-                    <input matInput formControlName="status" type="text">
+                    <mat-select matNativeControl placeholder="Select Status"  formControlName="status" required>
+                        <mat-option value="Select Status" disabled>Select Status</mat-option>
+                        <mat-option value="Active">Active</mat-option>
+                        <mat-option value="Inactive">Inactive</mat-option>
+                       
+                    </mat-select>
+                    <mat-error *ngIf="login.controls['status'].errors?.required">Status is Required
+                    </mat-error>
                 </mat-form-field>
                 <div class="form-button text-right">
                     <button mat-raised-button [disabled]="login.invalid" (click)="editdata()" class="filter_btn btn_orange">
