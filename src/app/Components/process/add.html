@@ -23,6 +23,9 @@
   
                     </mat-select>
                   </mat-form-field>
+                  <div *ngIf="list.length==0">
+                    No Plan Number Found.Plaese fill the plan number on part configuration module
+               </div>
 
                 <mat-form-field>
                     <mat-label>Plan Description</mat-label>

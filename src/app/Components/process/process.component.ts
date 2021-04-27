@@ -38,7 +38,10 @@ Role_NAME:any;
       this.ngOnInit();
     });
   }
- 
+  usernot(){
+    Swal.fire("You are not allow to access.Please contact Admin")
+
+  }
   ngOnInit() {
     this.myLoader= true;
        this.service.operator(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
@@ -200,10 +203,10 @@ export class Add {
     this.login=this.fb.group({
       plan_name:[this.edit_data.plan_name],
       plan_number:[this.edit_data.plan_number],
-    part_configuration_id:[this.edit_data.part_number],
+    part_configuration_id:[this.edit_data.part_configuration_id],
     plan_description:[this.edit_data.plan_description],
     status:[this.edit_data.status]
-    })
+    }) 
   }
 
   editdata() {

@@ -1,7 +1,7 @@
 <section class="page">
   <div *ngIf="myLoader" class="spinner">
     <img src="assets/images/spinner.gif">
-  </div>
+  </div> 
   <div class="section_top_padding">
     <div class="container-fluid">
       <div class="page_title_sec">
@@ -9,8 +9,12 @@
           <mat-icon class="v-align-middle display">alarm</mat-icon>
           <span class="v-align-middle">Part Configuration</span>
         </h2>
-        <div class="add_new ">
+        <div class="add_new" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">
           <mat-icon class="circle" (click)="user()">add</mat-icon>
+        </div>
+
+        <div class="add_new" *ngIf = "Role_NAME == 'Supervisor'">
+          <mat-icon class="circle" (click)="usernot()">add</mat-icon>
         </div>
       </div>
       <mat-card class="card_sec">
@@ -60,13 +64,21 @@
               <ul *matCellDef="let element" class="table_action">
                 <li>
                   <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                    (click)="operator_edit(element)" mattooltip="Edit">edit
+                    (click)="operator_edit(element)" mattooltip="Edit"  *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">edit
                   </mat-icon>
+
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                  (click)="usernot()" mattooltip="Edit" *ngIf = "Role_NAME == 'Supervisor'">edit
+                </mat-icon>
                 </li>
                 <li>
                   <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                    (click)="operator_delete(element.id)" mattooltip="Delete">delete
+                    (click)="operator_delete(element.id)" mattooltip="Delete" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">delete
                   </mat-icon>
+
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                  (click)="usernot()" mattooltip="Delete" *ngIf = "Role_NAME == 'Supervisor'">delete
+                </mat-icon>
                 </li>
               </ul>
             </ng-container> 

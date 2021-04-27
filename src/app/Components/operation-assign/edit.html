@@ -1,0 +1,93 @@
+<div class="modal_sec">
+    <mat-toolbar class="forum">
+        <h3>Operator Assign</h3>
+        <button type="button" class="close" aria-label="Close" (click)="onNoClick()">
+            <span aria-hidden="true">×</span>
+        </button>
+    </mat-toolbar>
+    <div class="dialog-form">
+        <div class="filter_sec">
+            <form [formGroup]="login" class="form_sec"> 
+                <div class="filter_field">
+                    <mat-form-field appearance="outline">
+                      <mat-select placeholder="Select Machine" matNativeControl required formControlName="machine_id">
+                        <mat-option *ngFor="let machine of machine_response" [value]="machine.id">
+                          {{machine.machine_name}}
+                        </mat-option>
+                      </mat-select> 
+                    </mat-form-field>
+                  </div>
+
+
+                  <div class="filter_field">
+                    <mat-form-field appearance="outline">
+                      <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_id">
+                        <!-- <mat-option value="all">All</mat-option> -->
+    
+                        <mat-option *ngFor="let shift of shift_response" [value]="shift.id">{{shift.shift_no}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div> 
+
+
+                  <div class="filter_field">
+                    <mat-form-field appearance="outline">
+                      <mat-select placeholder="Select Operator" matNativeControl required formControlName="operator_id">
+                        <!-- <mat-option value="all">All</mat-option> -->
+    
+                        <mat-option *ngFor="let operator of operator_response" [value]="operator.id">{{operator.operator_name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div> 
+
+
+                  <div class="filter_field">
+                    <mat-form-field appearance="outline">
+                      <mat-select placeholder="Select Operation Id" matNativeControl required formControlName="operation_id">
+                        <!-- <mat-option value="all">All</mat-option> -->
+    
+                        <mat-option *ngFor="let operation of operation_id_response" [value]="operation.id">{{operation.id}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div> 
+
+
+
+                  <div class="filter_field date_picker">
+                    <mat-form-field appearance="fill">
+                      <!-- <mat-label>From Date</mat-label> -->
+                      <input matInput [matDatepicker]="picker" placeholder='From Date' formControlName="from_date" (click)="picker.open()">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+      
+                  <div class="filter_field date_picker">
+                                 
+                    <mat-form-field appearance="fill">
+                        <!-- <mat-label>To Date</mat-label> -->
+                        <input matInput [matDatepicker]="picker1" placeholder='To Date' formControlName="to_date" (click)="picker1.open()">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1 startView="year" [startAt]="endDate"></mat-datepicker>
+                      </mat-form-field>
+                </div>
+             
+             
+                <mat-form-field>
+                    <mat-label>Others</mat-label>
+                    <input matInput formControlName="description" type="text">
+                    <mat-error *ngIf="login.controls['description'].errors?.required">Description is Required
+                    </mat-error>
+                </mat-form-field>
+                <div class="form-button text-right">
+                    <button mat-raised-button [disabled]="login.invalid" (click)="logintest()"class="filter_btn btn_orange">
+                        Save</button>
+                    <button mat-raised-button (click)="cancel()" class="filter_btn btn_default ml-16">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

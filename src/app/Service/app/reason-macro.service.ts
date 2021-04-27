@@ -27,7 +27,7 @@ export class ReasonMacroService {
   }
 
 
-  edit(id: any,data: any):Observable<any> {
+  edit(id: any,data: any):Observable<any> { 
     return this.http.put('hmi_reasons/'+id,data)
   }
   list():Observable<any> {

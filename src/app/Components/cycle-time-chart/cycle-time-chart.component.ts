@@ -150,9 +150,6 @@ export class CycleTimeChartComponent implements OnInit {
   }
 
   
-  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    this.date = event.value;
-  }
   chart1(){
     this.parts = [];
     this.c_time = [];

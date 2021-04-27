@@ -7,6 +7,7 @@
     </mat-toolbar>
     <div class="dialog-form">
         <div class="filter_sec">
+           
             <form [formGroup]="login" class="form_sec">
                 <mat-form-field>
                     <mat-label>Plan Name</mat-label>
@@ -22,7 +23,11 @@
                       </mat-option>
   
                     </mat-select>
+
                   </mat-form-field>
+                  <div *ngIf="list.length==0">
+                    No Plan Number Found.Plaese fill the plan number on part configuration module
+               </div>
                 <mat-form-field>
                     <mat-label>Plan Description</mat-label>
                     <input matInput formControlName="plan_description" type="text">

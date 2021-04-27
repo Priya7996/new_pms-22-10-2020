@@ -3,27 +3,28 @@ import { NavbarService} from '../../Nav/navbar.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormBuilder, FormArray,FormControl,FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
-import { PartService} from '../../Service/app/part.service';
+import { OperatorService} from '../../Service/app/operator.service';
 import { MatTableDataSource } from '@angular/material';
 import { untilDestroyed } from 'ngx-take-until-destroy';
-@Component({
-  selector: 'app-part-doucumentation',
-  templateUrl: './part-doucumentation.component.html',
-  styleUrls: ['./part-doucumentation.component.scss']
-})
-export class PartDoucumentationComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'part_number', 'part_name','customer_name','created_by','status','action'];
+@Component({
+  selector: 'app-operation-assign',
+  templateUrl: './operation-assign.component.html',
+  styleUrls: ['./operation-assign.component.scss']
+})
+export class OperationAssignComponent implements OnInit {
+
+  displayedColumns: string[] = ['operator_name', 'operator_spec_id', 'description','created_by','action','shift','date'];
   dataSource = new MatTableDataSource();
   tenant: any;
-  list: any; 
+  list: any;
   myLoader= false;
 show_status:any;
 Role_NAME:any;
-  constructor(private nav:NavbarService,private fb:FormBuilder,public dialog: MatDialog,private service:PartService)
+  constructor(private nav:NavbarService,private fb:FormBuilder,public dialog: MatDialog,private service:OperatorService)
   {
   this.nav.show();
-  this.tenant=localStorage.getItem('tenant_id')
+  this.tenant=localStorage.getItem('tenant_id');
   this.Role_NAME = localStorage.getItem('role_name')
   console.log(this.Role_NAME);
   }
@@ -43,8 +44,11 @@ Role_NAME:any;
 
   }
   ngOnInit() {
+   
+  
+
     this.myLoader= true;
-       this.service.part(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+       this.service.operator_get_ass(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
        this.myLoader= false;
        this.list=res;
        this.dataSource=new MatTableDataSource(this.list)
@@ -52,6 +56,7 @@ Role_NAME:any;
   }
 
 
+  // operator_delete(id)
   
   operator_delete(id) {
    
@@ -69,9 +74,13 @@ Role_NAME:any;
           if (destroy.value) {
             this.service.delete_row(id).pipe(untilDestroyed(this)).subscribe(res => {
             
-             
-                Swal.fire(res.msg)
-             
+              if(res.status === true)
+              {
+                Swal.fire("Deleted Succesfuly !")
+              }
+              else{
+                Swal.fire("Delete Failed")
+              }
               
               this.ngOnInit()
             })
@@ -102,14 +111,24 @@ ngOnDestroy(){
 @Component({
   selector: 'edit-page',
   templateUrl: 'edit.html',
-  styleUrls: ['./part-doucumentation.component.scss']
+  styleUrls: ['./operation-assign.component.scss']
 })
 
 export class Edit {
   login:FormGroup;
   tenant: any;
   add_val:any;
-  constructor(public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,public service :PartService) {}
+  role_name:any;
+  operation_id_response:any;
+  machine_response:any;
+  operator_response:any;
+  shift_response:any;
+  constructor(public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,public service :OperatorService) {
+    this.role_name = localStorage.getItem('role_name');
+    console.log(this.role_name);
+
+  }
+
 
   cancel() {
     this.dialogRef.close();
@@ -124,23 +143,56 @@ export class Edit {
       event.preventDefault();
     }
   }
-
   ngOnInit()
-  { this.tenant=localStorage.getItem('tenant_id');
+  { 
+    this.tenant=localStorage.getItem('tenant_id');
+
+    this.service.list_machine(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+      this.machine_response=res;
+   })
+   this.service.list_operation_id(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+    this.operation_id_response=res;
+ })
+
+
+   this.service.list_operator(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+    this.operator_response=res;
+ })
+
+ this.service.shiftidentity(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+   console.log(res);
+   console.log(res.id)
+
+  this.service.shift(res.id).subscribe(res => {
+   this.shift_response=res; 
+  })
+})
+    
+    
     this.login=this.fb.group({
-      part_name:["",Validators.required],
-      part_number:["",Validators.required],
-      customer_name:["",Validators.required],
-      part_description:["",Validators.required],
-      status:["",Validators.required]
-    })
+      machine_id:["",],
+      shift_id:["",],
+      operator_id:[""],
+      operation_id:[""],
+      from_date:[""],
+      to_date:[""],
+      description:["",Validators.required],
+    }) 
   }
   logintest() {
-    console.log(this.login.value);
-    this.add_val=this.login.value;
-    this.add_val["tenant_id"] =this.tenant ;
-    this.service.post(this.add_val).pipe(untilDestroyed(this)).subscribe(res => {
+
+    // this.add_val=this.login.value;
+    // this.add_val["tenant_id"] =this.tenant ;
+   console.log(this.login.value)
+
+   // console.log(this.add_val)
+    let data = {'machine_id': this.login.value.machine_id, 'shift_id':this.login.value.shift_id,'operator_id': this.login.value.operator_id,'operation_id':this.login.value.operator_id,'from_date':this.login.value.from_date,'to_date':this.login.value.to_date,'tenant_id':this.tenant}
+    console.log(data);
+
+    this.service.post_oper_ass(data).pipe(untilDestroyed(this)).subscribe(res => {
     Swal.fire(res.msg)
+    console.log(res.msg);
+
     this.dialogRef.close(status);
    
 
@@ -154,7 +206,7 @@ export class Edit {
 @Component({
   selector: 'add-page',
   templateUrl: 'add.html',
-  styleUrls: ['./part-doucumentation.component.scss']
+  styleUrls: ['./operation-assign.component.scss']
 })
 export class Add {
   login:FormGroup;
@@ -162,10 +214,14 @@ export class Add {
   tenant:any;
   edit_data:any;
 
-  constructor(public dialogRef: MatDialogRef<Add>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,private service:PartService) 
+  constructor(public dialogRef: MatDialogRef<Add>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,private service:OperatorService) 
   {
     this.edit_data=data;
     console.log(this.edit_data);
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
   keyPress(event: any) {
@@ -175,26 +231,17 @@ export class Add {
       event.preventDefault();
     }
   }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
   ngOnInit()
   {
-
-
     this.tenant=localStorage.getItem('tenant_id');
     this.login=this.fb.group({
-      part_name:[this.edit_data.part_name,Validators.required],
-      part_number:[this.edit_data.part_number,Validators.required],
-      customer_name:[this.edit_data.customer_name,Validators.required],
-      part_description:[this.edit_data.part_description,Validators.required],
-      status:[this.edit_data.status,Validators.required]
+    operator_name:[this.edit_data.operator_name],
+    operator_spec_id:[this.edit_data.operator_spec_id],
+    description:[this.edit_data.description],
     })
   }
 
   editdata() {
-    console.log(this.login.value);
     this.add_val=this.login.value
     this.add_val["tenant_id"] =this.tenant ;
     this.service.put(this.edit_data.id,this.add_val).pipe(untilDestroyed(this)).subscribe(res =>{
