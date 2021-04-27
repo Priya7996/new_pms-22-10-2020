@@ -1,6 +1,6 @@
 <div class="modal_sec">
     <mat-toolbar>
-        <h3>C Password</h3>
+        <h3>Change Password</h3>
         <button type="button" class="close" aria-label="Close" (click)="onNoClick()">
             <span aria-hidden="true">×</span>
         </button>
@@ -34,22 +34,25 @@
                         <input matInput formControlName="old_password" [type]=" flock ? 'text' : 'password'"
                             [(ngModel)]="oldPassword" (change)="checkPassword()" required>
                         <mat-icon class="eye" matSuffix (click)="flock = !flock">
-                            {{flock ? 'visibility' : 'visibility_off'}}
+                            {{flock ? 'visibility_off' : 'visibility'}}
                         </mat-icon>
                     </mat-form-field>
 
                     <mat-form-field>
                         <mat-label>New Password</mat-label>
-                        <input matInput formControlName="new_password" [type]=" hide ? 'text' : 'password'" required>
-                        <mat-icon class="eye" matSuffix (click)="hide = !hide">
-                            {{hide ? 'visibility' : 'visibility_off'}}
+                        <input matInput formControlName="new_password" maxlength="14" [type]=" hide ? 'password' : 'text'"  required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&].{7,}$">
+                        <mat-icon class="eye" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
                         </mat-icon>
+                        <mat-error *ngIf="edit1.controls['new_password'].errors?.required">password is Required
+                        </mat-error>
+                       
+                        <mat-error *ngIf="edit1.controls['new_password'].errors?.pattern"><b>password Should be this format eg:('A','a','7','#' and password in 8 char)</b>                        </mat-error>
                     </mat-form-field>
                 </div>
 
                 <div class="form-button text-right">
                     <button mat-raised-button class="filter_btn btn_orange" [disabled]="edit1.invalid"> Save</button>
-                    <button mat-raised-button (click)="onNoClick()" class="filter_btn btn_default ml-16">Close</button>
+                 
                 </div>
             </form>
         </div>

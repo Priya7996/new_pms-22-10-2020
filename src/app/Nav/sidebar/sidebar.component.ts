@@ -28,7 +28,7 @@ export class SidebarComponent implements OnInit,OnChanges {
   Compare :any;
   // first: any;
   // last: any; 
-   
+  u_id:any;
   constructor(private servie:LoginService,public nav: NavbarService, private route: Router,private dialog:MatDialog) { }
 
   ngOnInit() {
@@ -48,6 +48,8 @@ export class SidebarComponent implements OnInit,OnChanges {
       this.last_name =localStorage.getItem('last_name');
       this.tenant =localStorage.getItem('tenant_id');
       this.email =localStorage.getItem('email');
+      this.u_id = localStorage.getItem('user_id')
+
     }
 
 }
@@ -113,6 +115,7 @@ export class editComponent {
   lname:any;
   phone:any;
   email:any;
+  u_id:any;
   password:any;
   oldPassword:any;
   hide: boolean = true;
@@ -124,6 +127,8 @@ export class editComponent {
     this.phone = localStorage.getItem('phone')
     this.email = localStorage.getItem('email')
     this.password = localStorage.getItem('password')
+    this.u_id = localStorage.getItem('user_id')
+    console.log(this.u_id)
   }
 
   ngOnInit()
@@ -165,15 +170,16 @@ export class editComponent {
     }
   }
   editform() {
-    this.service.editvalue(this.tenant,this.edit1.value).subscribe(res => {
+
+    console.log(this.edit1.value)
+    let data = {'first_name': this.edit1.value.first_name, 'last_name':this.edit1.value.last_name,'email_id': this.edit1.value.email_id,'default':this.edit1.value.new_password,'password_digest': this.edit1.value.new_password,'password': this.edit1.value.new_password,'old_password': this.edit1.value.old_password,'tenant_id':this.tenant}
+console.log(data);
+    this.service.editvalue(this.u_id,data).subscribe(res => {
       console.log(res)
-      if(res === true)
-      {
-        Swal.fire("Updated Succesfully !")
-      }
-      else{
-        Swal.fire("Updated Sucessfully !")
-      }
+     
+        Swal.fire(res.msg)
+  
+     
       this.dialogRef.close();
       this.ngOnInit();
       })
