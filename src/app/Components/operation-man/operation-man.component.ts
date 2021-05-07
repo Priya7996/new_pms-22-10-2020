@@ -3,6 +3,8 @@ import { NavbarService} from '../../Nav/navbar.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormBuilder, FormArray,FormControl,FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
+import { ActivatedRoute } from '@angular/router';
+
 import { OperatorService} from '../../Service/app/operator.service';
 import { MatTableDataSource } from '@angular/material';
 import { untilDestroyed } from 'ngx-take-until-destroy';
@@ -20,8 +22,19 @@ export class OperationManComponent implements OnInit {
   myLoader= false;
 show_status:any;
 Role_NAME:any;
-  constructor(private nav:NavbarService,private fb:FormBuilder,public dialog: MatDialog,private service:OperatorService)
+id_pass:any;
+machine:any;
+  constructor(private route:ActivatedRoute,private nav:NavbarService,private fb:FormBuilder,public dialog: MatDialog,private service:OperatorService)
   {
+
+    console.log(localStorage.getItem('Process_id'))
+    this.machine = this.route.snapshot.queryParamMap.get('Process_id');
+
+    console.log(this.machine)
+
+
+
+
   this.nav.show();
   this.tenant=localStorage.getItem('tenant_id');
   this.Role_NAME = localStorage.getItem('role_name')

@@ -24,64 +24,80 @@
                       <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_id">
                         <!-- <mat-option value="all">All</mat-option> -->
     
-                        <mat-option *ngFor="let shift of shift_response" [value]="shift.id">{{shift.shift_no}}
+                        <mat-option *ngFor="let shift of shift_response" [value]="shift.id">{{shift.shift_no}}  ({{shift.shift_start_time}} - {{shift.shift_end_time}})
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div> 
 
 
-                  <div class="filter_field">
-                    <mat-form-field appearance="outline">
-                      <mat-select placeholder="Select Operator" matNativeControl required formControlName="operator_id">
-                        <!-- <mat-option value="all">All</mat-option> -->
-    
-                        <mat-option *ngFor="let operator of operator_response" [value]="operator.id">{{operator.operator_name}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div> 
+                
+                  <!-- {{shift.shift_no}}({{shift.shift_start_time}}-{{shift.shift_end_time}}) -->
 
-
-                  <div class="filter_field">
-                    <mat-form-field appearance="outline">
-                      <mat-select placeholder="Select Operation Id" matNativeControl required formControlName="operation_id">
-                        <!-- <mat-option value="all">All</mat-option> -->
-    
-                        <mat-option *ngFor="let operation of operation_id_response" [value]="operation.id">{{operation.id}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div> 
+                 
 
 
 
                   <div class="filter_field date_picker">
                     <mat-form-field appearance="fill">
                       <!-- <mat-label>From Date</mat-label> -->
-                      <input matInput [matDatepicker]="picker" placeholder='From Date' formControlName="from_date" (click)="picker.open()">
+                      <input matInput [matDatepicker]="picker" placeholder='From Date' formControlName="date" (click)="picker.open()" [min]="minDate">
                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                       <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
                     </mat-form-field>
                   </div>
       
-                  <div class="filter_field date_picker">
+                  <!-- <div class="filter_field date_picker">
                                  
                     <mat-form-field appearance="fill">
-                        <!-- <mat-label>To Date</mat-label> -->
                         <input matInput [matDatepicker]="picker1" placeholder='To Date' formControlName="to_date" (click)="picker1.open()">
                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                         <mat-datepicker #picker1 startView="year" [startAt]="endDate"></mat-datepicker>
                       </mat-form-field>
-                </div>
+                </div> -->
              
              
-                <mat-form-field>
-                    <mat-label>Others</mat-label>
+                <mat-form-field appearance="outline">
+                    <mat-label>Operator Description</mat-label>
                     <input matInput formControlName="description" type="text">
                     <mat-error *ngIf="login.controls['description'].errors?.required">Description is Required
                     </mat-error>
                 </mat-form-field>
+
+                <!-- *ngFor="let item of login.get('idle_run_rate')['controls']; let i = index;">
+                <div [formGroupName]="i"> -->
+
+                  <div formArrayName="items" *ngFor="let item of login.get('items')['controls']; let i = index;">
+                    <div [formGroupName]="i" class="shift_input_list">
+                      <div class="filter_field">
+                        <mat-form-field appearance="outline">
+                          <mat-select placeholder="Select Operator" matNativeControl required formControlName="operator_id">
+                            <!-- <mat-option value="all">All</mat-option> -->
+        
+                            <mat-option *ngFor="let operator of operator_response" [value]="operator.id">{{operator.operator_name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>                       
+                      <div class="filter_field">
+                        <mat-form-field appearance="outline">
+                          <mat-select placeholder="Select Operation Id" matNativeControl required formControlName="operation_management_id">
+                            <!-- <mat-option value="all">All</mat-option> -->
+        
+                            <mat-option *ngFor="let operation of operation_id_response" [value]="operation.id">{{operation.operation_id}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>                     </div>
+                    <!-- ['controls'] -->
+                  </div>
+                  <div class="text-right">
+                    <button  *ngIf="data.new != 'new'"(click)="add();submitButton.disabled = true" #submitButton class="btn add_link">Add choice</button>
+                    <!-- <button (click)="adding()" class="btn add_link">Add choice</button> -->
+                    <button  *ngIf="data.new === 'new'" (click)="adding()" class="btn add_link">Add choice</button>
+                  </div>
+
+
                 <div class="form-button text-right">
                     <button mat-raised-button [disabled]="login.invalid" (click)="logintest()"class="filter_btn btn_orange">
                         Save</button>

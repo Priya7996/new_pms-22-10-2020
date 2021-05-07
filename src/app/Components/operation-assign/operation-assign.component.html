@@ -21,39 +21,38 @@
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
   
               <!-- Position Column -->
-              <ng-container matColumnDef="operator_name">
-                <th mat-header-cell *matHeaderCellDef> Machine Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.operator_name || '---'}} </td>
+              <ng-container matColumnDef="Position">
+                <th mat-header-cell *matHeaderCellDef>S.No</th>
+                <td mat-cell *matCellDef="let i=index;"> {{i+1}} </td>
               </ng-container>
   
               <!-- Name Column -->
-              <ng-container matColumnDef="operator_spec_id">
-                <th mat-header-cell *matHeaderCellDef>Operation Name</th>
-                <td mat-cell *matCellDef="let element"> {{element.operator_spec_id || '---'}} </td>
-              </ng-container>
-  
-              <!-- Weight Column -->
-              <ng-container matColumnDef="description">
-                <th mat-header-cell *matHeaderCellDef>Operator Name</th>
-                <td mat-cell *matCellDef="let element"> {{element.description || '---'}} </td>
-              </ng-container>
-
-
-              
-              <!-- Weight Column -->
-              <ng-container matColumnDef="shift">
-                <th mat-header-cell *matHeaderCellDef>Shift Num</th>
-                <td mat-cell *matCellDef="let element"> {{element.shift || '---'}} </td>
-              </ng-container>
-
-
               <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef>Date</th>
-                <td mat-cell *matCellDef="let element"> {{element.date || '---'}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.date | date :'MM/dd/yyyy'}} </td>
               </ng-container>
   
-  
-              <ng-container matColumnDef="created_by">
+              <ng-container matColumnDef="machine">
+                <th mat-header-cell *matHeaderCellDef>Machine Name</th>
+                <td mat-cell *matCellDef="let element"> {{element.machine || '---'}} </td>
+              </ng-container>
+
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="shift_num">
+                <th mat-header-cell *matHeaderCellDef>Shift Number</th>
+                <td mat-cell *matCellDef="let element"> {{element.shifttransaction || '---'}} </td>
+              </ng-container>
+
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="description">
+                  <th mat-header-cell *matHeaderCellDef>Description</th>
+                  <td mat-cell *matCellDef="let element"> {{element.description || '---'}} </td>
+                </ng-container>
+
+
+             <ng-container matColumnDef="created_by">
                 <th mat-header-cell *matHeaderCellDef> Created By </th>
                 <td mat-cell *matCellDef="let element"> {{element.created_by || '---'}} </td>
               </ng-container>
@@ -66,7 +65,12 @@
                 <ul *matCellDef="let element" class="table_action">
                   <li>
                     <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                      (click)="operator_edit(element)" mattooltip="Edit" >edit
+                    (click)="operator_show(element)" mattooltip="Edit" >alarm_on
+                  </mat-icon>
+                  </li>
+                  <li>
+                    <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                      (click)="operator_edit(element,element.id)" mattooltip="Edit" >edit
                     </mat-icon>
                     <!-- <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
                      mattooltip="Edit" (click)="usernot()" *ngIf = "Role_NAME == 'Supervisor' || Role_NAME == 'Manager'">edit

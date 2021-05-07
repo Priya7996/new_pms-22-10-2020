@@ -27,6 +27,7 @@ export class SidebarComponent implements OnInit,OnChanges {
   isHandset$:any;
   Compare :any;
   // first: any;
+  role:any;
   // last: any; 
   u_id:any;
   constructor(private servie:LoginService,public nav: NavbarService, private route: Router,private dialog:MatDialog) { }
@@ -49,6 +50,9 @@ export class SidebarComponent implements OnInit,OnChanges {
       this.tenant =localStorage.getItem('tenant_id');
       this.email =localStorage.getItem('email');
       this.u_id = localStorage.getItem('user_id')
+      
+      this.role = localStorage.getItem('role_name')
+
 
     }
 
@@ -120,7 +124,7 @@ export class editComponent {
   oldPassword:any;
   hide: boolean = true;
   flock: boolean = true;
-  constructor(private service:SidebarService,public dialogRef: MatDialogRef<editComponent>,@Inject(MAT_DIALOG_DATA) public data,private fb:FormBuilder,) {
+  constructor(private service:SidebarService,public dialogRef: MatDialogRef<editComponent>,@Inject(MAT_DIALOG_DATA) public data,private fb:FormBuilder, private route: Router,) {
     this.tenant=localStorage.getItem('tenant_id')
     this.fname = localStorage.getItem('first_name')
     this.lname = localStorage.getItem('last_name')
@@ -164,7 +168,7 @@ export class editComponent {
     if(this.oldPassword==this.password){
       this.edit1.controls.new_password.enable()
     }else{
-      Swal.fire('password entered is incorrect')
+      Swal.fire('Old password entered is incorrect')
       this.edit1.controls.old_password.reset()
       this.edit1.controls.new_password.disable()
     }
@@ -176,15 +180,21 @@ export class editComponent {
 console.log(data);
     this.service.editvalue(this.u_id,data).subscribe(res => {
       console.log(res)
-     
+      this.dialogRef.close();
+
         Swal.fire(res.msg)
   
-     
-      this.dialogRef.close();
+
       this.ngOnInit();
+
       })
+      this.clerk();
+
   }
-  
+  clerk(){
+    this.route.navigateByUrl('');
+
+  }
   
 }
 

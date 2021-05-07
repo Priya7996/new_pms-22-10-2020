@@ -10,7 +10,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class MachineDetailsComponent implements OnInit {
   machine_response:any;
-   
+  GODBless:any;
   tenant: string;
   myLoader = false;
   constructor(private nav:NavbarService,private service:MachineDetailsService,private route:Router) {
@@ -22,10 +22,14 @@ export class MachineDetailsComponent implements OnInit {
     this.myLoader = true;
     this.service.dashboard_lock(this.tenant).subscribe(res =>{
       console.log(res);
+      this.GODBless = res;
+
+     
+      console.log(this.GODBless);
       this.myLoader = false;
       this.machine_response=res;
      // console.log(this.machine_response.data['Unit - 1'][0]['machine_id'])
-     console.log(this.machine_response.data)
+     console.log(this.machine_response.data) 
     })
   }
   dashboard(name,id){

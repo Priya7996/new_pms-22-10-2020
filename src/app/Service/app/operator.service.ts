@@ -15,8 +15,8 @@ export class OperatorService {
     return this.http.get('operators?tenant_id='+tenantId)
   }
 
-  operator_get_ass(tenantId):Observable<any> {
-    return this.http.get('operator_allocations?tenant_id='+tenantId)
+  operator_get_ass():Observable<any> {
+    return this.http.get('operator_allocations')
   }
   post(value):Observable<any>{
     return this.http.post('operators',value)
@@ -58,6 +58,11 @@ delete_row_man(id):Observable<any>{
 
 }
 
+delete_row_operass(id):Observable<any>{
+  return this.http.delete('operator_allocations/'+id)
+
+}
+
 list_operation_id(tenantId):Observable<any> {
   return this.http.get('operation_managements?tenant_id='+tenantId)
 }
@@ -65,6 +70,11 @@ list_operation_id(tenantId):Observable<any> {
 
 post_oper_ass(value):Observable<any>{
   return this.http.post('operator_allocations',value)
+}
+
+shift_put_ass(id,val):Observable<any>{
+  return this.http.put('operator_allocations/'+id,val)
+
 }
 
 }

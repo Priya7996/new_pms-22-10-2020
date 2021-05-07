@@ -71,6 +71,7 @@
               <div class="btn_group">
                 <button mat-raised-button class="filter_btn btn_success" (click)="hmiReport()">Report</button>
                 <button mat-raised-button class="filter_btn btn_orange ml-16" (click)="hmiChart()"> Chart</button>
+                <button type="text" class="view_btn mr-2" mat-button (click) = toggleDisplay()>View Chart</button>
               </div>
             </div>
           </form>
@@ -148,6 +149,20 @@
   <p>Machine Name:{{charts.machine_name}},Shift:{{charts.shift}},Date:{{charts.date | date: "dd-MMM-yyyy"}}</p>
 </mat-card>
 </div> -->
+
+
+<div class="view_graph" [hidden] = "isShow">
+  <figure class="highcharts-figure">
+    <div id="container"></div>
+  </figure>
+</div>
+
+
+<div class="col-md-6 col-sm-12 pie-vh">
+  <figure class="highcharts-figure">
+      <div id="comparepie"></div>
+  </figure>
+</div>
 
       <div *ngIf="myLoader1" class="spinner">
         <img src="assets/images/spinner.gif">

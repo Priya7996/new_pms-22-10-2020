@@ -27,6 +27,43 @@ export class AlarmHistoryService {
    
     return this.http.get('operators?tenant_id='+tenantId);
   }
+
+  shift1(value,sdate,edate,tenant):Observable<any>  {
+
+
+    if(value.shift_id === 'undefined' && value.machine_id === 'machineundef'){
+
+    return this.http.get('alarm_reports?tenant_id='+tenant+ '&&start_date=' + sdate + '&&end_date=' + edate  + '&&report_type=' + value.report_type)
+  }
+
+  else if(value.shift_id === 'undefined'){
+
+    return this.http.get('alarm_reports?tenant_id='+tenant+ '&&start_date=' + sdate + '&&end_date=' + edate +'&&machine_id=' + value.machine_id + '&&report_type=' + value.report_type)
+
+  }
+
+  else if(value.machine_id === 'machineundef'){
+
+    return this.http.get('alarm_reports?tenant_id='+tenant+ '&&start_date=' + sdate + '&&end_date=' + edate + '&&report_type=' + value.report_type + '&&shift_id=' + value.shift_id )
+
+  }
+  else{
+
+    return this.http.get('alarm_reports?tenant_id='+tenant+ '&&start_date=' + sdate + '&&end_date=' + edate +'&&machine_id=' + value.machine_id + '&&shift_id=' + value.shift_id + '&&report_type=' + value.report_type)
+  }
+
+  }
+  operator1(value,sdate,edate,tenant):Observable<any>  {
+
+if(value.machine_id === 'machineundef'){
+
+    return this.http.get('alarm_reports?tenant_id='+tenant+ '&&start_date=' + sdate + '&&end_date=' + edate + '&&operator_id=' + value.operator_id + '&&report_type=' + value.report_type)
+  }
+  else{
+    return this.http.get('alarm_reports?tenant_id='+tenant+ '&&start_date=' + sdate + '&&end_date=' + edate +'&&machine_id=' + value.machine_id + '&&operator_id=' + value.operator_id + '&&report_type=' + value.report_type)
+  }
+
+  }
   table(register,type,tenant):Observable<any>  {
     console.log(tenant)
     if(type === 'ShiftWise'){ 

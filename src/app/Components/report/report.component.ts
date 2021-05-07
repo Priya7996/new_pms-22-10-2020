@@ -208,7 +208,7 @@ export class ReportComponent implements OnInit {
 
       this.myLoader = true;
 
-      this.service.table(this.login.value,this.new_date,this.new_date1,this.show,this.tenant,this.docku).subscribe(res =>{
+      this.service.table_date(this.login.value,this.new_date,this.new_date1,this.tenant).subscribe(res =>{
         this.myLoader = false;
 
         this.listin_data = res;
@@ -222,7 +222,7 @@ export class ReportComponent implements OnInit {
       this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
       this.myLoader = true;
 
-      this.service.table(this.login.value,this.new_date,this.new_date1,this.show,this.tenant,this.docku).subscribe(res =>{
+      this.service.table_date(this.login.value,this.new_date,this.new_date1,this.tenant).subscribe(res =>{
         this.myLoader = false;
 
         this.listin_data = res;
@@ -231,45 +231,87 @@ export class ReportComponent implements OnInit {
       })
     }
   
+    else if(this.login.value.shift_id === 'undefined' && this.login.value.machine_id === 'undefined' && this.login.value.report_split === 'undefined')
+{
+  alert("allshiftandmachinetype");
+  this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
+  this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
+  this.myLoader = true;
 
-    // else if(this.login.value.report_split === 'undefined'){
+  this.service.table_mac(this.tenant,this.login.value,this.new_date,this.new_date1,this.docku,this.show).subscribe(res =>{
+    this.myLoader = false;
+
+    this.list_data = res;
+    this.dataSource = new MatTableDataSource(this.list_data);
+
+  })
+}
+    
+    else if(this.login.value.report_type === 'Shiftwise'){
+      this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
+      this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
+      this.myLoader = true;
+       alert("Shift")
+       console.log(this.login.value);
        
-    //   alert("GODVAPMSTHANKS")
-    //   this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
-    //   this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
-    //   this.myLoader = true;
+      this.service.table_shift(this.tenant,this.login.value,this.new_date,this.new_date1,this.docku,this.show).subscribe(res =>{
+        this.myLoader = false;
 
-    //   this.service.reportall(this.login.value,this.new_date,this.new_date1,this.show,this.tenant).subscribe(res =>{
-    //     this.myLoader = false;
-    //     console.log(res);
-    //     this.list_data = res;
-        
-    //     this.dataSource = new MatTableDataSource(this.list_data);
-  
-    //   })
-    // }
-
-    else{
-    this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
-    this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
-    this.myLoader = true;
-
-    this.service.table(this.login.value,this.new_date,this.new_date1,this.show,this.tenant,this.docku).subscribe(res =>{
-      this.myLoader = false;
-
-      this.list_data = res;
+        this.list_data = res;
       this.dataSource = new MatTableDataSource(this.list_data);
       console.log(res);
-      for(let i in this.list_data){
-        // console.log(i)
-        this.pulse = this.list_data[i].puls_code;
-        // console.log(this.puls_code)  
-      }
+      })
+    }
+  
 
-    })
+    else if(this.login.value.report_type === 'Operatorwise'){
+      this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
+      this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
+      this.myLoader = true;
+       alert("operator")
+       console.log(this.login.value);
+       
+      this.service.table_oper(this.tenant,this.login.value,this.new_date,this.new_date1,this.docku,this.show).subscribe(res =>{
+        this.myLoader = false;
+
+        this.list_data = res;
+      this.dataSource = new MatTableDataSource(this.list_data);
+      console.log(res);
+      })
+    }
+
+    else if(this.login.value.report_type === 'Operatorwise' && this.login.value.machine_id === 'undefined' && this.login.value.report_split === 'undefined')
+    {
+      alert("allmachineopersplit");
+      this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
+      this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
+      this.myLoader = true;
+    
+      this.service.table_machi(this.tenant,this.login.value,this.new_date,this.new_date1,this.docku,this.show).subscribe(res =>{
+        this.myLoader = false;
+    
+        this.list_data = res;
+        this.dataSource = new MatTableDataSource(this.list_data);
+    
+      })
+    }
+  //   else{
+  //   this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
+  //   this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
+  //   this.myLoader = true;
+
+  //   this.service.table(this.login.value,this.new_date,this.new_date1,this.show,this.tenant,this.docku).subscribe(res =>{
+  //     this.myLoader = false;
+
+  //     this.list_data = res;
+  //     this.dataSource = new MatTableDataSource(this.list_data);
+  //     console.log(res);
+     
+
+  //   })
     
   
-  }
+  // }
   
 
   }

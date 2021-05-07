@@ -243,18 +243,7 @@ export class Add {
     data.break_time = this.convertTime(this.shiftForm.value.break_time)  
     console.log(data);
      
-     // data.start_time = this.convertTimeAM(this.shiftForm.value.start_time)
-    // data.end_time = this.convertTimeAM(this.shiftForm.value.end_time)
-    // data.break_time = this.convertTime(this.shiftForm.value.break_time)
-    // var timeStart = new Date("01/01/2010 " + data.start_time);
-    // var timeEnd = new Date("01/01/2010 " + data.end_time);
-    // var difference = timeEnd - timeStart;
-    // // var hours = Math.floor(difference / 1000 / 60 / 60);
-    // var diff = difference * 1000 * 60 * 60;
-    // var minutes = Math.floor(diff / 1000 / 60);
-
-
-    if (this.value.new) {
+if (this.value.new) {
       this.myLoader = true;
       this.shift.post(data).pipe(untilDestroyed(this)).subscribe(res => {
         console.log(res);

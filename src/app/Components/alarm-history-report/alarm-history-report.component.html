@@ -27,6 +27,8 @@
               <div class="filter_field">
                 <mat-form-field appearance="outline">
                   <mat-select placeholder="Select Machine" matNativeControl required formControlName="machine_id">
+                    <mat-option value="machineundef">All</mat-option> 
+
                     <mat-option *ngFor="let machine of machine_response" [value]="machine.id">
                       {{machine.machine_name}}
                     </mat-option>
@@ -48,8 +50,8 @@
                 <mat-form-field appearance="outline">
                   <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_id">
                     <!-- <mat-option value="all">All</mat-option> -->
-
-                    <mat-option *ngFor="let shift of shift_response" [value]="shift.id">{{shift.shift_no}}
+                    <mat-option value="undefined">All</mat-option> 
+                     <mat-option *ngFor="let shift of shift_response" [value]="shift.id">{{shift.shift_no}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>

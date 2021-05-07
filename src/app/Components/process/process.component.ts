@@ -3,6 +3,8 @@ import { NavbarService} from '../../Nav/navbar.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormBuilder, FormArray,FormControl,FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
+
 import { ProcessService} from '../../Service/app/process.service';
 import { MatTableDataSource } from '@angular/material';
 import { untilDestroyed } from 'ngx-take-until-destroy';
@@ -20,7 +22,7 @@ export class ProcessComponent implements OnInit {
   myLoader= false;
 show_status:any;
 Role_NAME:any;
-  constructor(private nav:NavbarService,private fb:FormBuilder,public dialog: MatDialog,private service:ProcessService)
+  constructor(private nav:NavbarService,private fb:FormBuilder,public dialog: MatDialog,private service:ProcessService,private router:Router)
   {
   this.nav.show();
   this.tenant=localStorage.getItem('tenant_id');
@@ -40,6 +42,14 @@ Role_NAME:any;
   }
   usernot(){
     Swal.fire("You are not allow to access.Please contact Admin")
+
+  }
+
+  manage(val,id){
+    console.log(id,val);
+    localStorage.setItem('Process_id',id);
+
+    this.router.navigate(['/operation_man'], { queryParams: { Process_id: id } });
 
   }
   ngOnInit() {

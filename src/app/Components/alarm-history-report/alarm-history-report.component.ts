@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { HttpClient } from '@angular/common/http';
 import { ExportService } from '../shared/export.service';
+import { DatePipe } from '@angular/common';
 
 
 import Swal from 'sweetalert2'; 
@@ -18,6 +19,8 @@ export class AlarmHistoryReportComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','alarmtype','alarmnumber','alarmmessage','alarmtime'];
   dataSource = new MatTableDataSource();
   startDate:any;
+  new_date:any;
+  new_date1:any;
   endDate:any;
     show: boolean=false;
   login:FormGroup;
@@ -30,7 +33,7 @@ export class AlarmHistoryReportComponent implements OnInit {
   alarmreport:any;
   get_report:any;
   export_excel: any[] = [];
-  constructor(private http:HttpClient,private nav:NavbarService,private service:AlarmHistoryService,private fb:FormBuilder,private exportService: ExportService) { 
+  constructor(private datepipe: DatePipe,private http:HttpClient,private nav:NavbarService,private service:AlarmHistoryService,private fb:FormBuilder,private exportService: ExportService) { 
     this.nav.show()
     this.tenant=localStorage.getItem('tenant_id')
 
@@ -91,7 +94,7 @@ export class AlarmHistoryReportComponent implements OnInit {
  
  
   }
-
+ 
 getsplit(val){
    this.valuesplit = val;
    console.log(this.valuesplit)
@@ -99,15 +102,50 @@ getsplit(val){
 
 
 loginfunc(){
+  console.log(this.login.value)
+  this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
+  this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
+
   this.myLoader = true;
-    this.service.table(this.login.value,this.valuesplit,this.tenant).subscribe(res =>{
+  if(this.login.value.report_type === 'Shiftwise'){
+    alert("shift")
+    this.service.shift1(this.login.value, this.new_date,this.new_date1,this.tenant).subscribe(res =>{
       console.log(res);
       this.alarmreport = res;
       this.myLoader = false;
       this.dataSource=new MatTableDataSource(this.alarmreport)
 
-      
     })
+  }
+  else if(this.login.value.report_type === 'Operatorwise'){
+    alert("operator")
+    this.service.operator1(this.login.value, this.new_date,this.new_date1,this.tenant).subscribe(res =>{
+      console.log(res);
+      this.alarmreport = res;
+      this.myLoader = false;
+      this.dataSource=new MatTableDataSource(this.alarmreport)
+
+    })
+  }
+
+  // else if(this.login.value.shift_id === 'undefined' && this.login.value.report_type === 'Shiftwise'){
+  //   alert("correctALLshift")
+    // this.service.shift1(this.login.value, this.new_date,this.new_date1,this.tenant).subscribe(res =>{
+    //   console.log(res);
+    //   this.alarmreport = res;
+    //   this.myLoader = false;
+    //   this.dataSource=new MatTableDataSource(this.alarmreport)
+
+    // })
+  // }
+    // this.service.table(this.login.value,this.valuesplit,this.tenant).subscribe(res =>{
+    //   console.log(res);
+    //   this.alarmreport = res;
+    //   this.myLoader = false;
+    //   this.dataSource=new MatTableDataSource(this.alarmreport)
+
+      
+    // })
 }
 
 ngOnDestroy(){

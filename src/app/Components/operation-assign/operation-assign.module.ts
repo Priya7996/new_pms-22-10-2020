@@ -5,6 +5,7 @@ import { OperationAssignRoutingModule } from './operation-assign-routing.module'
 import { OperationAssignComponent,Edit,Add } from './operation-assign.component';
 import { SharedModule} from '../shared/shared.module';
 import { OperatorService} from  '../../Service/app/operator.service'
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [OperationAssignComponent,Edit,Add],
@@ -13,6 +14,6 @@ import { OperatorService} from  '../../Service/app/operator.service'
     OperationAssignRoutingModule
   ],
   entryComponents:[Edit,Add], 
-  providers:[OperatorService]
+  providers:[OperatorService,DatePipe]
 })
 export class OperationAssignModule { }

@@ -167,7 +167,7 @@ export class Add {
     //  this.add_val["controller_type"]=this.controller_type;
 
     this.service.machine(this.login.value).pipe(untilDestroyed(this)).subscribe(res => {
-      Swal.fire('created successfully')
+      Swal.fire(res.msg)
       this.dialogRef.close();
 
   })
@@ -228,10 +228,10 @@ export class Edit {
     this.add_val = this.login.value 
     this.add_val["tenant_id"] = this.tenant;
     this.service.edit(this.edit_data1.id,this.add_val).pipe(untilDestroyed(this)).subscribe(res => {
-      Swal.fire("Updated Successfully!")
-      if(res === true){
-        Swal.fire("Updated Suceesfully")
-      }
+      Swal.fire(res.msg)
+      // if(res === true){
+      //   Swal.fire("Updated Suceesfully")
+      // }
       this.dialogRef.close();
     })
   }
