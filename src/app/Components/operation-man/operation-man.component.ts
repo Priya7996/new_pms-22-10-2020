@@ -3,7 +3,7 @@ import { NavbarService} from '../../Nav/navbar.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormBuilder, FormArray,FormControl,FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 
 import { OperatorService} from '../../Service/app/operator.service';
 import { MatTableDataSource } from '@angular/material';
@@ -19,24 +19,49 @@ export class OperationManComponent implements OnInit {
   dataSource = new MatTableDataSource();
   tenant: any;
   list: any;
+  data:any;
   myLoader= false;
 show_status:any;
 Role_NAME:any;
 machine:any;
+getIDIS:any;
 id_pass:any;
-  constructor(private route:ActivatedRoute,private nav:NavbarService,private fb:FormBuilder,public dialog: MatDialog,private service:OperatorService)
+  constructor(private Router :Router,private route:ActivatedRoute,private nav:NavbarService,private fb:FormBuilder,public dialog: MatDialog,private service:OperatorService)
   {
 
     console.log(localStorage.getItem('Process_id'))
     this.machine = this.route.snapshot.queryParamMap.get('Process_id');
-
+    if(this.machine === null){
+      console.log("test")
+    }
+    else{
     console.log(this.machine)
     this.service.get_opm(this.machine).pipe(untilDestroyed(this)).subscribe(res =>{
       console.log(res);
+      this.getIDIS = res.id
+      this.data = res;
+      
+      if(res){
+        const dialogRef = this.dialog.open(Add, {
+          width: '450px',
+          height:'auto',
+          data:this.data
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          this.ngOnInit();
+
+        });
+      }
+      else if(res === false){
+        alert("Process Plan is not entered");
+        this.Router.navigateByUrl('/process');
+
+      }
       
     })
 
-
+  }
 
   this.nav.show();
   this.tenant=localStorage.getItem('tenant_id');
