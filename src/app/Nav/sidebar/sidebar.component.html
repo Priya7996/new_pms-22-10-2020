@@ -17,9 +17,16 @@
           <i class="material-icons">
             settings
           </i>
-        </a>
+        </a> 
         <mat-menu #menu="matMenu" class="actions">
-          <button mat-menu-item (click)="open()">
+          <button mat-menu-item (click)="open()" *ngIf = "role == 'Admin' || role == 'Manager'">
+            <i class="material-icons">
+              edit
+            </i>
+            Edit
+          </button>
+
+          <button mat-menu-item (click)="opento()" *ngIf = "role == 'Supervisor'">
             <i class="material-icons">
               edit
             </i>

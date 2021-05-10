@@ -37,6 +37,8 @@ export class SidebarComponent implements OnInit,OnChanges {
     this.servie.true().subscribe(res=>{
       console.log(res);
       localStorage.setItem('sign', res);
+        this.role = localStorage.getItem('role_name')
+        console.log(this.role);
 
 
     })
@@ -60,6 +62,11 @@ export class SidebarComponent implements OnInit,OnChanges {
 
   view() {
     this.show2 = !this.show2
+}
+
+opento(){
+  Swal.fire("You are not allow to access.Please contact Admin")
+
 }
 open(): void {
   const dialogRef = this.dialog.open(editComponent, {
