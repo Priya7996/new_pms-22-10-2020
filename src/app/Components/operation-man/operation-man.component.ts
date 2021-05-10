@@ -15,15 +15,15 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 })
 export class OperationManComponent implements OnInit {
 
-  displayedColumns: string[] = ['position','operator_name', 'operator_spec_id', 'description','setup_time','created_by','part_per_cycle','created','status','action'];
+  displayedColumns: string[] = ['position','operator_name', 'plan_number','operator_spec_id', 'description','setup_time','created_by','part_per_cycle','created','status','action'];
   dataSource = new MatTableDataSource();
   tenant: any;
   list: any;
   myLoader= false;
 show_status:any;
 Role_NAME:any;
-id_pass:any;
 machine:any;
+id_pass:any;
   constructor(private route:ActivatedRoute,private nav:NavbarService,private fb:FormBuilder,public dialog: MatDialog,private service:OperatorService)
   {
 
@@ -31,7 +31,10 @@ machine:any;
     this.machine = this.route.snapshot.queryParamMap.get('Process_id');
 
     console.log(this.machine)
-
+    this.service.get_opm(this.machine).pipe(untilDestroyed(this)).subscribe(res =>{
+      console.log(res);
+      
+    })
 
 
 
@@ -130,9 +133,13 @@ export class Edit {
   role_name:any;
   meridian = true;
   seconds = true;
-  constructor(public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,public service :OperatorService) {
+  listo:any;
+  constructor(private route:ActivatedRoute,public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,public service :OperatorService) {
     this.role_name = localStorage.getItem('role_name');
     console.log(this.role_name);
+    this.tenant=localStorage.getItem('tenant_id');
+
+  
 
   }
 
@@ -150,20 +157,8 @@ export class Edit {
       event.preventDefault();
     }
   }
-  ngOnInit()
-  { this.tenant=localStorage.getItem('tenant_id');
-    this.login=this.fb.group({
-      operation_name:["",Validators.required],
-      operation_id:["",Validators.required],
-      std_cycle_time:[""],
-      load_unload_time:[""],
-      part_per_cycle:[""],
-      setup_time:[""],
-      status:[""]
-    }) 
-  }
 
-  convertTimeAM(time) {
+   convertTimeAM(time) {
     let AMPM;
     let hour;
     if (time.hour >= 12) {
@@ -221,8 +216,30 @@ export class Edit {
       second: parseInt(split[2], 10)
     };
   }
+  ngOnInit()
+  {
+
+    this.service.operator_proce(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+      this.listo=res;
+    })
+  
 
 
+
+
+    this.login=this.fb.group({
+      operation_name:["",],
+      operation_id:["",],
+      process_plan_id:["",],
+      std_cycle_time:["",],
+      load_unload_time:["",],
+      part_per_cycle:["",],
+      setup_time:["",],
+      status:[","],
+
+
+    })
+  }
 
   logintest() {
 
@@ -236,7 +253,7 @@ export class Edit {
     datas.setup_time = this.convertTime(this.login.value.setup_time)  
     console.log(datas);
    // console.log(this.add_val)
-    let data = {'operation_name': this.login.value.operation_name, 'operation_id':this.login.value.operation_id,'std_cycle_time': this.login.value.std_cycle_time,'load_unload_time':this.login.value.load_unload_time,'part_per_cycle': this.login.value.part_per_cycle,'setup_time': this.login.value.setup_time,'status': this.login.value.status,'tenant_id':this.tenant}
+    let data = {'operation_name': this.login.value.operation_name, 'operation_id':this.login.value.operation_id,'process_plan_id':this.login.value.process_plan_id,'std_cycle_time': this.login.value.std_cycle_time,'load_unload_time':this.login.value.load_unload_time,'part_per_cycle': this.login.value.part_per_cycle,'setup_time': this.login.value.setup_time,'status': this.login.value.status,'tenant_id':this.tenant}
     console.log(data);
 
     this.service.post1(data).pipe(untilDestroyed(this)).subscribe(res => {
@@ -262,11 +279,15 @@ export class Add {
   login:FormGroup;
   add_val:any;
   tenant:any;
+  listo:any;
   edit_data:any;
   meridian = true;
   seconds = true;
-  constructor(public dialogRef: MatDialogRef<Add>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,private service:OperatorService) 
+  machine:any;
+  constructor(private route:ActivatedRoute,public dialogRef: MatDialogRef<Add>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder,private service:OperatorService) 
   {
+
+   
     this.edit_data=data;
     console.log(this.edit_data);
   }
@@ -344,13 +365,22 @@ export class Add {
   ngOnInit()
   {
 
+    this.tenant=localStorage.getItem('tenant_id');
+
+
+    this.service.operator_proce(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+      this.listo=res;
+    })
   
     let shift = this.edit_data;
 
-    this.tenant=localStorage.getItem('tenant_id');
+
+
+
     this.login=this.fb.group({
       operation_name:[this.edit_data.operation_name],
       operation_id:[this.edit_data.operation_id],
+      process_plan_id:[this.edit_data.process_plan_id],
       std_cycle_time:[this.TimeAM(shift.std_cycle_time)],
       load_unload_time:[this.TimeAM(shift.load_unload_time)],
       part_per_cycle:[this.edit_data.part_per_cycle],
@@ -369,7 +399,7 @@ export class Add {
     dat.std_cycle_time = this.convertTimeAM(this.login.value.std_cycle_time)
     dat.load_unload_time = this.convertTimeAM(this.login.value.load_unload_time)
     dat.setup_time = this.convertTime(this.login.value.setup_time)  
-    let datak = {'operation_name': this.login.value.operation_name, 'operation_id':this.login.value.operation_id,'std_cycle_time': this.login.value.std_cycle_time,'load_unload_time':this.login.value.load_unload_time,'part_per_cycle': this.login.value.part_per_cycle,'setup_time': this.login.value.setup_time,'status': this.login.value.status,'tenant_id':this.tenant}
+    let datak = {'operation_name': this.login.value.operation_name, 'operation_id':this.login.value.operation_id,'process_plan_id':this.login.value.process_plan_id,'std_cycle_time': this.login.value.std_cycle_time,'load_unload_time':this.login.value.load_unload_time,'part_per_cycle': this.login.value.part_per_cycle,'setup_time': this.login.value.setup_time,'status': this.login.value.status,'tenant_id':this.tenant}
     console.log(datak);
    
 

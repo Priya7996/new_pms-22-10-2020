@@ -22,6 +22,18 @@
                     </mat-error>
                 </mat-form-field>
 
+                <mat-form-field >
+                    <mat-select placeholder="Process Plan Number " matNativeControl required formControlName="process_plan_id">
+                      <mat-option *ngFor="let file of listo" [value]="file.id">{{file.plan_number}}
+                      </mat-option>
+  
+                    </mat-select>
+
+                  </mat-form-field>
+                  <div *ngIf="listo.length==0">
+                    No Process Plan Number Found.Plaese fill the Process plan number on Process plan module
+               </div>
+
                 <!-- <mat-form-field> -->
                     <mat-label>Std.Cycle Time</mat-label>
                     <!-- <input matInput formControlName="std_cycle_time" type="text"> -->

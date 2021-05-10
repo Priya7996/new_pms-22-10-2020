@@ -77,4 +77,14 @@ shift_put_ass(id,val):Observable<any>{
 
 }
 
+
+
+
+operator_proce(tenantId):Observable<any> {
+  return this.http.get('process_plans?tenant_id='+tenantId) 
 }
+get_opm(macid):Observable<any> {
+  return this.http.get('get_operation_management?process_plan_id='+macid) 
+}
+}
+// operation_managements?process_plan_id=1
