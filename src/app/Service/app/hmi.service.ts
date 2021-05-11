@@ -21,10 +21,10 @@ export class HmiService {
     return this.http.get('shifttransactions?shift_id='+tenantId)
   }
   table(register):Observable<any>{
-    return this.http.get('hmi_reason?tenant_id='+ register.tenant_id+ '&&start_date=' + register.start_date + '&&end_date=' + register.end_date + '&&machine_id=' + register.machine_id + '&&shift_id=' +register.shift_id)
+    return this.http.get('idle_report?machine='+ register.machine + '&&date=' + register.date + '&&shift=' +register.shift)
   }
   chart(register):Observable<any>{
-    return this.http.get('hmi_reason_chart?tenant_id='+ register.tenant_id+ '&&start_date=' + register.start_date + '&&end_date=' + register.end_date + '&&machine_id=' + register.machine_id + '&&shift_id=' +register.shift_id)
+    return this.http.get('hmi_reason_chart?machine='+ register.machine+ '&&date=' + register.date + '&&shift=' + register.shift )
    
   }
   shiftidentity(tenantId):Observable<any>{

@@ -6,6 +6,8 @@ import { MatTableDataSource } from '@angular/material';
 import * as Highcharts from 'highcharts';
 import { DatePipe } from '@angular/common';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import Swal from 'sweetalert2';    
+
 @Component({
   selector: 'app-hmi',
   templateUrl: './hmi.component.html',
@@ -18,7 +20,8 @@ export class HmiComponent implements OnInit {
   new_date1:any;
   // chart 1
   toggleDisplay() { this.isShow = !this.isShow; }
-
+  no_data:any;
+  data:any;
   myLoader1 = false;
   myLoader = false;
   startDate = new Date(2020, 0, 1);
@@ -40,8 +43,13 @@ export class HmiComponent implements OnInit {
   macname: any;
   shiftname: any;
   new_date:any;
-  
-
+  g_report:any;
+  chart_loop:any;
+  get_report:any;
+  newdatee:any;
+  newdate:any;
+  newdate1:any;
+  newdates:any;
   constructor(private nav:NavbarService,private service:HmiService,private fb:FormBuilder,private datePipe: DatePipe) {
     this.nav.show();
     this.tenant=localStorage.getItem('tenant_id')
@@ -56,6 +64,20 @@ export class HmiComponent implements OnInit {
   {
     this.toggle=!this.toggle
   }
+  toHoursMinutesSeconds = totalSeconds => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    // let result = `${minutes
+    //   .toString()
+    //   .padStart(1, '0')}:${seconds.toString().padStart(2, '0')}`;
+    // if (!!hours) {
+    let result = `${hours.toString()}:${minutes
+      .toString()
+      .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+   
+    return result;
+  };
   ngOnInit() {
 
      this.login = this.fb.group({
@@ -77,6 +99,66 @@ export class HmiComponent implements OnInit {
            this.shift_response=res; 
           })
         })
+
+        Highcharts.chart('container', {
+          chart: {
+            renderTo: 'container',
+            type: 'column'
+          },
+          title: {
+            text: 'Restaurants Complaints'
+          },
+          tooltip: {
+            shared: true
+          },
+          xAxis: {
+            categories: [
+              'Overpriced',
+              'Small portions',
+              'Wait time',
+              'Food is tasteless',
+              'No atmosphere',
+              'Not clean',
+              'Too noisy',
+              'Unfriendly staff'
+            ],
+            crosshair: true
+          },
+          yAxis: [{
+            title: {
+              text: ''
+            }
+          }, {
+            title: {
+              text: ''
+            },
+            minPadding: 0,
+            maxPadding: 0,
+            max: 100,
+            min: 0,
+            opposite: true,
+            labels: {
+              format: "{value}%"
+            }
+          }],
+          series: [{
+            type: 'pareto',
+            name: 'Pareto',
+            yAxis: 1,
+            zIndex: 10,
+            baseSeries: 1,
+            tooltip: {
+              valueDecimals: 2,
+              valueSuffix: '%'
+            }
+          }, {
+            name: 'Complaints',
+            type: 'column',
+            zIndex: 2,
+            data: [755, 222, 151, 86, 72, 51, 36, 10]
+          }]
+        });
+
         Highcharts.chart('comparepie', {
           chart: {
             plotBackgroundColor: null,                                
@@ -166,88 +248,7 @@ export class HmiComponent implements OnInit {
         });
 
 
-        Highcharts.chart('container', {
-          chart: {
-              zoomType: 'xy',
-              height: 400,
-              backgroundColor: '#202328'
-          },
-           exporting: {
-              enabled: false
-            },
-            credits: {
-              enabled: false
-            },
-          title: {
-              text: ''
-          },
-          subtitle: {
-              text: ''
-          },
-          xAxis: [{
-              categories: ['Setup', 'Part Changeover', 'Other', 'Offset/Tool Changeover', 'A/P Reached Count', 'Material',
-                  'Machine Maintenance', 'Machine Problem', 'No Operator', 'Barloader', 'Chipping Out', 'No Tooling'],
-              crosshair: true
-          }],
-          yAxis: [{ // Primary yAxis
-            gridLineColor: '#4f4f4f',
-              labels: {
-                  format: '{value}k',
-                  style: {
-                      color: Highcharts.getOptions().colors[1]
-                  }
-              },
-              title: {
-                  text: 'Minutes of Downtime',
-                  style: {
-                      color: Highcharts.getOptions().colors[1]
-                  }
-              }
-          }, { // Secondary yAxis
-              title: {
-                  text: 'Occurrance',
-                  style: {
-                      color: Highcharts.getOptions().colors[0]
-                  }
-              },
-              labels: {
-                  style: {
-                      color: Highcharts.getOptions().colors[0]
-                  }
-              },
-              opposite: true
-          }],
-          tooltip: {
-              shared: true
-          },
-          legend: {
-              layout: 'vertical',
-              align: 'left',
-              x: 120,
-              verticalAlign: 'top',
-              y: 100,
-              floating: true,
-              backgroundColor:
-                  Highcharts.defaultOptions.legend.backgroundColor || // theme
-                  'rgba(255,255,255,0.25)'
-          },
-          series: [{
-               showInLegend: false,
-               borderColor: '#E8A249',
-              name: 'Minutes of Downtime',
-              type: 'column',
-              color: "#E8A249",
-              yAxis: 1,
-              data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
-      
-          }, {
-               showInLegend: false,
-              name: 'Occurrance',
-              color: "#ba6606",
-              type: 'spline',
-              data: [12.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
-          }]
-      });
+        
 
   }  
       
@@ -255,16 +256,33 @@ export class HmiComponent implements OnInit {
   hmiReport(){
 
     // this.login.reset();
-    let register = this.login.value;
-    this.new_date1 = new DatePipe('en-US').transform(this.login.value.date, 'dd-MM-yyyy');
-
-     register.start_date = this.new_date1;
-     register.end_date = this.new_date1;
-     register.tenant_id = this.tenant;
+    console.log(this.login.value)
+    this.newdates = new DatePipe('en-US').transform(this.login.value.date, 'MM/dd/yyyy');
+    this.newdatee = new DatePipe('en-US').transform(this.login.value.date, 'MM/dd/yyyy');
+    let register = {
+      "machine": this.login.value.machine_id,
+      "shift": this.login.value.shift_id,
+      "date": this.newdates + '-' + this.newdatee
+        }
+    console.log(register)
       this.myLoader = true;
       this.service.table(register).pipe(untilDestroyed(this)).subscribe(res => {
       this.myLoader = false;
+      this.no_data = res;
+
       this.reports = res;
+      this.g_report = res[0];
+      this.get_report = res[0].data;
+      if(this.get_report.length === 0){
+        Swal.fire("No Idle Reason Report Found")
+      }
+      this.data = []
+   
+      for(let i in this.get_report){
+
+        this.chart_loop = this.toHoursMinutesSeconds(this.get_report[i].time);
+        this.data.push(this.chart_loop);
+      }
       this.dataSource = new MatTableDataSource(this.reports);
       this.reportList = true;
       this.chartlist = false;
@@ -273,18 +291,20 @@ export class HmiComponent implements OnInit {
 
   hmiChart(){
     // this.login.reset();
-    let register = this.login.value;
-    this.new_date1 = new DatePipe('en-US').transform(this.login.value.date, 'dd-MM-yyyy');
-
-     register.start_date = this.new_date1;
-     register.end_date = this.new_date1;
-     register.tenant_id = this.tenant;
+    console.log(this.login.value)
+    this.newdate = new DatePipe('en-US').transform(this.login.value.date, 'MM/dd/yyyy');
+    this.newdate1 = new DatePipe('en-US').transform(this.login.value.date, 'MM/dd/yyyy');
+    let register = {
+      "machine": this.login.value.machine_id,
+      "shift": this.login.value.shift_id,
+      "date": this.newdate + '-' + this.newdate1
+        }
+    
     this.myLoader1 = true;
     this.service.chart(register).pipe(untilDestroyed(this)).subscribe(res => {
       this.myLoader1 = false;
 
-      this.new_date = this.datePipe.transform(this.login.value.date,'MM-dd-yyyy');
-      console.log(this.new_date);
+    
      this. chartOptions = {
         chart: {
           type: 'column',
