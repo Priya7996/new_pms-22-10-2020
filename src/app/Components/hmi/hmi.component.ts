@@ -3,10 +3,16 @@ import { NavbarService} from '../../Nav/navbar.service';
 import { HmiService} from '../../Service/app/hmi.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
-import * as Highcharts from 'highcharts';
 import { DatePipe } from '@angular/common';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import Swal from 'sweetalert2';    
+import pareto from 'highcharts/modules/pareto';
+
+
+declare var Highcharts: any;
+
+require('highcharts/modules/pareto');
+
 
 @Component({
   selector: 'app-hmi',
@@ -14,7 +20,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./hmi.component.scss']
 })
 export class HmiComponent implements OnInit {
-  Highcharts = Highcharts;
   chartOptions:any;
   isShow = true;
   new_date1:any;
@@ -99,65 +104,6 @@ export class HmiComponent implements OnInit {
            this.shift_response=res; 
           })
         })
-
-        Highcharts.chart('container', {
-          chart: {
-            renderTo: 'container',
-            type: 'column'
-          },
-          title: {
-            text: 'Restaurants Complaints'
-          },
-          tooltip: {
-            shared: true
-          },
-          xAxis: {
-            categories: [
-              'Overpriced',
-              'Small portions',
-              'Wait time',
-              'Food is tasteless',
-              'No atmosphere',
-              'Not clean',
-              'Too noisy',
-              'Unfriendly staff'
-            ],
-            crosshair: true
-          },
-          yAxis: [{
-            title: {
-              text: ''
-            }
-          }, {
-            title: {
-              text: ''
-            },
-            minPadding: 0,
-            maxPadding: 0,
-            max: 100,
-            min: 0,
-            opposite: true,
-            labels: {
-              format: "{value}%"
-            }
-          }],
-          series: [{
-            type: 'pareto',
-            name: 'Pareto',
-            yAxis: 1,
-            zIndex: 10,
-            baseSeries: 1,
-            tooltip: {
-              valueDecimals: 2,
-              valueSuffix: '%'
-            }
-          }, {
-            name: 'Complaints',
-            type: 'column',
-            zIndex: 2,
-            data: [755, 222, 151, 86, 72, 51, 36, 10]
-          }]
-        });
 
         Highcharts.chart('comparepie', {
           chart: {
@@ -248,6 +194,69 @@ export class HmiComponent implements OnInit {
         });
 
 
+
+
+        Highcharts.chart('container', {
+          chart: {
+            renderTo: 'container',
+            type: 'column'
+          },
+          title: {
+            text: 'Restaurants Complaints'
+          },
+          tooltip: {
+            shared: true
+          },
+          xAxis: {
+            categories: [
+              'Overpriced',
+              'Small portions',
+              'Wait time',
+              'Food is tasteless',
+              'No atmosphere',
+              'Not clean',
+              'Too noisy',
+              'Unfriendly staff'
+            ],
+            crosshair: true
+          },
+          yAxis: [{
+            title: {
+              text: ''
+            }
+          }, {
+            title: {
+              text: ''
+            },
+            minPadding: 0,
+            maxPadding: 0,
+            max: 100,
+            min: 0,
+            opposite: true,
+            labels: {
+              format: "{value}%"
+            }
+          }],
+          series: [{
+            type: 'pareto',
+            name: 'Pareto',
+            yAxis: 1,
+            zIndex: 10,
+            baseSeries: 1,
+            tooltip: {
+              valueDecimals: 2,
+              valueSuffix: '%'
+            }
+          }, {
+            name: 'Complaints',
+            type: 'column',
+            zIndex: 2,
+            data: [755, 222, 151, 86, 72, 51, 36, 10]
+          }]
+        });
+
+      
+
         
 
   }  
@@ -303,86 +312,89 @@ export class HmiComponent implements OnInit {
     this.myLoader1 = true;
     this.service.chart(register).pipe(untilDestroyed(this)).subscribe(res => {
       this.myLoader1 = false;
+      console.log(res);
+      
 
     
-     this. chartOptions = {
-        chart: {
-          type: 'column',
-          style: {
-            fontFamily: 'roboto'
-          }
-        },
-        options3d: {
-          enabled: true,
-          alpha: 15,
-          beta: 15,
-          depth: 50,
-          viewDistance: 25 
-      },
-        title: {
-          text: 'HMI Chart'
-        },
-        subtitle: {
-          text: 'Machine ID :'+res.machine_name+', Shift : '+res.shift+', Date : '+this.new_date+',Reason:'+res.reason+'',
-          style: {
-            fontSize: '16px',
-            color: '#f58632',
-            fill: '#f58632'
-          }
-        },
-        xAxis: {
-          categories: [''],
-          title: {
-            text: 'Reason',
-            align: 'middle'
-          }
-        },
-        yAxis: {
-          allowDecimals: false,
-          title: {
-            text: 'Time(min)',
-            align: 'middle'
-          },
-          labels: {
-            overflow: 'justify'
-          }
-        },
-        tooltip: {
-          //valueSuffix: ' certificates'
-        },
-        exporting: {
-          // enabled:true,
-          buttons: {
-            contextButton: {
-              menuItems: ["printChart", "separator", "downloadPNG", "downloadPDF"]
-          }
-        }
-      },
-      credits: {
-        enabled: false
-    },
-        plotOptions: {
-          bar: {  
-            dataLabels: {
-              enabled: true
-            }
-          },
-        },
+    //  this. chartOptions = {
+    //     chart: {
+    //       type: 'column',
+    //       style: {
+    //         fontFamily: 'roboto'
+    //       }
+    //     },
+    //     options3d: {
+    //       enabled: true,
+    //       alpha: 15,
+    //       beta: 15,
+    //       depth: 50,
+    //       viewDistance: 25 
+    //   },
+    //     title: {
+    //       text: 'HMI Chart'
+    //     },
+    //     subtitle: {
+    //       text: 'Machine ID :'+res.machine_name+', Shift : '+res.shift+', Date : '+this.new_date+',Reason:'+res.reason+'',
+    //       style: {
+    //         fontSize: '16px',
+    //         color: '#f58632',
+    //         fill: '#f58632'
+    //       }
+    //     },
+    //     xAxis: {
+    //       categories: [''],
+    //       title: {
+    //         text: 'Reason',
+    //         align: 'middle'
+    //       }
+    //     },
+    //     yAxis: {
+    //       allowDecimals: false,
+    //       title: {
+    //         text: 'Time(min)',
+    //         align: 'middle'
+    //       },
+    //       labels: {
+    //         overflow: 'justify'
+    //       }
+    //     },
+    //     tooltip: {
+    //       //valueSuffix: ' certificates'
+    //     },
+    //     exporting: {
+    //       // enabled:true,
+    //       buttons: {
+    //         contextButton: {
+    //           menuItems: ["printChart", "separator", "downloadPNG", "downloadPDF"]
+    //       }
+    //     }
+    //   },
+    //   credits: {
+    //     enabled: false
+    // },
+    //     plotOptions: {
+    //       bar: {  
+    //         dataLabels: {
+    //           enabled: true
+    //         }
+    //       },
+    //     },
     
      
-        colors: ['#f58632', '#f58632', '#f58632', '#f58632'],
-        series: [{
+    //     colors: ['#f58632', '#f58632', '#f58632', '#f58632'],
+    //     series: [{
 
-          data: [res.time],
-        }],
-        legend: {
-          layout: 'vertical',
-          align: 'right',
-          itemMarginBottom: 7,
-          verticalAlign: 'top'
-        }
-      }
+    //       data: [res.time],
+    //     }],
+    //     legend: {
+    //       layout: 'vertical',
+    //       align: 'right',
+    //       itemMarginBottom: 7,
+    //       verticalAlign: 'top'
+    //     }
+    //   }
       this.charts = res;
+      console.log(res);
       this.chartlist = true;
       this.reportList = false;
     })

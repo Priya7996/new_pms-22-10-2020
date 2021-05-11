@@ -24,7 +24,7 @@ export class HmiService {
     return this.http.get('idle_report?machine='+ register.machine + '&&date=' + register.date + '&&shift=' +register.shift)
   }
   chart(register):Observable<any>{
-    return this.http.get('hmi_reason_chart?machine='+ register.machine+ '&&date=' + register.date + '&&shift=' + register.shift )
+    return this.http.get('idle_report_chart?machine='+ register.machine+ '&&date=' + register.date + '&&shift=' + register.shift )
    
   }
   shiftidentity(tenantId):Observable<any>{
