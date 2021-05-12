@@ -24,9 +24,8 @@ export class LoginService {
 
   forhot_change(id,val):Observable<any>{
     console.log(id,val)
-    return this.http.put('users/'+id,val)
+    return this.http.put('reset_password/'+id,val)
   }
-  
 }
 
 // http://15.207.212.223:3005/api/v1/sessions/forgot_pwd?email_id=vinodhini1021@gmail.com&phone_number=8778841227

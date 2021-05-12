@@ -35,21 +35,32 @@ export class PasswordComponent implements OnInit {
   logintest(valu) {
     console.log(valu);
  
+if(valu.password  === valu.con_password){
+  Swal.fire("true")
+  let data = {'default':valu.con_password,'password_digest': valu.con_password,'password': valu.con_password}
+  console.log(data);
 
-     let data = {'default':valu.con_password,'password_digest': valu.con_password,'password': valu.con_password,'tenant_id':this.tenant}
-     console.log(data);
+  this.service.forhot_change(this.fo_id,data).subscribe(res => {
+   console.log(res)
+   if (res.status === true) {
+    Swal.fire("Password changed successfully")
+    this.router.navigateByUrl('');
 
-     this.service.forhot_change(this.fo_id,data).subscribe(res => {
-      console.log(res)
+  } else if (res.status === false){
+    Swal.fire("Something Went wrong")
+    
+  }
 
-        Swal.fire(res.msg)
-  
 
-      this.ngOnInit();
 
-      })
+   })
 
-      this.router.navigateByUrl('');
+}
+else{
+  Swal.fire("Password and Conform password is not matched.Please Verify")
+}
+   
+
 
   }
 

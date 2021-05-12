@@ -101,13 +101,14 @@ export class Dialog {
   }
   testform(value) {
     this.service.forgot(value).subscribe(res => {
-      console.log(res.response[0].id)
-      localStorage.setItem('fid', res.response[0].id);
+     
 
       if (res === false) {
         Swal.fire('Please Enter Correct Email or phone number')
       } else if (res.status === true){
         Swal.fire('Mail sent successfully.Please check your Mail')
+        console.log(res.response[0].id)
+        localStorage.setItem('fid', res.response[0].id);
       }
       this.dialogRef.close();
 

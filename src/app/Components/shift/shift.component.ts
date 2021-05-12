@@ -130,7 +130,8 @@ export class Edit {
   edit_data: any;
   tenant: any;
   machine_response: any;
-  
+  meridian = true;
+  seconds = true;
   constructor(private service:ShiftService,public dialogRef: MatDialogRef<Edit>,@Inject(MAT_DIALOG_DATA) public data: any,private fb:FormBuilder) {
     this.edit_data = data;  
   }
@@ -140,27 +141,93 @@ export class Edit {
   }
 
 
+  convertTimeAM(time) {
+    let AMPM;
+    let hour;
+    if (time.hour >= 12) {
+      if (time.hour > 12) {
+        hour = time.hour - 12;
+      } else if(time.hour == 12){
+        hour = time.hour;
+      }
+      AMPM = 'PM';
+    } else {
+      hour = time.hour;
+      AMPM = 'AM';
+    }
+    const pad = (i: number): string => i < 10 ? `0${i}` : `${i}`;
+    return time != null ? `${pad(hour)}:${pad(time.minute)}:${pad(time.second)} ${AMPM}` : null;
+  }
+  convertTime(time) {
+    let hour;
+    if (time.hour >= 12) {
+      hour = time.hour - 12;
+    } else {
+      hour = time.hour;
+    }
+    const pad = (i: number): string => i < 10 ? `0${i}` : `${i}`;
+    return time != null ? `${pad(hour)}:${pad(time.minute)}:${pad(time.second)}` : null;
+  }
+
+  TimeAM(time) {
+    if (!time) {
+      return null;
+    }
+    const split = time.split(':');
+    const AM = time.split(' ');
+    let hours;
+    if (AM[1] === 'PM') {
+      hours = parseInt(split[0], 10) + 12;
+    } else {
+      hours = parseInt(split[0], 10);
+    }
+    return {
+      hour: hours,
+      minute: parseInt(split[1], 10),
+      second: parseInt(split[2], 10)
+    };
+  }
+
+  Time(time) {
+    if (!time) {
+      return null;
+    }
+    const split = time.split(':');
+    return {
+      hour: parseInt(split[0], 10),
+      minute: parseInt(split[1], 10),
+      second: parseInt(split[2], 10)
+    };
+  }
+
+
 
 
   ngOnInit()
   {
     this.tenant=localStorage.getItem('tenant_id')
     this.login=this.fb.group({
-      day_start_time:[this.edit_data.day_start_time],
-      working_time:[this.edit_data.working_time],
-      no_of_shift:[this.edit_data.no_of_shift],
+      day_start_time:["",Validators.required],
+      working_time:["",Validators.required],
+      no_of_shift:["",Validators.required],
     })
   }
   logintest() {
-    this.service.shift(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
-      this.machine_response=res;
-      this.service.shifttransaction(this.machine_response.id).pipe(untilDestroyed(this)).subscribe(res =>{
-    })
-    })
-    this.add_val = this.login.value
-    this.add_val["tenant_id"] = this.tenant;
-    console.log(this.add_val);
-    this.service.edit(this.add_val).pipe(untilDestroyed(this)).subscribe(res => {
+    
+    // this.service.shift(this.tenant).pipe(untilDestroyed(this)).subscribe(res =>{
+    //   this.machine_response=res;
+    //   this.service.shifttransaction(this.machine_response.id).pipe(untilDestroyed(this)).subscribe(res =>{
+    // })
+    // })
+    let register = {
+      "day_start_time": this.convertTimeAM(this.login.value.day_start_time),
+      "working_time": this.login.value.working_time,
+      "no_of_shift": this.login.value.no_of_shift,
+      "tenant_id":this.tenant
+        }
+        console.log(register);
+    // data.day_start_time = this.convertTimeAM(this.login.value.day_start_time)
+    this.service.edit(register).pipe(untilDestroyed(this)).subscribe(res => {
       Swal.fire("Created successfully!")
       this.dialogRef.close();
       // this.ngOnInit();

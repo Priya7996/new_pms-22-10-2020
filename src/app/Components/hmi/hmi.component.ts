@@ -105,93 +105,7 @@ export class HmiComponent implements OnInit {
           })
         })
 
-        Highcharts.chart('comparepie', {
-          chart: {
-            plotBackgroundColor: null,                                
-            plotBorderWidth: 0,
-            plotShadow: false,
-            backgroundColor: '#212226',
-            spacingBottom: 0,
-            spacingTop: 0,
-            spacingRight: 0,
-            spacingLeft: 0,
-            margin: 0,
-            height: '100%',
-    
-          },
-          // navigation: {
-          //   buttonOptions: {
-          //     theme: {
-          //       'stroke-width': 1,
-          //       stroke: null,
-          //       fill: '#0b0b0b',
-          //       r: 0,
-          //       states: {
-          //         hover: {
-          //           fill: '#1a1919'
-          //         },
-          //         select: {
-          //           fill: '#1a1919'
-          //         }
-          //       }
-          //     }
-          //   }
-          // },
-          title: {
-            text: '',
-    
-            align: 'center',
-            verticalAlign: 'middle',
-            style: {
-              fontSize: '14px',
-              color: 'white'
-            }
-          },
-          tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-          },
-          accessibility: {
-            point: {
-              valueSuffix: '%'
-            }
-          },
-          credits: {
-            enabled: false
-          },
-          plotOptions: {
-            pie: {
-              colors: [
-                '#5D5D5D',
-                '#E8BE15',
-                '#207A24',
-              ],
-              dataLabels: {
-                enabled: true,
-                distance: -50,
-                style: {
-                  fontWeight: 'bold',
-                  color: 'white'
-                }
-              },
-    
-              size: '100%'
-            }
-          },
-          series: [{
-            type: 'pie',
-            borderWidth: 0,
-    
-            innerSize: '60%',
-            data: [
-              ['Disconnect',4],
-  
-              ['Idle',6],
-              ['Run',8],
-  
-            ]
-          }]
-    
-        });
+       
 
 
 
@@ -312,9 +226,95 @@ export class HmiComponent implements OnInit {
     this.myLoader1 = true;
     this.service.chart(register).pipe(untilDestroyed(this)).subscribe(res => {
       this.myLoader1 = false;
-      console.log(res);
-      
+      console.log(res.reason);
+      alert("chart")
+      Highcharts.chart('comparepie2', {
+        chart: {
+          plotBackgroundColor: null,                                
+          plotBorderWidth: 0,
+          plotShadow: false,
+          backgroundColor: '#212226',
+          spacingBottom: 0,
+          spacingTop: 0,
+          spacingRight: 0,
+          spacingLeft: 0,
+          margin: 0,
+          height: '50%',
+  
+        },
+        // navigation: {
+        //   buttonOptions: {
+        //     theme: {
+        //       'stroke-width': 1,
+        //       stroke: null,
+        //       fill: '#0b0b0b',
+        //       r: 0,
+        //       states: {
+        //         hover: {
+        //           fill: '#1a1919'
+        //         },
+        //         select: {
+        //           fill: '#1a1919'
+        //         }
+        //       }
+        //     }
+        //   }
+        // },
+        title: {
+          text: '',
+  
+          align: 'center',
+          verticalAlign: 'middle',
+          style: {
+            fontSize: '14px',
+            color: 'white'
+          }
+        },
+        tooltip: {
+          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        accessibility: {
+          point: {
+            valueSuffix: '%'
+          }
+        },
+        credits: {
+          enabled: false
+        },
+        plotOptions: {
+          pie: {
+            colors: [
+              '#5D5D5D',
+              '#E8BE15',
+              '#207A24',
+            ],
+            dataLabels: {
+              enabled: true,
+              distance: -50,
+              style: {
+                fontWeight: 'bold',
+                color: 'white'
+              }
+            },
+  
+            size: '100%'
+          }
+        },
+        series: [{
+          type: 'pie',
+          borderWidth: 0,
+  
+          innerSize: '60%',
+          data: [
+            [res.reason],
 
+            // ['Idle',6],
+            // ['Run',8],
+
+          ]
+        }]
+  
+      });
     
     //  this. chartOptions = {
     //     chart: {
@@ -395,8 +395,8 @@ export class HmiComponent implements OnInit {
     //   }
       this.charts = res;
       console.log(res);
-      this.chartlist = true;
-      this.reportList = false;
+      // this.chartlist = true;
+      // this.reportList = false;
     })
   }
   ngOnDestroy(){

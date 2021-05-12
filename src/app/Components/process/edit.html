@@ -6,16 +6,20 @@
         </button>
     </mat-toolbar>
     <div class="dialog-form">
-        <div class="filter_sec">
+        <div class="filter_sec"> 
            
             <form [formGroup]="login" class="form_sec">
                 <mat-form-field>
                     <mat-label>Plan Name</mat-label>
                     <input matInput formControlName="plan_name" type="text">
+                    <mat-error *ngIf="login.controls['plan_name'].errors?.required">Plan Name is Required
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Plan Number</mat-label>
                     <input matInput formControlName="plan_number" (keypress)="keyPress($event)" type="text">
+                      <mat-error *ngIf="login.controls['plan_number'].errors?.required">Plan Number is Required
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field >
                     <mat-select placeholder="Part Number" matNativeControl required formControlName="part_configuration_id">
@@ -25,12 +29,18 @@
                     </mat-select>
 
                   </mat-form-field>
+
+                  <!-- <mat-error *ngIf="login.controls['part_configuration_id'].errors?.required">Part Number is Required
+                </mat-error> -->
                   <div *ngIf="list.length==0">
                     No Plan Number Found.Plaese fill the plan number on part configuration module
                </div>
                 <mat-form-field>
                     <mat-label>Plan Description</mat-label>
                     <input matInput formControlName="plan_description" type="text">
+                    
+                  <mat-error *ngIf="login.controls['plan_description'].errors?.required">Description is Required
+                </mat-error>
                 </mat-form-field>
 
               
