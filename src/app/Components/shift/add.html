@@ -1,14 +1,19 @@
-<h2 mat-dialog-title>Shift Registration</h2>
-<div class="close_modal">
+<div class="close_modal1">
+
+    <h2 mat-dialog-title class="shift">Shift Registration</h2>
     <mat-icon mat-dialog-close  class="v-align-middle display" matTooltip="Close">close
     </mat-icon>
 </div>
+
+<div class="main_wrapper">
+
+
 <div class="mat-typography">
     <div class="filter_sec">
         <form [formGroup]="shiftForm" (ngSubmit)="submit()" class="form_sec shift_form"  autocomplete="off">
             <div class="form_field time_field_bg">
                 <!-- <mat-form-field appearance="outline"> -->
-                <mat-label>Shift Start Time</mat-label>
+                <mat-label class="sh">Shift Start Time</mat-label>
                 <!-- <input matInput formControlName="start_time" type="text"> -->
                 <!-- <ngx-timepicker-field formControlName="start_time" [controlOnly]="true"></ngx-timepicker-field> -->
                 <ngb-timepicker formControlName="shift_start_time" [meridian]="meridian" [seconds]="seconds"></ngb-timepicker>
@@ -16,7 +21,7 @@
             </div><br>
             <div class="form_field time_field_bg">
                 <!-- <mat-form-field appearance="outline"> -->
-                <mat-label>Shift End Time </mat-label>
+                <mat-label class="sh">Shift End Time </mat-label>
                 <!-- <input matInput formControlName="end_time" type="text"> -->
                 <!-- <ngx-timepicker-field formControlName="end_time" [controlOnly]="true"></ngx-timepicker-field> -->
                 <ngb-timepicker formControlName="shift_end_time" [meridian]="meridian" [seconds]="seconds"></ngb-timepicker>
@@ -24,22 +29,22 @@
             </div><br>
             <div class="form_field time_field_bg">
                 <!-- <mat-form-field appearance="outline"> -->
-                <mat-label>Break Time</mat-label>
+                <mat-label >Break Time</mat-label>
                 <!-- <input matInput formControlName="break_time" type="time"> -->
                 <ngb-timepicker formControlName="break_time" [seconds]="seconds"></ngb-timepicker>
                 <!-- <mat-error *ngIf="shiftForm.controls['break_time'].errors?.required">Break Time is Required
                     </mat-error> -->
                 <!-- </mat-form-field> -->
             </div>
- 
-                <mat-form-field appearance="outline">
-                    <mat-label>Shift Number</mat-label>
+              <div class="sec_sep">
+                <mat-form-field >
+                    <mat-label class="headins">Shift Number</mat-label>
                     <input matInput formControlName="shift_no" type="number" min="1">
                     <mat-error *ngIf="shiftForm.controls['shift_no'].errors?.required" placeholder="0">Shift Number is
                         Required
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline">
+                <mat-form-field >
                     <mat-label>Start Day</mat-label>
                     <mat-select formControlName="day" (selectionChange)="end_day_validation($event.value)">
                         <mat-option disabled value="">Select Start Day</mat-option>
@@ -49,7 +54,7 @@
                     <mat-error *ngIf="shiftForm.controls['day'].errors?.required">Start Day is Required
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline">
+                <mat-form-field >
                     <mat-label>End Day</mat-label>
                     <mat-select formControlName="end_day">
                         <mat-option disabled value="">Select End Day</mat-option>
@@ -59,9 +64,13 @@
                     <mat-error *ngIf="shiftForm.controls['end_day'].errors?.required">End Day is Required
                     </mat-error>
                 </mat-form-field>
-            <div class="form-button text-right" align="end">
+            </div>
+
+            <div class="form-button text-right">
                 <button mat-raised-button type="submit" class="filter_btn btn_orange"> Save</button>
             </div>
         </form>
     </div>
+</div>
+
 </div>

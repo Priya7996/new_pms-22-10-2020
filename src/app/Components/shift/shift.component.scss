@@ -216,9 +216,12 @@
 }
 }
 .form_sec_fields .form_field.time_field_bg, .time_field_bg{
-    background: #202739;
-    padding: 20px;
-    border-radius: 15px;
+    background: none;
+    border-radius: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
 } 
 body .componentForm .time_field_bg{
     padding: 5px!important;
@@ -274,3 +277,19 @@ body .componentForm .time_field_bg{
     width: 90px;
     margin-top: -130px;
   }
+
+  .sec_sep {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+mat-icon.v-align-middle.display.mat-icon.notranslate.material-icons.mat-icon-no-color {
+    cursor: pointer;
+}
+
+.form-button.text-right {
+    text-align: end;
+    margin-right: 30px;
+    margin-top: 20px;
+}

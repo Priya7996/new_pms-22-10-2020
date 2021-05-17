@@ -35,7 +35,7 @@
                 <mat-form-field appearance="outline">
                   <mat-select placeholder="Select Shift"  matNativeControl
                     required formControlName="shift_id">
-                    <mat-option *ngFor="let shift of shift_response" [value]="shift.id">{{shift.shift_no}}
+                    <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no">{{shift.shift_no}}
                       ({{shift.shift_start_time}}-{{shift.shift_end_time}})</mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -71,7 +71,7 @@
               <div class="btn_group">
                 <button mat-raised-button class="filter_btn btn_success" (click)="hmiReport()">Report</button>
                 <button mat-raised-button class="filter_btn btn_orange ml-16" (click)="hmiChart()"> Chart</button>
-                <button type="text" class="view_btn mr-2" mat-button (click) = toggleDisplay()>View Chart</button>
+                <!-- <button type="text" class="view_btn mr-2" mat-button (click) = toggleDisplay()>View Chart</button> -->
               </div>
             </div>
           </form>
@@ -104,7 +104,7 @@
                           <td>{{g_report?.shift_no || '---'}}</td>
 
                           <td>{{g_report?.machine_name || '---'}}</td>
-                           <td>{{g_report?.machine_id || '---'}}</td>
+                           <td>{{g_report?.operator || '---'}}</td>
                           <td>{{show_report?.idle_reason }}</td>
                           <td>{{show_report?.idle_start | date:'MM-dd-yyyy ; HH:mm:ss'}}</td>
                        
@@ -113,15 +113,16 @@
                       </tr>
                   </tbody>
               </table>
+              <div *ngIf="no_data?.length==0" class="no_data_found">
+                <h4>No Data Found</h4>
+            </div>
               <!-- <div class="duke">
                   Duration: {{get_duration}}
               </div> -->
           </div>
          
           
-          <div *ngIf="no_data?.length==0" class="no_data_found">
-              <h4>No Data Found</h4>
-          </div>
+          
        
          
 
@@ -144,9 +145,9 @@
   </figure>
 </div> -->
 
-   <figure class="highcharts-figure">
+   <!-- <figure class="highcharts-figure">
                 <div id="container"></div>
-               </figure> 
+               </figure>  -->
 
                <!-- <div >
                 <figure>
@@ -156,12 +157,15 @@
       <div *ngIf="myLoader1" class="spinner">
         <img src="assets/images/spinner.gif">
       </div>
-      <div  class="section_top_padding">
+      <div *ngIf="chartlist" class="section_top_padding" >
         <mat-card class="card_sec">
           <mat-card-content class="table_responsive">
             <!-- <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
               style="width: 100%; height: 400px; display: block;"></highcharts-chart> -->
               <div id="comparepie2"></div>
+
+              <div id="container"></div>
+
 
 <br>
               

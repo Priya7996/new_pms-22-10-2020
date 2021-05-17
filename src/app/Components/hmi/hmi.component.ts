@@ -23,6 +23,7 @@ export class HmiComponent implements OnInit {
   chartOptions:any;
   isShow = true;
   new_date1:any;
+  Highcharts: any;
   // chart 1
   toggleDisplay() { this.isShow = !this.isShow; }
   no_data:any;
@@ -40,6 +41,7 @@ export class HmiComponent implements OnInit {
   machine_response: any;
   tenant: any;
   login:FormGroup;
+  chart_pie:any;
   shift_response: any;
   reportList: boolean;
   reports: any;
@@ -110,64 +112,7 @@ export class HmiComponent implements OnInit {
 
 
 
-        Highcharts.chart('container', {
-          chart: {
-            renderTo: 'container',
-            type: 'column'
-          },
-          title: {
-            text: 'Restaurants Complaints'
-          },
-          tooltip: {
-            shared: true
-          },
-          xAxis: {
-            categories: [
-              'Overpriced',
-              'Small portions',
-              'Wait time',
-              'Food is tasteless',
-              'No atmosphere',
-              'Not clean',
-              'Too noisy',
-              'Unfriendly staff'
-            ],
-            crosshair: true
-          },
-          yAxis: [{
-            title: {
-              text: ''
-            }
-          }, {
-            title: {
-              text: ''
-            },
-            minPadding: 0,
-            maxPadding: 0,
-            max: 100,
-            min: 0,
-            opposite: true,
-            labels: {
-              format: "{value}%"
-            }
-          }],
-          series: [{
-            type: 'pareto',
-            name: 'Pareto',
-            yAxis: 1,
-            zIndex: 10,
-            baseSeries: 1,
-            tooltip: {
-              valueDecimals: 2,
-              valueSuffix: '%'
-            }
-          }, {
-            name: 'Complaints',
-            type: 'column',
-            zIndex: 2,
-            data: [755, 222, 151, 86, 72, 51, 36, 10]
-          }]
-        });
+       
 
       
 
@@ -192,7 +137,7 @@ export class HmiComponent implements OnInit {
       this.service.table(register).pipe(untilDestroyed(this)).subscribe(res => {
       this.myLoader = false;
       this.no_data = res;
-
+      console.log(this.no_data)
       this.reports = res;
       this.g_report = res[0];
       this.get_report = res[0].data;
@@ -213,6 +158,9 @@ export class HmiComponent implements OnInit {
   }
 
   hmiChart(){
+
+    this.chartlist = true;
+    this.reportList = false;
     // this.login.reset();
     console.log(this.login.value)
     this.newdate = new DatePipe('en-US').transform(this.login.value.date, 'MM/dd/yyyy');
@@ -224,10 +172,77 @@ export class HmiComponent implements OnInit {
         }
     
     this.myLoader1 = true;
+
+this.service.paretto_chart(register).pipe(untilDestroyed(this)).subscribe(res => {
+console.log(res.a);
+ Highcharts.chart('container', {
+  chart: {
+    renderTo: 'container',
+    type: 'column',
+    zoomType: 'xy',
+
+  },
+  title: {
+    text: 'Downtime Tracking'
+  },
+  tooltip: {
+    shared: true
+  },
+  xAxis: {
+    categories: res.reason,
+    // title: {
+    //   text: res.individual
+    // },
+    // p: res.individual,
+    crosshair: true
+  },
+  yAxis: [{
+    title: {
+      text: ''
+    }
+  }, {
+    title: {
+      text: ''
+    },
+    minPadding: 0,
+    maxPadding: 0,
+    max: 100,
+    min: 0,
+    opposite: true,
+    labels: {
+      format: "{value}%"
+    }
+  }],
+  series: [{
+    type: 'pareto',
+    name: 'Pareto',
+    yAxis: 1,
+    zIndex: 10,
+    baseSeries: 1,
+    tooltip: {
+      valueDecimals: 2,
+      valueSuffix: '%'
+    }
+  }, {
+    name: 'Complaints',
+    type: 'column',
+    zIndex: 2,
+    data: res.cumulative
+  }]
+});
+
+})
+
+
     this.service.chart(register).pipe(untilDestroyed(this)).subscribe(res => {
       this.myLoader1 = false;
+      this.chart_pie = res;
       console.log(res.reason);
-      alert("chart")
+      // for(let i=0;i<this.chart_pie.length;i++){
+      //   console.log(this.chart_pie)
+
+
+      // }
       Highcharts.chart('comparepie2', {
         chart: {
           plotBackgroundColor: null,                                
@@ -287,6 +302,9 @@ export class HmiComponent implements OnInit {
               '#5D5D5D',
               '#E8BE15',
               '#207A24',
+              '#00ffff',
+              '#ff00ff',
+              '#ff0000',
             ],
             dataLabels: {
               enabled: true,
@@ -305,13 +323,13 @@ export class HmiComponent implements OnInit {
           borderWidth: 0,
   
           innerSize: '60%',
-          data: [
-            [res.reason],
+          data:  res.reason
+          // [
 
-            // ['Idle',6],
-            // ['Run',8],
+          //   ['Idle',6],
+          //   ['Run',8],
 
-          ]
+          // ]
         }]
   
       });
@@ -395,8 +413,7 @@ export class HmiComponent implements OnInit {
     //   }
       this.charts = res;
       console.log(res);
-      // this.chartlist = true;
-      // this.reportList = false;
+
     })
   }
   ngOnDestroy(){

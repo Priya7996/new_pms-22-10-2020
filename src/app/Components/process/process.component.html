@@ -1,111 +1,111 @@
 <section class="page">
-    <div *ngIf="myLoader" class="spinner">
-      <img src="assets/images/spinner.gif">
-    </div> 
-    <div class="section_top_padding">
-      <div class="container-fluid">
-        <div class="page_title_sec">
-          <h2 class="sub_title">
-            <mat-icon class="v-align-middle display">alarm</mat-icon>
-            <span class="v-align-middle">Process Plan Registration</span>
-          </h2>
-          <div class="add_new" >
-            <mat-icon class="circle" (click)="user()" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">add</mat-icon>
-            <mat-icon class="circle" (click)="usernot()" *ngIf = "Role_NAME == 'Supervisor'">add</mat-icon>
+  <div *ngIf="myLoader" class="spinner">
+    <img src="assets/images/spinner.gif">
+  </div> 
+  <div class="section_top_padding">
+    <div class="container-fluid">
+      <div class="page_title_sec">
+        <h2 class="sub_title">
+          <mat-icon> notes</mat-icon>
+          <span class="v-align-middle">Process Plan Registration</span>
+        </h2>
+        <div class="add_new" >
+          <mat-icon class="circle" (click)="user()" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">add</mat-icon>
+          <mat-icon class="circle" (click)="usernot()" *ngIf = "Role_NAME == 'Supervisor'">add</mat-icon>
 
-          </div>
-
-         
         </div>
-        <mat-card class="card_sec">
-          <mat-card-content class="table-responsive">
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
-  
-              <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef> # </th>
-                <td mat-cell *matCellDef="let i=index;"> {{i+1}} </td>
 
-              </ng-container>
-
-              <!-- Position Column -->
-              <ng-container matColumnDef="operator_name">
-                <th mat-header-cell *matHeaderCellDef> Plan No</th>
-                <td mat-cell *matCellDef="let element"> {{element.plan_number || '---'}} </td>
-              </ng-container>
-  
-              <!-- Name Column -->
-              <ng-container matColumnDef="operator_spec_id">
-                <th mat-header-cell *matHeaderCellDef>Plan Name</th>
-                <td mat-cell *matCellDef="let element"> {{element.plan_name || '---'}} </td>
-              </ng-container>
-  
-              <!-- Weight Column -->
-              <ng-container matColumnDef="description">
-                <th mat-header-cell *matHeaderCellDef> Part No </th>
-                <td mat-cell *matCellDef="let element"> {{element.part_number || '---'}} </td>
-              </ng-container>
-
-               <!-- Weight Column -->
-               <ng-container matColumnDef="created">
-                <th mat-header-cell *matHeaderCellDef>Created By</th>
-                <td mat-cell *matCellDef="let element"> {{element.created_by || '---'}} </td>
-              </ng-container>
-  
-
-                <!-- Weight Column -->
-                <ng-container matColumnDef="status">
-                  <th mat-header-cell *matHeaderCellDef>Status</th>
-                  <td mat-cell *matCellDef="let element"> {{element.status || '---'}} </td>
-                </ng-container>
-  
-              <ng-container matColumnDef="action">
-                <!-- <mat-header-cell *matHeaderCellDef> Action </mat-header-cell> -->
-                <th mat-header-cell *matHeaderCellDef> Action </th>
-                <ul *matCellDef="let element" class="table_action">
-                  <li>
-                    <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                      (click)="operator_edit(element)" mattooltip="Edit" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">edit
-                    </mat-icon>
-
-                    <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                    (click)="usernot()" mattooltip="Edit" *ngIf = "Role_NAME == 'Supervisor'">edit
-                  </mat-icon>
-                  
-                  </li>
-
-                  <li>
-                    <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                      (click)="manage(element,element.id)" mattooltip="Edit" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">cached
-                    </mat-icon>
-
-                    <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                    (click)="usernot()" mattooltip="Edit" *ngIf = "Role_NAME == 'Supervisor'">cached
-                  </mat-icon>
-                  
-                  </li>
-
-                  <li>
-                    <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                      (click)="operator_delete(element.id)" mattooltip="Delete" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">delete
-                    </mat-icon>
-                   
-
-                    <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                    (click)="usernot()" mattooltip="Delete" *ngIf = "Role_NAME == 'Supervisor'">delete
-                  </mat-icon>
-                  </li>
-                </ul>
-              </ng-container>
-  
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-          </mat-card-content>
-              
-        <mat-card-content *ngIf="dataSource.filteredData.length==0" class="no_data_found">
-          <h2>No data found</h2>
-        </mat-card-content> 
-        </mat-card>
+       
       </div>
+      <mat-card class="card_sec">
+        <mat-card-content class="table-responsive">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef> # </th>
+              <td mat-cell *matCellDef="let i=index;"> {{i+1}} </td>
+
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="operator_name">
+              <th mat-header-cell *matHeaderCellDef> Plan No</th>
+              <td mat-cell *matCellDef="let element"> {{element.plan_number || '---'}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="operator_spec_id">
+              <th mat-header-cell *matHeaderCellDef>Plan Name</th>
+              <td mat-cell *matCellDef="let element"> {{element.plan_name || '---'}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef> Part No </th>
+              <td mat-cell *matCellDef="let element"> {{element.part_number || '---'}} </td>
+            </ng-container>
+
+             <!-- Weight Column -->
+             <ng-container matColumnDef="created">
+              <th mat-header-cell *matHeaderCellDef>Created By</th>
+              <td mat-cell *matCellDef="let element"> {{element.created_by || '---'}} </td>
+            </ng-container>
+
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let element"> {{element.status || '---'}} </td>
+              </ng-container>
+
+            <ng-container matColumnDef="action">
+              <!-- <mat-header-cell *matHeaderCellDef> Action </mat-header-cell> -->
+              <th mat-header-cell *matHeaderCellDef> Action </th>
+              <ul *matCellDef="let element" class="table_action">
+                <li>
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                    (click)="operator_edit(element)" mattooltip="Edit" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">edit
+                  </mat-icon>
+
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                  (click)="usernot()" mattooltip="Edit" *ngIf = "Role_NAME == 'Supervisor'">edit
+                </mat-icon>
+                
+                </li>
+
+                <li>
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                    (click)="manage(element,element.id)" mattooltip="Edit" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">cached
+                  </mat-icon>
+
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                  (click)="usernot()" mattooltip="Edit" *ngIf = "Role_NAME == 'Supervisor'">cached
+                </mat-icon>
+                
+                </li>
+
+                <li>
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                    (click)="operator_delete(element.id)" mattooltip="Delete" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">delete
+                  </mat-icon>
+                 
+
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                  (click)="usernot()" mattooltip="Delete" *ngIf = "Role_NAME == 'Supervisor'">delete
+                </mat-icon>
+                </li>
+              </ul>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </mat-card-content>
+            
+      <mat-card-content *ngIf="dataSource.filteredData.length==0" class="no_data_found">
+        <h2>No data found</h2>
+      </mat-card-content> 
+      </mat-card>
     </div>
-  </section>
+  </div>
+</section>

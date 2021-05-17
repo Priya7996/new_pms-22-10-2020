@@ -68,8 +68,8 @@ export class LoginComponent implements OnInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(Dialog, {
-      width: '30%',
-      height: '50%',
+      width: 'auto',
+      height: 'auto',
     });
 
     dialogRef.afterClosed().subscribe(result => {

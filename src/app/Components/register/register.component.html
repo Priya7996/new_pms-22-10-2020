@@ -123,13 +123,14 @@
                         <mat-label for="my-check">Agree the terms and policy</mat-label>
                     </span>
                     <div class="form-btn">
-                        <button mat-raised-button [disabled]="login.invalid" class="Submit">Register</button>
+                        <p class="disabled"><button mat-raised-button [disabled]="login.invalid" class="Submit">Register</button></p>
+                        <!-- <button mat-raised-button [disabled]="login.invalid" class="Submit">Register</button> -->
                     </div>
                 </form>
-                <mat-card-footer>
+                <!-- <mat-card-footer>
                     <p class="help_msg">Already have an account?
                         <a [routerLink]="['/']" class="sign_link">Login</a></p>
-                </mat-card-footer>
+                </mat-card-footer> -->
             </mat-card-content>
         </mat-card>
     </div>

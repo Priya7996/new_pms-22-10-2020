@@ -17,7 +17,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             .form_inner{
-                padding: 30px;
+                padding: 30px; 
                 background: #fff;
                 box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
                 border-radius: 0;
@@ -34,7 +34,7 @@
         p{
             font-size: 16px;
             font-weight: 300;
-            color: #aaa;
+            color: #000;
             margin-bottom: 0;
             text-align: center;
             line-height: 26px;
@@ -52,7 +52,7 @@
             .form-btn{
                 button{
                     color: #fff;
-                    background-color: #ec6e17;
+                    background-color: #ec6e17; 
                     border-color: #ec6e17;
                     border: 1px solid transparent;
                     padding: 0.375rem 0.75rem;
@@ -66,7 +66,7 @@
                 cursor: pointer!important;
             }
             
-        }
+        }   
         
         a{
             color: #43a7fd;
@@ -106,4 +106,15 @@
         }
     }
 }
+
+button.Submit.mat-raised-button.mat-button-base.mat-primary:hover {
+    background: linear-gradient(
+90deg
+, #ff01015c, transparent);
+}
+
+.mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
+    caret-color: #F3921D;
+}
+
 

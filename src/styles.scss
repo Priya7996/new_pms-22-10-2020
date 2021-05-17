@@ -28,7 +28,7 @@ body { margin: 0;  font-family: 'Rubik', sans-serif; }
 
 *::-webkit-scrollbar,
 *::-webkit-scrollbar-thumb {
-  width: 5px;
+  width: 8px;
   border-radius: 0px;
   background-clip: padding-box;
   border: 0px solid transparent;
@@ -329,7 +329,7 @@ table{
         }
         &.mat-row{
             &:nth-child(odd){
-                background-color:#f2f2f2;
+                background-color:#cfcaca;
          }
         }
          
@@ -517,6 +517,7 @@ table{
             background-color: #f58632;
             border-color: #f58632;
             color: #fff;
+            width: 20%;
         }
       }
 }
@@ -525,8 +526,9 @@ table{
 .table_action{
     list-style: none;
     display: flex;
-    margin: 0;
+    margin-top: 10px;
     padding: 0;
+    justify-content: center;
     li{
         mat-icon{
             color: #f7941e;
@@ -539,7 +541,7 @@ table{
 
 // modal show style
 mat-dialog-container{
-    padding: 0!important;
+    padding: 0 !important;
     overflow: unset!important;
     width: unset!important;
     height: 90%!important;
@@ -582,16 +584,30 @@ mat-dialog-container{
         .filter_btn{
             text-transform: capitalize;
         &.btn_orange{
-            background-color: #f58632;
+            background-color: #ddd;
             border-color: #f58632;
-            color: #fff;
+            color: #000;
+            
             }
          &.btn_default{
-            background-color: #e2e2e2;
+             margin-top: 10px;
             border-color: #ccc;
             color: #333!important;
         }
     }
+    }
+
+    .form-button {
+        text-align: right !important;
+    }
+
+    .main_wrapper {
+        padding: 30px !important;
+    }
+
+    button.filter_btn.btn_orange.mat-raised-button.mat-button-base:hover {
+        background: #f58632;
+        color: #fff;
     }
 
   
@@ -704,6 +720,12 @@ mat-dialog-container{
       }
     }
 }
+
+h3.seperate {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
 .current_status{
     position: absolute;
     top: 5px;
@@ -748,9 +770,9 @@ mat-dialog-container{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    border: 1px solid #e2e2e2;
-    padding: 10px 10px 5px 10px;
-    margin-bottom: 15px;
+    // border: 1px solid #e2e2e2;
+    // padding: 10px 10px 5px 10px;
+    // margin-bottom: 15px;
     .form-control {
       width: 47%;
       height: 24px;
@@ -794,6 +816,13 @@ mat-dialog-container{
     }  
 }
 
+*::-webkit-scrollbar-thumb {
+    background-color: #a9a9a9 !important;
+}
+
+button.filter_btn.btn_default.ml-16.mat-raised-button.mat-button-base {
+    box-shadow: none;
+}
 
 
 
@@ -1040,3 +1069,86 @@ mat-dialog-container{
                    .ngb-tp-hour, .ngb-tp-meridian, .ngb-tp-minute, .ngb-tp-second {
                     display: contents !important;
                    }
+
+
+// newstyles                    
+
+.close_modal1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+form.form_sec.shift_form.ng-untouched.ng-pristine.ng-invalid {
+    // padding: 20px !important;
+}
+
+.close_modal1 {
+    background: #f58632;
+    color: #fff;
+    padding: 20px;
+    padding-bottom: 0px !important;
+    margin-bottom: 20px;
+}
+
+button.btn-outline-primary {
+    background: #272b34 !important;
+    color: #fff !important;
+    outline: none !important;
+    border: 0px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding-top: 2px !important;
+    padding-bottom: 3px !important;
+}
+
+button.btn.btn-link.ng-star-inserted {
+    color: #f58632;
+    border: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+    padding-bottom: 3px;
+}
+
+.ngb-tp-input {
+    text-align: center;
+}
+
+.main_wrapper fieldset {
+    border: none !important;
+    border-bottom: 1px solid #ddd !important;
+    margin-top: 5px;
+}
+
+// .mat-select-panel-wrap {
+//     flex-basis: 96% !important;
+//     margin-left: 16px !important;
+//     margin-top: 46px !important;
+// }
+
+fieldset {
+    border: none !important;
+    border-bottom: 1px solid #ddd !important;
+    margin-top: 5px;
+}
+
+th.mat-header-cell.cdk-column-action.mat-column-action.ng-star-inserted {
+    text-align: center;
+}
+
+mat-icon.mat-icon.notranslate.material-icons.mat-icon-no-color {
+    margin-right: 10px;
+}
+
+.modal_sec .mat-form-field-flex {
+    width: 99%;
+}
+
+.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button .mat-datepicker-toggle-default-icon, .mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button .mat-datepicker-toggle-default-icon {
+    margin-bottom: 8px !important;
+}
+
+.card_sec table tr.mat-row:nth-child(odd) {
+    background-color: #e7e5e5 !important;
+}
