@@ -256,6 +256,7 @@ export class Add {
   myLoader = false;
   meridian = true;
   seconds = true;
+  tenant:any;
   end_day = [
     { name: 'Day 1', value: 1 },
     { name: 'Day 2', value: 2 },
@@ -265,7 +266,7 @@ export class Add {
   constructor(public dialogRef: MatDialogRef<Add>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private shift: ShiftService) {
     this.value = data;
     console.log(this.value);
-    
+    this.tenant=localStorage.getItem('tenant_id');
     this.shiftonkay=localStorage.getItem('SHIFT_IDEN');
     
 
@@ -304,6 +305,7 @@ export class Add {
     }
   
     let data = this.shiftForm.value;
+    data.tenant_id = this.tenant;
     data.shift_id = this.shiftonkay
     data.shift_start_time = this.convertTimeAM(this.shiftForm.value.shift_start_time)
     data.shift_end_time = this.convertTimeAM(this.shiftForm.value.shift_end_time)

@@ -30,9 +30,9 @@
                                 </h3>
                                 <div class="machine_total">
                                     <a>All ({{machine.value.length}})</a>
-                                    <!-- <a>Running ({{machine.key.running}})</a>
+                                    <a>Running ({{machine.value.length}})</a>
                                     <a>Idle ({{machine.value.length}})</a>
-                                    <a>Stop ({{machine.key.stop}})</a> -->
+                                    <a>Stop ({{machine.value.length}})</a>
 
 
                                 </div>
@@ -61,6 +61,16 @@
                                                     <span class="machine_status">Idle
                                                     </span>
                                                 </p>
+
+                                                <!-- <p class="idle machine_status_view" *ngIf="mac?.machine_status =='null'" >
+                                                <span class="machine_status">ghbmn
+                                                </span>
+                                            </p> -->
+
+                                                <!-- <p class="stop machine_status_view" *ngIf="mac?.machine_status =='null'">
+                                                <span class="mac_ut_bar_red">Stop
+                                                </span>
+                                            </p> -->
                                                 <span class="machine_status" *ngIf="mac?.machine_status =='null'">No
                                                     Data
                                                 </span>

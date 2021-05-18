@@ -113,23 +113,26 @@
                       </tr>
                   </tbody>
               </table>
-              <div *ngIf="no_data?.length==0" class="no_data_found">
-                <h4>No Data Found</h4>
-            </div>
+           
               <!-- <div class="duke">
                   Duration: {{get_duration}}
               </div> -->
           </div>
          
-          
+          <mat-card-content *ngIf="no_data?.length==0" class="no_data_found">
+            <h2>No data found</h2>
+          </mat-card-content> 
           
        
-         
+          
 
 
       
 
       </mat-card>
+      <!-- <div *ngIf="no_data?.length==0" class="no_data_found">
+        <h4>Nop Data Found</h4>
+    </div> -->
       </div>
       <!-- <div >
 <mat-card>
@@ -159,23 +162,27 @@
       </div>
       <div *ngIf="chartlist" class="section_top_padding" >
         <mat-card class="card_sec">
-          <mat-card-content class="table_responsive">
+          <mat-card-content class="table_responsive d-flex">
             <!-- <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
               style="width: 100%; height: 400px; display: block;"></highcharts-chart> -->
-              <div id="comparepie2"></div>
-
-              <div id="container"></div>
-
-
-<br>
               
+              <div class="container chrt">
+              <div id="comparepie2"></div>
+            </div>
+
+              <!-- <div id="container"></div> -->
+<br>
           </mat-card-content>
 
+        </mat-card>
 
+        <mat-card class="card_sec">
+          
+          <mat-card-content class="table_responsive d-flex">
+              <div id="container"></div>
+<br>
+          </mat-card-content>
 
-
-
-         
         </mat-card>
       </div>
     </div>

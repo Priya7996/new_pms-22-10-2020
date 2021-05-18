@@ -148,7 +148,7 @@ export class MachinenewComponent implements OnInit {
   ngOnInit() {
     this.service.machine(this.tenant).subscribe(res => {
     console.log(res);
-    this.machine_response=res;
+    this.machine_response[0]=res;
     console.log(localStorage.getItem('token'));})
 
     this.service.getoption(this.tenant).subscribe(res =>{

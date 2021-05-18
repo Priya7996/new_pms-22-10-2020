@@ -3,7 +3,7 @@
 
 html {  scroll-behavior: smooth;}
 html, body { height: 100%; outline: 0; }
-body { margin: 0;  font-family: 'Rubik', sans-serif; }
+body { margin: 0;  font-family: 'Rubik', sans-serif; } 
 
 
 /* SCROLL BAR */
@@ -424,7 +424,7 @@ table{
 .filter_sec {
     display: flex;
     align-items: start;
-    flex-wrap: wrap;
+    
     &.mt-10{
         margin-top: 10px!important;
     }
@@ -1151,4 +1151,26 @@ mat-icon.mat-icon.notranslate.material-icons.mat-icon-no-color {
 
 .card_sec table tr.mat-row:nth-child(odd) {
     background-color: #e7e5e5 !important;
+}
+
+.highcharts-background {
+    fill:transparent;
+  }
+
+  .highcharts-gauge-series path, .highcharts-gauge-series circle {
+    fill: #ffffff;
+}
+
+.bg_grad {
+    background-image: linear-gradient(#1b1d24, #373b47);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.vetrical-line {
+    width: auto;
+    height: 2px;
+    background: #3f3f3f;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

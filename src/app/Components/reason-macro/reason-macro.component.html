@@ -215,7 +215,9 @@
             </div> -->
   
         </div>
-    
+        <div *ngIf="machine_response?.length==0" class="no_data_found">
+            <h2>No Reasons found</h2>
+        </div> 
       </div>
     </div>
   </section>

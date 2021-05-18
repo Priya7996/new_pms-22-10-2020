@@ -73,16 +73,7 @@
                 
                 </li>
 
-                <li>
-                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                    (click)="manage(element,element.id)" mattooltip="Edit" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">cached
-                  </mat-icon>
-
-                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
-                  (click)="usernot()" mattooltip="Edit" *ngIf = "Role_NAME == 'Supervisor'">cached
-                </mat-icon>
-                
-                </li>
+              
 
                 <li>
                   <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
@@ -93,6 +84,18 @@
                   <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
                   (click)="usernot()" mattooltip="Delete" *ngIf = "Role_NAME == 'Supervisor'">delete
                 </mat-icon>
+                </li>
+
+
+                <li>
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                    (click)="manage(element,element.id)" mattooltip="Edit" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">send
+                  </mat-icon>
+
+                  <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                  (click)="usernot()" mattooltip="Edit" *ngIf = "Role_NAME == 'Supervisor'">send
+                </mat-icon>
+                
                 </li>
               </ul>
             </ng-container>

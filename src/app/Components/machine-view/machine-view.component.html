@@ -150,22 +150,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-12 col-xs-12 main_col sec_center">
-                                <div class="rpm_holder">                          
-                                    <div class="container">
-                                      <div class="row">
-                                          <div class="col-sm-6">Spindle Speed
-                                            <div id="containergokul" style="width:100%; height:200px; margin: 0 auto"></div>
+                            <div class="col-lg-4 col-md-12 col-xs-12 ">
+                                                          
+                                      <div class="row_spindle">
+                                         
+                                          <div class="col-lg-6">
+                                            <div id="containergokul" style="width:200px; height:180px; margin: 0 auto"></div>
                                           </div>
-                                          <div class="col-sm-6">Feed Rate
-                                            <div id="FeedRategokul" style="width:100%; height:200px; margin: 0 auto"></div>
+                                          <div class="col-lg-6">
+                                            <div id="FeedRategokul" style="width:200px; height:180px; margin: 0 auto; " ></div>
                                           </div>
-                                      </div>
-                                    </div>
-                                </div>
+                                        </div>
+                                    
                                 <div  class="col-sm-4">
                                     <h2 style="font-size: 20px">Servo Load </h2>
-                                    <div  style="font-size:14px; height: 227px">
+                                    <div  style="font-size:14px; height: 180px">
                                         <div class="axis_txt" *ngFor="let mach of testgokul | keyvalue">
                                              {{mach.key }}
                                              <span class="axis_txt float-right">{{mach.value}} %</span>
@@ -180,21 +179,20 @@
                                             </div>
                                         </div>
 
-                                     
-
-
-
                                         </div>
                                     </div>
-
                                 </div>
+
+                               
                                 <div class="bg_grad">
                                     <div class="mac_alarm">
-                                        <h5 class="brdr_botm"><i class="material-icons">
-                                                notification_important
-                                            </i>Recent Alarms</h5>
-                                        <div class="brdr_top mac_alarm_innr"> {{machie_status?.alarm}}</div>
+                                        <mat-icon class="sep">notifications</mat-icon>
+                                        <h5 class="brdr_botm">Recent Alarms</h5>
                                     </div>
+
+                                    <div class="Vertical-line"></div>
+
+                                    <div class="brdr_top mac_alarm_innr"> {{machie_status?.alarm}}</div>
                                 </div>
                             </div>
 
@@ -213,14 +211,15 @@
                                         <span class="mac_ut_time">{{machie_status?.total_run_time}}</span>
                                     </div>
                                 </div>
- 
+                                <div class="container one"> 
+                                    <h2>Pulse Coder Temperature</h2>   
                                 <div class="bg_grad donut_small bg_grad_temp">
-                                    <h2>Pulse Coder Temperature</h2>
+                                    
                                     <div class="row_sec temperature" *ngFor="let pu of machie_statusnew | keyvalue">
                                         <div class="col brdr_right axis_display">
                                             <div class="gradient-wrapper servo_motor_chart">
                                                 <circle-progress [percent]=pu.value [radius]="100" [outerStrokeWidth]="16"
-                                                    [innerStrokeWidth]="false" [outerStrokeColor]="'#48ba46'"
+                                                    [innerStrokeWidth]="16" [outerStrokeColor]="'#48ba46'" [innerStrokeColor]="'#78542C'"
                                                     [animation]="true" [animationDuration]="300"></circle-progress>
                                             </div>
                                             <p>{{pu.key}}</p>
@@ -228,13 +227,15 @@
                                       
                                     </div>
                                 </div>
+                                </div>
+                                <h2>Servo Motor Temperature</h2>
                                 <div class="bg_grad donut_small bg_grad_temp">
-                                    <h2>Servo Motor Temperature</h2>
+                                    
                                     <div class="row_sec temperature" *ngFor="let te of machie_statustemp | keyvalue" >
                                         <div class="col brdr_right axis_display">
                                             <div class="gradient-wrapper servo_motor_chart">
                                                 <circle-progress [percent]=te.value [radius]="100" [outerStrokeWidth]="16"
-                                                    [innerStrokeWidth]="false" [outerStrokeColor]="'#48ba46'"
+                                                    [innerStrokeWidth]="16" [outerStrokeColor]="'#48ba46'" [innerStrokeColor]="'#78542C'"
                                                     [animation]="true" [animationDuration]="300"></circle-progress>
                                             </div>
                                             <p>{{te.key}}</p>
@@ -242,25 +243,26 @@
                                       
                                     </div>
                                 </div>
-
+                                
+                                <h5 style="font-size: 20px">Spindle</h5>
                     <div class="bg_grad donut_small bg_grad_temp">
-                        <h5 style="font-size: 20px">Spindle</h5>
-                        <div class="row align-items-center brdr_right">
+                        
+                        <div class="row_sec temperature">
                           <div class="col-sm-6 text-center">
-                            <div class="gradient-wrapper2"  >
+                            <div class="gradient-wrapper servo_motor_chart">
                                 <circle-progress [percent]=machie_status?.spindle_load [radius]="100" [outerStrokeWidth]="16"
-                                                    [innerStrokeWidth]="false" [outerStrokeColor]="'#48ba46'"
+                                                    [innerStrokeWidth]="16" [outerStrokeColor]="'#48ba46'" [innerStrokeColor]="'#78542C'"
                                                     [animation]="true" [animationDuration]="300"></circle-progress>
                             </div>
-                            <p style="font-size: 14px; font-weight: 800">Load</p>
+                            <p style="font-size: 14px;">Load</p>
                           </div>
-                          <div class="col-sm-6 text-center brdr_left">
-                            <div class="gradient-wrapper8">
+                          <div class="col-sm-6 text-center">
+                            <div class="gradient-wrapper servo_motor_chart">
                                 <circle-progress [percent]=machie_status?.sp_temp [radius]="100" [outerStrokeWidth]="16"
-                                                    [innerStrokeWidth]="false" [outerStrokeColor]="'#48ba46'"
+                                                    [innerStrokeWidth]="16" [outerStrokeColor]="'#48ba46'" [innerStrokeColor]="'#78542C'"
                                                     [animation]="true" [animationDuration]="300"></circle-progress>
                             </div>
-                            <p style="font-size: 14px; font-weight: 800">Motor Temperature</p>
+                            <p style="font-size: 14px;">Motor Temperature</p>
                           </div>
                         </div>
                      </div>

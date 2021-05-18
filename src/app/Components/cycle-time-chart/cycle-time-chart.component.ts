@@ -186,7 +186,7 @@ this.diffparts = uniqs;
           
         
           style: {
-            fontFamily: 'roboto'
+            fontFamily: 'Rubik, sans-serif'
           }
         },
         title: {
@@ -266,7 +266,7 @@ this.diffparts = uniqs;
         zoomType: 'xy',
 
         style: {
-          fontFamily: 'roboto'
+          fontFamily: 'Rubik, sans-serif'
         }
       },
       title: {
@@ -610,6 +610,9 @@ this.diffparts = uniqs;
     }]
     }
 
+  }
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.date = event.value;
   }
   tableview() {
 

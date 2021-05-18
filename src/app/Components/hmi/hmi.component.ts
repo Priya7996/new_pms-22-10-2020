@@ -222,13 +222,19 @@ console.log(res.a);
     tooltip: {
       valueDecimals: 2,
       valueSuffix: '%'
-    }
-  }, {
+    },
+  },
+  
+  
+  
+  {
     name: 'Complaints',
     type: 'column',
     zIndex: 2,
     data: res.cumulative
   }]
+
+  
 });
 
 })
@@ -248,7 +254,7 @@ console.log(res.a);
           plotBackgroundColor: null,                                
           plotBorderWidth: 0,
           plotShadow: false,
-          backgroundColor: '#212226',
+          backgroundColor: '#ddd',
           spacingBottom: 0,
           spacingTop: 0,
           spacingRight: 0,
@@ -299,12 +305,12 @@ console.log(res.a);
         plotOptions: {
           pie: {
             colors: [
-              '#5D5D5D',
-              '#E8BE15',
-              '#207A24',
-              '#00ffff',
-              '#ff00ff',
-              '#ff0000',
+              '#2DCB75',
+              '#D5F30B',
+              '#FFAF00',
+              '#FF0000',
+              '#007ED6',
+              '#1BAA2F',
             ],
             dataLabels: {
               enabled: true,
@@ -315,7 +321,7 @@ console.log(res.a);
               }
             },
   
-            size: '100%'
+            size: '80%'
           }
         },
         series: [{
