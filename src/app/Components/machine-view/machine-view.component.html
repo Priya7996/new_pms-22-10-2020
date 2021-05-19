@@ -7,7 +7,7 @@
             <div class="content-inner active content-dashboard">
                 <div class="container-fluid">
                     <div class="wrapper_inner">
-                        <div class="mec_head">
+                        <div class="mec_head" [routerLink]="['/machine']">
                             <div class="row_sec main_header">
                                 <div class="col-lg-5 col-md-4 col-xs-12 v_mid">
                                     <h2 class="title">{{machie_status?.machine_name}} </h2>
@@ -70,7 +70,7 @@
                                             <span class="machine_status">Idle
                                             </span>
                                         </p>
-                                        <span class="machine_status" *ngIf="machie_status?.machine_status =='null'">No Data
+                                        <span class="machine_status" *ngIf="machie_status?.machine_status !='3' && machie_status?.machine_status !='100' && machie_status?.machine_status == null ">Disconnect
                                         </span>
                                     </div>
                                     <h5>{{machie_status?.job_name}}</h5>
@@ -79,7 +79,22 @@
                                     <div class="circle_progress_wrapper utilization_chart">
                                         <span>Utilization</span>
                                         <circle-progress percent="{{machie_status?.utilization}}" radius="100"
-                                            outerStrokeColor="#48ba46" innerStrokeColor="#78542C" animation="true"
+                                            outerStrokeColor="#48ba46" innerStrokeColor="#78542C" animation="true"  *ngIf="machie_status?.machine_status =='3'"
+                                            animationDuration="300"></circle-progress>
+
+ 
+                                            <circle-progress percent="{{machie_status?.utilization}}" radius="100"
+                                            outerStrokeColor="#F53E17" innerStrokeColor="#78542C" animation="true"  *ngIf="machie_status?.machine_status =='100'"
+                                            animationDuration="300"></circle-progress>
+
+
+                                            <circle-progress percent="{{machie_status?.utilization}}" radius="100"
+                                            outerStrokeColor="#DBCF19" innerStrokeColor="#78542C" animation="true" *ngIf="machie_status?.machine_status !='3' && machie_status?.machine_status !='100' && machie_status?.machine_status != null "
+                                            animationDuration="300"></circle-progress>
+
+
+                                            <circle-progress percent="{{machie_status?.utilization}}" radius="100"
+                                            outerStrokeColor="#A1A099" innerStrokeColor="#78542C" animation="true" *ngIf="machie_status?.machine_status !='3' && machie_status?.machine_status !='100' && machie_status?.machine_status == null "
                                             animationDuration="300"></circle-progress>
                                     </div>
                                 </div>
@@ -164,6 +179,10 @@
                                     
                                 <div  class="col-sm-4">
                                     <h2 style="font-size: 20px">Servo Load </h2>
+
+                                    <div *ngIf="machie_statustemp?.length==0" class="no_data_found">
+                                        <h2>No Servo Load found</h2>
+                                    </div>  
                                     <div  style="font-size:14px; height: 180px">
                                         <div class="axis_txt" *ngFor="let mach of testgokul | keyvalue">
                                              {{mach.key }}
@@ -181,6 +200,9 @@
 
                                         </div>
                                     </div>
+
+                                                               
+                                
                                 </div>
 
                                

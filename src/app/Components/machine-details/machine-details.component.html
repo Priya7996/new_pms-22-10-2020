@@ -71,8 +71,7 @@
                                                 <span class="mac_ut_bar_red">Stop
                                                 </span>
                                             </p> -->
-                                                <span class="machine_status" *ngIf="mac?.machine_status =='null'">No
-                                                    Data
+                                                <span class="machine_status" *ngIf="mac?.machine_status !='3' && mac?.machine_status !='100' && mac?.machine_status == null ">Disconnect
                                                 </span>
                                             </div>
                                             <div class="info_title">

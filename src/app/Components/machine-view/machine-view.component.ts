@@ -143,6 +143,9 @@ export class MachineViewComponent implements OnInit {
       exporting: {
         enabled: false
       },
+      credits: {
+        enabled: false
+      },
       series: [{
         name: 'Spindle Speed',
         data: [this.machie_status.spindle_speed],
@@ -223,6 +226,9 @@ export class MachineViewComponent implements OnInit {
       },
 
       exporting: {
+        enabled: false
+      },
+      credits: {
         enabled: false
       },
       series: [{

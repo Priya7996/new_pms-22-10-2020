@@ -7,7 +7,7 @@
                     <span class="v-align-middle">Machine Status</span>
                 </h2>
                 <div class="table_export">
-                    <a [routerLink]="['/dashboard']" class="export_btn">
+                    <a [routerLink]="['/machine_details']" class="export_btn">
                         <i class="material-icons">
                             laptop
                         </i>
@@ -16,59 +16,47 @@
                     </a>
                 </div>
             </div>
-            <!-- filter_sec start-->
+            <!-- filter_sec start-->  
             <mat-card class="card_sec">
-                <mat-card-content>
+                <mat-card-content> 
+                    <form [formGroup]="login" (ngSubmit)="logintest(login.value)">
                     <div class="filter_sec">
                         <div class="filter_field">
                             <mat-form-field appearance="outline">
-                                <mat-select placeholder="Select Machine" matNativeControl required [(ngModel)]="machine"
-                                    (selectionChange)="notify()">
-                                    <mat-option *ngFor="let machine of machine_response" [value]="machine.id">
-                                        {{machine.machine_name}}
-                                    </mat-option>
+                                <mat-select placeholder="Select Machine" matNativeControl required 
+                                formControlName="machine" >
+              
+                                  <mat-option *ngFor="let machines of machine_response" [value]="machines.id" (click)="getmachine(machines.machine_name,machines.id)">
+                                    {{machines.machine_name}}
+                                  </mat-option>
                                 </mat-select>
-                            </mat-form-field>
+                              </mat-form-field> 
                         </div>
 
                         <div class="filter_field">
                             <mat-form-field appearance="outline">
-                                <!-- <mat-select placeholder="Select type" matNativeControl [(ngModel)]="type"
-                                    (change)="typechange($event)" required >
-                                    
-                                </mat-select> -->
-
-                                <input matInput formControlName="shiftlist" placeholder="{{show_response?.shift}}"
-                                    required>
+                                <input matInput formControlName="shiftlist"  value="{{show_response?.shift}}"
+                                    readonly>
                             </mat-form-field>
-                        </div>
-<!-- 
-                        <div class="filter_field date_picker">
-                            <ejs-daterangepicker placeholder="{{show_response?.date}}" [max]='maxDate' [min]='minDate'
-                                (click)="daterangepicker.open()" formControlName="date">
-                                <e-presets>
-                                    <e-preset label="This Week" [start]='weekStart' [end]='weekEnd'></e-preset>
-                                    <e-preset label="This Month" [start]='monthStart' [end]='monthEnd'></e-preset>
-                                    <e-preset label="Last Month" [start]='lastStart' [end]='lastEnd'></e-preset>
-                                    <e-preset label="Last Year" [start]='yearStart' [end]='yearEnd'></e-preset>
-                                </e-presets>
-                            </ejs-daterangepicker>
-                        </div> -->
-
-                        
-              <div class="filter_field">
-                <mat-form-field>
+                        </div><div class="filter_field">
+                <!-- <mat-form-field>
                   <mat-label>Date</mat-label>
                   <input matInput [matDatepicker]="picker" formControlName="date" (click)="picker.open()">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
-                </mat-form-field>
+                </mat-form-field> -->
+
+                <div class="filter_field">
+                    <mat-form-field appearance="outline">
+                        <input matInput formControlName="date" value="{{show_response?.date}}"
+                        readonly>
+                    </mat-form-field>
+                </div>
               </div>
-                        <!-- <button mat-raised-button class="filter_btn btn_success"><i class="material-icons">
-                                remove_red_eye
-                            </i> View Report</button> -->
+                   
 
                     </div>
+                </form>
                 </mat-card-content>
             </mat-card>
 

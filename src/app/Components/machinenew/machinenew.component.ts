@@ -29,6 +29,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../../Nav/navbar.service';
 import * as Highcharts from 'highcharts';
 import { MachineNewService} from '../../Service/app/machine-new.service';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -128,8 +129,9 @@ export class MachinenewComponent implements OnInit {
 //   }
 
  
+login: FormGroup;
 
-
+machineName:any;
   show:boolean=true;
   tenant: any;
   machine_response: any;
@@ -139,17 +141,49 @@ export class MachinenewComponent implements OnInit {
   toggle_id: any;
   machine:any;
   hour_times: any;
-  constructor(private nav:NavbarService,private service:MachineNewService) {
+  constructor(private fb: FormBuilder,private nav:NavbarService,private service:MachineNewService) {
     this.nav.show();
     this.tenant=localStorage.getItem('tenant_id')
 
    }
 
   ngOnInit() {
+    
+
+    this.login = this.fb.group({
+      machine: ["", Validators.required],
+      shiftlist: [""],
+      date: [""]
+
+    })
     this.service.machine(this.tenant).subscribe(res => {
-    console.log(res);
-    this.machine_response[0]=res;
-    console.log(localStorage.getItem('token'));})
+    this.machine_response=res;
+    console.log(this.machine_response)
+    console.log(this.machine_response[0].machine_name);
+
+    for(let i=0; i<this.machine_response.length; i++){
+        this.machineName = this.machine_response[i].machine_name
+        console.log(this.machineName)
+       this.login.patchValue({
+        machine: this.machine_response[i].machine_name,
+       })
+      
+    }
+    // this.login.patchValue({
+    //   machine: this.machine_response[0].machine_name,
+    // })
+
+
+    // for(let i=0; i<this.machine_response[0]; i++){
+    //     this.machineName = this.machine_response[0].machine_name
+    //     console.log(this.machineName);
+    //    this.login.patchValue({
+    //     machine: this.machine_response[0].machine_name,
+    //    })
+      
+    // }
+  
+  })
 
     this.service.getoption(this.tenant).subscribe(res =>{
       console.log(res);
@@ -164,10 +198,12 @@ export class MachinenewComponent implements OnInit {
     })
     
     }
-
-    notify(){
-      console.log(this.machine)
-      this.toggle_id=this.machine
+logintest(val){
+  console.log(val);
+}
+getmachine(val,id){
+      console.log(val,id)
+      this.toggle_id=id
     
      this.service.changemachine(this.tenant,this.toggle_id).subscribe(res => {
         console.log(res);
