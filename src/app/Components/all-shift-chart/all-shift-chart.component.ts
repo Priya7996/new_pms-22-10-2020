@@ -20,7 +20,7 @@ export class AllShiftChartComponent implements OnInit {
 //form data
 machineName:any;
 SHIFT_ID:any;
-
+correct:any;
   // first chart
  Highcharts1 = Highcharts;
  chartOptions1: any;
@@ -29,7 +29,7 @@ SHIFT_ID:any;
  parts = [];
  c_time = [];
  pro_number = [];
-
+ all_cycle_resp:any;
 
  // second chart
  Highcharts2 = Highcharts;
@@ -43,7 +43,7 @@ SHIFT_ID:any;
  idlearryul1:any = [];
  stoparryul1:any = [];
  noarryul1:any = [];
-
+ allcycle_response:any;
 
  currentstatus:any;
     tenant: any;
@@ -523,6 +523,17 @@ exporting:{
  this.myLoader1= true;
 
  this.service.all_cycle_time_chart_new(register).pipe(untilDestroyed(this)).subscribe(res => {
+   this.allcycle_response = res;
+   console.log(this.allcycle_response);
+   for(let i in this.allcycle_response){
+    console.log(i)
+    this.correct = this.allcycle_response[i];
+    console.log(this.correct)
+    for(let j in this.allcycle_response[i][0]){
+      console.log(j)
+    }
+  
+   }
     this.myLoader1= false;
 
  })

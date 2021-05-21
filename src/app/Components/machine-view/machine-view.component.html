@@ -70,8 +70,15 @@
                                             <span class="machine_status">Idle
                                             </span>
                                         </p>
-                                        <span class="machine_status" *ngIf="machie_status?.machine_status !='3' && machie_status?.machine_status !='100' && machie_status?.machine_status == null ">Disconnect
+
+
+                                        <p class="disconnect machine_status_view"
+                                        *ngIf="machie_status?.machine_status !='3' && machie_status?.machine_status !='100' && machie_status?.machine_status == null ">
+                                        <span class="machine_status">Disconnect
                                         </span>
+                                    </p>
+                                        <!-- <span class="disconnect machine_status_view" *ngIf="machie_status?.machine_status !='3' && machie_status?.machine_status !='100' && machie_status?.machine_status == null ">Disconnect
+                                        </span> -->
                                     </div>
                                     <h5>{{machie_status?.job_name}}</h5>
                                 </div>
@@ -271,7 +278,7 @@
                         
                         <div class="row_sec temperature">
                           <div class="col-sm-6 text-center">
-                            <div class="gradient-wrapper servo_motor_chart">
+                            <div class="gradient-wrapper servo_motor_chart seperate">
                                 <circle-progress [percent]=machie_status?.spindle_load [radius]="100" [outerStrokeWidth]="16"
                                                     [innerStrokeWidth]="16" [outerStrokeColor]="'#48ba46'" [innerStrokeColor]="'#78542C'"
                                                     [animation]="true" [animationDuration]="300"></circle-progress>
@@ -279,7 +286,7 @@
                             <p style="font-size: 14px;">Load</p>
                           </div>
                           <div class="col-sm-6 text-center">
-                            <div class="gradient-wrapper servo_motor_chart">
+                            <div class="gradient-wrapper servo_motor_chart seperate">
                                 <circle-progress [percent]=machie_status?.sp_temp [radius]="100" [outerStrokeWidth]="16"
                                                     [innerStrokeWidth]="16" [outerStrokeColor]="'#48ba46'" [innerStrokeColor]="'#78542C'"
                                                     [animation]="true" [animationDuration]="300"></circle-progress>

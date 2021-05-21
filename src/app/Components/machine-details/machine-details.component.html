@@ -12,14 +12,19 @@
                 </h2>
                 <ul class="machine_identifier">
                     <li>
-                        <button type="text" class="add_btn" mat-button [routerLink]="['/machine_registration']">Add
-                            New</button>
+                        <button type="text" class="add_btn" mat-button [routerLink]="['/machine_registration']">Add New Machines</button>
                     </li>
                  
                 </ul>
             </div>
+
+            <div *ngIf="GODBless?.length==0" class="no_data_found">
+                <h2>No Machines Found.Please Register Machine and shift </h2>
+            </div>  
+            
+
             <div class="machines_details" id="machine_details_sec"
-                *ngFor="let machine of machine_response?.data | keyvalue">
+                *ngFor="let machine of machine_response?.data | keyvalue ; let i=index">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-xd-12 mb-2">
                         <div class="machine_item_details">
@@ -30,9 +35,11 @@
                                 </h3>
                                 <div class="machine_total">
                                     <a>All ({{machine.value.length}})</a>
-                                    <a>Running ({{machine.value.length}})</a>
-                                    <a>Idle ({{machine.value.length}})</a>
-                                    <a>Stop ({{machine.value.length}})</a>
+                                    <a>Running ({{machine_response.count[machine.key].running}})</a>
+                                    <a>Idle ({{ (machine_response.count[machine.key]["2"]) -- (machine_response.count[machine.key].idle) -- (machine_response.count[machine.key].idle1)}})</a>
+                                    <a>Stop ({{machine_response.count[machine.key].stop}})</a>
+                                    <a>Disconnect ({{machine_response.count[machine.key].waste}})</a>
+
 
 
                                 </div>
@@ -71,8 +78,15 @@
                                                 <span class="mac_ut_bar_red">Stop
                                                 </span>
                                             </p> -->
-                                                <span class="machine_status" *ngIf="mac?.machine_status !='3' && mac?.machine_status !='100' && mac?.machine_status == null ">Disconnect
-                                                </span>
+
+
+                                            <p class="disconnect machine_status_view"
+                                            *ngIf="mac?.machine_status !='3' && mac?.machine_status !='100' && mac?.machine_status == null ">
+                                            <span class="machine_status">Disconnect
+                                            </span>
+                                        </p>
+                                                <!-- <span class="machine_status" *ngIf="mac?.machine_status !='3' && mac?.machine_status !='100' && mac?.machine_status == null ">Disconnect
+                                                </span> -->
                                             </div>
                                             <div class="info_title">
                                                 <h2>{{mac.mac_name }}</h2>
