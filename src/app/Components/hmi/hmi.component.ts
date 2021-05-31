@@ -188,6 +188,9 @@ console.log(res.a);
   tooltip: {
     shared: true
   },
+  credits: {
+    enabled: false
+  },
   xAxis: {
     categories: res.reason,
     // title: {
@@ -228,7 +231,7 @@ console.log(res.a);
   
   
   {
-    name: 'Complaints',
+    name: 'Reasons',
     type: 'column',
     zIndex: 2,
     data: res.cumulative
@@ -243,102 +246,148 @@ console.log(res.a);
     this.service.chart(register).pipe(untilDestroyed(this)).subscribe(res => {
       this.myLoader1 = false;
       this.chart_pie = res;
-      console.log(res.reason);
+      console.log(this.chart_pie);
       // for(let i=0;i<this.chart_pie.length;i++){
       //   console.log(this.chart_pie)
 
 
       // }
-      Highcharts.chart('comparepie2', {
-        chart: {
-          plotBackgroundColor: null,                                
-          plotBorderWidth: 0,
-          plotShadow: false,
-          backgroundColor: '#ddd',
-          spacingBottom: 0,
-          spacingTop: 0,
-          spacingRight: 0,
-          spacingLeft: 0,
-          margin: 0,
-          height: '50%',
+      // Highcharts.chart('comparepie2', {
+      //   chart: {
+      //     plotBackgroundColor: null,                                
+      //     plotBorderWidth: 0,
+      //     plotShadow: false,
+      //     backgroundColor: '#ddd',
+      //     spacingBottom: 0,
+      //     spacingTop: 0,
+      //     spacingRight: 0,
+      //     spacingLeft: 0,
+      //     margin: 0,
+      //     height: '50%',
   
-        },
-        // navigation: {
-        //   buttonOptions: {
-        //     theme: {
-        //       'stroke-width': 1,
-        //       stroke: null,
-        //       fill: '#0b0b0b',
-        //       r: 0,
-        //       states: {
-        //         hover: {
-        //           fill: '#1a1919'
-        //         },
-        //         select: {
-        //           fill: '#1a1919'
-        //         }
-        //       }
-        //     }
-        //   }
-        // },
-        title: {
-          text: '',
+      //   },
+        
+      //   title: {
+      //     text: '',
   
-          align: 'center',
-          verticalAlign: 'middle',
-          style: {
-            fontSize: '14px',
-            color: 'white'
-          }
-        },
-        tooltip: {
-          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        accessibility: {
-          point: {
-            valueSuffix: '%'
-          }
-        },
-        credits: {
-          enabled: false
-        },
-        plotOptions: {
-          pie: {
-            colors: [
-              '#2DCB75',
-              '#D5F30B',
-              '#FFAF00',
-              '#FF0000',
-              '#007ED6',
-              '#1BAA2F',
-            ],
-            dataLabels: {
-              enabled: true,
-              distance: -50,
-              style: {
-                fontWeight: 'bold',
-                color: 'white'
-              }
-            },
+      //     align: 'center',
+      //     verticalAlign: 'middle',
+      //     style: {
+      //       fontSize: '14px',
+      //       color: 'white'
+      //     }
+      //   },
+      //   tooltip: {
+      //     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      //   },
+      //   accessibility: {
+      //     point: {
+      //       valueSuffix: '%'
+      //     }
+      //   },
+      //   credits: {
+      //     enabled: false
+      //   },
+      //   plotOptions: {
+      //     pie: {
+      //       colors: [
+      //         '#2DCB75',
+      //         '#D5F30B',
+      //         '#FFAF00',
+      //         '#FF0000',
+      //         '#007ED6',
+      //         '#1BAA2F',
+      //       ],
+      //       dataLabels: {
+      //         enabled: true,
+      //         distance: -50,
+      //         style: {
+      //           fontWeight: 'bold',
+      //           color: 'white'
+      //         }
+      //       },
   
-            size: '80%'
-          }
-        },
-        series: [{
-          type: 'pie',
-          borderWidth: 0,
+      //       size: '80%'
+      //     }
+      //   },
+      //   series: [{
+      //     type: 'pie',
+      //     borderWidth: 0,
   
-          innerSize: '60%',
-          data:  res.reason
-          // [
+      //     innerSize: '60%',
+      //     data:  res.reason
+       
+      //   }]
+  
+      // });
 
-          //   ['Idle',6],
-          //   ['Run',8],
 
-          // ]
-        }]
-  
-      });
+
+      // Create the chart
+// Radialize the colors
+// Highcharts.setOptions({
+//   colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
+//     return {
+//       radialGradient: {
+//         cx: 0.5,
+//         cy: 0.3,
+//         r: 0.7
+//       },
+//       stops: [
+//         [0, color],
+//         [1, Highcharts.color(color).brighten(-0.3).get('rgb')] // darken
+//       ]
+//     };
+//   })
+// });
+
+// Build the chart
+Highcharts.chart('comparepie2', {
+  chart: {
+    plotBackgroundColor: null,
+    plotBorderWidth: null,
+    plotShadow: false,
+    type: 'pie'
+  },
+  title: {
+    text: 'Downtime Idle Reason chart' 
+  },
+  tooltip: {
+    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+  },
+  accessibility: {
+    point: {
+      valueSuffix: '%'
+    }
+  },
+  credits: {
+       enabled: false
+       },
+  plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: true,
+        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+        connectorColor: 'silver'
+      }
+    }
+  },
+  series: [{
+    name: 'Share',
+    data: this.chart_pie
+      // { name: 'Internet Explorer', y: 11.84 },
+      // { name: 'Firefox', y: 10.85 },
+      // { name: 'Edge', y: 4.67 },
+      // { name: 'Safari', y: 4.18 },
+      // { name: 'Other', y: 7.05 }
+    
+  }]
+});
+
+
+
     
     //  this. chartOptions = {
     //     chart: {

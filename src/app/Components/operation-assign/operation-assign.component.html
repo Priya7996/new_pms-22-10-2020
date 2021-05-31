@@ -64,9 +64,12 @@
                 <th mat-header-cell *matHeaderCellDef> Action </th>
                 <ul *matCellDef="let element" class="table_action">
                   <li>
-                    <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
+                    <!-- <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
                     (click)="operator_show(element)" mattooltip="Edit" >open_in_new
-                  </mat-icon>
+                  </mat-icon> -->
+
+                  <button mat-raised-button  (click)="operator_show(element)" class="buton">
+                    View</button>
                   </li>
                   <li>
                     <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"

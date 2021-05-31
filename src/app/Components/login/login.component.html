@@ -17,7 +17,7 @@
           <mat-error *ngIf="login.controls['email_id'].hasError('pattern')"> Enter valid email address</mat-error>
 
           </mat-form-field>
-
+ 
           <mat-form-field class="form">
             <mat-label>Password</mat-label>
             <input matInput formControlName="password" placeholder="Password" [type]=" hide ? 'password' : 'text'"

@@ -17,12 +17,29 @@ export class PasswordComponent implements OnInit {
   show: boolean = true;
   fo_id:any;
   tenant:any;
+  fo_ln:any;
+  fo_fn:any;
   constructor(private fb: FormBuilder, public dialog: MatDialog, private nav: NavbarService, private service: LoginService, private router: Router) {
     this.nav.hide();
     this.tenant=localStorage.getItem('tenant_id')
 
     this.fo_id = localStorage.getItem('fid')
+    this.fo_fn = localStorage.getItem('forgotpage_fname')
+    this.fo_ln = localStorage.getItem('forgotpage_lname')
+    console.log(this.fo_fn,this.fo_ln)
+
     console.log(this.fo_id)
+    if(this.fo_fn  === []){
+      alert("Finalwork THANKSVAPMSP")
+    }
+
+    if(this.fo_fn  == ""){
+      alert("Finnalwork THANKSVAPMSP")
+    }
+    if(this.fo_id == 'null'){
+      console.log("Thanks")
+      alert("superThanks VAPMS")
+    }
   }
   ngOnInit() {
    
@@ -36,17 +53,16 @@ export class PasswordComponent implements OnInit {
     console.log(valu);
  
 if(valu.password  === valu.con_password){
-  Swal.fire("true")
   let data = {'default':valu.con_password,'password_digest': valu.con_password,'password': valu.con_password}
   console.log(data);
 
   this.service.forhot_change(this.fo_id,data).subscribe(res => {
    console.log(res)
    if (res.status === true) {
-    Swal.fire("Password changed successfully")
+    Swal.fire(res.msg)
     this.router.navigateByUrl('');
 
-  } else if (res.status === false){
+  } else {
     Swal.fire("Something Went wrong")
     
   }

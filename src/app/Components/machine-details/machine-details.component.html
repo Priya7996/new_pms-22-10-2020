@@ -30,15 +30,45 @@
                         <div class="machine_item_details">
                         
                             <div class="machine_info">
-                                <h3>
+                                <h3> 
                                     {{machine.key}}
                                 </h3>
                                 <div class="machine_total">
                                     <a>All ({{machine.value.length}})</a>
-                                    <a>Running ({{machine_response.count[machine.key].running}})</a>
-                                    <a>Idle ({{ (machine_response.count[machine.key]["2"]) -- (machine_response.count[machine.key].idle) -- (machine_response.count[machine.key].idle1)}})</a>
-                                    <a>Stop ({{machine_response.count[machine.key].stop}})</a>
-                                    <a>Disconnect ({{machine_response.count[machine.key].waste}})</a>
+                                    <a>Running ({{machine_response.count[machine.key].running || '0'}})</a>
+                                    <a *ngIf="machine_response.count[machine.key].idle  || machine_response.count[machine.key].idle1  || machine_response.count[machine.key]['2']">
+                                        IdleAll ({{ (machine_response.count[machine.key]["2"]) -- (machine_response.count[machine.key].idle) -- (machine_response.count[machine.key].idle1)}})
+                                    
+                                    </a>
+
+
+                                    <a *ngIf="machine_response.count[machine.key].idle  || machine_response.count[machine.key].idle1">
+                                        Idle&idle1 ({{(machine_response.count[machine.key].idle) -- (machine_response.count[machine.key].idle1)}})
+                                    
+                                    </a>
+
+
+
+                                    <a *ngIf="machine_response.count[machine.key].idle1  ||machine_response.count[machine.key]['2']">
+                                        Idle1@2 ({{ (machine_response.count[machine.key]["2"]) --  (machine_response.count[machine.key].idle1)}})
+                                    
+                                    </a>
+
+
+                                    <a *ngIf="machine_response.count[machine.key].idle  || machine_response.count[machine.key]['2']">
+                                        Idle@2 ({{ (machine_response.count[machine.key]["2"]) -- (machine_response.count[machine.key].idle)}})
+                                    
+                                    </a>
+
+                                    <!-- <a *ngIf="machine_response.count[machine.key].idle">Idle ({{machine_response.count[machine.key].idle || '0'}})</a> -->
+
+                                    <!-- <a *ngIf="machine_response.count[machine.key]['2']">Idle2 ({{machine_response.count[machine.key]["2"] || '0'}})</a> -->
+
+                                    <!-- <a *ngIf="machine_response.count[machine.key].idle1">Idle1 ({{machine_response.count[machine.key].idle1 || '0'}})</a> -->
+
+
+                                    <a>Stop ({{machine_response.count[machine.key].stop || '0'}})</a>
+                                    <a>Disconnect ({{machine_response.count[machine.key].waste || '0'}})</a>
 
 
 

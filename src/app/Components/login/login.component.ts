@@ -109,6 +109,10 @@ export class Dialog {
         Swal.fire('Mail sent successfully.Please check your Mail')
         console.log(res.response[0].id)
         localStorage.setItem('fid', res.response[0].id);
+        localStorage.setItem('forgotpage_fname', res.response[0].first_name);
+        localStorage.setItem('forgotpage_lname', res.response[0].last_name);
+
+
       }
       this.dialogRef.close();
 

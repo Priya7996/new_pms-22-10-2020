@@ -285,8 +285,8 @@ export class Settings {
       else{
         Swal.fire("Updated Sucessfully !")
       }
-      this.dialogRef.close();
-      this.ngOnInit();
+    //  this.dialogRef.close();
+      // this.ngOnInit();
 
      
     })
