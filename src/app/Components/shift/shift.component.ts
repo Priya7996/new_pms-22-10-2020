@@ -208,7 +208,7 @@ export class Edit {
     this.tenant=localStorage.getItem('tenant_id')
     this.login=this.fb.group({
       day_start_time:["",Validators.required],
-      working_time:["",Validators.required],
+      // working_time:["",Validators.required],
       no_of_shift:["",Validators.required],
     })
   }
@@ -221,7 +221,7 @@ export class Edit {
     // })
     let register = {
       "day_start_time": this.convertTimeAM(this.login.value.day_start_time),
-      "working_time": this.login.value.working_time,
+       "working_time": "00:00:00",
       "no_of_shift": this.login.value.no_of_shift,
       "tenant_id":this.tenant
         }

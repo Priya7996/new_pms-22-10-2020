@@ -29,16 +29,11 @@ export class PasswordComponent implements OnInit {
     console.log(this.fo_fn,this.fo_ln)
 
     console.log(this.fo_id)
-    if(this.fo_fn  === []){
-      alert("Finalwork THANKSVAPMSP")
-    }
+   
+    if(this.fo_id == null){
+      Swal.fire("You are not allow to change password.Try it again");
+      this.router.navigateByUrl('');
 
-    if(this.fo_fn  == ""){
-      alert("Finnalwork THANKSVAPMSP")
-    }
-    if(this.fo_id == 'null'){
-      console.log("Thanks")
-      alert("superThanks VAPMS")
     }
   }
   ngOnInit() {

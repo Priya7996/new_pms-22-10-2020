@@ -91,7 +91,7 @@
                   <!-- <mat-header-cell *matHeaderCellDef> Action </mat-header-cell> -->
                   <th mat-header-cell *matHeaderCellDef> Action </th>
                   <ul *matCellDef="let element" class="table_action">
-                    <li>
+                    <!-- <li>
                       <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
                         (click)="shift_edit(element, element.id.$oid)" mattooltip="Edit" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">edit
                       </mat-icon>
@@ -99,7 +99,7 @@
                       <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
                       (click)="usernot()" mattooltip="Edit" *ngIf = "Role_NAME == 'Supervisor'">edit
                     </mat-icon>
-                    </li>
+                    </li> -->
                     <li>
                       <mat-icon mat-button aria-hidden="false" aria-label="Example home icon"
                         (click)="shift_delete(element.id)" mattooltip="Delete" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">delete

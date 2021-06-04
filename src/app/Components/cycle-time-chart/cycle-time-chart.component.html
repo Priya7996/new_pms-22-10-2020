@@ -25,7 +25,7 @@
               </mat-form-field>
             </div>
             <div class="filter_field date_picker">  
-                           
+                            
                 <mat-form-field>
                     <mat-label>Date</mat-label>
                     <input matInput [matDatepicker]="picker" formControlName="date" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">

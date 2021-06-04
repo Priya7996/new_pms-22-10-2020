@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarService} from '../../Nav/navbar.service';
 import { AlarmHistoryService} from '../../Service/app/alarm-history.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder,Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { HttpClient } from '@angular/common/http';
@@ -40,12 +40,12 @@ export class AlarmHistoryReportComponent implements OnInit {
   }
   ngOnInit() {
     this.login = this.fb.group({
-      machine_id:[""],
-      shift_id:[""],
-      operator_id:[""],
-      start_date:[""],
-      end_date:[""],
-      report_type:[""],
+      machine_id:["",Validators.required],
+      shift_id:["",Validators.required],
+      operator_id:["",Validators.required],
+      start_date:["",Validators.required],
+      end_date:["",Validators.required],
+      report_type:["",Validators.required],
     })
     this.service.alarm_history(this.tenant).pipe(untilDestroyed(this)).subscribe(res => {
       this.machine_response=res;
@@ -103,6 +103,23 @@ getsplit(val){
 
 loginfunc(){
   console.log(this.login.value)
+  if(this.login.value.machine_id === ''){
+    alert("Plese select Machine")
+  }
+  else if(this.login.value.report_type === ''){
+    alert("Plese select Type")
+
+  }
+ 
+  else if(this.login.value.start_date === ''){
+    alert("Plese select Start Date")
+
+  }
+  else if(this.login.value.end_date === ''){
+    alert("Plese select End Date")
+
+  }
+  else {
   this.new_date = new DatePipe('en-US').transform(this.login.value.start_date, 'dd-MM-yyyy');
   this.new_date1 = new DatePipe('en-US').transform(this.login.value.end_date, 'dd-MM-yyyy');
 
@@ -127,6 +144,7 @@ loginfunc(){
 
     })
   }
+}
 
   // else if(this.login.value.shift_id === 'undefined' && this.login.value.report_type === 'Shiftwise'){
   //   alert("correctALLshift")
