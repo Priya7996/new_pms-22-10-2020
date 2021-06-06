@@ -11,9 +11,13 @@
                     <span class="v-align-middle">Machines List</span>
                 </h2>
                 <ul class="machine_identifier">
+                    <mat-icon class="add1_btn"  (click)="refresh()" matTooltip="Refresh">refresh</mat-icon>
+
+                 
                     <li>
                         <button type="text" class="add_btn" mat-button [routerLink]="['/machine_registration']">Add New Machines</button>
                     </li>
+
                  
                 </ul>
             </div>

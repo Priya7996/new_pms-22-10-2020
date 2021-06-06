@@ -234,7 +234,7 @@ console.log(res.a);
     name: 'Reasons',
     type: 'column',
     zIndex: 2,
-    data: res.cumulative
+    data: res.individual
   }]
 
   

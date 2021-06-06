@@ -39,4 +39,19 @@ export class MachineDetailsComponent implements OnInit {
     this.route.navigate(['/machine_view'],{ queryParams: { machine_id: id } })
   }
 
+  refresh(){
+    this.myLoader = true;
+    this.service.dashboard_lock(this.tenant).subscribe(res =>{
+      console.log(res);
+      this.GODBless = res;
+
+     
+      console.log(this.GODBless);
+      this.myLoader = false;
+      this.machine_response=res;
+     // console.log(this.machine_response.data['Unit - 1'][0]['machine_id'])
+     console.log(this.machine_response.data) 
+    })
+  }
+
 }
