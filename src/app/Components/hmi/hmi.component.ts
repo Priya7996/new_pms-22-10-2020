@@ -194,18 +194,18 @@ console.log(res.a);
   xAxis: {
     categories: res.reason,
     // title: {
-    //   text: res.individual
+    //   text: 'VAPMS'
     // },
     // p: res.individual,
     crosshair: true
   },
   yAxis: [{
     title: {
-      text: ''
+      text: 'Priya'
     }
   }, {
     title: {
-      text: ''
+      text: 'Dharsini'
     },
     minPadding: 0,
     maxPadding: 0,

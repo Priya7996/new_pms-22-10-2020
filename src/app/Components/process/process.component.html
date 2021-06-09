@@ -9,6 +9,10 @@
           <mat-icon> notes</mat-icon>
           <span class="v-align-middle">Process Plan Registration</span>
         </h2>
+
+        <div>
+          <button (click)="exporter.exportTable('xlsx',{fileName:'Process Plan Configuration'})">Export</button>
+        </div>
         <div class="add_new" >
           <mat-icon class="circle" (click)="user()" *ngIf = "Role_NAME == 'Admin' || Role_NAME == 'Manager'">add</mat-icon>
           <mat-icon class="circle" (click)="usernot()" *ngIf = "Role_NAME == 'Supervisor'">add</mat-icon>
@@ -19,7 +23,7 @@
       </div>
       <mat-card class="card_sec">
         <mat-card-content class="table-responsive">
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+          <table mat-table  matTableExporter #exporter="matTableExporter" [dataSource]="dataSource" class="mat-elevation-z0">
 
             <ng-container matColumnDef="position">
               <th mat-header-cell *matHeaderCellDef> # </th>

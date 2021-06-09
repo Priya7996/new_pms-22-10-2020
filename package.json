@@ -44,6 +44,7 @@
     "highcharts-angular": "^2.4.0",
     "highcharts-pareto": "^0.1.7",
     "mat-table-exporter": "^1.2.5",
+
     "ng-circle-progress": "^1.5.1",
     "ng-packagr": "^3.0.0-rc.0",
     "ng2-codemirror": "^1.1.3",

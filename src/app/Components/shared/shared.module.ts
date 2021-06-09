@@ -13,11 +13,11 @@ import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ExportService } from './export.service';
-import { MatTableExporterModule } from 'mat-table-exporter';
 // import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 @NgModule({
   declarations: [],
