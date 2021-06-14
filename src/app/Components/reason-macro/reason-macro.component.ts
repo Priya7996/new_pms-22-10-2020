@@ -1,7 +1,7 @@
 import { Component, OnInit,Inject } from '@angular/core';
 import { NavbarService } from '../../Nav/navbar.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, FormControl, Validators,FormGroup} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatTableDataSource } from '@angular/material';
 import { untilDestroyed } from 'ngx-take-until-destroy';
@@ -35,6 +35,18 @@ export class ReasonMacroComponent implements OnInit {
   }
   user(): void {
     const dialogRef = this.dialog.open(User, {
+      width: '450px',
+      height: 'auto'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     
+      this.ngOnInit();
+
+    });
+  }
+  test(): void {
+    const dialogRef = this.dialog.open(Dialog, {
       width: '450px',
       height: 'auto'
     });
@@ -253,5 +265,50 @@ export class Edit {
   ngOnDestroy(){
 
   } 
+  
+}
+
+
+
+
+@Component({
+  selector: 'dialog-page',
+  templateUrl: 'dialog.html',
+  styleUrls: ['./reason-macro.component.scss']
+})
+export class Dialog {
+  login:FormGroup;
+  constructor(private service: ReasonMacroService, public dialogRef: MatDialogRef<Dialog>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, ) {
+
+    
+
+
+  }
+ 
+
+  keyPress(event: any) {
+    const pattern = /[0-9]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+  
+  ngOnInit() {
+     this.login = this.fb.group({
+      name:["",],spec_id:[""]
+     })
+    
+  }
+
+  logintest_func(){
+    console.log(this.login.value);
+    this.service.VAPMS(this.login.value).subscribe(res =>{
+      console.log(res);
+      Swal.fire(res.msg)
+      this.dialogRef.close();
+    })
+  }
+  
   
 }

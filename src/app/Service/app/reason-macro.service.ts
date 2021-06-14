@@ -36,4 +36,8 @@ export class ReasonMacroService {
   delete_row(id):Observable<any>{
     return this.http.delete('hmi_reasons/'+id)
   }
+
+  VAPMS(value):Observable<any>{
+    return this.http.post('post_hmi_reason',value)
+  }
 }
