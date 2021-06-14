@@ -1204,5 +1204,16 @@ rect.highcharts-point.highcharts-color-1 {
 }
 
 button.highcharts-a11y-proxy-button {
-    fill: #c13c09 !important;
+    fill: #F7941D !important;
+}
+
+// rect.highcharts-point {
+//     fill: #F7941D;
+// }
+text.highcharts-axis-title {
+    font-variant: slashed-zero;
+    font-weight: 600;
+}
+.card_sec.sep_crt rect.highcharts-point {
+    fill: #F7941D;
 }

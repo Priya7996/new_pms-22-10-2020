@@ -201,11 +201,11 @@ console.log(res.a);
   },
   yAxis: [{
     title: {
-      text: 'Priya'
+      text: 'Downtime Duration (Minutes)'
     }
   }, {
     title: {
-      text: 'Dharsini'
+      text: 'Cumulative Percentage (Pareto)'
     },
     minPadding: 0,
     maxPadding: 0,
@@ -234,7 +234,8 @@ console.log(res.a);
     name: 'Reasons',
     type: 'column',
     zIndex: 2,
-    data: res.individual
+    data: res.individual,
+    
   }]
 
   

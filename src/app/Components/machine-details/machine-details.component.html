@@ -40,29 +40,29 @@
                                 <div class="machine_total">
                                     <a>All ({{machine.value.length}})</a>
                                     <a>Running ({{machine_response.count[machine.key].running || '0'}})</a>
-                                    <a *ngIf="machine_response.count[machine.key].idle  || machine_response.count[machine.key].idle1  || machine_response.count[machine.key]['2']">
-                                        IdleAll ({{ (machine_response.count[machine.key]["2"]) -- (machine_response.count[machine.key].idle) -- (machine_response.count[machine.key].idle1)}})
+                                    <a>
+                                        Idle ({{ (machine_response.count[machine.key]["2"] ) -- (machine_response.count[machine.key].idle) -- (machine_response.count[machine.key].idle1)}})
                                     
                                     </a>
 
-
+<!-- 
                                     <a *ngIf="machine_response.count[machine.key].idle  || machine_response.count[machine.key].idle1">
                                         Idle&idle1 ({{(machine_response.count[machine.key].idle) -- (machine_response.count[machine.key].idle1)}})
                                     
-                                    </a>
+                                    </a> -->
 
 
 
-                                    <a *ngIf="machine_response.count[machine.key].idle1  ||machine_response.count[machine.key]['2']">
+                                    <!-- <a *ngIf="machine_response.count[machine.key].idle1  ||machine_response.count[machine.key]['2']">
                                         Idle1@2 ({{ (machine_response.count[machine.key]["2"]) --  (machine_response.count[machine.key].idle1)}})
                                     
-                                    </a>
+                                    </a> -->
 
-
+<!-- 
                                     <a *ngIf="machine_response.count[machine.key].idle  || machine_response.count[machine.key]['2']">
                                         Idle@2 ({{ (machine_response.count[machine.key]["2"]) -- (machine_response.count[machine.key].idle)}})
                                     
-                                    </a>
+                                    </a> -->
 
                                     <!-- <a *ngIf="machine_response.count[machine.key].idle">Idle ({{machine_response.count[machine.key].idle || '0'}})</a> -->
 
@@ -122,11 +122,26 @@
                                                 <!-- <span class="machine_status" *ngIf="mac?.machine_status !='3' && mac?.machine_status !='100' && mac?.machine_status == null ">Disconnect
                                                 </span> -->
                                             </div>
-                                            <div class="info_title">
+                                            <div class="info_title" *ngIf="mac?.machine_status !='3' && mac?.machine_status !='100' && mac?.machine_status == null ">
+                                                <h2>{{mac.mac_name }}</h2>
+                                                <h4>Disconnect</h4>
+                                            </div>
+
+                                            <div class="info_title"  *ngIf="mac?.machine_status =='3'">
+                                                <h2>{{mac.mac_name }}</h2>
+                                                <h4>Running</h4>
+                                            </div>
+
+                                            <div class="info_title" *ngIf="mac?.machine_status =='100'">
+                                                <h2>{{mac.mac_name }}</h2>
+                                                <h4>Stop</h4>
+                                            </div>
+
+
+                                            <div class="info_title"  *ngIf="mac?.machine_status !='3' && mac?.machine_status !='100' && mac?.machine_status != null ">
                                                 <h2>{{mac.mac_name }}</h2>
                                                 <h4>{{mac.macro}}</h4>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>

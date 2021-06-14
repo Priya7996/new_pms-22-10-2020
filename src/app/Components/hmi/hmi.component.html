@@ -104,8 +104,8 @@
                           <td>{{g_report?.shift_no || '---'}}</td>
 
                           <td>{{g_report?.machine_name || '---'}}</td>
-                           <td>{{g_report?.operator || '---'}}</td>
-                          <td>{{show_report?.idle_reason }}</td>
+                           <td>{{g_report?.operator_name || '---'}}</td>
+                          <td>{{show_report?.idle_reason || '---'}}</td>
                           <td>{{show_report?.idle_start | date:'MM-dd-yyyy ; HH:mm:ss'}}</td>
                        
                           <td>{{show_report?.idle_end | date:'MM-dd-yyyy ; HH:mm:ss'}}</td>
@@ -176,11 +176,12 @@
 
         </mat-card>
 
-        <mat-card class="card_sec">
+        <mat-card class="card_sec sep_crt">
           
           <mat-card-content class="table_responsive d-flex">
               <div id="container"></div>
 <br>
+<!-- <h3 class="tag">Reasons</h3> -->
           </mat-card-content>
 
         </mat-card>
