@@ -41,7 +41,7 @@
                                     <a>All ({{machine.value.length}})</a>
                                     <a>Running ({{machine_response.count[machine.key].running || '0'}})</a>
                                     <a>
-                                        Idle ({{ (machine_response.count[machine.key]["2"] ) ||(machine_response.count[machine.key].idle) || (machine_response.count[machine.key].idle1)}})
+                                        Idle ({{ (machine_response.count[machine.key]["2"] ) &&(machine_response.count[machine.key].idle  ) && (machine_response.count[machine.key].idle1 ) && (0)}})
                                     
                                     </a>
 
