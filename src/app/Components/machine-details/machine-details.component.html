@@ -40,10 +40,11 @@
                                 <div class="machine_total">
                                     <a>All ({{machine.value.length}})</a>
                                     <a>Running ({{machine_response.count[machine.key].running || '0'}})</a>
-                                    <a>
-                                        Idle ({{ (machine_response.count[machine.key]["2"] ) &&(machine_response.count[machine.key].idle  ) && (machine_response.count[machine.key].idle1 ) && (0)}})
+                                    <!-- <a >
+                                        Idle ({{ (machine_response.count[machine.key]["2"] ) --(machine_response.count[machine.key].idle  ) -- (machine_response.count[machine.key].idle1 )}})
                                     
-                                    </a>
+                                    </a> -->
+                                    <a>Idle ({{machine_response.idle_count[machine.key]}})</a>
 
 <!-- 
                                     <a *ngIf="machine_response.count[machine.key].idle  || machine_response.count[machine.key].idle1">
@@ -124,17 +125,17 @@
                                             </div>
                                             <div class="info_title" *ngIf="mac?.machine_status !='3' && mac?.machine_status !='100' && mac?.machine_status == null ">
                                                 <h2>{{mac.mac_name }}</h2>
-                                                <h4>Disconnect</h4>
+                                                <h4>DISCONNECT</h4>
                                             </div>
 
                                             <div class="info_title"  *ngIf="mac?.machine_status =='3'">
                                                 <h2>{{mac.mac_name }}</h2>
-                                                <h4>Running</h4>
+                                                <h4>RUNNING</h4>
                                             </div>
 
                                             <div class="info_title" *ngIf="mac?.machine_status =='100'">
                                                 <h2>{{mac.mac_name }}</h2>
-                                                <h4>Stop</h4>
+                                                <h4>STOP</h4>
                                             </div>
 
 
