@@ -67,7 +67,7 @@
                     
                   
                     <mat-option value="">Select Split</mat-option> 
-                    <mat-option value="undefined">All</mat-option> 
+                    <!-- <mat-option value="undefined">All</mat-option>  -->
                     <mat-option value="{{loko.value}}" *ngFor="let loko of split">
                       {{loko.value}}
                     </mat-option>
@@ -252,18 +252,62 @@
 
               <ng-container matColumnDef="servo_load">
                 <th mat-header-cell *matHeaderCellDef>Servo Load(%)</th>
-                <td mat-cell *matCellDef="let element"> {{element.servo_load  || '---'}} </td>
+                <td mat-cell *matCellDef="let element"> 
+                <p *ngIf = "element.servo_load.length !=0">
+                  <span>X axis : {{element.servo_load[0].x_axis}}</span><br>
+                  <span>Y axis : {{element.servo_load[1].y_axis}}</span><br>
+                  <span>Z axis : {{element.servo_load[2].z_axis}}</span><br>
+                  <span>A axis : {{element.servo_load[3].a_axis}}</span><br>
+                  <span>B axis : {{element.servo_load[4].b_axis}}</span><br>
+                </p>
+
+                <p *ngIf = "element.servo_load.length === 0">
+                  <span>No Servo Load Found</span>
+                </p>
+                </td>
               </ng-container>
 
 
               <ng-container matColumnDef="servo_m_temp">
                 <th mat-header-cell *matHeaderCellDef>Servo Motor Temp(℃)</th>
-                <td mat-cell *matCellDef="let element"> {{element.servo_m_temp  || '---'}} </td>
+                <td mat-cell *matCellDef="let element"> 
+                  
+                  <!-- {{element.servo_m_temp  || '---'}}  -->
+                
+                  <p *ngIf = "element.servo_m_temp.length !=0">
+                    <span>X axis : {{element.servo_m_temp[0].x_axis}}</span><br>
+                    <span>Y axis : {{element.servo_m_temp[1].y_axis}}</span><br>
+                    <span>Z axis : {{element.servo_m_temp[2].z_axis}}</span><br>
+                    <span>A axis : {{element.servo_m_temp[3].a_axis}}</span><br>
+                    <span>B axis : {{element.servo_m_temp[4].b_axis}}</span><br>
+                  </p>
+  
+                  <p *ngIf = "element.servo_m_temp.length === 0">
+                    <span>No Servo Motor Temp Found</span>
+                  </p>
+
+                </td>
               </ng-container>
 
               <ng-container matColumnDef="puls_code">
                 <th mat-header-cell *matHeaderCellDef>Pulse Coder Temp(℃)</th>
-                <td mat-cell *matCellDef="let element"> {{element.puls_code  || '---'}} </td>
+                <td mat-cell *matCellDef="let element"> 
+                  
+                  <!-- {{element.puls_code  || '---'}}  -->
+                
+                  <p *ngIf = "element.puls_code.length !=0">
+                    <span>X axis : {{element.puls_code[0].x_axis}}</span><br>
+                    <span>Y axis : {{element.puls_code[1].y_axis}}</span><br>
+                    <span>Z axis : {{element.puls_code[2].z_axis}}</span><br>
+                    <span>A axis : {{element.puls_code[3].a_axis}}</span><br>
+                    <span>B axis : {{element.puls_code[4].b_axis}}</span><br>
+                  </p>
+  
+                  <p *ngIf = "element.puls_code.length === 0">
+                    <span>No Pulse Code Temp Found</span>
+                  </p>
+                
+                </td>
               </ng-container>
 
 <!-- 
