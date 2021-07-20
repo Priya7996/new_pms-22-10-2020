@@ -166,9 +166,16 @@ export class ReportComponent implements OnInit {
            "Utilization(%)": this.list_data[i].utilization || '---',
            "Spindle Load(%)": this.list_data[i].spindle_load || '---',
            "Spindle Motor Temp(℃)": this.list_data[i].spindle_m_temp || '---',
-           "Servo Load(%)": this.list_data[i].servo_load || '---',
-           "Servo Motor Temp(℃)": this.list_data[i].servo_m_temp || '---',
-           "Pulse Coder Temp(℃)": this.list_data[i].puls_code || '---',
+           "Servo Load(%)": this.list_data[i].servo_load1,
+            //  "a_axis" : 
+            //  b : this.list_data[i].servo_load1[1],
+            //  c : this.list_data[i].servo_load1[2],
+            //  d : this.list_data[i].servo_load1[3],
+            //  e : this.list_data[i].servo_load1[4],
+
+           
+           "Servo Motor Temp(℃)": this.list_data[i].servo_m_temp1 || '---',
+           "Pulse Coder Temp(℃)": this.list_data[i].puls_code1 || '---',
 
 
  

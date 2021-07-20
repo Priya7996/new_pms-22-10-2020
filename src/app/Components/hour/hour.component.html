@@ -1,0 +1,140 @@
+<section class="page">
+    <div *ngIf="myLoader" class="spinner">
+      <img src="assets/images/spinner.gif">
+    </div>
+    <div class="section_top_padding">
+      <div class="container-fluid">
+        <div class="page_title_sec">
+          <h2 class="sub_title">
+            <mat-icon>donut_small</mat-icon>
+            <span class="v-align-middle">Hourwise Report Based on target</span>
+          </h2>
+          <!-- <div class="add_new">
+            <mat-icon class="circle" (click)="add_shift_registartion()"  matTooltip="Add New">add</mat-icon>
+          </div> -->
+        </div>
+      
+        <div class="page_title_sec align_right">
+          <div class="table_search">
+            <a (click)="export()" class="export_btn">
+              <i class="material-icons">
+                  file_copy
+              </i>
+              Export
+          </a>
+          </div>
+        </div> 
+  
+        <mat-card class="card_sec">
+          <mat-card-content class="table-responsive">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+  
+  
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef>S.No</th>
+                <td mat-cell *matCellDef = "let i=index;"> {{i+1}} </td>
+              </ng-container>
+  
+              <!-- Name Column -->
+              <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Machine Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.date || '---'}} </td>
+              </ng-container>
+  
+              <!-- Weight Column -->
+              <ng-container matColumnDef="shift">
+                <th mat-header-cell *matHeaderCellDef> Time Slice </th>
+                <td mat-cell *matCellDef="let element"> {{element.shift || '---'}} </td>
+              </ng-container>
+  
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="machine">
+                <th mat-header-cell *matHeaderCellDef> Start Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.machine || '---'}} </td>
+              </ng-container>
+  
+  
+              <ng-container matColumnDef="operating">
+                <th mat-header-cell *matHeaderCellDef> part Name</th>
+                <td mat-cell *matCellDef="let element"> {{element.machine || '---'}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="cycle">
+                <th mat-header-cell *matHeaderCellDef> Part Number</th>
+                <td mat-cell *matCellDef="let element"> {{element.machine || '---'}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="produced">
+                <th mat-header-cell *matHeaderCellDef>Op.no</th>
+                <td mat-cell *matCellDef="let element"> {{element.machine || '---'}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="rejected">
+                <th mat-header-cell *matHeaderCellDef>Operator Name</th>
+                <td mat-cell *matCellDef="let element"> {{element.machine || '---'}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="availability">
+                <th mat-header-cell *matHeaderCellDef>Hourly Target</th>
+                <td mat-cell *matCellDef="let element"> {{element.machine || '---'}} </td>
+              </ng-container>
+              <ng-container matColumnDef="hour1">
+                <th mat-header-cell *matHeaderCellDef>Hour1</th>
+                <td mat-cell *matCellDef="let element"> {{element.hour1 || '---'}} </td>
+              </ng-container>
+              <ng-container matColumnDef="hour2">
+                <th mat-header-cell *matHeaderCellDef>Hour2</th>
+                <td mat-cell *matCellDef="let element"> {{element.hour2 || '---'}} </td>
+              </ng-container>
+              <ng-container matColumnDef="hour3">
+                <th mat-header-cell *matHeaderCellDef>Hour3</th>
+                <td mat-cell *matCellDef="let element"> {{element.hour3 || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="hour4">
+                <th mat-header-cell *matHeaderCellDef>Hour4</th>
+                <td mat-cell *matCellDef="let element"> {{element.hour4 || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="hour5">
+                <th mat-header-cell *matHeaderCellDef>Hour5</th>
+                <td mat-cell *matCellDef="let element"> {{element.hour5 || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="hour6">
+                <th mat-header-cell *matHeaderCellDef>Hour6</th>
+                <td mat-cell *matCellDef="let element"> {{element.hour6 || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="hour7">
+                <th mat-header-cell *matHeaderCellDef>Hour7</th>
+                <td mat-cell *matCellDef="let element"> {{element.hour7 || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="hour8">
+                <th mat-header-cell *matHeaderCellDef>Hour8</th>
+                <td mat-cell *matCellDef="let element"> {{element.hour8 || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="planned">
+                <th mat-header-cell *matHeaderCellDef>Planned qty</th>
+                <td mat-cell *matCellDef="let element"> {{element.planned || '---'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="actual">
+                <th mat-header-cell *matHeaderCellDef>Actual qty</th>
+                <td mat-cell *matCellDef="let element"> {{element.actual || '---'}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          
+          </mat-card-content>
+          <!-- <mat-card-content *ngIf="oee_get.length==0" class="no_data_found">
+            <h2>No data found</h2>
+          </mat-card-content> -->
+        </mat-card>
+      </div>
+    </div>
+  </section>

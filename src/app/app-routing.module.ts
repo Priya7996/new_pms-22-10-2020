@@ -50,6 +50,7 @@ const routes: Routes = [
   { path: 'operation_man', loadChildren: () => import('./Components/operation-man/operation-man.module').then(m => m.OperationManModule) },
   { path: 'operation_assign', loadChildren: () => import('./Components/operation-assign/operation-assign.module').then(m => m.OperationAssignModule) },
   { path: 'password', loadChildren: () => import('./Components/password/password.module').then(m => m.PasswordModule) },
+  { path: 'hour', loadChildren: () => import('./Components/hour/hour.module').then(m => m.HourModule) },
 
 ];
  

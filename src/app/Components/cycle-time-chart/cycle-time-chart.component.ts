@@ -624,7 +624,7 @@ this.diffparts = uniqs;
     this.service.all_time_chart(register).pipe(untilDestroyed(this)).subscribe(res => {
       this.myLoader=false;
       this.allcycletime = res;
-      console.log(this.allcycletime);
+      console.log(res.cycle_time);
       this.tablelist = true;
       this.chart1()
     })
